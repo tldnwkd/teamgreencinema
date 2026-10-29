@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="그린시네마 포트폴리오 웹사이트 HTML/CSS 시안">
+<meta name="theme-color" content="#11151a">
+<title>관리자 화면 | 그린시네마</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+	<header class="site-header">
+		<div class="container site-header__inner">
+			<a class="logo" href="index.html" aria-label="그린시네마 홈">GREEN<span>CINEMA</span><small
+				class="logo__sub">CINEMA FOR EVERYONE</small></a>
+			<nav class="main-nav" aria-label="주 메뉴">
+				<a href="index.html#movies">영화</a><a href="booking.html">예매</a><a
+					href="booking.html#theater">극장</a><a href="notices.html">고객센터</a>
+			</nav>
+			<div class="header-actions">
+				<a class="header-actions__link" href="login.html">로그인</a><span
+					class="header-actions__sep" aria-hidden="true">/</span><a
+					class="header-actions__link" href="register.html">회원가입</a><a
+					class="header-pill" href="mypage.html">마이페이지</a>
+			</div>
+		</div>
+	</header>
+	<main id="main">
+		<div class="page-content">
+			<div class="container">
+				<div class="page-heading">
+					<p class="page-heading__eyebrow">ADMINISTRATOR</p>
+					<h1 class="page-heading__title">관리자 대시보드</h1>
+					<p class="page-heading__description">관리자용 화면 디자인 예시입니다.</p>
+				</div>
+				<div class="demo-note">
+					<span class="demo-note__dot" aria-hidden="true"></span>관리자 권한 확인,
+					정보 변경, 공지 작성과 문의 답변은 서버 기능 연결 전입니다. 요구사항상 관리자는 예매할 수 없습니다.
+				</div>
+				<div class="admin-stats">
+					<div class="admin-stat">
+						<div class="admin-stat__label">영화</div>
+						<div class="admin-stat__value admin-stat__value--green">10</div>
+					</div>
+					<div class="admin-stat">
+						<div class="admin-stat__label">극장 대분류</div>
+						<div class="admin-stat__value">3</div>
+					</div>
+					<div class="admin-stat">
+						<div class="admin-stat__label">상영관 / 극장</div>
+						<div class="admin-stat__value">3</div>
+					</div>
+					<div class="admin-stat">
+						<div class="admin-stat__label">좌석 / 상영관</div>
+						<div class="admin-stat__value">100</div>
+					</div>
+				</div>
+				<div class="booking-panel">
+					<div class="admin-toolbar">
+						<h2 class="booking-panel__title" style="margin: 0">관리 메뉴</h2>
+						<span class="chip chip--green">DEMO</span>
+					</div>
+					<div class="service-grid">
+						<div class="service-card">
+							<span class="service-card__icon">▥</span>
+							<h3>영화·상영 관리</h3>
+							<p>영화정보, 상영관, 상영일정 관리 화면</p>
+						</div>
+						<div class="service-card">
+							<span class="service-card__icon">▤</span>
+							<h3>공지사항 관리</h3>
+							<p>공지사항 작성과 조회 관리 화면</p>
+						</div>
+						<div class="service-card">
+							<span class="service-card__icon">?</span>
+							<h3>문의 답변 관리</h3>
+							<p>문의 상태 확인과 관리자 답변</p>
+						</div>
+					</div>
+				</div>
+				<p class="detail-caption">본 화면은 요구사항을 시각화한 예시이며 권한 인증 및 데이터 수정
+					로직은 없습니다.</p>
+			</div>
+		</div>
+	</main>
+	<footer class="site-footer">
+		<div class="container site-footer__inner">
+			<div>
+				<div class="site-footer__brand">
+					GREEN<span style="color: #03c75a">CINEMA</span>
+				</div>
+				<p class="footer-copy">
+					그린시네마 · 조별과제 포트폴리오 UI 시안<br>영화, 극장, 상영시간, 요금 및 예매 정보는 모두 예시
+					데이터입니다.
+				</p>
+			</div>
+			<div class="site-footer__links">
+				<a href="index.html#movies">영화</a><a href="booking.html">예매</a><a
+					href="notices.html">공지사항</a><a href="faq.html">FAQ</a><a
+					href="inquiry.html">1:1문의</a><a href="admin.html">관리자 시안</a>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
