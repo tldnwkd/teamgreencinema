@@ -24,7 +24,7 @@ public class MovieDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				
-				
+				System.out.println("movie_title : " + rs.getString("movie_title"));
 				MovieDTO mvdto = new MovieDTO();
 				mvdto.setMovieId(rs.getInt("movie_id"));
 				mvdto.setImgPath(rs.getString("img_path"));

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>그린시네마에 오신걸 환영합니다.</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
