@@ -15,10 +15,11 @@
 		request.setCharacterEncoding("utf-8");
 	
 		String section = request.getParameter("section");
-		
-		if(section ==null){
-			section = "section.jsp";
-		}
+				
+		if(section == null){
+	        request.getRequestDispatcher("MovieListProc.do").forward(request, response);
+	        return;
+	    }
 	
 	%>
 	<div class="index-wrap">

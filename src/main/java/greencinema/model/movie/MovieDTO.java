@@ -6,7 +6,7 @@ public class MovieDTO {
 	private String movieTitle;
 	private int movieRate;
 	private String imgPath;
-	private int movieContent;
+	private String movieContent;
 	private int runTime;
 	public int getMovieId() {
 		return movieId;
@@ -31,11 +31,12 @@ public class MovieDTO {
 	}
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
-	}
-	public int getMovieContent() {
+	}	
+	
+	public String getMovieContent() {
 		return movieContent;
 	}
-	public void setMovieContent(int movieContent) {
+	public void setMovieContent(String movieContent) {
 		this.movieContent = movieContent;
 	}
 	public int getRunTime() {

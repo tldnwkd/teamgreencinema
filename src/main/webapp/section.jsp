@@ -14,210 +14,24 @@
 			</div>
 			<a class="section-link" href="#">전체 예매 보기 ↗</a>
 		</div>
-
-		<div class="movie-grid">
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="다시, 봄 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_01.png"
-						alt="가상 영화 다시, 봄 포스터" loading="lazy"></a><span
-						class="movie-card__rank">01</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a> <a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">다시, 봄</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--12">12</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>112분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="어나더 월드 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_02.png"
-						alt="가상 영화 어나더 월드 포스터" loading="lazy"></a><span
-						class="movie-card__rank">02</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">어나더 월드</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--12">12</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>124분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="바람의 기사 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_03.png"
-						alt="가상 영화 바람의 기사 포스터" loading="lazy"></a><span
-						class="movie-card__rank">03</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">바람의 기사</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--all">전체</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>118분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="그림자 속의 진실 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_04.png"
-						alt="가상 영화 그림자 속의 진실 포스터" loading="lazy"></a><span
-						class="movie-card__rank">04</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">그림자 속의 진실</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--15">15</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>106분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="행복한 동행 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_05.png"
-						alt="가상 영화 행복한 동행 포스터" loading="lazy"></a><span
-						class="movie-card__rank">05</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">행복한 동행</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--all">전체</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>95분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="달빛 고양이 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_06.png"
-						alt="가상 영화 달빛 고양이 포스터" loading="lazy"></a><span
-						class="movie-card__rank">06</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">달빛 고양이</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--all">전체</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>101분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="너의 계절 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_07.png"
-						alt="가상 영화 너의 계절 포스터" loading="lazy"></a><span
-						class="movie-card__rank">07</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">너의 계절</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--12">12</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>109분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="열 번째 증인 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_08.png"
-						alt="가상 영화 열 번째 증인 포스터" loading="lazy"></a><span
-						class="movie-card__rank">08</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">열 번째 증인</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--15">15</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>127분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="더 라스트 데이 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_09.png"
-						alt="가상 영화 더 라스트 데이 포스터" loading="lazy"></a><span
-						class="movie-card__rank">09</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">더 라스트 데이</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--15">15</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>132분</span>
-				</div>
-			</article>
-			<article class="movie-card">
-				<div class="movie-card__poster-wrap">
-					<a href="#" aria-label="별이 되는 노래 상세정보"><img
-						class="movie-card__poster"
-						src="assets/posters/greencinema_poster_10.png"
-						alt="가상 영화 별이 되는 노래 포스터" loading="lazy"></a><span
-						class="movie-card__rank">10</span>
-					<div class="movie-card__actions">
-						<a class="btn btn--primary btn--small" href="#">예매하기</a><a
-							class="btn btn--dark btn--small" href="#">상세보기</a>
-					</div>
-				</div>
-				<h3 class="movie-card__title">
-					<a href="#">별이 되는 노래</a>
-				</h3>
-				<div class="movie-card__meta">
-					<span class="age-badge age-badge--12">12</span><span
-						class="meta-separator" aria-hidden="true">·</span><span>114분</span>
-				</div>
-			</article>
-		</div>
-	</div>
+		<c:forEach items="${mdtoList}" var="list" begin="1">
+			<div class="movie-grid">
+				<article class="movie-card">
+					<div class="movie-card__poster-wrap">
+						<a href="MovieInfo.do" aria-label="${list.moveTitle }"><img
+							class="movie-card__poster"
+							src="${list.imgPath}"
+							alt="${list.moveTitle }" loading="lazy"></a><span
+							class="movie-card__rank">${begin}</span>
+						<div class="movie-card__actions">
+							<a class="btn btn--primary btn--small" href="Reservation.do">예매하기</a>
+							<a class="btn btn--dark btn--small" href="MovieInfo.do">상세보기</a>
+						</div>					
+					</div>				
+				</article>
+			</div>		
+		</c:forEach>
+</div>		
 </section>
 <section class="promo-band">
 	<div class="container promo-band__inner">
