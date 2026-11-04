@@ -1,13 +1,11 @@
 package greencinema.model.user;
 
-import java.util.Date;
-
 public class UserDTO {
 	
 	private String userId;	
 	private String userPw;
 	private String userName;
-	private Date userBirth;
+	private String userBirth;
 	private String userEmail;
 	private String userPhone;
 	private int userDelete;
@@ -28,13 +26,7 @@ public class UserDTO {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public Date getUserBirth() {
-		return userBirth;
-	}
-	public void setUserBirth(Date userBirth) {
-		this.userBirth = userBirth;
-	}
+	}	
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -52,6 +44,12 @@ public class UserDTO {
 	}
 	public void setUserDelete(int userDelete) {
 		this.userDelete = userDelete;
+	}
+	public String getUserBirth() {
+		return userBirth;
+	}
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
 	}	
 	
 }
