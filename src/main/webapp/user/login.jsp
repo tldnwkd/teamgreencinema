@@ -28,11 +28,8 @@
           </button>
         </form>
 
-        <div class="auth-links">
+        <div class="auth-links">        
           <a href="/index.jsp?section=user/user-join.jsp">회원가입</a>
-          <c:if test="${not empty sessionScope.id }">
-          	<a href="/index.jsp?section=user/my-page.jsp&&userId=${sessionScope.id }">마이페이지</a>
-          </c:if>
         </div>
       </div>
     </section>

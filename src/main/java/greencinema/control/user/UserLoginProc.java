@@ -45,6 +45,11 @@ public class UserLoginProc extends HttpServlet {
 			request.setAttribute("msg", "아이디 혹은 비밀번호가 맞지 않습니다.");
 		}
 		
+		if(userId.equals("admin")) {
+			targetUri = "/index.jsp?section=admin/admin.jsp";
+		}
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher(targetUri);
 		rd.forward(request, response);
 		

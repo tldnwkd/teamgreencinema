@@ -3,8 +3,11 @@ package greencinema.model.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import greencinema.DBPKG.Util;
+import greencinema.model.inquiry.InquiryDTO;
+import greencinema.model.reserve.ReserveDTO;
 
 public class UserDAO {
 
@@ -95,6 +98,75 @@ public class UserDAO {
 		}
 		
 		return isLogin;
+	}
+	
+	
+	// 예매리스트 정보
+	public ArrayList<ReserveDTO> getReserveList (String userId) {
+		ArrayList<ReserveDTO> rList = new ArrayList<>();
+		try {
+			con = Util.getConnection();
+			String sql = "SELECT * FROM reserve WHERE user_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);		
+			rs = pstmt.executeQuery();
+						
+			while(rs.next()) {
+				ReserveDTO rdto = new ReserveDTO();
+				rdto.setUserId(rs.getString("user_id"));
+				rdto.setAdultCount(rs.getInt("adult_count"));
+				rdto.setTeensCount(rs.getInt("teens_count"));
+				rdto.setTotalPrice(rs.getInt("total_price"));
+				rdto.setUserId(rs.getString("user_id"));
+				rdto.setReserveDate(rs.getDate("reserve_date"));
+				rdto.setCancelDate(rs.getDate("cancel_date"));
+				rList.add(rdto);
+			}
+			
+		}catch (Exception e) {
+			
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return rList;
+	}
+	
+	// 1:1문의 리스트 추가
+	public ArrayList<InquiryDTO> getInquiryList (String userId) {
+		ArrayList<InquiryDTO> iList = new ArrayList<>();
+		try {
+			con = Util.getConnection();
+			String sql = "SELECT * FROM reserve WHERE user_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);		
+			rs = pstmt.executeQuery();
+						
+			while(rs.next()) {
+				InquiryDTO rdto = new InquiryDTO();
+				
+			}
+			
+		}catch (Exception e) {
+			
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return iList;
 	}
 	
 	

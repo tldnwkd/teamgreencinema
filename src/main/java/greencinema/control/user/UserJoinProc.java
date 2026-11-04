@@ -56,6 +56,7 @@ public class UserJoinProc extends HttpServlet {
 			return;
 		}
 		
+		
 		// 3. 정상 회원가입 처리
 		udto.setUserId(userId);
 		udto.setUserPw(userPw);
@@ -65,6 +66,8 @@ public class UserJoinProc extends HttpServlet {
 		udto.setUserPhone(userPhone);
 		
 		udao.joinUser(udto);		
+		
+		
 		
 		response.sendRedirect("/index.jsp");			
 		return;

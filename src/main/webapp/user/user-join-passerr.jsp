@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 	<script type="text/javascript">
     	alert("${msg}")
-    	location.href="/index.jsp?section=user-join.jsp";
+    	location.href="/index.jsp?section=user/user-join.jsp";
     </script>
