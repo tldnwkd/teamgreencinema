@@ -11,6 +11,8 @@ public class ReserveDTO {
 	private int totalPrice;
 	private Date reserveDate;
 	private Date cancelDate;
+	
+	
 	public int getReserveId() {
 		return reserveId;
 	}

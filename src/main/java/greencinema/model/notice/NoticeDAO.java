@@ -9,4 +9,6 @@ public class NoticeDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
+	
+	
 }
