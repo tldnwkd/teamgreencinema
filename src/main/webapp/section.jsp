@@ -14,24 +14,24 @@
 			</div>
 			<a class="section-link" href="#">전체 예매 보기 ↗</a>
 		</div>
-		
+
 			<div class="movie-grid">
-			<c:forEach items="${mdtoList}" var="list" begin="0">
+			<c:forEach items="${mdtoList}" var="list" begin="1">
 				<article class="movie-card">
 					<div class="movie-card__poster-wrap">
 						<a href="MovieInfo.do" aria-label="${list.movieTitle }">
 						<img class="movie-card__poster" src="./${list.imgPath}" alt="${list.movieTitle }"></a>
 						<span class="movie-card__rank">${begin}</span>
 						<div class="movie-card__actions">
-							<a class="btn btn--primary btn--small" href="#">예매하기</a>
-							<a class="btn btn--dark btn--small" href="#">상세보기</a>
-						</div>					
-					</div>				
+							<a class="btn btn--primary btn--small" href="Reservation.do">예매하기</a>
+							<a class="btn btn--dark btn--small" href="MovieInfo.do">상세보기</a>
+						</div>
+					</div>
 				</article>
 			</c:forEach>
-			</div>		
-		
-</div>		
+			</div>
+
+</div>
 </section>
 <section class="promo-band">
 	<div class="container promo-band__inner">

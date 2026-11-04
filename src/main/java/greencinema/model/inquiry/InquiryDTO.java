@@ -3,8 +3,8 @@ package greencinema.model.inquiry;
 public class InquiryDTO {
 	private int inquiryId;
 	private String userId;
-	private int inquirySort;
-	private int inquiryType;
+	private String inquirySort;
+	private String inquiryType;
 	private String inquiryTitle;
 	private String inquiryContent;
 	private int receptionType;
@@ -23,16 +23,16 @@ public class InquiryDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getInquirySort() {
+	public String getInquirySort() {
 		return inquirySort;
 	}
-	public void setInquirySort(int inquirySort) {
+	public void setInquirySort(String inquirySort) {
 		this.inquirySort = inquirySort;
 	}
-	public int getInquiryType() {
+	public String getInquiryType() {
 		return inquiryType;
 	}
-	public void setInquiryType(int inquiryType) {
+	public void setInquiryType(String inquiryType) {
 		this.inquiryType = inquiryType;
 	}
 	public String getInquiryTitle() {
