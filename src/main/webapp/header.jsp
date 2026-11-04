@@ -8,8 +8,8 @@
 				<a class="logo" href="index.jsp" aria-label="그린시네마 홈">GREEN<span>CINEMA</span><small
 					class="logo__sub">CINEMA FOR EVERYONE</small></a>
 				<nav class="main-nav" aria-label="주 메뉴">
-					<a href="index.jsp?section=movie/movie-list.jsp" aria-current="page">영화</a>
-					<a href="index.jsp?section=reserve/reserve.jsp">예매</a>
+					<a href="MovieListProc.do" aria-current="page">영화</a>
+					<a href="index.jsp?section=reserve/reserve-movie.jsp">예매</a>
 					<a href="index.jsp?section=theater/theater.jsp">극장</a>
 					<a href="index.jsp?section=customer-service.jsp">고객센터</a>
 				</nav>
