@@ -66,7 +66,7 @@
 							</div>
 						</div>
 						<div class="form-actions">
-							<input type="hidden" name = "id" value="${sessionScope.userId}">
+							<input type="hidden" name = "id" value="${sessionScope.userId}"> 
 							<a href=InquiryProc.do  class="btn btn--outline">내 문의내역보기</a>
 							<input type="submit"  class="btn btn--primary" value ="문의">
 						</div>

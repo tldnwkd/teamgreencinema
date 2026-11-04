@@ -30,7 +30,7 @@ public class InquiryDAO {
 			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		try {
 		con = Util.getConnection();
-		String sql = "select * from inquiry where user_id='user01'"; // id는 파라미터로 set 받아야함.(임의로 user01지정)
+		String sql = "select *, count(*) from inquiry where user_id='user01'"; // id는 파라미터로 set 받아야함.(임의로 user01지정)
 		pstmt = con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		
@@ -102,6 +102,74 @@ public class InquiryDAO {
 		ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		 try {
 			 con = Util.getConnection();
+			 String sql = "select * from inquiry order by inquiry_id desc limit ?,?";
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setInt(1, StartRow);
+			 pstmt.setInt(2, pageSize);
+			 rs = pstmt.executeQuery();
+			 
+			 while(rs.next()) {
+					InquiryDTO idto = new InquiryDTO();
+					idto.setInquiryId(rs.getInt(1));
+					idto.setUserId(rs.getString(2));
+					idto.setInquirySort(rs.getString(3));
+					idto.setInquiryType(rs.getString(4));
+					idto.setInquiryTitle(rs.getString(5));
+					idto.setInquiryContent(rs.getString(6));
+					idto.setReceptionType(rs.getInt(7));
+					idto.setAnswerStatus(rs.getInt(8));
+					idto.setAnswerContent(rs.getString(9));
+					
+					i.add(idto);
+			 }
+			 
+		 }catch(Exception e) {e.printStackTrace();}finally {
+			 try {if(rs != null)rs.close();
+			 if(pstmt != null)pstmt.close();
+			 if(con != null)con.close();
+
+			 }catch(Exception e) {
+			 e.printStackTrace();
+			 }
+			 }
+		return i ;
+		
+	}
+	
+	//-------------------------------------
+	//1:1문의 개인 Count문 + select문 
+	// 로그인 회원 1:1 문의 count
+	public int getOneCount() {
+		int count=0;
+		try {
+			con = Util.getConnection();
+			String sql = "select count(*) from inquiry where user_id='user1'";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+				if(con != null)con.close();
+
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return count;
+		
+	}
+	// 로그인 회원 select add
+	public ArrayList<InquiryDTO> getOneList(int StartRow, int pageSize){
+		ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
+		 try {
+			 con = Util.getConnection();
 			 String sql = "select * from inquiry where user_id='user1' order by inquiry_id desc limit ?,?";
 			 pstmt = con.prepareStatement(sql);
 			 pstmt.setInt(1, StartRow);
@@ -135,5 +203,73 @@ public class InquiryDAO {
 		return i ;
 		
 	}
+	//-----------------------------------------------------------
+	//Search (select, count)기능
+	// search count
+	public int sCount(String type, String content) {
+		int count=0;
+		try {
+			con = Util.getConnection();
+			String sql = "select count(*) from inquiry where "+type+" like '%"+content+"%'";
+			System.out.println("count:"+sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+				if(con != null)con.close();
+
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+
+		
+	}
+	// search select add
+	public ArrayList<InquiryDTO> search(String type, String content){
+			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
+		try { 
+			con = Util.getConnection();
+			String sql = "select * from inquiry where "+type+" like '%"+content+"%'";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				InquiryDTO idto = new InquiryDTO();
+				idto.setInquiryId(rs.getInt(1));
+				idto.setUserId(rs.getString(2));
+				idto.setInquirySort(rs.getString(3));
+				idto.setInquiryType(rs.getString(4));
+				idto.setInquiryTitle(rs.getString(5));
+				idto.setInquiryContent(rs.getString(6));
+				idto.setReceptionType(rs.getInt(7));
+				idto.setAnswerStatus(rs.getInt(8));
+				idto.setAnswerContent(rs.getString(9));
+				
+				i.add(idto);
+			}
+			
+			
+		}catch(Exception e) {e.printStackTrace();}finally {
+			 try {if(rs != null)rs.close();
+			 if(pstmt != null)pstmt.close();
+			 if(con != null)con.close();
+
+			 }catch(Exception e) {
+			 e.printStackTrace();
+			 }
+			 }
+		
+		return i;
+	} 
+	
 }
 

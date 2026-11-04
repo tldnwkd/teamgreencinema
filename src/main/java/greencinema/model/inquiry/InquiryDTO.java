@@ -11,6 +11,8 @@ public class InquiryDTO {
 	private int answerStatus;
 	private String answerContent;
 	
+	
+	
 	public int getInquiryId() {
 		return inquiryId;
 	}
@@ -66,4 +68,5 @@ public class InquiryDTO {
 		this.answerContent = answerContent;
 	}
 	
+
 }
