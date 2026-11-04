@@ -16,7 +16,7 @@
 		</div>
 		
 			<div class="movie-grid">
-			<c:forEach items="${mdtoList}" var="list" begin="1">
+			<c:forEach items="${mdtoList}" var="list" begin="0">
 				<article class="movie-card">
 					<div class="movie-card__poster-wrap">
 						<a href="MovieInfo.do" aria-label="${list.movieTitle }">
