@@ -14,10 +14,15 @@
 					<a href="index.jsp?section=customer-service.jsp">고객센터</a>
 				</nav>
 				<div class="header-actions">
-					<a class="header-actions__link" href="index.jsp?section=user/login.jsp">로그인</a><span
-						class="header-actions__sep" aria-hidden="true">/</span>
-					<a	class="header-actions__link" href="index.jsp?section=user/user-join.jsp">회원가입</a><a
-						class="header-pill" href="index.jsp?section=user/my-page.jsp">마이페이지</a>
+					<c:if test="${empty sessionScope.id}">
+					<a class="header-actions__link" href="index.jsp?section=user/login.jsp">로그인</a>
+					<span class="header-actions__sep" aria-hidden="true">/</span>
+					<a class="header-actions__link" href="index.jsp?section=user/user-join.jsp">회원가입</a>
+					</c:if>
+					<c:if test="${not empty sessionScope.id}">					
+					<a class="header-pill" href="index.jsp?section=user/my-page.jsp?userId=${sessionScope.id}">마이페이지</a>
+					<a class="header-pill" href="UserLogout.do">로그아웃</a>
+					</c:if>
 				</div>
 			</div>
 		</header>
