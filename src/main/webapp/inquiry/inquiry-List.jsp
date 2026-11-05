@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    <link rel="stylesheet" href="css/inquiry.css">
+    <link rel="stylesheet" href="css/inquiry-list.css">
     <section>
    <h1>1:1 문의사항</h1>
     <form action="searchInquiryProc.do" method="get">
@@ -26,15 +26,7 @@
 			<th>제목</th>
 			<th>답변상태</th>
 		</tr>
-			<c:choose>
-			<c:when test="${content != null and empty content }">
-				<tr>
-					<td colspan="5" align="center"><p>검색결과가 없습니다.</p></td>
-				</tr>
-			</c:when>
-			<c:when test ="${empty content and empty sList}"> 
 			<c:forEach var= "iList" items="${iList}">
-			<c:set var="number" value="1"/>
 					<tr>
 						<td>${number }</td>
 						<td>${iList.inquiryType }</td>
@@ -51,33 +43,8 @@
 						</c:choose>
 						</td>
 					</tr>
-				<c:set var="number" value="${number+1}"/>
+				<c:set var="number" value="${number-1}"/>
 			</c:forEach>
-			</c:when>
-			<c:when test="${not empty sList }">
-			<c:set var="number" value="1"/>
-				<c:forEach var= "sList" items="${sList}">
-					<tr>
-						<td>${number }</td>
-						<td>${sList.inquiryType }</td>
-						<td>${sList.inquirySort }</td>
-						<td>${sList.inquiryTitle }</td>
-						<td>
-						<c:choose >
-							<c:when test="${iList.answerStatus eq 1 }">
-								<a href="#">답변 완료</a>
-							</c:when>
-							<c:otherwise>
-								<p>답변 대기</p>
-							</c:otherwise>
-						</c:choose>
-						</td>
-					</tr>
-					</c:forEach>
-				<c:set var="number" value="${number+1}"/>
-			</c:when>
-
-			</c:choose>
 	</table>
 	<%-- 페이징 부분 --%>
 	<div class ="paging">
@@ -95,14 +62,5 @@
 			<a href ="InquiryProc.do?pageNum=${startpage+pageBlock}">다음</a>
 		</c:if>
 	</div>
- 	<script type="text/javascript">
-		function change(){
-			let type_i = document.getElementByID("type_i").value
-			let ch = document.getElementByID("ch")
-			if(type_i.value=="sort"){
-				ch.placeholder = "건의/문의 중 형식에 맞게 입력해주세요";
-			}
-		}
-	</script>
 	</section>
 	

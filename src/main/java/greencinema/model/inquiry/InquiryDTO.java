@@ -10,9 +10,16 @@ public class InquiryDTO {
 	private int receptionType;
 	private int answerStatus;
 	private String answerContent;
+	private String inquiryDate;
 	
 	
 	
+	public String getInquiryDate() {
+		return inquiryDate;
+	}
+	public void setInquiryDate(String inquiryDate) {
+		this.inquiryDate = inquiryDate;
+	}
 	public int getInquiryId() {
 		return inquiryId;
 	}

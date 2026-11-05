@@ -17,9 +17,9 @@
 			<div class="site-footer__links">
 				<a href="index.jsp?section=movie/movie-list.jsp">영화</a>
 				<a href="index.jsp?section=reserve/reserve.jsp">예매</a>
-				<a href="index.jsp?section=notice/notice.jsp">공지사항</a>
+				<a href="NoticeProc.do">공지사항</a>
 				<a href="index.jsp?section=inquiry/inquiry.jsp">1:1문의</a>
-				<a href="index.jsp?section=faq/faq.jsp">FAQ</a>
+				<a href="FaqProc.do">FAQ</a>
 			</div>
 		</div>
 	</footer>

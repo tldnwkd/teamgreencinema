@@ -5,9 +5,11 @@ import java.util.Date;
 public class NoticeDTO {
 	private int noticeId;
 	private String noticeTitle;
-	private Date noticeDate;
+	private String noticeDate;
 	private int noticeHits;
 	private String noticeText;
+	
+	
 	public int getNoticeId() {
 		return noticeId;
 	}
@@ -20,10 +22,10 @@ public class NoticeDTO {
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
-	public Date getNoticeDate() {
+	public String getNoticeDate() {
 		return noticeDate;
 	}
-	public void setNoticeDate(Date noticeDate) {
+	public void setNoticeDate(String noticeDate) {
 		this.noticeDate = noticeDate;
 	}
 	public int getNoticeHits() {

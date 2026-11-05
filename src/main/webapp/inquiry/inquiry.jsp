@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!doctype html>
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<section class="inquiry"> 
-		<form action="InquiryProc.do">
+		<form action="InquityInsertProc.do ">
 		<a class="skip-link" href="#main">본문으로 건너뛰기</a>
 		<main id="main">
 			<div class="page-content">
@@ -66,7 +66,7 @@
 							</div>
 						</div>
 						<div class="form-actions">
-							<input type="hidden" name = "id" value="${sessionScope.userId}"> 
+							<input type="hidden" name = "id" value="user01"> 
 							<a href=InquiryProc.do  class="btn btn--outline">내 문의내역보기</a>
 							<input type="submit"  class="btn btn--primary" value ="문의">
 						</div>

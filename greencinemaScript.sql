@@ -95,6 +95,8 @@ CREATE TABLE reserve (
     cancel_date DATETIME DEFAULT NULL
 );
 
+
+
 -- 결제 (payment)
 CREATE TABLE payment (
     payment_id INT PRIMARY KEY AUTO_INCREMENT,

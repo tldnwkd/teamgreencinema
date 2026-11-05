@@ -45,6 +45,7 @@ public class InquiryDAO {
 			idto.setReceptionType(rs.getInt(7));
 			idto.setAnswerStatus(rs.getInt(8));
 			idto.setAnswerContent(rs.getString(9));
+			idto.setInquiryDate(rs.getString(10));
 			
 			i.add(idto);
 			
@@ -119,6 +120,7 @@ public class InquiryDAO {
 					idto.setReceptionType(rs.getInt(7));
 					idto.setAnswerStatus(rs.getInt(8));
 					idto.setAnswerContent(rs.getString(9));
+					idto.setInquiryDate(rs.getString(10));
 					
 					i.add(idto);
 			 }
@@ -187,6 +189,7 @@ public class InquiryDAO {
 					idto.setReceptionType(rs.getInt(7));
 					idto.setAnswerStatus(rs.getInt(8));
 					idto.setAnswerContent(rs.getString(9));
+					idto.setInquiryDate(rs.getString(10));
 					
 					i.add(idto);
 			 }
@@ -210,8 +213,7 @@ public class InquiryDAO {
 		int count=0;
 		try {
 			con = Util.getConnection();
-			String sql = "select count(*) from inquiry where "+type+" like '%"+content+"%'";
-			System.out.println("count:"+sql);
+			String sql = "select count(*) from inquiry where "+type+" like '%"+content+"%' ";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -234,12 +236,14 @@ public class InquiryDAO {
 		
 	}
 	// search select add
-	public ArrayList<InquiryDTO> search(String type, String content){
+	public ArrayList<InquiryDTO> search(String type, String content, int Startpage, int pagesize){
 			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		try { 
 			con = Util.getConnection();
-			String sql = "select * from inquiry where "+type+" like '%"+content+"%'";
+			String sql = "select * from inquiry where "+type+" like '%"+content+"%' limit ?,?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Startpage);
+			pstmt.setInt(2, pagesize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -253,6 +257,7 @@ public class InquiryDAO {
 				idto.setReceptionType(rs.getInt(7));
 				idto.setAnswerStatus(rs.getInt(8));
 				idto.setAnswerContent(rs.getString(9));
+				idto.setInquiryDate(rs.getString(10));
 				
 				i.add(idto);
 			}
@@ -270,6 +275,39 @@ public class InquiryDAO {
 		
 		return i;
 	} 
+
+	public boolean insert(InquiryDTO idto) {
+		boolean result = false;
+		 try {
+			 con = Util.getConnection();
+			 String sql = "INSERT INTO inquiry\r\n"
+			 		+ "(user_id,inquiry_sort,inquiry_type,inquiry_title,inquiry_content,reception_type,answer_status,answer_content,inquiry_date)\r\n"
+			 		+ "VALUES\r\n"
+			 		+ "\r\n"
+			 		+ "(?, ?, ?, ?,\r\n"
+			 		+ " ?,?,0,null,current_date());";
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setString(1, idto.getUserId());
+			 pstmt.setString(2, idto.getInquirySort());
+			 pstmt.setString(3, idto.getInquiryType());
+			 pstmt.setString(4, idto.getInquiryTitle());
+			 pstmt.setString(5, idto.getInquiryContent());
+			 pstmt.setInt(6, idto.getReceptionType());
+			 result = pstmt.executeUpdate() > 0;
+			 
+			 
+		 }catch(Exception e) {e.printStackTrace();}finally {
+			 try {if(rs != null)rs.close();
+			 if(pstmt != null)pstmt.close();
+			 if(con != null)con.close();
+
+			 }catch(Exception e) {
+			 e.printStackTrace();
+			 }
+			 }
+		 return result;
+		
+	}
 	
 }
 

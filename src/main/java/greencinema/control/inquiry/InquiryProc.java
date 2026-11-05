@@ -28,8 +28,6 @@ public class InquiryProc extends HttpServlet {
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String type = request.getParameter("type");
-		String content = request.getParameter("content");
 		
 		int count = 0; // 전체게시글 수
 		int pagesize = 5; // 한 화면에 그릴 페이지 수
@@ -44,8 +42,9 @@ public class InquiryProc extends HttpServlet {
 		InquiryDAO idao = new InquiryDAO();
 		count = idao.AllCount(); // 페이지 전체수 입력
 		int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
+	
 		
-		ArrayList<InquiryDTO>  iList = new ArrayList<InquiryDTO>();
+		ArrayList<InquiryDTO> iList = new ArrayList<InquiryDTO>();
 		iList = idao.getAllList(StartRow, pagesize);
 		
 		
