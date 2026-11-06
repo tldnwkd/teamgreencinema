@@ -150,8 +150,15 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 						
 			while(rs.next()) {
-				InquiryDTO rdto = new InquiryDTO();
-				
+				InquiryDTO idto = new InquiryDTO();
+				idto.setInquiryId(rs.getInt("inquiryId"));
+				idto.setInquirySort(rs.getString("inquirySort"));
+				idto.setInquiryType(rs.getString("inquiryType"));
+				idto.setInquiryTitle(rs.getString("inquiryTitle"));
+				idto.setInquiryContent(rs.getString("inquiryContent"));
+				idto.setReceptionType(rs.getInt("receptionType"));
+				idto.setAnswerStatus(rs.getInt("answerStatus"));
+				idto.setAnswerContent(rs.getString("answerContent"));
 			}
 			
 		}catch (Exception e) {
