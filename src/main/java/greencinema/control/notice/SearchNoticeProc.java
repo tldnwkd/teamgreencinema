@@ -1,4 +1,4 @@
-package greencinema.control.faq;
+package greencinema.control.notice;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,21 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import greencinema.model.faq.FaqDAO;
 import greencinema.model.faq.FaqDTO;
+import greencinema.model.notice.NoticeDAO;
+import greencinema.model.notice.NoticeDTO;
 
-
-@WebServlet("/seachFaqProc.do")
-public class seachFaqProc extends HttpServlet {
-
+@WebServlet("/SearchNoticeProc.do")
+public class SearchNoticeProc extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		rePro(request, response);
+		reqPro(request, response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		rePro(request, response);
+		reqPro(request, response);
 	}
-	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
 		String type = request.getParameter("type");
 		String content = request.getParameter("content");
 		
@@ -40,12 +42,13 @@ public class seachFaqProc extends HttpServlet {
 		int number = 0; 
 		int curretnPage = Integer.parseInt(pageNum); // 현재 페이지 위치
 		
-		FaqDAO fdao = new FaqDAO();
+		NoticeDAO ndao = new NoticeDAO();
+		count = ndao.nCount(type,content); // 페이지 전체수 입력
+		System.out.println(count);
 		int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
-		count = fdao.fCount(type,content); // 페이지 전체수 입력
 		
-		ArrayList<FaqDTO>  fList = new ArrayList<FaqDTO>();
-		fList = fdao.search(type,content,StartRow,pagesize);
+		ArrayList<NoticeDTO>  nList = new ArrayList<NoticeDTO>();
+		nList = ndao.search(type,content,StartRow,pagesize);
 		
 		
 		number = count-StartRow; //페이지당 게시글 출력 번호
@@ -71,10 +74,9 @@ public class seachFaqProc extends HttpServlet {
 			}
 			
 		}
-		request.setAttribute("fList", fList);
-		request.setAttribute("content", content);
+		request.setAttribute("nList", nList);
 		request.setAttribute("type", type);
-		
+		request.setAttribute("content", content);
 		
 		request.setAttribute("StartRow", StartRow);
 		request.setAttribute("pageCount", pageCount);
@@ -86,7 +88,7 @@ public class seachFaqProc extends HttpServlet {
 		request.setAttribute("pageBlock", pageBlock);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=faq/search-Faq.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/Search-Notice.jsp");
 		rd.forward(request, response);
 		
 	}

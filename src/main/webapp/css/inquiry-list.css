@@ -1,276 +1,312 @@
-/*
- * GreenCinema | inquiry-List.jsp ì „ìš© CSS
- * JSP/HTML íƒœê·¸, í´ë˜ìŠ¤, ë³€ìˆ˜ëª… ë³€ê²½ ì—†ì´ ì ìš©
- * í•´ë‹¹ JSPì˜ <link>ë¥¼ css/inquiry-list.css ìœ¼ë¡œ ë°”ê¾¸ì„¸ìš”.
- * UTF-8
- */
+/* =========================================================
+   GREEN CINEMA | 1:1 ¹®ÀÇ ¸ñ·Ï Àü¿ë CSS
+   ´ë»ó: ±âÁ¸ JSPÀÇ section > h1 + form + table + .paging
+   JSP ÅÂ±×, ID, class, HTML ±¸Á¶ º¯°æ ºÒÇÊ¿ä
+   ========================================================= */
 
-/* ì™¸ë¶€ í˜ì´ì§€ì˜ header/footerì— ì˜í–¥ì„ ì£¼ì§€ ì•Šë„ë¡ form actionìœ¼ë¡œ ë²”ìœ„ë¥¼ í•œì • */
-section:has(> form[action="searchInquiryProc.do"]) {
-    --gc-accent: #3c63bd;
-    --gc-accent-dark: #294b9b;
-    --gc-accent-light: #ecf2fe;
-    --gc-accent-glow: rgba(60,99,189,.13);
-    --gc-border: #e4ebf1;
-    --gc-muted: #738295;
-    --gc-ink: #1b2a3b;
+/* ´Ù¸¥ ÆäÀÌÁöÀÇ section¿¡ ¿µÇâÀ» ÁÖÁö ¾Êµµ·Ï °Ë»ö select·Î ¹üÀ§¸¦ Á¦ÇÑ */
+section:has(> form #type_i) {
+    --inq-green: #03a94f;
+    --inq-green-dark: #078743;
+    --inq-green-soft: #ecfaf2;
+    --inq-ink: #192328;
+    --inq-muted: #6b7781;
+    --inq-line: #e6ebeb;
+    --inq-white: #ffffff;
+
+    width: min(1120px, calc(100% - 48px));
+    margin: 56px auto 92px;
+    padding: 0;
+    color: var(--inq-ink);
+    font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
     box-sizing: border-box;
-    width: min(1120px, calc(100% - 36px));
-    margin: 44px auto 68px;
-    padding: 34px 38px 32px;
-    background: #fff;
-    border: 1px solid var(--gc-border);
-    border-radius: 22px;
-    box-shadow: 0 16px 46px rgba(20, 43, 69, .055);
-    font-family: Pretendard, "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
-    color: var(--gc-ink);
-    overflow-x: auto;
-}
-section:has(> form[action="searchInquiryProc.do"]), section:has(> form[action="searchInquiryProc.do"]) * { box-sizing: border-box; }
-
-/* ì¼ë°˜ ëª©ë¡ ì „ìš©: ì¹´í…Œê³ ë¦¬ ë¼ë²¨ */
-
-section:has(> form[action="searchInquiryProc.do"])::before {
-    content: "1:1 ë¬¸ì˜ Â· ì „ì²´ ëª©ë¡";
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: .02em;
-    color: var(--gc-accent-dark);
-    background: var(--gc-accent-light);
 }
 
-/* í™”ë©´ ì œëª© */
-section:has(> form[action="searchInquiryProc.do"]) > h1 {
-    position: relative;
-    margin: 0 0 25px;
-    padding: 0 0 20px;
-    font-size: clamp(23px, 2.6vw, 32px);
-    font-weight: 800;
+section:has(> form #type_i) *,
+section:has(> form #type_i) *::before,
+section:has(> form #type_i) *::after {
+    box-sizing: border-box;
+}
+
+/* »ó´Ü Á¦¸ñ: PC À¥»çÀÌÆ®Çü Å¸ÀÌÆ÷±×·¡ÇÇ */
+section:has(> form #type_i) > h1 {
+    margin: 0 0 32px;
+    padding: 0 0 22px;
+    border-bottom: 2px solid var(--inq-ink);
+    font-size: clamp(26px, 2.6vw, 34px);
+    font-weight: 750;
+    letter-spacing: -1.2px;
     line-height: 1.3;
-    letter-spacing: -.045em;
-    color: var(--gc-ink);
-}
-section:has(> form[action="searchInquiryProc.do"]) > h1::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 46px;
-    height: 4px;
-    border-radius: 99px;
-    background: var(--gc-accent);
 }
 
-/* ê²€ìƒ‰ ì˜ì—­: select / ê²€ìƒ‰ì–´ / ê²€ìƒ‰ / ì „ì²´ë³´ê¸° */
-section:has(> form[action="searchInquiryProc.do"]) > form {
-    display: grid;
-    grid-template-columns: 172px minmax(0, 1fr) 85px 94px;
-    gap: 10px;
+section:has(> form #type_i) > h1::before {
+    content: "CUSTOMER SERVICE";
+    display: block;
+    margin-bottom: 10px;
+    color: var(--inq-green-dark);
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 2px;
+}
+
+/* °Ë»öÃ¢: °¡·ÎÇü À¥»çÀÌÆ® °Ë»ö ¹Ù */
+section:has(> form #type_i) > form {
+    display: flex;
     align-items: center;
-    margin: 0 0 29px;
-    padding: 19px;
-    background: #f7f9fb;
-    border: 1px solid #ecf0f4;
-    border-radius: 14px;
-}
-section:has(> form[action="searchInquiryProc.do"]) > form select,
-section:has(> form[action="searchInquiryProc.do"]) > form input {
-    min-width: 0;
-    height: 44px;
-    margin: 0;
-    border-radius: 9px;
-    font: inherit;
-    font-size: 13px;
-}
-section:has(> form[action="searchInquiryProc.do"]) > form select,
-section:has(> form[action="searchInquiryProc.do"]) > form input[type="text"] {
-    width: 100%;
-    padding: 0 13px;
-    background: #fff;
-    border: 1px solid #dce4ea;
-    color: #314256;
-    outline: none;
-    transition: border-color .18s, box-shadow .18s;
-}
-section:has(> form[action="searchInquiryProc.do"]) > form input[type="text"]::placeholder { color: #a0aaba; }
-section:has(> form[action="searchInquiryProc.do"]) > form select:focus,
-section:has(> form[action="searchInquiryProc.do"]) > form input[type="text"]:focus {
-    border-color: var(--gc-accent);
-    box-shadow: 0 0 0 3px var(--gc-accent-glow);
-}
-section:has(> form[action="searchInquiryProc.do"]) > form input[type="submit"],
-section:has(> form[action="searchInquiryProc.do"]) > form input[type="button"] {
-    width: 100%;
-    padding: 0 8px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 700;
-    transition: transform .15s, background-color .15s, border-color .15s;
-}
-section:has(> form[action="searchInquiryProc.do"]) > form input[type="submit"] {
-    border: 1px solid var(--gc-accent);
-    color: #fff;
-    background: var(--gc-accent);
-}
-section:has(> form[action="searchInquiryProc.do"]) > form input[type="submit"]:hover {
-    background: var(--gc-accent-dark);
-    transform: translateY(-1px);
-}
-section:has(> form[action="searchInquiryProc.do"]) > form input.btn-all {
-    border: 1px solid #d8e0e8;
-    color: #526275;
-    background: #fff;
-}
-section:has(> form[action="searchInquiryProc.do"]) > form input.btn-all:hover {
-    border-color: var(--gc-accent);
-    color: var(--gc-accent-dark);
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0 0 24px;
+    padding: 0;
 }
 
-/* ëª©ë¡ í…Œì´ë¸” (ì›ë³¸ border=1 ì œê±° ë° ë ˆì´ì•„ì›ƒ ì •ëˆ) */
-section:has(> form[action="searchInquiryProc.do"]) > table {
-    width: 100%;
-    min-width: 710px;
-    margin: 0;
-    border-collapse: collapse;
-    border: 0;
-    table-layout: fixed;
-    background: #fff;
+section:has(> form #type_i) > form select,
+section:has(> form #type_i) > form input {
+    height: 44px;
+    border: 1px solid #d8dfdf;
+    border-radius: 6px;
+    background: var(--inq-white);
+    color: var(--inq-ink);
+    font: inherit;
+    font-size: 14px;
+    transition: border-color .2s, box-shadow .2s, background-color .2s;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table th,
-section:has(> form[action="searchInquiryProc.do"]) > table td {
-    border: 0;
-    border-bottom: 1px solid #edf1f5;
-    text-align: center;
+
+section:has(> form #type_i) > form select {
+    width: 175px;
+    padding: 0 35px 0 14px;
+    cursor: pointer;
+}
+
+section:has(> form #type_i) > form input[type="text"] {
+    flex: 0 1 325px;
+    min-width: 210px;
+    padding: 0 14px;
+}
+
+section:has(> form #type_i) > form input[type="text"]::placeholder {
+    color: #9aa4ab;
+}
+
+section:has(> form #type_i) > form select:focus,
+section:has(> form #type_i) > form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--inq-green);
+    box-shadow: 0 0 0 3px rgba(3, 169, 79, .12);
+}
+
+section:has(> form #type_i) > form input[type="submit"],
+section:has(> form #type_i) > form input[type="button"] {
+    min-width: 82px;
+    padding: 0 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+section:has(> form #type_i) > form input[type="submit"] {
+    border-color: var(--inq-green-dark);
+    color: white;
+    background: var(--inq-green-dark);
+}
+
+section:has(> form #type_i) > form input[type="submit"]:hover {
+    background: #066d36;
+    border-color: #066d36;
+}
+
+section:has(> form #type_i) > form input.btn-all {
+    background: #f6f8f8;
+    color: #3d484f;
+}
+
+section:has(> form #type_i) > form input.btn-all:hover {
+    border-color: #879b91;
+    background: #edf3ef;
+}
+
+/* Ç¥: °¡·ÎÁÙ Áß½ÉÀÇ ±ò²ûÇÑ °Ô½ÃÆÇ */
+section:has(> form #type_i) > table {
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+    border-collapse: collapse;
+    border-top: 2px solid var(--inq-ink);
+    background: var(--inq-white);
+    font-size: 14px;
+}
+
+section:has(> form #type_i) > table th,
+section:has(> form #type_i) > table td {
+    border: none;
+    border-bottom: 1px solid var(--inq-line);
     vertical-align: middle;
     overflow-wrap: anywhere;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table th {
-    padding: 16px 13px;
-    background: var(--gc-accent-light);
-    color: var(--gc-accent-dark);
+
+section:has(> form #type_i) > table th {
+    padding: 19px 12px;
+    background: #f5f8f6;
+    color: #47565b;
+    text-align: center;
     font-size: 13px;
-    font-weight: 800;
-    white-space: nowrap;
-    border-top: 2px solid var(--gc-accent);
-    border-bottom: 1px solid #dce7e5;
+    font-weight: 700;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table td {
-    padding: 17px 13px;
-    font-size: 13px;
-    line-height: 1.55;
-    color: #4a5969;
+
+section:has(> form #type_i) > table td {
+    padding: 20px 12px;
+    color: #47535b;
+    text-align: center;
+    line-height: 1.6;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table td:first-child {
-    color: #8894a3;
+
+section:has(> form #type_i) > table tr:not(:first-child):hover td {
+    background: #f7fcf9;
+}
+
+section:has(> form #type_i) > table th:nth-child(1),
+section:has(> form #type_i) > table td:nth-child(1) { width: 9%; }
+
+section:has(> form #type_i) > table th:nth-child(2),
+section:has(> form #type_i) > table td:nth-child(2) { width: 17%; }
+
+section:has(> form #type_i) > table th:nth-child(3),
+section:has(> form #type_i) > table td:nth-child(3) { width: 17%; }
+
+section:has(> form #type_i) > table th:nth-child(4),
+section:has(> form #type_i) > table td:nth-child(4) { width: 40%; }
+
+section:has(> form #type_i) > table th:nth-child(5),
+section:has(> form #type_i) > table td:nth-child(5) { width: 17%; }
+
+section:has(> form #type_i) > table td:first-child {
+    color: #8b979c;
     font-variant-numeric: tabular-nums;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table td:nth-child(4) {
+
+/* ¹®ÀÇ Á¦¸ñ °­Á¶ */
+section:has(> form #type_i) > table td:nth-child(4) {
     text-align: left;
-    font-weight: 600;
-    color: #233449;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table tr:not(:first-child):hover td {
-    background: #f7fbfa;
-}
-section:has(> form[action="searchInquiryProc.do"]) > table td[colspan] {
-    padding: 48px 18px;
-    color: var(--gc-muted);
-    text-align: center;
-}
-section:has(> form[action="searchInquiryProc.do"]) > table td[colspan] p { margin: 0; }
 
-/* 1:1 ë¬¸ì˜ ë‹µë³€ ìƒíƒœ: ë§í¬=ì™„ë£Œ, ë¬¸ë‹¨=ëŒ€ê¸° (í˜„ì¬ JSP êµ¬ì¡° ê¸°ì¤€) */
-section:has(> form[action="searchInquiryProc.do"]) > table td:last-child a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 13px;
-    border-radius: 999px;
-    background: #e5f7ee;
-    color: #18794e;
-    font-size: 12px;
-    font-weight: 700;
+section:has(> form #type_i) > table td:nth-child(4) a {
+    color: #202b31;
     text-decoration: none;
-    white-space: nowrap;
+    font-weight: 650;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table td:last-child p {
+
+section:has(> form #type_i) > table td:nth-child(4) a:hover {
+    color: var(--inq-green-dark);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* ´äº¯ ¿Ï·á / ´äº¯ ´ë±â Ç¥½Ã */
+section:has(> form #type_i) > table td:last-child a,
+section:has(> form #type_i) > table td:last-child p {
     display: inline-block;
+    min-width: 82px;
     margin: 0;
-    padding: 6px 13px;
-    border-radius: 999px;
-    background: #f1f3f6;
-    color: #687386;
+    padding: 6px 11px;
+    border-radius: 5px;
     font-size: 12px;
     font-weight: 700;
+    line-height: 1.5;
     white-space: nowrap;
 }
-section:has(> form[action="searchInquiryProc.do"]) > table th:nth-child(1),
-section:has(> form[action="searchInquiryProc.do"]) > table td:nth-child(1) { width: 11%; }
-section:has(> form[action="searchInquiryProc.do"]) > table th:nth-child(2),
-section:has(> form[action="searchInquiryProc.do"]) > table td:nth-child(2) { width: 16%; }
-section:has(> form[action="searchInquiryProc.do"]) > table th:nth-child(3),
-section:has(> form[action="searchInquiryProc.do"]) > table td:nth-child(3) { width: 17%; }
-section:has(> form[action="searchInquiryProc.do"]) > table th:nth-child(5),
-section:has(> form[action="searchInquiryProc.do"]) > table td:nth-child(5) { width: 16%; }
 
-/* í˜ì´ì§€ ì´ë™: ì´ì „ / í˜ì´ì§€ë²ˆí˜¸ / ë‹¤ìŒ */
-section:has(> form[action="searchInquiryProc.do"]) > .paging {
+section:has(> form #type_i) > table td:last-child a {
+    background: var(--inq-green-soft);
+    color: var(--inq-green-dark);
+    text-decoration: none;
+}
+
+section:has(> form #type_i) > table td:last-child p {
+    background: #f0f2f4;
+    color: #79858d;
+}
+
+/* ÆäÀÌÁö ¹øÈ£ */
+section:has(> form #type_i) > .paging {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 7px;
-    min-height: 42px;
-    margin: 30px 0 0;
+    gap: 6px;
+    margin-top: 36px;
 }
-section:has(> form[action="searchInquiryProc.do"]) > .paging > a {
+
+section:has(> form #type_i) > .paging a {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     min-width: 38px;
     height: 38px;
     padding: 0 11px;
-    border: 1px solid #dfe7ef;
-    border-radius: 9px;
+    border: 1px solid #e0e5e6;
+    border-radius: 5px;
     background: #fff;
+    color: #536168;
     font-size: 13px;
-    font-weight: 700;
     text-decoration: none;
-    color: #657489;
-    transition: background-color .18s, color .18s, border-color .18s;
-}
-section:has(> form[action="searchInquiryProc.do"]) > .paging > a:hover,
-section:has(> form[action="searchInquiryProc.do"]) > .paging > a:focus-visible {
-    background: var(--gc-accent);
-    border-color: var(--gc-accent);
-    color: #fff;
+    transition: background-color .2s, border-color .2s, color .2s;
 }
 
-@media (max-width: 800px) {
-    section:has(> form[action="searchInquiryProc.do"]) {
-        width: calc(100% - 22px);
-        padding: 24px 18px;
-        margin: 22px auto 40px;
-        border-radius: 16px;
-    }
-    section:has(> form[action="searchInquiryProc.do"]) > form {
-        grid-template-columns: 135px minmax(0, 1fr);
-        padding: 14px;
-    }
-    section:has(> form[action="searchInquiryProc.do"]) > form input[type="submit"],
-    section:has(> form[action="searchInquiryProc.do"]) > form input.btn-all { min-height: 42px; }
-    section:has(> form[action="searchInquiryProc.do"]) > table td,
-    section:has(> form[action="searchInquiryProc.do"]) > table th { padding: 13px 10px; font-size: 12px; }
+section:has(> form #type_i) > .paging a:hover,
+section:has(> form #type_i) > .paging a:focus-visible {
+    background: var(--inq-green-dark);
+    border-color: var(--inq-green-dark);
+    color: white;
+    outline: none;
 }
-@media (max-width: 510px) {
-    section:has(> form[action="searchInquiryProc.do"]) > form { grid-template-columns: 1fr 1fr; gap: 8px; }
-    section:has(> form[action="searchInquiryProc.do"]) > form select,
-    section:has(> form[action="searchInquiryProc.do"]) > form input[type="text"] { grid-column: 1 / -1; }
-    section:has(> form[action="searchInquiryProc.do"]) > table { min-width: 710px; }
-    section:has(> form[action="searchInquiryProc.do"]) > .paging > a { min-width: 35px; height: 35px; }
+
+/* Á¢±Ù¼º: Å°º¸µå·Î Á¦¸ñ ¸µÅ© ÀÌµ¿ ½Ã */
+section:has(> form #type_i) a:focus-visible {
+    outline: 2px solid var(--inq-green);
+    outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+    section:has(> form #type_i) {
+        width: calc(100% - 28px);
+        margin: 28px auto 60px;
+    }
+
+    section:has(> form #type_i) > h1 {
+        font-size: 26px;
+        margin-bottom: 22px;
+    }
+
+    section:has(> form #type_i) > form {
+        justify-content: stretch;
+        gap: 8px;
+    }
+
+    section:has(> form #type_i) > form select {
+        width: 100%;
+    }
+
+    section:has(> form #type_i) > form input[type="text"] {
+        flex: 1 1 100%;
+        width: 100%;
+        min-width: 0;
+    }
+
+    section:has(> form #type_i) > form input[type="submit"],
+    section:has(> form #type_i) > form input[type="button"] {
+        flex: 1;
+    }
+
+    /* HTML ±¸Á¶¸¦ º¯°æÇÏÁö ¾Ê°í ÀÛÀº È­¸é¿¡¼­ °¡·Î ½ºÅ©·Ñ Çã¿ë */
+    section:has(> form #type_i) {
+        overflow-x: auto;
+    }
+
+    section:has(> form #type_i) > table {
+        min-width: 660px;
+    }
+
+    section:has(> form #type_i) > table th,
+    section:has(> form #type_i) > table td {
+        padding: 15px 10px;
+    }
 }

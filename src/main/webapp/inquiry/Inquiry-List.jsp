@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="css/inquiry-list.css">
     <section>
    <h1>1:1 문의사항</h1>
-    <form action="searchInquiryProc.do" method="get">
+    <form action="SearchInquiryProc.do" method="get">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="inquiry_type"  ${type==inquiry_type?'selected':''}>문의종류로 검색</option>
@@ -18,9 +18,9 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='InquiryProc.do'">
     </form>
+    <form action="OneInquiryProc.do" method="get">
 	<table border="1">
 		<tr>
-			<th>글번호</th>
 			<th>문의종류</th>
 			<th>문의분류</th>
 			<th>제목</th>
@@ -28,14 +28,14 @@
 		</tr>
 			<c:forEach var= "iList" items="${iList}">
 					<tr>
-						<td>${number }</td>
 						<td>${iList.inquiryType }</td>
 						<td>${iList.inquirySort }</td>
-						<td>${iList.inquiryTitle }</td>
+						<td><button type="submit" name="inquiryId" value="${iList.inquiryId}">${iList.inquiryTitle }</button>
+						</td>
 						<td>
 						<c:choose >
 							<c:when test="${iList.answerStatus eq 1 }">
-								<a href="#">답변 완료</a>
+								<button type="submit" name="inquiryId" value="${iList.inquiryId}">답변 완료</button>
 							</c:when>
 							<c:otherwise>
 								<p>답변 대기</p>
@@ -43,7 +43,6 @@
 						</c:choose>
 						</td>
 					</tr>
-				<c:set var="number" value="${number-1}"/>
 			</c:forEach>
 	</table>
 	<%-- 페이징 부분 --%>
@@ -62,5 +61,6 @@
 			<a href ="InquiryProc.do?pageNum=${startpage+pageBlock}">다음</a>
 		</c:if>
 	</div>
+	</form>
 	</section>
 	

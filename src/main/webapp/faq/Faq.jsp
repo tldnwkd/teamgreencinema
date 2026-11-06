@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/faq.css">
     <section>
 	<h1>FAQ</h1>
-    <form action="seachFaqProc.do" method="get">
+    <form action="SeachFaqProc.do" method="get">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="faq_inquery"  ${type=='faq_inquery'?'selected':''}>제목로 검색</option>
@@ -18,16 +18,12 @@
     </form>
 	<table border="1">
 		<tr>
-			<th>글번호</th>
 			<th>질문</th>
 		</tr>
-				<c:set var="number" value="${number}"/>
 			<c:forEach var= "fList" items="${fList}">
 					<tr>
-						<td>${number }</td>
 						<td>${fList.faqInquery }</td>
 					</tr>
-				<c:set var="number" value="${number-1}"/>
 			</c:forEach>
 	</table>
 	<%-- 페이징 부분 --%>

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/search-list.css">
     <section>
    <h1>1:1 문의사항</h1>
-    <form action="searchInquiryProc.do" method="get">
+    <form action="SearchInquiryProc.do" method="get">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="inquiry_type"  ${type=='inquiry_type'?'selected':''}>문의종류로 검색</option>
@@ -20,7 +20,6 @@
     </form>
 	<table border="1">
 		<tr>
-			<th>글번호</th>
 			<th>문의종류</th>
 			<th>문의분류</th>
 			<th>제목</th>
@@ -35,7 +34,6 @@
 			<c:otherwise>
 				<c:forEach var="sList" items="${sList}">
 					<tr>
-						<td>${number }</td>
 						<td>${sList.inquiryType }</td>
 						<td>${sList.inquirySort }</td>
 						<td>${sList.inquiryTitle }</td>
@@ -50,7 +48,6 @@
 						</c:choose>
 						</td>
 					</tr>
-				<c:set var="number" value="${number-1}"/>
 				</c:forEach>
 				</c:otherwise>
 			</c:choose>
@@ -59,16 +56,16 @@
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>
 		<c:if test="${startpage > pageBlock }">
-			<a href="searchInquiryProc.do?pageNum=${startpage-pageBlock}">이전</a>
+			<a href="SearchInquiryProc.do?pageNum=${startpage-pageBlock}">이전</a>
 		</c:if>
 	<%-- 페이징 --%>
 		<c:forEach var="i" begin="${startpage}" end ="${endpage}">
-			<a href="searchInquiryProc.do?pageNum=${i }&content=${content }&type=${type }">${i }</a>
+			<a href="SearchInquiryProc.do?pageNum=${i }&content=${content }&type=${type }">${i }</a>
 		</c:forEach>	
 		
 		<%-- [다음] 링크 만들지 파악 --%>
 		<c:if test="${endpage < pageCount }">
-			<a href ="searchInquiryProc.do?pageNum=${startpage+pageBlock}">다음</a>
+			<a href ="SearchInquiryProc.do?pageNum=${startpage+pageBlock}">다음</a>
 		</c:if>
 	</div>
 	</section>

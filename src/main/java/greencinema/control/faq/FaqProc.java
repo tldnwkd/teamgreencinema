@@ -83,7 +83,7 @@ public class FaqProc extends HttpServlet {
 		request.setAttribute("pageBlock", pageBlock);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=faq/faq.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=faq/Faq.jsp");
 		rd.forward(request, response);
 		
 	}

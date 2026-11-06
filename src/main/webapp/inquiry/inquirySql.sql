@@ -9,6 +9,7 @@ INSERT INTO inquiry
  inquiry_content, answer_status, answer_content)
 VALUES
 
+
 ('user01', '예매/결제', '문의', '예매 취소 방법 문의',
  '예매한 영화를 취소하려면 어떻게 해야 하나요?',
  1, '마이페이지의 예매 내역에서 취소할 수 있습니다.'),
