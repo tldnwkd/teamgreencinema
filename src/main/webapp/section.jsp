@@ -12,7 +12,7 @@
 				<h2 class="section-title">현재 상영작</h2>
 				<p class="section-subtitle">그린시네마의 가상 영화 컬렉션</p>
 			</div>
-			<a class="section-link" href="#">전체 예매 보기 ↗</a>
+			<a class="section-link" href="selectMovieReserveProc.do">전체 예매 보기 ↗</a>
 		</div>
 
 			<div class="movie-grid">

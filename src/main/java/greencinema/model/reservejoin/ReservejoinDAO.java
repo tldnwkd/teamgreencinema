@@ -176,6 +176,7 @@ public class ReservejoinDAO {
 	        while(rs.next()) {
 	            ReservejoinDTO rjdto = new ReservejoinDTO();
 	            rjdto.setScheduleStarttime(rs.getString("schedule_starttime"));                         
+	            rjdto.setScheduleEndtime(rs.getString("schedule_endtime"));                         
 	            rjdto.setTotalSeat(rs.getInt("total_seat"));                       
 	            rjdto.setScreenId(rs.getInt("screen_id"));                         
 	            list.add(rjdto);

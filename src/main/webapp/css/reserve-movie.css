@@ -570,6 +570,13 @@
   line-height: 1.6;
 }
 
+.summary-footnote02 {
+  color: #171a18;
+  font-size: 11px;
+  margin: 16px 0;
+  line-height: 1.6;
+}
+
 .booking-panel__title .reset-btn {
   display: inline-flex;
   align-items: center;
@@ -591,4 +598,39 @@
   background: var(--gc-surface-muted, #f2f7f4);
   border-color: var(--gc-primary, #03c75a);
   color: var(--gc-primary-hover, #02ad4f);
+}
+
+/* =====================================================================
+   달력 요일 및 주말(토, 일) 색상 스타일링
+   ===================================================================== */
+
+/* 1. 요일 헤더 색상 */
+.cal_table th:nth-child(1) { /* 일요일 헤더 */
+    color: #ff4d4d !important;
+}
+.cal_table th:nth-child(7) { /* 토요일 헤더 */
+    color: #3b82f6 !important;
+}
+
+/* 2. 날짜 셀(TD) 기준 주말 글자색 지정 (일요일: 첫 번째 열, 토요일: 일곱 번째 열) */
+.cal_table td:nth-child(1) .calendar-day:not(.is-disabled) {
+    color: #ff4d4d !important; /* 일요일 날짜 빨간색 */
+}
+.cal_table td:nth-child(7) .calendar-day:not(.is-disabled) {
+    color: #3b82f6 !important; /* 토요일 날짜 파란색 */
+}
+
+/* 선택된 날짜(is-selected)일 때는 기존 테마 색상(흰색 글씨)이 유지되도록 예외 처리 */
+.calendar-day.is-selected {
+    color: #fff !important;
+}
+
+/* No saan pay a nakompleto dagiti napili ken naaramat ti class a btn--large02 */
+.btn.btn--primary.btn--block.btn--large02 {
+    background-color: #e5e7eb !important; /* Nalawag agray a kolor */
+    color: #9ca3af !important;           /* Nalawag a gray a text */
+    border-color: #d1d5db !important;
+    cursor: not-allowed !important;      /* Mangipakita iti "not-allowed" a cursor */
+    pointer-events: none;                /* Mangipaidakkel a saan a ma-click ti p-tag */
+    box-shadow: none !important;
 }

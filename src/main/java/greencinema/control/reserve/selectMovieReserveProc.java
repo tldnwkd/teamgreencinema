@@ -36,6 +36,7 @@ public class selectMovieReserveProc extends HttpServlet {
 		String smallRegion = request.getParameter("smallRegion"); 
 		String selectedDate = request.getParameter("selectedDate");
 		String movieTitle = request.getParameter("movieTitle");
+		String screenId = request.getParameter("screenId");
 		
 		System.out.println("movieId: " + movieId);
 	    System.out.println("largeRegion: " + largeRegion);
@@ -53,6 +54,7 @@ public class selectMovieReserveProc extends HttpServlet {
 		request.setAttribute("rjlist02", rjlist02);
 		request.setAttribute("rjlist03", rjlist03);
 		request.setAttribute("rjlist04", rjlist04);
+		request.setAttribute("screenId", screenId);
 
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=reserve/reserve-movie.jsp");
 		rd.forward(request, response);
