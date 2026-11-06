@@ -186,6 +186,7 @@ p {
 .btn--primary {
   color: #fff;
   background: var(--gc-primary);
+  
 }
 
 .btn--primary:hover:not(:disabled) {
