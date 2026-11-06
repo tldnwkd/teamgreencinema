@@ -15,19 +15,13 @@
           <p class="page-heading__description">예매 내역과 문의 내역을 관리하는 화면입니다.</p>
         </div>
 
-        <!-- 안내 문구 -->
-        <div class="demo-note">
-          <span class="demo-note__dot" aria-hidden="true"></span>
-          마이페이지 화면은 예시 데이터입니다. 로그인 상태·취소 가능 기간·취소 처리 기능은 구현되지 않았습니다.
-        </div>
-
         <!-- 마이페이지 레이아웃 -->
         <div class="mypage-layout">
           <!-- 좌측 사이드 메뉴 -->
           <nav class="side-nav" aria-label="마이페이지 메뉴">
             <a class="is-active" href="#reservations">예매내역</a>
-            <a href="#my-inquiries">1:1문의내역</a>
-            <a href="inquiry.html">문의 작성</a>
+            <a href="index.jsp?section=inquiry/inquiry-List.jsp">1:1문의내역</a>
+            <a href="index.jsp?section=inquiry/inquiry.jsp">문의 작성</a>
           </nav>
 
           <!-- 우측 본문 영역 -->
@@ -36,7 +30,7 @@
             <section id="reservations">
               <div class="section-header">
                 <h2 class="section-title">예매 내역</h2>
-                <span class="chip chip--green">1건 (예시)</span>
+                <span class="chip chip--green">1건</span>
               </div>
 
               <div class="reservation-list">
@@ -61,7 +55,7 @@
             <section id="my-inquiries" class="stack-section">
               <div class="section-header">
                 <h2 class="section-title">1:1 문의내역</h2>
-                <a href="inquiry.html" class="btn btn--outline btn--small">문의 작성</a>
+                <a href="index.jsp?section=inquiry/inquiry.jsp" class="btn btn--outline btn--small">문의 작성</a>
               </div>
 
               <div class="table-scroll">

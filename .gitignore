@@ -2,3 +2,5 @@
 Servers/
 build/
 .idea/
+.classpath
+.project

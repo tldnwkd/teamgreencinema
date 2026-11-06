@@ -37,7 +37,7 @@ public class InquityInsertProc extends HttpServlet {
 		
 		InquiryDAO idao = new InquiryDAO();
 		idao.insert(idto);
-		 System.out.println(idao.insert(idto));
+		
 
 	
 	}
