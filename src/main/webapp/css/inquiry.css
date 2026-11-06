@@ -101,6 +101,7 @@ section:has(> .paging) > .paging a {
     text-decoration: none;
     font-size: 13px;
     transition: background-color .2s, color .2s, border-color .2s;
+    cursor: pointer;
 }
 
 section:has(> .paging) > .paging a:hover {
