@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+/* =====================================================================
+   결제 페이지 전용 3단 레이아웃 및 스타일 (인라인 스타일 제거 완료)
+   ===================================================================== */
+
+.payment-three-column-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.payment-col-left {
+    flex: 1;
+    min-width: 280px;
+}
+
+.payment-col-center {
+    flex: 1;
+    min-width: 260px;
+}
+
+.payment-col-right {
+    width: 320px;
+    min-width: 320px;
+}
+
+.payment-panel-fix {
+    margin-bottom: 0px !important;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.payment-title-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Wagas ti panagpili (Payment Method Cards) */
+.pay-method-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.pay-method-card {
+    border: 1px solid var(--gc-border, #e5e7eb);
+    padding: 24px 12px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.pay-radio-hidden {
+    display: none;
+}
+
+.pay-method-card:hover {
+    border-color: var(--gc-primary, #03c75a);
+    background-color: #f8fafc;
+}
+
+.pay-method-card:has(input[type="radio"]:checked) {
+    border-color: var(--gc-primary, #03c75a);
+    background-color: #f4fbf7;
+}
+
+.pay-method-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gc-text, #111);
+}
+
+/* Paset ti Kannawan (Payment Summary & Action) */
+.payment-summary-fix {
+    margin-bottom: 0px !important;
+}
+
+.movie-rate-badge {
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 10px;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.summary-movie-title {
+    display: block;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.summary-movie-runtime {
+    font-size: 13px;
+    color: #64706b;
+    margin-top: 6px;
+}
+
+.summary-datetime-val {
+    font-size: 12px;
+}
+
+.summary-seat-val {
+    color: var(--gc-primary-hover, #02ad4f);
+}
+
+.payment-summary-bottom-section {
+    border-top: 1px solid var(--gc-border, #e5e7eb);
+    margin-top: 16px;
+    padding-top: 16px;
+}
+
+.agree-checkbox-wrap {
+    margin-bottom: 12px;
+}
+
+.agree-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #555;
+}
+
+.payment-calc-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.calc-row-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #64706b;
+}
+
+.calc-row-item.discount-row {
+    color: #e11d48;
+}
+
+.calc-row-item.total-final-row {
+    font-size: 16px;
+    font-weight: 800;
+    border-top: 1px dashed var(--gc-border, #e5e7eb);
+    padding-top: 10px;
+    margin-top: 4px;
+    color: var(--gc-text);
+}
+
+.total-price-color {
+    color: var(--gc-primary, #03c75a);
+}
+
+/* Berde a button ti panagbayad */
+.payment-submit-btn-green {
+    margin-top: 12px;
+    background: var(--gc-primary, #03c75a) !important;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.payment-submit-btn-green:hover {
+    background: var(--gc-primary-hover, #02ad4f) !important;
+}
+
+/* Responsibo para iti mobile / tablet */
+@media (max-width: 1024px) {
+    .payment-three-column-layout {
+        flex-direction: column;
+    }
+    .payment-col-left,
+    .payment-col-center,
+    .payment-col-right {
+        width: 100%;
+        min-width: 100%;
+    }
+}
