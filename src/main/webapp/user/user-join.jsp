@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*"%>
-<%@ page import="java.sql.*" %>
+    pageEncoding="UTF-8" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <main id="main">
@@ -11,7 +11,7 @@
           <p class="auth-card__subtitle">회원 가입에 필요한 정보를 입력하세요.</p>
           
           <div class="demo-note">
-            <span class="demo-note__dot" aria-hidden="true"></span>회원가입 UI 예시입니다. DB 저장과 입력값 검증은 구현되지 않았습니다.
+            <span class="demo-note__dot" aria-hidden="true"></span>회원가입
           </div>
 
           <form action="UserJoinProc.do" method="post">

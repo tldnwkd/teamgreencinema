@@ -2,6 +2,7 @@ SELECT * FROM greencinema.inquiry;
 select * from inquiry;
 select * from inquiry where user_id='user01';
 
+alter table inquiry add inquiry_date date not null;
 
 INSERT INTO inquiry
 (user_id, inquiry_sort, inquiry_type, inquiry_title,
@@ -87,4 +88,63 @@ VALUES
 ('user10', '예매/결제', '문의', '청소년 예매 문의',
  '청소년 요금으로 예매하려면 어떻게 해야 하나요?',
  0, NULL);
+ ------2026 11 05 date 컬럼 추가 및 update문
+ alter table inquiry add column inquiry_date date;
+
+
  
+UPDATE greencinema.inquiry
+SET inquiry_date = CASE inquiry_id
+    WHEN 1 THEN '2026-09-01'
+    WHEN 2 THEN '2026-09-02'
+    WHEN 3 THEN '2026-09-03'
+    WHEN 4 THEN '2026-09-04'
+    WHEN 5 THEN '2026-09-05'
+    WHEN 6 THEN '2026-09-06'
+    WHEN 7 THEN '2026-09-07'
+    WHEN 8 THEN '2026-09-08'
+    WHEN 9 THEN '2026-09-09'
+    WHEN 10 THEN '2026-09-10'
+    WHEN 11 THEN '2026-09-11'
+    WHEN 12 THEN '2026-09-12'
+    WHEN 13 THEN '2026-09-13'
+    WHEN 14 THEN '2026-09-14'
+    WHEN 15 THEN '2026-09-15'
+    WHEN 16 THEN '2026-09-16'
+    WHEN 17 THEN '2026-09-17'
+    WHEN 18 THEN '2026-09-18'
+    WHEN 19 THEN '2026-09-19'
+    WHEN 20 THEN '2026-09-20'
+    WHEN 21 THEN '2026-09-21'
+    WHEN 22 THEN '2026-09-22'
+    WHEN 23 THEN '2026-09-23'
+    WHEN 24 THEN '2026-09-24'
+    WHEN 25 THEN '2026-09-25'
+    WHEN 26 THEN '2026-09-26'
+    WHEN 27 THEN '2026-09-27'
+    WHEN 28 THEN '2026-09-28'
+    WHEN 29 THEN '2026-09-29'
+    WHEN 30 THEN '2026-09-30'
+    WHEN 31 THEN '2026-10-01'
+    WHEN 32 THEN '2026-10-02'
+    WHEN 33 THEN '2026-10-03'
+    WHEN 34 THEN '2026-10-04'
+    WHEN 35 THEN '2026-10-05'
+    WHEN 36 THEN '2026-10-06'
+    WHEN 37 THEN '2026-10-07'
+    WHEN 38 THEN '2026-10-08'
+    WHEN 39 THEN '2026-10-09'
+    WHEN 40 THEN '2026-10-10'
+    WHEN 41 THEN '2026-10-11'
+    WHEN 42 THEN '2026-10-12'
+    WHEN 43 THEN '2026-10-13'
+    WHEN 44 THEN '2026-10-14'
+    WHEN 45 THEN '2026-10-15'
+    WHEN 46 THEN '2026-10-16'
+    WHEN 47 THEN '2026-10-17'
+    WHEN 48 THEN '2026-10-18'
+    WHEN 49 THEN '2026-10-19'
+    WHEN 50 THEN '2026-10-20'
+END
+WHERE inquiry_id BETWEEN 1 AND 50;
+
