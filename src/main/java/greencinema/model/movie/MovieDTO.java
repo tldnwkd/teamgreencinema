@@ -8,6 +8,7 @@ public class MovieDTO {
 	private String imgPath;
 	private String movieContent;
 	private int runTime;
+	
 	public int getMovieId() {
 		return movieId;
 	}

@@ -112,7 +112,7 @@
 				<div class="personnelinfo" id="personnel"></div>
 				<div class="Reservationinfo" id="Reservation"></div>
 				<div class="nextback">
-					<button class="back">이전</button>
+					<button class="back" onclick="back()">이전</button>
 					<button class="next">다음</button>
 				</div>
 			</aside>
@@ -262,7 +262,13 @@
         render();
         seatrender();
     }
-
+	
+    function back(){
+    	
+    	if(confirm("이전 페이지로 이동하시겠습니까?")){
+    	history.go(-1);
+    	}
+    }
     render();
     seatrender();
 </script>
