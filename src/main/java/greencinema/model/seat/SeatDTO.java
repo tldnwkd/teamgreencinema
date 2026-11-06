@@ -6,6 +6,7 @@ public class SeatDTO {
 	private int screenId;
 	private int reserveId;
 	private String seatNum;
+	
 	public int getSeatId() {
 		return seatId;
 	}
