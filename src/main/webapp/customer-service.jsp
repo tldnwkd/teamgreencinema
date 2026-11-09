@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#11151a">
 <title>1:1 문의 | 그린시네마</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/style.css">
+	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 	<a class="skip-link" href="#main">본문으로 건너뛰기</a>

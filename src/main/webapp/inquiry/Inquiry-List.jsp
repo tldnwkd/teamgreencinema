@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    <link rel="stylesheet" href="css/inquiry-list.css">
-    <section>
+    <section class="board-page board-page--inquiry">
    <h1>1:1 문의사항</h1>
     <form action="SearchInquiryProc.do" method="get">
     	<select id="type_i" name="type">
@@ -18,7 +17,6 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='InquiryProc.do'">
     </form>
-    <form action="OneInquiryProc.do" method="get">
 	<table border="1">
 		<tr>
 			<th>문의종류</th>
@@ -59,6 +57,5 @@
 			<a href ="InquiryProc.do?pageNum=${startpage+pageBlock}">다음</a>
 		</c:if>
 	</div>
-	</form>
 	</section>
 	

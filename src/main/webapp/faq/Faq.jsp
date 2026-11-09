@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<link rel="stylesheet" href="css/faq.css">
-    <section>
+<section class="board-page board-page--faq">
 	<h1>FAQ</h1>
     <form action="SeachFaqProc.do" method="get">
     	<select id="type_i" name="type">
@@ -16,7 +15,6 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='FaqProc.do'">
     </form>
-    <form action="OneFaqProc.do" method="get">
 	<table border="1">
 				<tr>
 					<th>질문</th>
@@ -27,7 +25,6 @@
 				</tr>
 		</c:forEach>
 	</table>
-	</form>
 	<%-- 페이징 부분 --%>
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>

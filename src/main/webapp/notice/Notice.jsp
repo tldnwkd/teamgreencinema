@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<link rel="stylesheet" href="css/notice.css">
-    <section>
+<section class="board-page board-page--notice">
 	<h1>공지사항</h1>
     <form action="SearchNoticeProc.do" method="post">
     	<select id="type_i" name="type">
@@ -16,7 +15,6 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='NoticeProc.do'">
     </form>
-    <form action="OneNoticeProc.do" method="get">
 		<table border="1">
 			<tr>
 				<th>질문</th>
@@ -33,7 +31,6 @@
 						</tr>
 				</c:forEach>
 		</table>
-	</form>
 	<%-- 페이징 부분 --%>
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>
