@@ -31,13 +31,15 @@ public class OneInquiryProc extends HttpServlet {
 		if(request.getParameter("btn") != null) {
 		type = request.getParameter("btn");
 		}
+		
+		
+		
 		if(type.equals("수정")) {
 			
 		InquiryDAO idao = new InquiryDAO();
 		int inquiryId = Integer.parseInt(request.getParameter("inquiryId")) ;
 		InquiryDTO idto = idao.getOneInquiry(inquiryId);
 		
-		System.out.println(inquiryId);
 		request.setAttribute("idto", idto);
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=inquiry/OneInquiryUpdate.jsp");
 		rd.forward(request, response);
@@ -48,7 +50,6 @@ public class OneInquiryProc extends HttpServlet {
 			int inquiryId = Integer.parseInt(request.getParameter("inquiryId")) ;
 			InquiryDTO idto = idao.getOneInquiry(inquiryId);
 			
-			System.out.println(inquiryId);
 			request.setAttribute("idto", idto);
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=inquiry/OneInquiry.jsp");
 			rd.forward(request, response);

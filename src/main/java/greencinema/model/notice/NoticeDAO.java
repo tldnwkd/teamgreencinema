@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import greencinema.DBPKG.Util;
+import greencinema.model.faq.FaqDTO;
 import greencinema.model.inquiry.InquiryDTO;
 
 public class NoticeDAO {
@@ -138,5 +139,38 @@ public class NoticeDAO {
 		return i;
 	} 
 	
+	public NoticeDTO OneNotice(int notice_Id) {
+		NoticeDTO n = new NoticeDTO();
+		 try {
+			 con = Util.getConnection();
+			 String sql = "select * from notice where notice_id = ?";
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setInt(1, notice_Id);
+			 rs = pstmt.executeQuery();
+			 
+			 if(rs.next()) {
+					n.setNoticeId(rs.getInt(1));
+					n.setNoticeTitle(rs.getString(2));
+					n.setNoticeDate(rs.getString(3));
+					n.setNoticeHits(rs.getInt(4));
+					n.setNoticeText(rs.getString(5));
+				 
+				 
+			 }
+			 
+			 
+		 }catch(Exception e) {e.printStackTrace();}finally {
+			 try {if(rs != null)rs.close();
+			 if(pstmt != null)pstmt.close();
+			 if(con != null)con.close();
+
+			 }catch(Exception e) {
+			 e.printStackTrace();
+			 }
+			 }
+		
+		
+		return n;
+	}
 	
 }

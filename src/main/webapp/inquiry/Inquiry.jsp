@@ -13,7 +13,7 @@
 </head>
 <body>
 	<section class="inquiry"> 
-		<form action="InquiryInsertProc.do " method="post" name="iform">
+		<form action="InquiryInsertProc.do" method="post" name="iform">
 		<a class="skip-link" href="#main">본문으로 건너뛰기</a>
 		<main id="main">
 			<div class="page-content">
@@ -69,9 +69,9 @@
 							</div>
 						</div>
 						<div class="form-actions">
-							<input type="hidden" name = "id" value="${sessionScope.Id }"> 
+							<input type="hidden" name = "id" value="${sessionScope.id }"> 
 							<input type="hidden" name = "btn" value="문의"> 
-							<a href=InquiryProc.do  class="btn btn--outline">내 문의내역보기</a>
+							<input type="button"  class="btn btn--outline" value="내 문의내역보기" onclick="myinqu()">
 							<input type="button" class="btn btn--primary" value ="문의" onclick="chk()">
 						</div>
 					</section>
@@ -81,8 +81,27 @@
 		</form>
 	</section>
 	<script type="text/javascript">
+		
+		function myinqu(){
+			let f = document.iform
+			if(f.id.value.trim()==""){
+				alert("로그인 후 이용해주세요");
+				location.href='index.jsp?section=user/login.jsp';
+				return;
+			}else{
+				location.href='InquiryProc.do';
+			}
+		}
+	
+	
 		function chk(){
 			let f = document.iform
+			
+			if(f.id.value==""){
+				alert("로그인 후 이용해주세요");
+				location.href='index.jsp?section=user/login.jsp';
+				return;
+			}else{
 			if(f.inquirySort.value =="선택"){
 				alert("문의 분류를 입력해주세요");
 				f.inquirySort.focus();
@@ -107,6 +126,7 @@
 				alert("수신 방법을 선택해주세요");
 				f.receptionType.focus();
 				return
+			}
 			}
 
 			f.submit();

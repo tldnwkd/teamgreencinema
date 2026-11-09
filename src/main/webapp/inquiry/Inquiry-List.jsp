@@ -30,18 +30,16 @@
 					<tr>
 						<td>${iList.inquiryType }</td>
 						<td>${iList.inquirySort }</td>
-						<td><button type="submit" name="inquiryId" value="${iList.inquiryId}">${iList.inquiryTitle }</button>
-						</td>
-						<td>
 						<c:choose >
 							<c:when test="${iList.answerStatus eq 1 }">
-								<button type="submit" name="inquiryId" value="${iList.inquiryId}">답변 완료</button>
+								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">${iList.inquiryTitle }</a></td>
+								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">답변 완료</a></td>
 							</c:when>
 							<c:otherwise>
-								<p>답변 대기</p>
+								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">${iList.inquiryTitle }</a></td>
+								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">답변 대기</a></td>
 							</c:otherwise>
 						</c:choose>
-						</td>
 					</tr>
 			</c:forEach>
 	</table>

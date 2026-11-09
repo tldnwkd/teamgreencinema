@@ -16,16 +16,18 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='FaqProc.do'">
     </form>
+    <form action="OneFaqProc.do" method="get">
 	<table border="1">
-		<tr>
-			<th>질문</th>
-		</tr>
-			<c:forEach var= "fList" items="${fList}">
-					<tr>
-						<td>${fList.faqInquery }</td>
-					</tr>
-			</c:forEach>
+				<tr>
+					<th>질문</th>
+				</tr>
+		<c:forEach var= "fList" items="${fList}">
+				<tr>
+					<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquery }</a></td>
+				</tr>
+		</c:forEach>
 	</table>
+	</form>
 	<%-- 페이징 부분 --%>
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>

@@ -137,4 +137,38 @@ public class FaqDAO {
 		
 		return f;
 	} 
+	
+	// Faq 한페이지 화면 출력
+	public FaqDTO OneFaq(int faq_id) {
+		FaqDTO f = new FaqDTO();
+		 try {
+			 con = Util.getConnection();
+			 String sql = "select * from faq where faq_id = ?";
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setInt(1, faq_id);
+			 rs = pstmt.executeQuery();
+			 
+			 if(rs.next()) {
+				 f.setFaqId(rs.getInt(1));
+				 f.setFaqType(rs.getInt(2));
+				 f.setFaqInquery(rs.getString(3));
+				 f.setFaqAnswer(rs.getString(4));
+				 
+				 
+			 }
+			 
+			 
+		 }catch(Exception e) {e.printStackTrace();}finally {
+			 try {if(rs != null)rs.close();
+			 if(pstmt != null)pstmt.close();
+			 if(con != null)con.close();
+
+			 }catch(Exception e) {
+			 e.printStackTrace();
+			 }
+			 }
+		
+		
+		return f;
+	}
 }

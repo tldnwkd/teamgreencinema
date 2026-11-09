@@ -48,6 +48,12 @@
 								<p>문의 내용</p>
 								<textarea id="inqText" class="form-control" name="inquiryContent" readonly>${idto.inquiryContent}</textarea>
 							</div>
+							<c:if test="${idto.answerStatus eq 1}">
+							<div class="form-group form-group--full">
+								<p>답변 내용</p>
+								<textarea id="inqText" class="form-control" name="answerContent" readonly>${idto.answerContent}</textarea>
+							</div>
+							</c:if>
 							<div class="form-group form-group--full">
 								<p>답변 수신 방법</p>
 									<c:if test="${idto.receptionType eq 1}">
@@ -67,7 +73,9 @@
 							<input type="hidden" name = "inquiryContent" value="${idto.inquiryContent}"> 
 							<input type="hidden" name = "receptionType" value="${idto.receptionType}"> 
 							<a href=InquiryProc.do  class="btn btn--outline">내 문의내역보기</a>
-							<input name="btn" type="submit" class="btn btn--primary" value="수정">
+							<c:if test="${idto.answerStatus eq 0}">
+								<input name="btn" type="submit" class="btn btn--primary" value="수정">
+							</c:if>
 						</div>
 					</section>
 				</div>

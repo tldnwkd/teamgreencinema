@@ -1,6 +1,7 @@
 package greencinema.control.inquiry;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -31,6 +32,17 @@ public class InquiryProc extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		String chkId = (String)session.getAttribute("id");
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		if(chkId.equals("")||chkId.isEmpty()) {
+			out.println("<script>");
+			out.println("alert('로그인 후 이용해주세요')");
+			out.println("location.href='index.jsp?section=user/login.jsp'");
+			out.println("</script>");
+			out.flush();
+		}
 		
 		
 		if(!chkId.equals("admin")) { // 일반회원일 경우

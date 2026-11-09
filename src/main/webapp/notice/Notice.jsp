@@ -16,23 +16,24 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='NoticeProc.do'">
     </form>
-	<table border="1">
-		<tr>
-			<th>질문</th>
-			<th>게시일</th>
-			<th>조회수</th>
-		</tr>
-			<c:forEach var= "nList" items="${nList}">
-					<tr>
-						<td>
-						<button type="submit" name="inquiryId" value="${nList.noticeId}">${nList.noticeTitle }</button>
-						</td>
-						<td></td>
-						<td>${nList.noticeDate }</td>
-						<td align="center">${nList.noticeHits }</td>
-					</tr>
-			</c:forEach>
-	</table>
+    <form action="OneNoticeProc.do" method="get">
+		<table border="1">
+			<tr>
+				<th>질문</th>
+				<th>게시일</th>
+				<th>조회수</th>
+			</tr>
+				<c:forEach var= "nList" items="${nList}">
+						<tr>
+							<td>
+								<a href="OneNoticeProc.do?notice_Id=${nList.noticeId}">${nList.noticeTitle }</a>
+							</td>
+								<td>${nList.noticeDate }</td>
+							<td align="center">${nList.noticeHits }</td>
+						</tr>
+				</c:forEach>
+		</table>
+	</form>
 	<%-- 페이징 부분 --%>
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>
