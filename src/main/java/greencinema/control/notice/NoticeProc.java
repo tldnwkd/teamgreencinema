@@ -83,7 +83,7 @@ public class NoticeProc extends HttpServlet {
 		request.setAttribute("pageBlock", pageBlock);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/notice.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/Notice.jsp");
 		rd.forward(request, response);
 		
 	}

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/faq.css">
     <section>
 	<h1>FAQ</h1>
-    <form action="seachFaqProc.do" method="get">
+    <form action="SeachFaqProc.do" method="get">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="faq_inquery"  ${type=='faq_inquery'?'selected':''}>제목로 검색</option>
@@ -16,20 +16,18 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='FaqProc.do'">
     </form>
+    <form action="OneFaqProc.do" method="get">
 	<table border="1">
-		<tr>
-			<th>글번호</th>
-			<th>질문</th>
-		</tr>
-				<c:set var="number" value="${number}"/>
-			<c:forEach var= "fList" items="${fList}">
-					<tr>
-						<td>${number }</td>
-						<td>${fList.faqInquery }</td>
-					</tr>
-				<c:set var="number" value="${number-1}"/>
-			</c:forEach>
+				<tr>
+					<th>질문</th>
+				</tr>
+		<c:forEach var= "fList" items="${fList}">
+				<tr>
+					<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquery }</a></td>
+				</tr>
+		</c:forEach>
 	</table>
+	</form>
 	<%-- 페이징 부분 --%>
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>

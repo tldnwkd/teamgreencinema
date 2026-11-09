@@ -22,9 +22,9 @@
 					<p class="page-heading__description">회원 전용 1:1 문의 작성 화면입니다.</p>
 				</div>
 				<nav class="cs-tabs" aria-label="고객센터 메뉴">
-					<a href="index.jsp?section=notice/notice.jsp">공지사항</a>
-					<a href="index.jsp?section=faq/faq.jsp">FAQ</a>
-					<a href="index.jsp?section=inquiry/inquiry.jsp" aria-current="page">1:1 문의</a>
+					<a href="index.jsp?section=notice/Notice.jsp">공지사항</a>
+					<a href="index.jsp?section=faq/Faq.jsp">FAQ</a>
+					<a href="index.jsp?section=inquiry/Inquiry.jsp" aria-current="page">1:1 문의</a>
 				</nav>
 				<div class="demo-note">
 					<span class="demo-note__dot" aria-hidden="true"></span>문의 전송은 연결되지
