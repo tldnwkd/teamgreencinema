@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<link rel="stylesheet" href="css/search-faq.css">
-    <section>
+<section class="board-page board-page--faq is-search">
 	<h1>FAQ</h1>
     <form action="SearchFaqProc.do" method="get">
     	<select id="type_i" name="type">
@@ -23,14 +22,13 @@
 					<c:choose>
 			<c:when test="${empty fList}">
 				<tr>
-					<td colspan="5" align="center"><p>검색결과가 없습니다.</p></td>
+					<td colspan="1" align="center"><p>검색결과가 없습니다.</p></td>
 				</tr>
 			</c:when>
 			<c:otherwise>
 			<c:forEach var= "fList" items="${fList}">
 					<tr>
-						<td>${number }</td>
-						<td>${fList.faqInquery }</td>
+						<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquery }</a></td>
 					</tr>
 			</c:forEach>
 			</c:otherwise>

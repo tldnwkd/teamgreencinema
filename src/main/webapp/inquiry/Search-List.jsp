@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<link rel="stylesheet" href="css/search-list.css">
-    <section>
+<section class="board-page board-page--inquiry is-search">
    <h1>1:1 문의사항</h1>
     <form action="SearchInquiryProc.do" method="get">
     	<select id="type_i" name="type">
@@ -28,7 +27,7 @@
 			<c:choose>
 			<c:when test="${empty sList}">
 				<tr>
-					<td colspan="5" align="center"><p>검색결과가 없습니다.</p></td>
+					<td colspan="4" align="center"><p>검색결과가 없습니다.</p></td>
 				</tr>
 			</c:when>
 			<c:otherwise>

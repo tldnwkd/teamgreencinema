@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<link rel="stylesheet" href="css/search-notice.css">
-    <section>
+<section class="board-page board-page--notice is-search">
 	<h1>공지사항</h1>
     <form action="SearchNoticeProc.do" method="post">
     	<select id="type_i" name="type">
@@ -25,7 +24,7 @@
 					<c:choose>
 			<c:when test="${empty nList}">
 				<tr>
-					<td colspan="5" align="center"><p>검색결과가 없습니다.</p></td>
+					<td colspan="3" align="center"><p>검색결과가 없습니다.</p></td>
 				</tr>
 			</c:when>
 			<c:otherwise>

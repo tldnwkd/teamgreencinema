@@ -148,7 +148,7 @@ public class InquiryDAO {
 		int count=0;
 		try {
 			con = Util.getConnection();
-			String sql = "select count(*) from inquiry where user_id='?'";
+			String sql = "select count(*) from inquiry where user_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();

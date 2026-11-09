@@ -40,17 +40,17 @@ public class InquiryInsertProc extends HttpServlet {
 		idto.setInquiryTitle(request.getParameter("inquiryTitle"));
 		idto.setInquiryContent(request.getParameter("inquiryContent"));//잘못됨
 		idto.setReceptionType(Integer.parseInt(request.getParameter("receptionType")));
-		
+
 		InquiryDAO idao = new InquiryDAO();
 		boolean result =  idao.insert(idto);
 		 System.out.println(result);
-		 
+
 		 RequestDispatcher rd = request.getRequestDispatcher("InquiryProc.do");
 		 rd.forward(request, response);
 		}else if(type.equals("수정")) {
-			
+
 		}
-		 
+
 
 	
 	}

@@ -3,8 +3,6 @@
 <%@ page import="java.sql.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="css/reserve.css">
-
 <div class="page-content">
 	<div class="container">
 

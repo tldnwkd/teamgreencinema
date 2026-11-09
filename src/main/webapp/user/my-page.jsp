@@ -2,94 +2,105 @@
     pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+            <section class="member-card" aria-label="회원 정보">
+              <div class="member-card__mark" aria-hidden="true">
+                <c:choose>
+                  <c:when test="${not empty userInfo.userName}">${userInfo.userName.substring(0,1)}</c:when>
+                  <c:otherwise>G</c:otherwise>
+                </c:choose>
+              </div>
+              <div>
+                <h2 class="member-card__name">${empty userInfo.userName ? '회원' : userInfo.userName}</h2>
+                <p class="member-card__id">${userInfo.userId}</p>
+                <dl class="member-card__meta">
+                  <div><dt>이메일</dt><dd>${empty userInfo.userEmail ? '-' : userInfo.userEmail}</dd></div>
+                  <div><dt>휴대폰</dt><dd>${empty userInfo.userPhone ? '-' : userInfo.userPhone}</dd></div>
+                  <div><dt>생년월일</dt><dd>${empty userInfo.userBirth ? '-' : userInfo.userBirth}</dd></div>
+                </dl>
+              </div>
+            </section>
 
-  <!-- ================= MAIN CONTENT ================= -->
-  <main id="main">
-    <div class="page-content">
-      <div class="container">
-
-        <!-- 페이지 헤딩 -->
-        <div class="page-heading">
-          <p class="page-heading__eyebrow">MY PAGE</p>
-          <h1 class="page-heading__title">마이페이지</h1>
-          <p class="page-heading__description">예매 내역과 문의 내역을 관리하는 화면입니다.</p>
-        </div>
-
-        <!-- 안내 문구 -->
-        <div class="demo-note">
-          <span class="demo-note__dot" aria-hidden="true"></span>
-          마이페이지 화면은 예시 데이터입니다. 로그인 상태·취소 가능 기간·취소 처리 기능은 구현되지 않았습니다.
-        </div>
-
-        <!-- 마이페이지 레이아웃 -->
-        <div class="mypage-layout">
-          <!-- 좌측 사이드 메뉴 -->
-          <nav class="side-nav" aria-label="마이페이지 메뉴">
-            <a class="is-active" href="#reservations">예매내역</a>
-            <a href="#my-inquiries">1:1문의내역</a>
-            <a href="inquiry.html">문의 작성</a>
-          </nav>
-
-          <!-- 우측 본문 영역 -->
-          <div>
             <!-- 예매 내역 섹션 -->
             <section id="reservations">
               <div class="section-header">
                 <h2 class="section-title">예매 내역</h2>
-                <span class="chip chip--green">1건 (예시)</span>
               </div>
 
+              <c:choose>
+                <c:when test="${empty myPage or empty myPage.movieTitle}">
+                  <div class="empty-state">
+                    <p class="empty-state__title">예매 내역이 없습니다</p>
+                    <p>영화 예매 후 이곳에서 확인할 수 있습니다.</p>
+                  </div>
+                </c:when>
+                <c:otherwise>
               <div class="reservation-list">
                 <article class="reservation-card">
-                  <img class="reservation-card__poster" src="assets/posters/greencinema_poster_01.png" alt="다시, 봄 포스터">
+                  <img class="reservation-card__poster" src="./${myPage.imgPath}" alt="${myPage.movieTitle }">
                   <div>
-                    <h3 class="reservation-card__title">다시, 봄</h3>
-                    <p class="reservation-card__detail">그린시네마 홍대 · 1관</p>
-                    <p class="reservation-card__detail">2026.10.29 (목) 18:10</p>
-                    <p class="reservation-card__detail">성인 1명 · C5</p>
-                    <p class="reservation-card__detail">14,000원 · 신용카드 결제(예시)</p>
+                    <h3 class="reservation-card__title">${myPage.movieTitle }</h3>
+                    <p class="reservation-card__detail">그린시네마 ${myPage.region} · ${myPage.screenNum }관</p>
+                    <p class="reservation-card__detail">${myPage.scheduleStarttime }</p>
+                    <p class="reservation-card__detail">
+						<c:if test="${myPage.adultCount > 0 }">						                    	
+                    		성인 ${myPage.adultCount}명
+                    	</c:if>
+                    	<c:if test="${myPage.teensCount > 0 }">						                    	
+                    		청소년 ${myPage.teensCount}명
+                    	</c:if>
+                    	 · ${myPage.seatNum}
+                    </p>
+                    <p class="reservation-card__detail">${myPage.totalPrice }원 · ${myPage.paymentMethod} 결제</p>
                   </div>
                   <div class="reservation-card__actions">
-                    <span class="status-badge status-badge--success">예매 완료</span>
-                    <span class="form-help">취소 UI 준비 중</span>
+                    <span class="status-badge status-badge--success">${myPage.paymentStatus }</span>
+                    <span class="form-help"><a href="ReserveCancel.do?reserveId=${myPage.reserveId }">취소</a></span>
                   </div>
                 </article>
               </div>
+                </c:otherwise>
+              </c:choose>
             </section>
 
             <!-- 1:1 문의내역 섹션 -->
             <section id="my-inquiries" class="stack-section">
               <div class="section-header">
                 <h2 class="section-title">1:1 문의내역</h2>
-                <a href="inquiry.html" class="btn btn--outline btn--small">문의 작성</a>
+                <a href="index.jsp?section=inquiry/inquiry.jsp" class="btn btn--outline btn--small">문의 작성</a>
               </div>
 
-              <div class="table-scroll">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>문의번호</th>
-                      <th>분류</th>
-                      <th>제목</th>
-                      <th>답변상태</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>101</td>
-                      <td>예매 / 결제</td>
-                      <td>예매 취소 문의 (예시)</td>
-                      <td><span class="status-badge status-badge--pending">답변 대기</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <c:choose>
+                <c:when test="${empty inquiry or inquiry.inquiryId == 0}">
+                  <div class="empty-state">
+                    <p class="empty-state__title">문의 내역이 없습니다</p>
+                    <p>궁금한 점은 1:1 문의로 남겨 주세요.</p>
+                  </div>
+                </c:when>
+                <c:otherwise>
+                  <div class="table-scroll">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th>문의번호</th>
+                          <th>분류</th>
+                          <th>제목</th>
+                          <th>답변상태</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>${inquiry.inquiryId }</td>
+                          <td>${inquiry.inquirySort }</td>
+                          <td>${inquiry.inquiryTitle }</td>
+                          <td>
+                            <span class="status-badge ${inquiry.answerStatus == 0 ? 'status-badge--pending' : 'status-badge--success'}">
+                              ${inquiry.answerStatus == 0 ? "답변대기" : "답변완료" }
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </c:otherwise>
+              </c:choose>
             </section>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-  <!-- ================= FOOTER ================= -->
