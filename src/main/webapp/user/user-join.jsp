@@ -49,7 +49,7 @@
           </form>
 
           <div class="auth-links">
-            <a href="#">이미 계정이 있나요? 로그인</a>
+            <a href="index.jsp?section=user/login.jsp">이미 계정이 있나요? 로그인</a>
           </div>
         </div>
       </section>

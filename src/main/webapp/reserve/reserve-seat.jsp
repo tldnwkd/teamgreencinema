@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 <!-- 단독 CSS 파일 연결 -->
 <link rel="stylesheet" href="css/reserve-seat.css">
 

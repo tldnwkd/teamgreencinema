@@ -1,2 +1,7 @@
 .metadata/
 Servers/
+build/
+.idea/
+/bin/
+.classpath
+.project

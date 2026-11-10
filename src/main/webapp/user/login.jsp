@@ -29,7 +29,7 @@
         </form>
 
         <div class="auth-links">        
-          <a href="/index.jsp?section=user/user-join.jsp">회원가입</a>
+          <a href="index.jsp?section=user/user-join.jsp">회원가입</a>
         </div>
       </div>
     </section>

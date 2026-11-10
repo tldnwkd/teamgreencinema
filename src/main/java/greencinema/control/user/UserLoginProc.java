@@ -46,7 +46,7 @@ public class UserLoginProc extends HttpServlet {
 		}
 		
 		if(userId.equals("admin")) {
-			targetUri = "/index.jsp?section=admin/admin.jsp";
+			targetUri = "/admin/admin-index.jsp";
 		}
 		
 		
