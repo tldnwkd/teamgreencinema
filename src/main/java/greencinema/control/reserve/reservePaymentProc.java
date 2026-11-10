@@ -1,6 +1,7 @@
 package greencinema.control.reserve;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -28,6 +29,20 @@ public class reservePaymentProc extends HttpServlet {
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession(false);
+		Object idObj = (session != null) ? session.getAttribute("id") : null;
+
+		// 세션이 없거나, id가 null이거나, 공백/빈 문자열인 경우 모두 차단
+		if (session == null || idObj == null || idObj.toString().trim().isEmpty()) {
+		    response.setContentType("text/html; charset=UTF-8");
+		    PrintWriter out = response.getWriter();
+		    out.println("<script>");
+		    out.println("alert('세션이 만료되었습니다. 로그인 후 다시 예매 하세요.');");
+		    out.println("location.href='index.jsp?section=user/login.jsp';");
+		    out.println("</script>");
+		    return;
+		}
 		ReservejoinDAO rjdao = new ReservejoinDAO();
 		ReserveDAO rdao = new ReserveDAO();
 		
@@ -38,6 +53,7 @@ public class reservePaymentProc extends HttpServlet {
 		String scheduleSTime = request.getParameter("scheduleSTime");
 		String scheduleETime = request.getParameter("scheduleETime");
 		String adultcount= request.getParameter("adultcount");
+		int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
 		int precount = Integer.parseInt(request.getParameter("precount"));
 		String seats = request.getParameter("seats");
 		String screenId = request.getParameter("screenId");
@@ -59,6 +75,7 @@ public class reservePaymentProc extends HttpServlet {
 		request.setAttribute("precount", precount);
 		request.setAttribute("seats", seats);
 		request.setAttribute("screenId", screenId);
+		request.setAttribute("scheduleId", scheduleId);
 	
 		
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=payment/payment.jsp");

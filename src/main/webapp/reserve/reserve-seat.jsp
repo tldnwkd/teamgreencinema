@@ -41,7 +41,7 @@
 									<span>성인</span>
 									<div class="counter-btns">
 										<button type="button" id="adultminus" onclick="adultminus()">-</button>
-										<button type="button" id="adult" style="cursor: default;">0</button>
+										<button type="button" id="adult" class="counter-num-btn">0</button>
 										<button type="button" id="adultplus" onclick="adultplus()">+</button>
 									</div>
 								</div>
@@ -55,7 +55,7 @@
 									<span>청소년</span>
 									<div class="counter-btns">
 										<button type="button" id="preminus" onclick="preminus()">-</button>
-										<button type="button" id="pre" style="cursor: default;">0</button>
+										<button type="button" id="pre" class="counter-num-btn">0</button>
 										<button type="button" id="preplus" onclick="preplus()">+</button>
 									</div>
 								</div>
@@ -79,7 +79,9 @@
 						<!-- 좌석 범례 -->
 						<div class="seat-legend">
 							<div class="seat-legend-item"><span class="seat-legend-box selected"></span>선택</div>
-							<div class="seat-legend-item"><span class="seat-legend-box completed"></span>예매완료</div>
+							<div class="seat-legend-item">
+								<span class="seat-legend-box completed">✕</span>예매완료
+							</div>
 							<div class="seat-legend-item"><span class="seat-legend-box normal"></span>일반</div>
 						</div>
 					</div>
@@ -98,7 +100,7 @@
 					</c:if>
 					<div>
 						<strong>${rjdto.movieTitle }</strong>
-						<p style="font-size: 13px; color: #64706b; margin-top: 6px;"><span>🕒</span> ${rjdto.runTime }분</p>
+						<p class="summary-movie__runtime"><span>🕒</span> ${rjdto.runTime }분</p>
 					</div>
 				</div>
 
@@ -137,42 +139,43 @@
 				<!-- 성인 / 청소년 인원수 각각 분리 표시 -->
 				<div class="booking-summary__row">
 					<span class="booking-summary__label">관람인원</span>
-					<strong class="booking-summary__value" id="summary-people-count" style="color: var(--gc-text);">
+					<strong class="booking-summary__value" id="summary-people-count">
 						성인 0명, 청소년 0명
 					</strong>
 				</div>
 
 				<div class="booking-summary__row">
 					<span class="booking-summary__label">선택좌석</span>
-					<strong class="booking-summary__value" id="seatnumber" style="color: var(--gc-primary-hover, #02ad4f);">
+					<strong class="booking-summary__value booking-summary__value--highlight" id="seatnumber">
 						미선택
 					</strong>
 				</div>
 
 				<div class="booking-summary__total">
 					<span>총 합계</span> 
-					<span class="booking-summary__amount" style="font-size: 18px;" id="summary-total-price">0원</span>
+					<span class="booking-summary__amount" id="summary-total-price">0원</span>
 				</div>
 
 				<p class="summary-footnote">모든 항목을 선택한 후 결제 단계로 이동하세요.</p>
 
 				<!-- 이전 / 결제하기 버튼 영역 -->
-				<div style="display: flex; gap: 8px; margin-top: 16px;">
-					<button type="button" onclick="back()" style="flex: 1; padding: 12px; border: 1px solid var(--gc-border, #e5e7eb); border-radius: 8px; background: #fff; font-weight: 750; cursor: pointer; color: var(--gc-text);">이전</button>
+				<div class="summary-actions">
+					<button type="button" onclick="back()" class="btn-summary-back">이전</button>
 					
-					<form action="reservePaymentProc.do" method="GET" onsubmit="return validateForm()" style="flex: 2; display: flex;">
+					<form action="reservePaymentProc.do" method="GET" onsubmit="return validateForm()" class="form-summary-submit">
 						<input type="hidden" name="large_region" value="${param.large_region}">
 						<input type="hidden" name="smallRegion" value="${param.smallRegion}">
 						<input type="hidden" name="movieId" value="${rjdto.movieId}">
 						<input type="hidden" name="selectedDate" value="${param.selectedDate}">
 						<input type="hidden" name="scheduleSTime" value="${param.scheduleSTime}">
 						<input type="hidden" name="scheduleETime" value="${param.scheduleETime}">
-						<input type="hidden" name="screenId" value="${param.screenId}">					
+						<input type="hidden" name="screenId" value="${param.screenId}">
+						<input type="hidden" name="scheduleId" value="${param.scheduleId}"> <!-- 💡 회차 ID 전달용 히든 인풋 추가 -->					
 						<input type="hidden" name="adultcount" id="form-adultcount" value="0">
 						<input type="hidden" name="precount" id="form-precount" value="0">
-						<input type="hidden" name="seats" id="form-seats" value="">			         
+						<input type="hidden" name="seats" id="form-seats" value="">          
 						
-						<button type="submit" id="nextMoveBtn" style="width: 100%; text-align: center; padding: 12px; background: #e5e7eb; color: #9ca3af; border-radius: 8px; text-decoration: none; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; cursor: not-allowed; pointer-events: none;" disabled>결제 페이지 ↗</button>
+						<button type="submit" id="nextMoveBtn" class="btn-summary-next" disabled>결제 페이지 ↗</button>
 					</form>
 				</div>
 			</aside>
@@ -182,6 +185,15 @@
 </div>
 
 <script>
+    let completedSeats = [
+        <c:forEach items="${rjlist05}" var="seat" varStatus="status">
+            "${fn:trim(seat.seatNum)}"<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+    ].map(seat => {
+        let match = seat.match(/^([A-Za-z]+)(\d+)$/);
+        return match ? match[1] + parseInt(match[2], 10) : seat;
+    });
+
     let seatwrap = document.getElementById('seatwrap');
     let seatnumber = document.getElementById('seatnumber');
     let adult = document.getElementById('adult');
@@ -190,7 +202,6 @@
     let summaryTotalPrice = document.getElementById('summary-total-price');
     let nextMoveBtn = document.getElementById('nextMoveBtn');
     
-    // Form hidden inputs
     let formAdultCount = document.getElementById('form-adultcount');
     let formPreCount = document.getElementById('form-precount');
     let formSeats = document.getElementById('form-seats');
@@ -199,7 +210,7 @@
     let precount = 0;
     let maxcount = 0;
     let adultprice = 12000; 
-    let teenprice = 8000;   
+    let teenprice = 8000;    
 
     let arry = Array.from(Array(10), () => new Array(10).fill(0));
     let arryeng = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -214,9 +225,15 @@
             for (let j = 0; j < arry[i].length; j++) {
                 let seatNumVal = j + 1;
                 let seatName = arryeng[i] + seatNumVal;
+                
+                let isCompleted = completedSeats.includes(seatName);
                 let isActive = seatresult.includes(seatName) ? ' active' : '';
                 
-                result += '<td><div class="seatnum' + isActive + '" onclick="choicerender(' + i + ', ' + j + ')">' + seatNumVal + '</div></td>';
+                if (isCompleted) {
+                    result += '<td><div class="seatnum completed">✕</div></td>';
+                } else {
+                    result += '<td><div class="seatnum' + isActive + '" onclick="choicerender(' + i + ', ' + j + ')">' + seatNumVal + '</div></td>';
+                }
             }
             result += '</tr>';
         }
@@ -246,7 +263,6 @@
             summaryPeopleCount.innerHTML = "성인 " + adultcount + "명, 청소년 " + precount + "명";
         }
 
-        // Update form hidden input values dynamically
         formAdultCount.value = adultcount;
         formPreCount.value = precount;
         formSeats.value = selectedArr.join(',');
@@ -285,12 +301,19 @@
     }
 
     function choicerender(index, index02) {
+        let seatName = arryeng[index] + (index02 + 1);
+        
+        if (completedSeats.includes(seatName)) {
+            alert("이미 예매 완료된 좌석입니다.");
+            return;
+        }
+
         let totalPeople = adultcount + precount;
         if (totalPeople === 0) {
             alert("관람 인원을 먼저 선택해주세요.");
             return;
         }
-        let seatName = arryeng[index] + (index02 + 1);
+        
         let existingIndex = seatresult.indexOf(seatName);
         if (existingIndex !== -1) {
             seatresult[existingIndex] = '-';
@@ -366,14 +389,16 @@
     }
 
     function reset() {
-        adultcount = 0;
-        precount = 0;
-        maxcount = 0;
-        adult.innerText = 0;
-        pre.innerText = 0;
-        seatresult = new Array(8).fill('-');
-        render();
-        seatrender();
+    	if(confirm("선택한 좌석을 초기화 하시겠습니까?")){
+	        adultcount = 0;
+	        precount = 0;
+	        maxcount = 0;
+	        adult.innerText = 0;
+	        pre.innerText = 0;
+	        seatresult = new Array(8).fill('-');
+	        render();
+	        seatrender();
+    	}
     }
     
     function back(){

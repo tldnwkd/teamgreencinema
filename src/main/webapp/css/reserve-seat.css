@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 :root {
   --gc-primary: #03c75a;
   --gc-primary-hover: #02ad4f;
@@ -165,6 +164,16 @@
   background: var(--gc-primary-soft);
 }
 
+.counter-num-btn {
+  cursor: default !important;
+}
+
+.counter-num-btn:hover {
+  border-color: var(--gc-border) !important;
+  color: var(--gc-text) !important;
+  background: #fff !important;
+}
+
 /* 4. 좌석 선택 영역 (Seat Layout) */
 .seat-layout {
   display: flex;
@@ -262,6 +271,14 @@
   box-shadow: 0 0 8px rgba(3, 199, 90, 0.4);
 }
 
+.seatnum.completed {
+  background-color: #ffffff !important;
+  color: #9ca3af !important;
+  border-color: #e5e7eb !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
 .seat-legend {
   display: flex;
   justify-content: center;
@@ -285,7 +302,16 @@
 }
 
 .seat-legend-box.selected { background-color: var(--gc-primary); }
-.seat-legend-box.completed { background-color: #252c28; border: 1px solid #3a403d; }
+.seat-legend-box.completed { 
+  background-color: #ffffff; 
+  border: 1px solid #e5e7eb; 
+  color: #9ca3af;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: bold;
+}
 .seat-legend-box.normal { background-color: #35443b; border: 1px solid #506359; }
 
 /* 5. 우측 예매 요약 사이드바 (Booking Summary) */
@@ -337,6 +363,12 @@
   color: var(--gc-text);
 }
 
+.summary-movie__runtime {
+  font-size: 13px;
+  color: var(--gc-muted);
+  margin-top: 6px;
+}
+
 .booking-summary__row {
   display: flex;
   align-items: start;
@@ -358,6 +390,10 @@
   color: var(--gc-text);
 }
 
+.booking-summary__value--highlight {
+  color: var(--gc-primary-hover, #02ad4f);
+}
+
 .booking-summary__total {
   display: flex;
   align-items: baseline;
@@ -372,7 +408,7 @@
 
 .booking-summary__amount {
   color: var(--gc-primary-hover);
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 900;
   white-space: nowrap;
 }
@@ -384,7 +420,7 @@
   line-height: 1.6;
 }
 
-/* 6. 공통 버튼 및 리셋 버튼 (Buttons) */
+/* 6. 공통 버튼 및 리셋/액션 버튼 */
 .booking-panel__title .reset-btn {
   display: inline-flex;
   align-items: center;
@@ -406,4 +442,43 @@
   background: var(--gc-surface-muted);
   border-color: var(--gc-primary);
   color: var(--gc-primary-hover);
+}
+
+.summary-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn-summary-back {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--gc-border);
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 750;
+  cursor: pointer;
+  color: var(--gc-text);
+}
+
+.form-summary-submit {
+  flex: 2;
+  display: flex;
+}
+
+.btn-summary-next {
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  background: #e5e7eb;
+  color: #9ca3af;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  pointer-events: none;
 }

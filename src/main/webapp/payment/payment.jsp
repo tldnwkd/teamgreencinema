@@ -35,6 +35,7 @@
             <input type="hidden" name="precount" value="${param.precount}">
             <input type="hidden" name="seats" value="${param.seats}">
             <input type="hidden" name="screenId" value="${param.screenId}">
+            <input type="hidden" name="scheduleId" value="${param.scheduleId}"> 	
             
             <!-- [해결] 중복을 피하기 위해 id를 input-total-price로 명확히 분리 -->
             <input type="hidden" name="totalprice" id="input-total-price" value="0">

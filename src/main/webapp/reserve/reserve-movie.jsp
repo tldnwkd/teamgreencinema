@@ -15,8 +15,10 @@
 		</div>
 
 		<ol class="booking-steps" aria-label="예매 진행 단계">
-			<li class="booking-step is-current"><span class="step-num">01</span> 영화·극장 선택</li>
-			<li class="booking-step"><span class="step-num">02</span> 인원·좌석 선택</li>
+			<li class="booking-step is-current"><span class="step-num">01</span>
+				영화·극장 선택</li>
+			<li class="booking-step"><span class="step-num">02</span> 인원·좌석
+				선택</li>
 			<li class="booking-step"><span class="step-num">03</span> 결제</li>
 			<li class="booking-step"><span class="step-num">04</span> 예매 완료</li>
 		</ol>
@@ -35,20 +37,20 @@
 						<!-- 지역 대분류 -->
 						<div class="region-major-group">
 							<c:forEach items="${rjlist}" var="theater" begin="0">
-								<a href="selectMovieReserveProc.do?large_region=${theater.largeRegion }&movieId=${rjdto.movieId}&selectedDate=${param.selectedDate}"
-								   class="${param.large_region eq theater.largeRegion ? 'is-selected' : ''}">
-									${theater.largeRegion } 
-								</a>
+								<a
+									href="selectMovieReserveProc.do?large_region=${theater.largeRegion }&movieId=${rjdto.movieId}&selectedDate=${param.selectedDate}"
+									class="${param.large_region eq theater.largeRegion ? 'is-selected' : ''}">
+									${theater.largeRegion } </a>
 							</c:forEach>
 						</div>
 						<!-- 지역 소분류 및 극장 -->
 						<div class="region-minor-group">
 							<c:if test="${not empty rjlist02}">
 								<c:forEach items="${rjlist02}" var="smallTheater" begin="0">
-									<a href="selectMovieReserveProc.do?large_region=${param.large_region }&movieId=${rjdto.movieId}&smallRegion=${smallTheater.smallRegion }&selectedDate=${param.selectedDate}"
-									   class="${param.smallRegion eq smallTheater.smallRegion ? 'is-selected' : ''}">
-										${smallTheater.smallRegion } 
-									</a>
+									<a
+										href="selectMovieReserveProc.do?large_region=${param.large_region }&movieId=${rjdto.movieId}&smallRegion=${smallTheater.smallRegion }&selectedDate=${param.selectedDate}"
+										class="${param.smallRegion eq smallTheater.smallRegion ? 'is-selected' : ''}">
+										${smallTheater.smallRegion } </a>
 								</c:forEach>
 							</c:if>
 						</div>
@@ -57,22 +59,24 @@
 							<c:choose>
 								<c:when test="${not empty rjlist04}">
 									<c:forEach items="${rjlist04}" var="movieselect">
-										<a href="selectMovieReserveProc.do?large_region=${param.large_region}&smallRegion=${param.smallRegion}&movieId=${movieselect.movieId}&selectedDate=${param.selectedDate}&scheduleSTime=${param.scheduleSTime}&scheduleETime=${param.scheduleETime}"
-								   		   class="${param.movieId eq movieselect.movieId or rjdto.movieId eq movieselect.movieId ? 'is-selected' : ''}">
-											<span class="${movieselect.movieRate==12?'yellow':movieselect.movieRate==15?'orange':movieselect.movieRate==19?'red':'green' }">
-											<c:choose>
-												<c:when test="${movieselect.movieRate==19}">19</c:when>
-												<c:when test="${movieselect.movieRate==15}">15</c:when>
-												<c:when test="${movieselect.movieRate==12}">12</c:when>
-												<c:when test="${movieselect.movieRate==0}">ALL</c:when>
-											</c:choose>									
-											</span>
-											&nbsp;${movieselect.movieTitle }
+										<a
+											href="selectMovieReserveProc.do?large_region=${param.large_region}&smallRegion=${param.smallRegion}&movieId=${movieselect.movieId}&selectedDate=${param.selectedDate}&scheduleSTime=${param.scheduleSTime}&scheduleETime=${param.scheduleETime}"
+											class="${param.movieId eq movieselect.movieId or rjdto.movieId eq movieselect.movieId ? 'is-selected' : ''}">
+											<span
+											class="${movieselect.movieRate==12?'yellow':movieselect.movieRate==15?'orange':movieselect.movieRate==19?'red':'green' }">
+												<c:choose>
+													<c:when test="${movieselect.movieRate==19}">19</c:when>
+													<c:when test="${movieselect.movieRate==15}">15</c:when>
+													<c:when test="${movieselect.movieRate==12}">12</c:when>
+													<c:when test="${movieselect.movieRate==0}">ALL</c:when>
+												</c:choose>
+										</span> &nbsp;${movieselect.movieTitle }
 										</a>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
-									<p style="font-size: 13px; color: #64706b; margin-top: 10px;">극장을 선택하면 해당 극장에서 상영중인 영화가 표시됩니다.</p>
+									<p style="font-size: 13px; color: #64706b; margin-top: 10px;">극장을
+										선택하면 해당 극장에서 상영중인 영화가 표시됩니다.</p>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -84,7 +88,7 @@
 					<h2 class="booking-panel__title">
 						<span class="number-kicker">02</span> 상영일 및 상영시간 선택
 					</h2>
-					
+
 					<div class="date-time-flex-container">
 						<!-- [좌측] 날짜 선택 (달력) -->
 						<div class="date-select-group">
@@ -103,7 +107,6 @@
 
 							let selectedDateStr = "${param.selectedDate}"; 
 
-							// 최초 진입 시 파라미터가 없으면 오늘 날짜로 자동 설정 후 리다이렉트
 							if (!selectedDateStr) {
 							    let tYear = today.getFullYear();
 							    let tMonth = (today.getMonth() + 1) < 10 ? "0" + (today.getMonth() + 1) : (today.getMonth() + 1);
@@ -222,22 +225,27 @@
 						</div>
 
 						<!-- [우측] 상영 시간표 영역 -->
+						<!-- [우측] 상영 시간표 영역 -->
 						<div id="schedule-area" class="schedule-output-area">
 							<h3>상영 시간표</h3>
 							<c:choose>
 								<c:when test="${not empty rjlist03}">
 									<div class="schedule-grid-wrap">
 										<c:forEach items="${rjlist03}" var="schedule" begin="0">
-											<a href="selectMovieReserveProc.do?large_region=${param.large_region}&movieId=${rjdto.movieId}&smallRegion=${param.smallRegion}&selectedDate=${param.selectedDate}&scheduleSTime=${schedule.scheduleStarttime}&scheduleETime=${schedule.scheduleEndtime}&screenId=${schedule.screenId}#schedule-area"
-											   class="schedule-card ${param.scheduleSTime eq schedule.scheduleStarttime ? 'is-selected' : ''}"> 
-												<span class="schedule-time-text">${fn:substring(schedule.scheduleStarttime, 11, 16)}</span>
-												<span class="schedule-info-text">${schedule.totalSeat}석 / ${schedule.screenId}관</span>
+											<a
+												href="selectMovieReserveProc.do?large_region=${param.large_region}&movieId=${rjdto.movieId}&smallRegion=${param.smallRegion}&selectedDate=${param.selectedDate}&scheduleSTime=${schedule.scheduleStarttime}&scheduleETime=${schedule.scheduleEndtime}&screenId=${schedule.screenId}&scheduleId=${schedule.scheduleId}#schedule-area"
+												class="schedule-card ${param.scheduleId eq schedule.scheduleId ? 'is-selected' : ''}">
+												<!-- 상영 시작 시간 --> <span class="schedule-time-text">${fn:substring(schedule.scheduleStarttime, 11, 16)}</span>
+												<!-- 잔여좌석 / 총좌석 · 상영관 번호 --> <span
+												class="schedule-info-text">${schedule.remainSeat}/${schedule.totalSeat}석
+													· ${schedule.screenNum}관</span>
 											</a>
 										</c:forEach>
 									</div>
 								</c:when>
 								<c:otherwise>
-									<p style="font-size: 13px; color: #64706b; margin-top: 10px;">선택하신 상영관,영화,날짜에 해당하는 상영일정이 없습니다.</p>
+									<p style="font-size: 13px; color: #64706b; margin-top: 10px;">선택하신
+										상영관, 영화, 날짜에 해당하는 상영일정이 없습니다.</p>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -255,15 +263,17 @@
 						<img src="./${rjdto.imgPath }" alt="선택 영화">
 					</c:if>
 					<div>
-						<strong>${rjdto.movieTitle }</strong><br/>
-						<p style="font-size: 13px; color: #64706b; margin-top: 10px;"><span>🕒</span>${rjdto.runTime }분</p>
+						<strong>${rjdto.movieTitle }</strong><br />
+						<p style="font-size: 13px; color: #64706b; margin-top: 10px;">
+							<span>🕒</span>${rjdto.runTime }분</p>
 					</div>
 				</div>
 
 				<div class="booking-summary__row">
 					<span class="booking-summary__label">극장</span>
 					<c:if test="${not empty param.smallRegion }">
-						<strong class="booking-summary__value">그린 시네마 ${param.smallRegion }</strong>
+						<strong class="booking-summary__value">그린 시네마
+							${param.smallRegion }</strong>
 					</c:if>
 					<c:if test="${empty param.smallRegion}">
 						<strong class="booking-summary__value">미선택</strong>
@@ -271,9 +281,8 @@
 				</div>
 
 				<div class="booking-summary__row">
-					<span class="booking-summary__label">상영일</span> 
-					<strong class="booking-summary__value" id="summary-date">
-						<c:choose>
+					<span class="booking-summary__label">상영일</span> <strong
+						class="booking-summary__value" id="summary-date"> <c:choose>
 							<c:when test="${not empty param.selectedDate}">${param.selectedDate}</c:when>
 							<c:otherwise>미선택</c:otherwise>
 						</c:choose>
@@ -299,19 +308,21 @@
 					</c:if>
 				</div>
 				<c:choose>
-					<c:when test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">					
+					<c:when
+						test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">
 						<p class="summary-footnote02">선택이 완료되었습니다 다음 단계로 이동하세요.</p>
 					</c:when>
 					<c:otherwise>
 						<p class="summary-footnote">모든 항목을 선택한 후 다음 단계로 이동하세요.</p>
 					</c:otherwise>
 				</c:choose>
-				
+
 				<c:choose>
-					<c:when test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">
+					<c:when
+						test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">
 						<a class="btn btn--primary btn--block btn--large" id="seatMoveBtn"
-							href="selectSeatReserveProc.do?movieId=${rjdto.movieId}&smallRegion=${param.smallRegion }&selectedDate=${param.selectedDate}&scheduleSTime=${param.scheduleSTime}&scheduleETime=${param.scheduleETime}&screenId=${param.screenId}">인원·좌석 선택 ↗
-						</a>
+							href="selectSeatReserveProc.do?movieId=${rjdto.movieId}&smallRegion=${param.smallRegion}&selectedDate=${param.selectedDate}&scheduleSTime=${param.scheduleSTime}&scheduleETime=${param.scheduleETime}&screenId=${param.screenId}&large_region=${param.large_region}&scheduleId=${param.scheduleId}">인원·좌석
+							선택 ↗ </a>
 					</c:when>
 					<c:otherwise>
 						<p class="btn btn--primary btn--block btn--large02">인원·좌석 선택 ↗</p>

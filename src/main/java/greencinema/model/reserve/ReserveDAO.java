@@ -13,105 +13,94 @@ public class ReserveDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 	
-	//payment 테이블 insert 하는 메소드
-	public boolean insertPayment(int reserveid,int paymenttype) {
+	// payment 테이블 insert 하는 메소드
+	public boolean insertPayment(int reserveid, int paymenttype) {
 		boolean chk = false;
 		try {
-	        con = Util.getConnection();       
-	        String sql = "insert into payment values (null,?,?,current_time());";		        
-	        pstmt = con.prepareStatement(sql);
-	        pstmt.setInt(1, reserveid);
-	        pstmt.setInt(2, paymenttype);
-	        
-	        chk = pstmt.executeUpdate() > 0;	      
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if(rs != null) rs.close();
-	            if(pstmt != null) pstmt.close();
-	            if(con != null) con.close();
-	        } catch (Exception e) {e.printStackTrace();}
-	    }	 
+			con = Util.getConnection();       
+			String sql = "INSERT INTO payment VALUES (null, ?, ?, current_time());";        
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, reserveid);
+			pstmt.setInt(2, paymenttype);
+			
+			chk = pstmt.executeUpdate() > 0;      
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}	
 		return chk;
 	}
 	
-	//reserve 테이블 insert 하는 메소드
-	
 	// reserve 테이블 insert 하는 메소드
 	public boolean insertReserve(String user_id, int adult_count, int teens_count, int total_price) {
+		boolean chk = false;
+		try {
+			con = Util.getConnection();       
+			String sql = "INSERT INTO reserve VALUES (null, ?, ?, ?, ?, current_time(), null);";        
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, adult_count);
+			pstmt.setInt(3, teens_count);
+			pstmt.setInt(4, total_price);
+			
+			chk = pstmt.executeUpdate() > 0;       
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll();
+		}   
+		return chk;
+	}
+	
+	// seat 테이블 insert 하는 메소드
+	public boolean insertSeat(int scheduleId, int screenId, int reseveId, String seat) {
 	    boolean chk = false;
 	    try {
-	        con = Util.getConnection();       	        
-	        String sql = "insert into reserve values (null, ?, ?, ?, ?, current_time(), null);";        
+	        con = Util.getConnection();        
+	        String sql = "INSERT INTO seat VALUES (null, ?, ?, ?, ?)"; // 컬럼 순서: seat_id, schedule_id, screen_id, reserve_id, seat_num
 	        pstmt = con.prepareStatement(sql);
-	        pstmt.setString(1, user_id);
-	        pstmt.setInt(2, adult_count);
-	        pstmt.setInt(3, teens_count);
-	        pstmt.setInt(4, total_price);
+	        pstmt.setInt(1, scheduleId); // 💡 schedule_id 추가
+	        pstmt.setInt(2, screenId);
+	        pstmt.setInt(3, reseveId);
+	        pstmt.setString(4, seat);
 	        
 	        chk = pstmt.executeUpdate() > 0;       
 	    } catch(Exception e) {
 	        e.printStackTrace();
 	    } finally {
-	        try {
-	            if(rs != null) rs.close();
-	            if(pstmt != null) pstmt.close();
-	            if(con != null) con.close();
-	        } catch (Exception e) {e.printStackTrace();}
+	        closeAll();
 	    }   
 	    return chk;
 	}
 	
-	
-	
-	//seat 테이블 insert 하는 메소드
-	
-	public boolean insertSeat(int screenId,int reseveId,String seat) {
-		boolean chk = false;
-		try {
-	        con = Util.getConnection();       
-	        String sql = "INSERT INTO seat VALUES (null,?,?,?)";		        
-	        pstmt = con.prepareStatement(sql);
-	        pstmt.setInt(1, screenId);
-	        pstmt.setInt(2, reseveId);
-	        pstmt.setString(3, seat);
-	        
-	        chk = pstmt.executeUpdate() > 0;	      
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if(rs != null) rs.close();
-	            if(pstmt != null) pstmt.close();
-	            if(con != null) con.close();
-	        } catch (Exception e) {e.printStackTrace();}
-	    }	 
-		return chk;
-	}
-	
-	//reserve 테이블 count갯수 select하는 메소드(reserveID 구하는 용도)	
 	public int reserveID() {		
-		int count = 0;
+		int maxId = 0;
 		try {
 			con = Util.getConnection();
-			String sql = "select count(*) as count from reserve";
+			String sql = "SELECT MAX(reserve_id) AS max_id FROM reserve";
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {				
-				count = rs.getInt("count");
+				maxId = rs.getInt("max_id");
 			}					
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				if(con != null) con.close();
-			} catch (Exception e) {e.printStackTrace();}
+			closeAll();
 		}
-		return count;		
+		return maxId;		
 	}
 	
+	// 자원 해제용 공통 메서드
+	private void closeAll() {
+		try {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(con != null) con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
