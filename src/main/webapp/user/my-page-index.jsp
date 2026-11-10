@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
     String menu = request.getParameter("menu");
@@ -17,6 +18,10 @@
         menu = "home";
     }
 %>
+
+<c:if test="${param.cancelled == '1'}">
+  <script>alert('예매가 취소되었습니다.');</script>
+</c:if>
 
 <div class="page-content">
   <div class="container">

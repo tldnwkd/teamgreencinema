@@ -295,7 +295,6 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-
 				mydto.setMovieTitle(rs.getString(1));
 				mydto.setImgPath(rs.getString(2));
 				mydto.setScreenNum(rs.getInt(3));
@@ -308,6 +307,7 @@ public class UserDAO {
 				mydto.setPaymentMethod(rs.getString(10));
 				mydto.setCancelDate(rs.getString(11));
 				mydto.setPaymentStatus(rs.getString(12));
+				mydto.setReserveId(rs.getInt(13));
 			}		
 			
 		}catch (Exception e) {
