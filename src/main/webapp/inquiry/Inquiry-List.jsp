@@ -4,16 +4,15 @@
     
     <section class="board-page board-page--inquiry">
    <h1>1:1 문의사항</h1>
-    <form action="SearchInquiryProc.do" method="get">
+    <form action="SearchInquiryProc.do" method="get" name="iform">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="inquiry_type"  ${type==inquiry_type?'selected':''}>문의종류로 검색</option>
     		<option value="inquiry_Sort"  ${type=='inquiry_Sort'?'selected':''}>문의분류로 검색</option>
     		<option value="inquiry_title"  ${type=='inquiry_title'?'selected':''}>제목으로 검색</option>
-    		<option value="answer_status"  ${type=='answer_status'?'selected':''}>답변상태로 검색</option>
     	</select>
 		<input name="content" id="ch" type="text" onchange="change()" placeholder="검색어를 입력해주세요" >
-    	<input type="submit" value="검색">
+    	<input type="button" value="검색" onclick="search()">
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='InquiryProc.do'">
     </form>
@@ -58,4 +57,16 @@
 		</c:if>
 	</div>
 	</section>
+		<script>
+	function search(){
+		let i = document.iform;
+		if(i.type.value =="선택"){
+			alert('검색 항목을 선택해주세요.');
+			i.type.focus();
+			return;
+		}else{
+			i.submit();
+		}
+		}
+	</script>
 	

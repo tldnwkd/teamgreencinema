@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import greencinema.model.inquiry.InquiryDAO;
 import greencinema.model.inquiry.InquiryDTO;
@@ -27,17 +28,33 @@ public class OneInquiryProc extends HttpServlet {
 	}
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(false);
 		String type ="";
+		int inquiryId = Integer.parseInt(request.getParameter("inquiryId")) ;
+		InquiryDAO idao = new InquiryDAO();
 		if(request.getParameter("btn") != null) {
 		type = request.getParameter("btn");
+		System.out.println("type"+type);
+		}
+		
+		
+		if(type.equals("del")) {
+			int result = idao.OneDelete(inquiryId);
+			if(result > 0) {
+				String chkId = (String) session.getAttribute("id");
+				String msg = "삭제하시겠습니까?";
+				
+				request.setAttribute("chkId", chkId);
+				request.setAttribute("msg", msg);
+				RequestDispatcher rd = request.getRequestDispatcher("InquiryProc.do");
+				rd.forward(request, response);
+			}
 		}
 		
 		
 		
-		if(type.equals("수정")) {
+		if(type.equals("upd")) {
 			
-		InquiryDAO idao = new InquiryDAO();
-		int inquiryId = Integer.parseInt(request.getParameter("inquiryId")) ;
 		InquiryDTO idto = idao.getOneInquiry(inquiryId);
 		
 		request.setAttribute("idto", idto);
@@ -46,8 +63,6 @@ public class OneInquiryProc extends HttpServlet {
 		
 		}else {
 			
-			InquiryDAO idao = new InquiryDAO();
-			int inquiryId = Integer.parseInt(request.getParameter("inquiryId")) ;
 			InquiryDTO idto = idao.getOneInquiry(inquiryId);
 			
 			request.setAttribute("idto", idto);

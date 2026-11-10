@@ -13,45 +13,56 @@ import javax.servlet.http.HttpSession;
 import greencinema.model.inquiry.InquiryDAO;
 import greencinema.model.inquiry.InquiryDTO;
 
-
 @WebServlet("/InquiryInsertProc.do")
 public class InquiryInsertProc extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		rePro(request, response);
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	rePro(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		rePro(request, response);
 	}
-	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void rePro(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(false);
-			String chkid = (String) session.getAttribute("id");
-			System.out.println(chkid);
-			String type = (String)request.getParameter("btn");
-		System.out.println("zz:"+type);
+		String chkid = (String) session.getAttribute("id");
+		String type = request.getParameter("btn");
+		String content = request.getParameter("inquiryContent");
+		String title = request.getParameter("inquiryTitle");
+		System.out.println(chkid);
+		System.out.println("zz:" + type);
 		InquiryDTO idto = new InquiryDTO();
-		if(type.equals("문의")) {
-		idto.setUserId(chkid);
-		idto.setInquirySort(request.getParameter("inquirySort"));
-		idto.setInquiryType(request.getParameter("inquiryType"));
-		idto.setInquiryTitle(request.getParameter("inquiryTitle"));
-		idto.setInquiryContent(request.getParameter("inquiryContent"));//잘못됨
-		idto.setReceptionType(Integer.parseInt(request.getParameter("receptionType")));
+		if (type.equals("inq")) {
+			idto.setUserId(chkid);
+			idto.setInquirySort(request.getParameter("inquirySort"));
+			idto.setInquiryType(request.getParameter("inquiryType"));
+			idto.setInquiryTitle(request.getParameter("inquiryTitle"));
+			idto.setInquiryContent(request.getParameter("inquiryContent"));// �߸���
+			idto.setReceptionType(Integer.parseInt(request.getParameter("receptionType")));
 
-		InquiryDAO idao = new InquiryDAO();
-		boolean result =  idao.insert(idto);
-		 System.out.println(result);
+			InquiryDAO idao = new InquiryDAO();
+			boolean result = idao.insert(idto);
+			System.out.println(result);
 
-		 RequestDispatcher rd = request.getRequestDispatcher("InquiryProc.do");
-		 rd.forward(request, response);
-		}else if(type.equals("수정")) {
+			RequestDispatcher rd = request.getRequestDispatcher("InquiryProc.do");
+			rd.forward(request, response);
+		} else if (type.equals("updOk")) {
+			InquiryDAO idao = new InquiryDAO();
+			int inquiryId = Integer.parseInt(request.getParameter("inquiryId"));
+			int result = idao.getOneUpdate(title, content, inquiryId);
+			System.out.println(result);
+			if (result > 0) {
+				request.setAttribute("inquiryId", inquiryId);
+				RequestDispatcher rd = request.getRequestDispatcher("OneInquiryProc.do");
+				rd.forward(request, response);
+			}
 
 		}
 
-
-	
 	}
 }

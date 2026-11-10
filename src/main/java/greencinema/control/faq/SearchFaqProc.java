@@ -14,8 +14,8 @@ import greencinema.model.faq.FaqDAO;
 import greencinema.model.faq.FaqDTO;
 
 
-@WebServlet("/SeachFaqProc.do")
-public class SeachFaqProc extends HttpServlet {
+@WebServlet("/SearchFaqProc.do")
+public class SearchFaqProc extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		rePro(request, response);

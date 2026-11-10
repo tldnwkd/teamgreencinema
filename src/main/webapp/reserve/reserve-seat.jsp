@@ -390,7 +390,7 @@
     }
 
     function reset() {
-    	if(confirm("선택한 좌석을 초기화 하시겠습니까?")){
+    	if(confirm("선택한 관람인원을 초기화 하시겠습니까?")){
 	        adultcount = 0;
 	        precount = 0;
 	        maxcount = 0;
