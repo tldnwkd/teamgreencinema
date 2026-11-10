@@ -13,7 +13,7 @@
     } else if ("info".equals(menu)) {
         contentPage = "/user/my-page-info.jsp";
     } else if ("inquiry-write".equals(menu)) {
-    	contentPage = "/inquiry/inquiry.jsp";
+    	contentPage = "/inquiry/Inquiry.jsp";
     } else {
         menu = "home";
     }
@@ -21,6 +21,21 @@
 
 <c:if test="${param.cancelled == '1'}">
   <script>alert('예매가 취소되었습니다.');</script>
+</c:if>
+<c:if test="${param.pwChanged == '1'}">
+  <script>alert('비밀번호가 변경되었습니다.');</script>
+</c:if>
+<c:if test="${param.pwError == 'current'}">
+  <script>alert('현재 비밀번호가 맞지 않습니다.');</script>
+</c:if>
+<c:if test="${param.pwError == 'mismatch'}">
+  <script>alert('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.');</script>
+</c:if>
+<c:if test="${param.pwError == 'empty'}">
+  <script>alert('비밀번호를 모두 입력해 주세요.');</script>
+</c:if>
+<c:if test="${param.pwError == 'fail'}">
+  <script>alert('비밀번호를 변경하지 못했습니다.');</script>
 </c:if>
 
 <div class="page-content">

@@ -16,26 +16,6 @@ public class ReserveDAO {
 	Connection con = null;
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
-	
-	public void cancelReserve(String reserveId) {		
-		try {
-			con = Util.getConnection();
-			String sql = "update reserve set cancel_date = current_timestamp where reserve_id = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, reserveId);
-			pstmt.executeUpdate();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(con != null) con.close();
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 
 	// payment 테이블 insert 하는 메소드
 	public boolean insertPayment(int reserveid, int paymenttype) {
@@ -127,7 +107,7 @@ public class ReserveDAO {
 			e.printStackTrace();
 		}
 	}
-}
+
 
 	public void cancelReserve(String reserveId) {		
 		try {

@@ -99,6 +99,29 @@ public class UserDAO {
 		
 		return isLogin;
 	}
+
+	public boolean updatePassword(String userId, String userPw) {
+		boolean updated = false;
+		try {
+			con = Util.getConnection();
+			String sql = "UPDATE user SET user_pw = ? WHERE user_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userPw);
+			pstmt.setString(2, userId);
+			updated = pstmt.executeUpdate() == 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) con.close();
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return updated;
+	}
 	
 	
 	// 예매리스트 정보
