@@ -105,7 +105,7 @@ public class ReserveDAO {
 			e.printStackTrace();
 		}
 	}
-}
+
 
 	public void cancelReserve(String reserveId) {		
 		try {

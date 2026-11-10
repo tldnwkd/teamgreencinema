@@ -19,7 +19,7 @@
 			<c:forEach items="${mdtoList}" var="list" begin="0">
 				<article class="movie-card">
 					<div class="movie-card__poster-wrap">
-						<a href="MovieInfo.do" aria-label="${list.movieTitle }">
+						<a href="selectMovieReserveProc.do?movieId=${list.movieId }" aria-label="${list.movieTitle }">
 						<img class="movie-card__poster" src="./${list.imgPath}" alt="${list.movieTitle }"></a>
 						<span class="movie-card__rank">${begin}</span>
 						<div class="movie-card__actions">
@@ -42,7 +42,7 @@
 			</h2>
 			<p>영화 선택 → 극장·일정 선택 → 좌석 선택 → 결제 순서의 예매 화면을 둘러보세요.</p>
 		</div>
-		<a class="btn btn--primary btn--large" href="#">예매 화면
+		<a class="btn btn--primary btn--large" href="selectMovieReserveProc.do">예매 화면
 			보기 ↗</a>
 	</div>
 </section>
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<div class="service-grid">
-			<a class="service-card" href="#">
+			<a class="service-card" href="selectMovieReserveProc.do">
 			<span class="service-card__num">01</span><span class="service-card__icon">▦</span>
 			<h3>영화 예매</h3>
 			<p>영화·극장·상영일정을 고르는 화면</p> <strong>화면 보기 ↗</strong></a>

@@ -98,7 +98,6 @@
                     <section class="booking-panel payment-panel-fix">
                         <div class="booking-panel__title payment-title-between">
                             <h2><span class="number-kicker">01</span> 최종 결제수단</h2>
-                            <button type="button" onclick="location.reload()" class="reset-btn">&#8635; 초기화</button>
                         </div>
                         
                         <div class="pay-method-grid">

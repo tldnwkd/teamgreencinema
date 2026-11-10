@@ -263,8 +263,10 @@
 					</c:if>
 					<div>
 						<strong>${rjdto.movieTitle }</strong><br />
+						<c:if test="${rjdto.runTime ne 0 }">
 						<p style="font-size: 13px; color: #64706b; margin-top: 10px;">
 							<span>🕒</span>${rjdto.runTime }분</p>
+						</c:if>
 					</div>
 				</div>
 
