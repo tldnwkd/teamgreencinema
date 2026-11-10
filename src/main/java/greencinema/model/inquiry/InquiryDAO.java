@@ -25,12 +25,12 @@ public class InquiryDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
-	//admin  1:1  문의 전체 출력 메소드
+	//admin  1:1  臾몄쓽 �쟾泥� 異쒕젰 硫붿냼�뱶
 	public ArrayList<InquiryDTO> inAllList(int StartRow, int pageSize) {
 			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		try {
 		con = Util.getConnection();
-		String sql = "select * from inquiry order by inquiry_id desc limit ?,?"; // id는 파라미터로 set 받아야함.(임의로 user01지정)
+		String sql = "select * from inquiry order by inquiry_id desc limit ?,?"; // id�뒗 �뙆�씪誘명꽣濡� set 諛쏆븘�빞�븿.(�엫�쓽濡� user01吏��젙)
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, StartRow);
 		pstmt.setInt(2, pageSize);
@@ -73,7 +73,7 @@ public class InquiryDAO {
 		
 	}
 	//------------------------------------------------------
-	// 게시글 총 count 메소드
+	// 寃뚯떆湲� 珥� count 硫붿냼�뱶
 	public int AllCount() {
 		int count=0;
 		try {
@@ -100,7 +100,7 @@ public class InquiryDAO {
 		return count;
 		
 	}
-	//로그인 개인회원 1:1문의 전체 출력 메소드
+	//濡쒓렇�씤 媛쒖씤�쉶�썝 1:1臾몄쓽 �쟾泥� 異쒕젰 硫붿냼�뱶
 	public ArrayList<InquiryDTO> getAllList(String id, int StartRow, int pageSize){
 		ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		 try {
@@ -142,8 +142,8 @@ public class InquiryDAO {
 	}
 	
 	//-------------------------------------
-	//1:1문의 개인 Count문 + select문 
-	// 로그인 회원 1:1 문의 count
+	//1:1臾몄쓽 媛쒖씤 Count臾� + select臾� 
+	// 濡쒓렇�씤 �쉶�썝 1:1 臾몄쓽 count
 	public int getOneCount(String id) {
 		int count=0;
 		try {
@@ -171,7 +171,7 @@ public class InquiryDAO {
 		return count;
 		
 	}
-	// 로그인 회원 select add
+	// 濡쒓렇�씤 �쉶�썝 select add
 	public ArrayList<InquiryDTO> getOneList(String id, int StartRow, int pageSize){
 		ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		 try {
@@ -213,7 +213,7 @@ public class InquiryDAO {
 		
 	}
 	//-----------------------------------------------------------
-	//Search (select, count)기능
+	//Search (select, count)湲곕뒫
 	// search count
 	public int sCount(String id, String type, String content) {
 		int count=0;
@@ -221,7 +221,6 @@ public class InquiryDAO {
 			con = Util.getConnection();
 			String sql = "select count(*) from inquiry where "+type+" like '%"+content+"%' ";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -243,15 +242,17 @@ public class InquiryDAO {
 		
 	}
 	// search select add
-	public ArrayList<InquiryDTO> search(String type, String content, int Startpage, int pagesize){
+	public ArrayList<InquiryDTO> search(String type, String content, int Startpage, int pagesize, String chkid){
 			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		try { 
 			con = Util.getConnection();
-			String sql = "select * from inquiry where "+type+" like '%"+content+"%' limit ?,?";
+			String sql = "select * from inquiry where "+type+" and user_id=? like '%"+content+"%' limit ?,?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, Startpage);
-			pstmt.setInt(2, pagesize);
+			pstmt.setString(1, chkid);
+			pstmt.setInt(2, Startpage);
+			pstmt.setInt(3, pagesize);
 			rs = pstmt.executeQuery();
+			System.out.println(sql);
 			
 			while(rs.next()) {
 				InquiryDTO idto = new InquiryDTO();
@@ -282,7 +283,7 @@ public class InquiryDAO {
 		
 		return i;
 	} 
-	// 문의글 등록 메소드
+	// 臾몄쓽湲� �벑濡� 硫붿냼�뱶
 	public boolean insert(InquiryDTO idto) {
 		boolean result = false;
 		 try {
@@ -292,7 +293,7 @@ public class InquiryDAO {
 			 		+ "VALUES\r\n"
 			 		+ "\r\n"
 			 		+ "(?, ?, ?, ?,\r\n"
-			 		+ " ?,?,0,null,current_date());";
+			 		+ " ?,?,0,null,NOW());";
 			 pstmt = con.prepareStatement(sql);
 			 pstmt.setString(1, idto.getUserId());
 			 pstmt.setString(2, idto.getInquirySort());
@@ -310,15 +311,16 @@ public class InquiryDAO {
 
 			 }catch(Exception e) {
 			 e.printStackTrace();
+			 
 			 }
 			 }
 		 return result;
 		
 	}
 	
-	//하나의 게시글 한페이지에 출력하는 메소드
+	//�븯�굹�쓽 寃뚯떆湲� �븳�럹�씠吏��뿉 異쒕젰�븯�뒗 硫붿냼�뱶
 	public InquiryDTO getOneInquiry(int num) {
-			InquiryDTO i = new InquiryDTO();
+			InquiryDTO i = null;
 		 try {
 			 con = Util.getConnection();
 			 String sql = "select * from inquiry where inquiry_id=?";
@@ -326,6 +328,7 @@ public class InquiryDAO {
 			 pstmt.setInt(1, num);
 			 rs = pstmt.executeQuery();
 			 if(rs.next()) {
+				 i = new InquiryDTO();
 				 i.setInquiryId(rs.getInt(1));
 				 i.setUserId(rs.getString(2));
 				 i.setInquirySort(rs.getString(3));
@@ -350,6 +353,64 @@ public class InquiryDAO {
 			 }
 		 return i;
 		
+	}
+	// OneInquiryUpdate 사용 - 1:1문의 수정
+	public int getOneUpdate(String title, String content, int inquiryId) {
+	    int result = 0;
+
+	    try {
+	        con = Util.getConnection();
+
+	        String sql = "UPDATE inquiry "
+	                   + "SET inquiry_title=?, inquiry_content=? "
+	                   + "WHERE inquiry_id=? AND answer_status=0";
+
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, title);
+	        pstmt.setString(2, content);
+	        pstmt.setInt(3, inquiryId);
+
+	        result = pstmt.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (pstmt != null) pstmt.close();
+	            if (con != null) con.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return result;
+	}
+	
+	public int OneDelete(int inquiryId) {
+	    int result = 0;
+
+	    try {
+	        con = Util.getConnection();
+
+	        String sql = "delete from inquiry where inquiry_id=?";
+
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setInt(1, inquiryId);
+
+	        result = pstmt.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (pstmt != null) pstmt.close();
+	            if (con != null) con.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+		
+		return result;
 	}
 	
 	}

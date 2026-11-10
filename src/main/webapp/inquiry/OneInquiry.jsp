@@ -56,8 +56,9 @@
 						<input type="hidden" name="receptionType" value="${idto.receptionType}">
 						<a href="InquiryProc.do" class="btn btn--outline">내 문의내역보기</a>
 						<c:if test="${idto.answerStatus eq 0}">
-							<input name="btn" type="submit" class="btn btn--primary" value="수정">
+							<button type="submit" class="btn btn--primary" name="btn" value="upd">수정</button>
 						</c:if>
+							<button type="submit" class="btn btn--primary" name="btn" onclick="return confirm('정말 삭제하시겠습니까?');" value="del">삭제</button>
 					</div>
 				</section>
 			</div>

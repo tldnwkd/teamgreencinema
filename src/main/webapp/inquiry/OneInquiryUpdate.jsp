@@ -42,8 +42,9 @@
 					</div>
 					<div class="form-actions">
 						<input type="hidden" name="id" value="${sessionScope.id }">
+						<input type="hidden" name="inquiryId" value="${idto.inquiryId}">
 						<a href="InquiryProc.do" class="btn btn--outline">내 문의내역보기</a>
-						<input name="btn" type="submit" class="btn btn--primary" value="수정">
+						<button name="btn" type="submit" class="btn btn--primary" value="updOk" onclick="return confirm('수정을 완료하시겠습니까?');" >수정</button>
 					</div>
 				</section>
 			</div>

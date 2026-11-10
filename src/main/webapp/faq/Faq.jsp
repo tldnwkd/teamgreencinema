@@ -4,7 +4,7 @@
     
 <section class="board-page board-page--faq">
 	<h1>FAQ</h1>
-    <form action="SeachFaqProc.do" method="get">
+    <form action="SearchFaqProc.do" method="get">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="faq_inquery"  ${type=='faq_inquery'?'selected':''}>제목로 검색</option>

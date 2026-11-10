@@ -38,16 +38,16 @@
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>
 		<c:if test="${startpage > pageBlock }">
-			<a href="SeachFaqProc.do?pageNum=${startpage-pageBlock}">이전</a>
+			<a href="SearchFaqProc.do?pageNum=${startpage-pageBlock}">이전</a>
 		</c:if>
 	<%-- 페이징 --%>
 		<c:forEach var="i" begin="${startpage}" end ="${endpage}">
-			<a href="SeachFaqProc.do?pageNum=${i }&content=${content }&type=${type }">${i }</a>
+			<a href="SearchFaqProc.do?pageNum=${i }&content=${content }&type=${type }">${i }</a>
 		</c:forEach>	
 		
 		<%-- [다음] 링크 만들지 파악 --%>
 		<c:if test="${endpage < pageCount }">
-			<a href ="SeachFaqProc.do?pageNum=${startpage+pageBlock}">다음</a>
+			<a href ="SearchFaqProc.do?pageNum=${startpage+pageBlock}">다음</a>
 		</c:if>
 	</div>
 	</section>

@@ -57,7 +57,7 @@
 					</div>
 					<div class="form-actions">
 						<input type="hidden" name="id" value="${sessionScope.id }">
-						<input type="hidden" name="btn" value="문의">
+						<input type="hidden" name="btn" value="inq">
 						<input type="button" class="btn btn--outline" value="내 문의내역보기" onclick="myinqu()">
 						<input type="button" class="btn btn--primary" value="문의" onclick="chk()">
 					</div>
@@ -111,8 +111,14 @@
 				return
 			}
 			}
-
+			if(confirm('1:1문의를 신청하시겠습니까?')){
 			f.submit();
+			}else{
+				return;
+			}
+			
+			
+
 		}
 	</script>
 </section>

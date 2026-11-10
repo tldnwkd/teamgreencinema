@@ -15,34 +15,37 @@
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='NoticeProc.do'">
     </form>
-	<table border="1">
-		<tr>
-			<th>질문</th>
-			<th>게시일</th>
-			<th>조회수</th>
-		</tr>
-					<c:choose>
-			<c:when test="${empty nList}">
-				<tr>
-					<td colspan="3" align="center"><p>검색결과가 없습니다.</p></td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-			<c:forEach var= "nList" items="${nList}">
-					<tr>
-						<td>${nList.noticeTitle }</td>
-						<td>${nList.noticeDate }</td>
-						<td align="center">${nList.noticeHits }</td>
-					</tr>
-			</c:forEach>
-			</c:otherwise>
+			<table border="1">
+			<tr> <!-- search 검색기능 -->
+				<th>질문</th>
+				<th>게시일</th>
+				<th>조회수</th>
+			</tr>
+				<c:choose>
+					<c:when test="${empty nList}">
+						<tr>
+							<td colspan="4" align="center"><p>검색결과가 없습니다.</p></td>
+						</tr>
+					</c:when>
+				<c:otherwise>
+					<c:forEach var= "nList" items="${nList}">
+							<tr>
+								<td>
+									<a href="OneNoticeProc.do?notice_Id=${nList.noticeId}">${nList.noticeTitle }</a>
+								</td>
+									<td>${nList.noticeDate }</td>
+								<td align="center">${nList.noticeHits }</td>
+							</tr>
+					</c:forEach>
+				</c:otherwise>
 			</c:choose>
-	</table>
+		</table>
+		
 	<%-- 페이징 부분 --%>
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>
 		<c:if test="${startpage > pageBlock }">
-			<a href="SearchNoticeProc.do?pageNum=${startpage-pageBlock}">이전</a>
+			<a href="SearchNoticeProc.do?pageNum=${startpage-pageBlock}&content=${content }&type=${type }">이전</a>
 		</c:if>
 	<%-- 페이징 --%>
 		<c:forEach var="i" begin="${startpage}" end ="${endpage}">
@@ -51,7 +54,7 @@
 		
 		<%-- [다음] 링크 만들지 파악 --%>
 		<c:if test="${endpage < pageCount }">
-			<a href ="SearchNoticeProc.do?pageNum=${startpage+pageBlock}">다음</a>
+			<a href ="SearchNoticeProc.do?pageNum=${startpage+pageBlock}&content=${content }&type=${type }">다음</a>
 		</c:if>
 	</div>
 	</section>

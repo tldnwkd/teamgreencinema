@@ -10,14 +10,13 @@
     		<option value="inquiry_type"  ${type=='inquiry_type'?'selected':''}>문의종류로 검색</option>
     		<option value="inquiry_Sort"  ${type=='inquiry_Sort'?'selected':''}>문의분류로 검색</option>
     		<option value="inquiry_title"  ${type=='inquiry_title'?'selected':''}>제목으로 검색</option>
-    		<option value="answer_status"  ${type=='answer_status'?'selected':''}>답변상태로 검색</option>
     	</select>
 		<input name="content" id="ch" type="text" onchange="change()" placeholder="검색어를 입력해주세요" value="${content }">
     	<input type="submit" value="검색">
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='InquiryProc.do'">
     </form>
-	<table border="1">
+		<table border="1">
 		<tr>
 			<th>문의종류</th>
 			<th>문의분류</th>
@@ -25,29 +24,28 @@
 			<th>답변상태</th>
 		</tr>
 			<c:choose>
-			<c:when test="${empty sList}">
-				<tr>
-					<td colspan="4" align="center"><p>검색결과가 없습니다.</p></td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var="sList" items="${sList}">
+				<c:when test="${empty sList}">
 					<tr>
-						<td>${sList.inquiryType }</td>
-						<td>${sList.inquirySort }</td>
-						<td>${sList.inquiryTitle }</td>
-						<td>
-						<c:choose >
-							<c:when test="${sList.answerStatus eq 1 }">
-								<a href="#">답변 완료</a>
-							</c:when>
-							<c:otherwise>
-								<p>답변 대기</p>
-							</c:otherwise>
-						</c:choose>
-						</td>
+						<td colspan="4" align="center"><p>검색결과가 없습니다.</p></td>
 					</tr>
-				</c:forEach>
+				</c:when>
+			<c:otherwise>
+					<c:forEach var= "sList" items="${sList}">
+							<tr>
+								<td>${sList.inquiryType }</td>
+								<td>${sList.inquirySort }</td>
+								<c:choose >
+									<c:when test="${sList.answerStatus eq 1 }">
+										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">${sList.inquiryTitle}</a></td>
+										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">답변 완료</a></td>
+									</c:when>
+									<c:otherwise>
+										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">${sList.inquiryTitle}</a></td>
+										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">답변 대기</a></td>
+									</c:otherwise>
+								</c:choose>
+							</tr>
+					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 	</table>
@@ -55,7 +53,7 @@
 	<div class ="paging">
 	<%-- [이전] 링크 만들지 파악 --%>
 		<c:if test="${startpage > pageBlock }">
-			<a href="SearchInquiryProc.do?pageNum=${startpage-pageBlock}">이전</a>
+			<a href="SearchInquiryProc.do?pageNum=${startpage-pageBlock}&content=${content }&type=${type }">이전</a>
 		</c:if>
 	<%-- 페이징 --%>
 		<c:forEach var="i" begin="${startpage}" end ="${endpage}">
@@ -64,7 +62,7 @@
 		
 		<%-- [다음] 링크 만들지 파악 --%>
 		<c:if test="${endpage < pageCount }">
-			<a href ="SearchInquiryProc.do?pageNum=${startpage+pageBlock}">다음</a>
+			<a href ="SearchInquiryProc.do?pageNum=${startpage+pageBlock}&content=${content }&type=${type }">다음</a>
 		</c:if>
 	</div>
 	</section>
