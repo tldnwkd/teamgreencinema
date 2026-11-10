@@ -1,24 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-            <section class="member-card" aria-label="회원 정보">
-              <div class="member-card__mark" aria-hidden="true">
-                <c:choose>
-                  <c:when test="${not empty userInfo.userName}">${userInfo.userName.substring(0,1)}</c:when>
-                  <c:otherwise>G</c:otherwise>
-                </c:choose>
-              </div>
-              <div>
-                <h2 class="member-card__name">${empty userInfo.userName ? '회원' : userInfo.userName}</h2>
-                <p class="member-card__id">${userInfo.userId}</p>
-                <dl class="member-card__meta">
-                  <div><dt>이메일</dt><dd>${empty userInfo.userEmail ? '-' : userInfo.userEmail}</dd></div>
-                  <div><dt>휴대폰</dt><dd>${empty userInfo.userPhone ? '-' : userInfo.userPhone}</dd></div>
-                  <div><dt>생년월일</dt><dd>${empty userInfo.userBirth ? '-' : userInfo.userBirth}</dd></div>
-                </dl>
-              </div>
-            </section>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>           
 
             <!-- 예매 내역 섹션 -->
             <section id="reservations">
@@ -53,8 +35,13 @@
                     <p class="reservation-card__detail">${myPage.totalPrice }원 · ${myPage.paymentMethod} 결제</p>
                   </div>
                   <div class="reservation-card__actions">
-                    <span class="status-badge status-badge--success">${myPage.paymentStatus }</span>
-                    <span class="form-help"><a href="ReserveCancel.do?reserveId=${myPage.reserveId }">취소</a></span>
+                    <span class="status-badge ${myPage.paymentStatus eq '취소됨' ? 'status-badge--cancelled' : 'status-badge--success'}">${myPage.paymentStatus }</span>
+                    <c:if test="${myPage.paymentStatus ne '취소됨'}">
+                      <span class="form-help">
+                        <a href="ReserveCancel.do?reserveId=${myPage.reserveId}"
+                           onclick="return confirm('이 예매를 취소하시겠습니까?');">취소</a>
+                      </span>
+                    </c:if>
                   </div>
                 </article>
               </div>
