@@ -14,13 +14,11 @@
 	<%
 		request.setCharacterEncoding("utf-8");
 	
-		String section = request.getParameter("section");
-				
+		String section = request.getParameter("section");				
 		if(section == null){			
 	        request.getRequestDispatcher("MovieListProc.do").forward(request, response);
 	        return;
-	    }
-	
+	    }	
 	%>
 	
 	<c:choose >	
