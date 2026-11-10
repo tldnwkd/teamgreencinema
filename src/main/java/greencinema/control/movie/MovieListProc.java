@@ -30,7 +30,6 @@ public class MovieListProc extends HttpServlet {
 		MovieDAO mvdao = new MovieDAO();
 		
 		ArrayList<MovieDTO> mdtoList =  mvdao.getAllMovieList();
-		System.out.println("DB에서 가져온 영화 개수 : " + mdtoList.size());
 		request.setAttribute("mdtoList", mdtoList);
 				
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=section.jsp");		

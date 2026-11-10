@@ -1,6 +1,7 @@
 package greencinema.model.reservejoin;
 
 import java.sql.Date;
+
 public class ReservejoinDTO {
 	private int reserveId;
 	private String userId;
@@ -29,8 +30,41 @@ public class ReservejoinDTO {
 	private String smallRegion;
 	private int theatherId;
 	private int totalSeat;
+	private int remainSeat; // 💡 DB에는 없지만 화면 출력을 위해 추가된 잔여 좌석 필드
 	private int screenNum;
 
+	// --- [필수] 대소문자 및 다양한 별칭 Getter/Setter 추가 (EL 에러 방지용) ---
+	
+	public String getScheduleStarttime() {
+		return scheduleStarttime;
+	}
+	public void setScheduleStarttime(String scheduleStarttime) {
+		this.scheduleStarttime = scheduleStarttime;
+	}
+	
+	public String getScheduleStartTime() {
+		return scheduleStarttime;
+	}
+	public void setScheduleStartTime(String scheduleStarttime) {
+		this.scheduleStarttime = scheduleStarttime;
+	}
+
+	public String getScheduleSTime() {
+		return scheduleStarttime;
+	}
+	public void setScheduleSTime(String scheduleStarttime) {
+		this.scheduleStarttime = scheduleStarttime;
+	}
+
+	// -------------------------------------------------------------
+
+	public int getRemainSeat() {
+		return remainSeat;
+	}
+	public void setRemainSeat(int remainSeat) {
+		this.remainSeat = remainSeat;
+	}
+	
 	public int getTheatherId() {
 		return theatherId;
 	}
@@ -49,7 +83,6 @@ public class ReservejoinDTO {
 	public void setScreenNum(int screenNum) {
 		this.screenNum = screenNum;
 	}
-	
 	public int getReserveId() {
 		return reserveId;
 	}
@@ -134,12 +167,6 @@ public class ReservejoinDTO {
 	public void setScheduleId(int scheduleId) {
 		this.scheduleId = scheduleId;
 	}
-	public String getScheduleStarttime() {
-		return scheduleStarttime;
-	}
-	public void setScheduleStarttime(String scheduleStarttime) {
-		this.scheduleStarttime = scheduleStarttime;
-	}
 	public String getScheduleEndtime() {
 		return scheduleEndtime;
 	}
@@ -200,6 +227,4 @@ public class ReservejoinDTO {
 	public void setSmallRegion(String smallRegion) {
 		this.smallRegion = smallRegion;
 	}
-	
-
 }
