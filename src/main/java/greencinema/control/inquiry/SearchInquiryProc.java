@@ -29,11 +29,8 @@ public class SearchInquiryProc extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String type = request.getParameter("type");
-		System.out.println("type"+type);
 		String content = request.getParameter("content");
-		System.out.println("content"+content);
 		String chkid = (String) session.getAttribute("id");
-		System.out.println("chkid"+chkid);
 		
 		
 		
@@ -48,6 +45,9 @@ public class SearchInquiryProc extends HttpServlet {
 		int curretnPage = Integer.parseInt(pageNum); // 현재 페이지 위치
 		InquiryDAO idao = new InquiryDAO();
 		
+		System.out.println("type"+type);
+		System.out.println("content"+content);
+		System.out.println("chkid"+chkid);
 		int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
 		count = idao.sCount(chkid, type, content); // 페이지 전체수 입력
 		

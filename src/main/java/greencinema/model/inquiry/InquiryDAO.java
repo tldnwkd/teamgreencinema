@@ -246,13 +246,13 @@ public class InquiryDAO {
 			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		try { 
 			con = Util.getConnection();
-			String sql = "select * from inquiry where "+type+" and user_id=? like '%"+content+"%' limit ?,?";
+			String sql = "select * from inquiry where user_id=? and "+ type +" like '%"+content+"%' limit ?,?";
+			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, chkid);
 			pstmt.setInt(2, Startpage);
 			pstmt.setInt(3, pagesize);
 			rs = pstmt.executeQuery();
-			System.out.println(sql);
 			
 			while(rs.next()) {
 				InquiryDTO idto = new InquiryDTO();

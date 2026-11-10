@@ -4,14 +4,14 @@
     
 <section class="board-page board-page--notice is-search">
 	<h1>공지사항</h1>
-    <form action="SearchNoticeProc.do" method="post">
+    <form action="SearchNoticeProc.do" method="post" name="nform">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="notice_title"  ${type=='notice_title'?'selected':''}>제목으로 검색</option>
     		<option value="notice_text"  ${type=='notice_text'?'selected':''}>내용으로 검색</option>
     	</select> 
 		<input name="content" id="ch" type="text" onchange="change()" placeholder="검색어를 입력해주세요" value="${content }">
-    	<input type="submit" value="검색">
+    	<input type="button" value="검색" onclick="search()">
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='NoticeProc.do'">
     </form>
@@ -24,7 +24,7 @@
 				<c:choose>
 					<c:when test="${empty nList}">
 						<tr>
-							<td colspan="4" align="center"><p>검색결과가 없습니다.</p></td>
+							<td colspan="3" align="center"><p>검색결과가 없습니다.</p></td>
 						</tr>
 					</c:when>
 				<c:otherwise>
@@ -58,3 +58,15 @@
 		</c:if>
 	</div>
 	</section>
+	<script>
+	function search(){
+		let i = document.nform;
+		if(i.type.value =="선택"){
+			alert('검색 항목을 선택해주세요.');
+			i.type.focus();
+			return;
+		}else{
+			i.submit();
+		}
+		}
+	</script>

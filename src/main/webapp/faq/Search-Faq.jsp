@@ -4,14 +4,14 @@
     
 <section class="board-page board-page--faq is-search">
 	<h1>FAQ</h1>
-    <form action="SearchFaqProc.do" method="get">
+    <form action="SearchFaqProc.do" method="get" name="fform">
     	<select id="type_i" name="type">
     		<option>선택</option>
     		<option value="faq_inquery"  ${type=='faq_inquery'?'selected':''}>제목으로 검색</option>
     		<option value="faq_answer"  ${type=='faq_answer'?'selected':''}>내용으로 검색</option>
     	</select> 
 		<input name="content" id="ch" type="text" onchange="change()" placeholder="검색어를 입력해주세요" value="${content }">
-    	<input type="submit" value="검색">
+    	<input type="button" value="검색" onclick="search()">
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='FaqProc.do'">
     </form>
@@ -51,4 +51,16 @@
 		</c:if>
 	</div>
 	</section>
+		<script>
+	function search(){
+		let i = document.fform;
+		if(i.type.value =="선택"){
+			alert('검색 항목을 선택해주세요.');
+			i.type.focus();
+			return;
+		}else{
+			i.submit();
+		}
+		}
+	</script>
 	
