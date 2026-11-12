@@ -217,10 +217,27 @@ public class InquiryDAO {
 	// search count
 	public int sCount(String id, String type, String content) {
 		int count=0;
+		
+		String column = "";
+		
+		if("inquiry_title".equals(type)) {
+			column = "inquiry_title";
+		}else if("inquiry_type".equals(type)) {
+			column = "inquiry_type";
+		}else if("inquiry_Sort".equals(type)) {
+			column = "inquiry_Sort";
+		}else if("answer_status".equals(type)) {
+			column = "answer_status";
+		}else {
+		    throw new IllegalArgumentException("잘못된 검색 조건");
+		}
+		
 		try {
 			con = Util.getConnection();
-			String sql = "select count(*) from inquiry where "+type+" like '%"+content+"%' ";
+			String sql = "select count(*) from inquiry where user_id=? and "+column+" like ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, "%" + content + "%");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -244,14 +261,32 @@ public class InquiryDAO {
 	// search select add
 	public ArrayList<InquiryDTO> search(String type, String content, int Startpage, int pagesize, String chkid){
 			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
+			
+			
+			String column = "";
+			
+			if("inquiry_title".equals(type)) {
+				column = "inquiry_title";
+			}else if("inquiry_type".equals(type)) {
+				column = "inquiry_type";
+			}else if("inquiry_Sort".equals(type)) {
+				column = "inquiry_Sort";
+			}else if("answer_status".equals(type)) {
+				column = "answer_status";
+			}else {
+			    throw new IllegalArgumentException("잘못된 검색 조건");
+			}
+			
+			
 		try { 
 			con = Util.getConnection();
-			String sql = "select * from inquiry where user_id=? and "+ type +" like '%"+content+"%' limit ?,?";
+			String sql = "select * from inquiry where user_id=? and "+ column +" like ? limit ?,?";
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, chkid);
-			pstmt.setInt(2, Startpage);
-			pstmt.setInt(3, pagesize);
+			pstmt.setString(2, "%" + content + "%");
+			pstmt.setInt(3, Startpage);
+			pstmt.setInt(4, pagesize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -319,13 +354,14 @@ public class InquiryDAO {
 	}
 	
 	//�븯�굹�쓽 寃뚯떆湲� �븳�럹�씠吏��뿉 異쒕젰�븯�뒗 硫붿냼�뱶
-	public InquiryDTO getOneInquiry(int num) {
+	public InquiryDTO getOneInquiry(int num, String id) {
 			InquiryDTO i = null;
 		 try {
 			 con = Util.getConnection();
-			 String sql = "select * from inquiry where inquiry_id=?";
+			 String sql = "select * from inquiry where inquiry_id=? and user_id=?";
 			 pstmt = con.prepareStatement(sql);
 			 pstmt.setInt(1, num);
+			 pstmt.setString(2, id);
 			 rs = pstmt.executeQuery();
 			 if(rs.next()) {
 				 i = new InquiryDTO();
@@ -354,8 +390,8 @@ public class InquiryDAO {
 		 return i;
 		
 	}
-	// OneInquiryUpdate 사용 - 1:1문의 수정
-	public int getOneUpdate(String title, String content, int inquiryId) {
+	// OneInquiryInsert 사용 - 1:1문의 수정
+	public int getOneUpdate(String title, String content, int inquiryId, String id) {
 	    int result = 0;
 
 	    try {
@@ -363,12 +399,13 @@ public class InquiryDAO {
 
 	        String sql = "UPDATE inquiry "
 	                   + "SET inquiry_title=?, inquiry_content=? "
-	                   + "WHERE inquiry_id=? AND answer_status=0";
+	                   + "WHERE inquiry_id=? AND user_id = ?";
 
 	        pstmt = con.prepareStatement(sql);
 	        pstmt.setString(1, title);
 	        pstmt.setString(2, content);
 	        pstmt.setInt(3, inquiryId);
+	        pstmt.setString(4, id);
 
 	        result = pstmt.executeUpdate();
 
@@ -386,16 +423,17 @@ public class InquiryDAO {
 	    return result;
 	}
 	
-	public int OneDelete(int inquiryId) {
+	public int OneDelete(int inquiryId, String id) {
 	    int result = 0;
 
 	    try {
 	        con = Util.getConnection();
 
-	        String sql = "delete from inquiry where inquiry_id=?";
+	        String sql = "delete from inquiry where inquiry_id=? and user_id=?";
 
 	        pstmt = con.prepareStatement(sql);
 	        pstmt.setInt(1, inquiryId);
+	        pstmt.setString(2, id);
 
 	        result = pstmt.executeUpdate();
 
