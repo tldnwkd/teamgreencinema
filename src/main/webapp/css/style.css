@@ -3957,6 +3957,37 @@ a.service-card:hover {transform:translateY(-3px);box-shadow:0 14px 25px rgba(12,
   border-top: 1px solid var(--gc-border);
 }
 
+.password-block {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--gc-border);
+}
+
+.password-block__title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.password-block__help {
+  margin: 0 0 18px;
+  color: var(--gc-muted);
+  font-size: 13px;
+}
+
+.form-help.is-match {
+  color: #07813c;
+}
+
+.form-help.is-mismatch {
+  color: var(--gc-danger);
+}
+
+.profile-actions--end {
+  justify-content: flex-end;
+}
+
 .profile-actions {
   display: flex;
   flex-wrap: wrap;
