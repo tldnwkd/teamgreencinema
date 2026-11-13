@@ -11,7 +11,7 @@
     		<option value="inquiry_Sort"  ${type=='inquiry_Sort'?'selected':''}>문의분류로 검색</option>
     		<option value="inquiry_title"  ${type=='inquiry_title'?'selected':''}>제목으로 검색</option>
     	</select>
-		<input name="content" id="ch" type="text" onchange="change()" placeholder="검색어를 입력해주세요" >
+		<input name="content" id="ch" type="text" onchange="change()" placeholder="검색어를 입력해주세요" value="${content }">
     	<input type="button" value="검색" onclick="search()">
     	<input type="button" value ="전체보기" class="btn-all"
 				onclick="location.href='InquiryProc.do'">

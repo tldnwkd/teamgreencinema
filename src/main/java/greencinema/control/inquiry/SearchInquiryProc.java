@@ -56,7 +56,7 @@ public class SearchInquiryProc extends HttpServlet {
 		sList = idao.search(type, content, StartRow, pagesize, chkid);
 		
 		number = count-StartRow; //페이지당 게시글 출력 번호
-		int pageCount = 1; //페이지 개수
+		int pageCount = 0; //페이지 개수
 		int pageBlock = 3; //한 화면에 출력할 페이지 개수
 		int startpage = 1; //한 화면 시작 페이지 수
 		int endpage = 0; //마지막 페이지 수

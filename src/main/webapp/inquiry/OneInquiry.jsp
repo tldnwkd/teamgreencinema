@@ -19,6 +19,10 @@
 				<section class="inquiry-form">
 					<div class="form-grid">
 						<div class="form-group">
+							<p class="form-label">문의 회원</p>
+							<p>${idto.userId }</p>
+						</div>
+						<div class="form-group">
 							<p class="form-label">문의 분류</p>
 							<p>${idto.inquirySort }</p>
 						</div>

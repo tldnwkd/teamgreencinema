@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS user;
 
 -- 3. 테이블 생성 (FK 제외, PK 설정)
 
+
 -- 회원 (user)
 CREATE TABLE user (
     user_id VARCHAR(10) PRIMARY KEY,

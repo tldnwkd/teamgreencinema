@@ -7,10 +7,10 @@
 	<p class="admin-side__kicker">CONTROL</p>
 	<nav class="admin-nav" aria-label="관리자 메뉴">
 		<a class="${empty param.section ? 'is-active' : ''}" href="${pageContext.request.contextPath}/admin/admin-index.jsp">대시보드</a>
-		<a class="${param.section == 'admin-movie.jsp' ? 'is-active' : ''}" href="admin-index.jsp?section=admin-movie.jsp">상영작 <span class="admin-nav__count">${movieCount}</span></a>
-		<a class="${param.section == 'admin-notice.jsp' ? 'is-active' : ''}" href="admin-index.jsp?section=admin-notice.jsp">공지사항 <span class="admin-nav__count">${noticeCount}</span></a>
-		<a class="${param.section == 'admin-inquiry.jsp' ? 'is-active' : ''}" href="admin-index.jsp?section=admin-inquiry.jsp">1:1 문의 <span class="admin-nav__count">${waitingCount}</span></a>
-		<a class="${param.section == 'admin-faq.jsp' ? 'is-active' : ''}" href="admin-index.jsp?section=admin-faq.jsp">FAQ <span class="admin-nav__count">${faqCount}</span></a>
+		<a class="${param.section == 'admin-movie.jsp' ? 'is-active' : ''}" href="/greencinema/admin/admin-index.jsp?section=admin-movie.jsp">상영작 <span class="admin-nav__count">${movieCount}</span></a>
+		<a class="${param.section == 'admin-notice.jsp' ? 'is-active' : ''}" href="${pageContext.request.contextPath}/NoticeProc.do?id='${sessionScope.id }'">공지사항 <span class="admin-nav__count">${noticeCount}</span></a>
+		<a class="${param.section == 'admin-inquiry.jsp' ? 'is-active' : ''}" href="/greencinema/admin/admin-index.jsp?section=admin-inquiry.jsp">1:1 문의 <span class="admin-nav__count">${waitingCount}</span></a>
+		<a class="${param.section == 'admin-faq.jsp' ? 'is-active' : ''}" href="/greencinema/admin/admin-index.jsp?section=admin-faq.jsp">FAQ <span class="admin-nav__count">${faqCount}</span></a>
 	</nav>
 	<div class="admin-side__foot">
 		<a href="${pageContext.request.contextPath}/UserLogout.do">로그아웃</a>
