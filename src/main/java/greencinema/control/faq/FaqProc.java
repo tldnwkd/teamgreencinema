@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import greencinema.model.faq.FaqDAO;
 import greencinema.model.faq.FaqDTO;
@@ -27,7 +28,8 @@ public class FaqProc extends HttpServlet {
 	}
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		HttpSession session = request.getSession();
+		String chkId = (String)session.getAttribute("id");
 		
 		int count = 0; // 전체게시글 수
 		int pagesize = 10; // 한 화면에 그릴 페이지 수
@@ -82,10 +84,15 @@ public class FaqProc extends HttpServlet {
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("pageBlock", pageBlock);
 		
+		if("admin".equals(chkId)) {
+			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-faq.jsp");
+			rd.forward(request, response);
+		}else {
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=faq/Faq.jsp");
 		rd.forward(request, response);
-		
+		}	
 	}
 
 }
