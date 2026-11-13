@@ -10,7 +10,7 @@ public class Util {
 		Connection con = DriverManager.getConnection
 				("jdbc:mysql://localhost:3306/greencinema?serverTimezone=UTC&useSSL=false"
 				, "root"
-				, "1q2w3e4r");
+				, "1234");
 		
 		return con;		
 	}
