@@ -14,7 +14,7 @@ public class NoticeDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
-	public ArrayList<NoticeDTO> FaqAllList(int Startpage, int pagesize){
+	public ArrayList<NoticeDTO> NoticeAllList(int Startpage, int pagesize){
 		ArrayList<NoticeDTO> n = new ArrayList<NoticeDTO>();
 		 try {
 			 con = Util.getConnection();

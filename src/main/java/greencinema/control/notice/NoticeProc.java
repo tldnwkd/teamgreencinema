@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import greencinema.model.faq.FaqDAO;
 import greencinema.model.faq.FaqDTO;
@@ -28,6 +29,9 @@ public class NoticeProc extends HttpServlet {
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		String chkid = (String)session.getAttribute("id");
+		System.out.println(chkid);
 		
 		int count = 0; // 전체게시글 수
 		int pagesize = 10; // 한 화면에 그릴 페이지 수
@@ -45,7 +49,7 @@ public class NoticeProc extends HttpServlet {
 		int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
 		
 		ArrayList<NoticeDTO>  nList = new ArrayList<NoticeDTO>();
-		nList = ndao.FaqAllList(StartRow,pagesize);
+		nList = ndao.NoticeAllList(StartRow,pagesize);
 		
 		
 		number = count-StartRow; //페이지당 게시글 출력 번호
@@ -82,9 +86,15 @@ public class NoticeProc extends HttpServlet {
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("pageBlock", pageBlock);
 		
+		if("admin".equals(chkid)) {
+			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-notice.jsp");
+			rd.forward(request, response);
+		}else{
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/Notice.jsp");
+			rd.forward(request, response);
+			
+		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/Notice.jsp");
-		rd.forward(request, response);
 		
 	}
 
