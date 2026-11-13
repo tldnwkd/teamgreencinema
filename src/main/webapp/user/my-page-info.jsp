@@ -40,13 +40,12 @@
       <!-- 휴대폰 번호 -->
       <div class="form-group">
         <label for="userPhone" class="form-label">휴대폰 번호 <span class="required">*</span></label>
-        <input type="tel" id="userPhone" name="userPhone" class="form-input" 
+        <input type="text" id="userPhone" name="userPhone" class="form-input" 
                value="${userInfo.userPhone}" maxlength="15" placeholder="010-0000-0000" required>
       </div>
 
       <!-- 하단 버튼 영역 (수정 저장 / 회원 탈퇴) -->
-      <div class="profile-actions">
-        <button type="button" class="btn btn--danger-outline" onclick="confirmWithdraw();">회원 탈퇴</button>
+      <div class="profile-actions">        
         <div class="profile-actions__right">
           <button type="reset" class="btn btn--outline">초기화</button>
           <button type="submit" class="btn btn--primary">정보 수정 완료</button>
@@ -80,62 +79,24 @@
 
         <div class="profile-actions profile-actions--end">
           <button type="submit" class="btn btn--primary">비밀번호 변경</button>
+          <button type="button" class="btn btn--danger-outline" onclick="userDelete();">회원 탈퇴</button>
         </div>
       </form>
     </div>
 
     <!-- 회원 탈퇴 처리용 히든 폼 (user_delete = 1 소프트 삭제 요청용) -->
-    <form id="userWithdrawForm" action="${pageContext.request.contextPath}/userDeleteProc.do" method="post">
+    <form id="userWithdrawForm" action="${pageContext.request.contextPath}/UserDeleteProc.do" method="post" name="userDeleteForm">
       <input type="hidden" name="userId" value="${userInfo.userId}">
+      <input type="hidden" name="userPw" value="${userInfo.userPw }">
       <input type="hidden" name="userDelete" value="1">
     </form>
   </div>
 </section>
-
 <script>
-(function () {
-  var form = document.getElementById("userPwForm");
-  if (!form) return;
+	function userDelete() {
+		let userDeleteForm = document.userDeleteForm;		
+		userDeleteForm.submit();		
+	}
 
-  var currentPw = document.getElementById("currentPw");
-  var userPw = document.getElementById("userPw");
-  var userPwChk = document.getElementById("userPwChk");
-  var msg = document.getElementById("pwMatchMsg");
 
-  function setMsg(text, state) {
-    msg.textContent = text;
-    msg.className = "form-help" + (state ? " is-" + state : "");
-  }
-
-  function updateMatch() {
-    if (!userPw.value && !userPwChk.value) {
-      setMsg("", "");
-      return;
-    }
-    if (userPw.value && userPwChk.value && userPw.value === userPwChk.value) {
-      setMsg("비밀번호가 일치합니다.", "match");
-      return;
-    }
-    if (userPwChk.value) {
-      setMsg("비밀번호가 일치하지 않습니다.", "mismatch");
-      return;
-    }
-    setMsg("", "");
-  }
-
-  userPw.addEventListener("input", updateMatch);
-  userPwChk.addEventListener("input", updateMatch);
-
-  form.addEventListener("submit", function (event) {
-    if (!currentPw.value || !userPw.value || !userPwChk.value) {
-      event.preventDefault();
-      setMsg("비밀번호를 모두 입력해 주세요.", "mismatch");
-      return;
-    }
-    if (userPw.value !== userPwChk.value) {
-      event.preventDefault();
-      setMsg("비밀번호가 일치하지 않습니다.", "mismatch");
-    }
-  });
-})();
 </script>

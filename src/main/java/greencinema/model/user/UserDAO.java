@@ -242,7 +242,7 @@ public class UserDAO {
 		UserDTO userDto = new UserDTO();
 		try {
 			con = Util.getConnection();
-			String sql = "SELECT * FROM USER WHERE user_id = ?";						
+			String sql = "SELECT * FROM user WHERE user_id = ?";						
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, userId);
@@ -274,7 +274,7 @@ public class UserDAO {
 	
 	public MyPageDTO getMyPage(String id) {
 		MyPageDTO mydto = new MyPageDTO();
-		
+		System.out.println("getMyPage id : " + id);
 		try {
 			con = Util.getConnection();
 			String sql = "SELECT\r\n"		
@@ -348,5 +348,94 @@ public class UserDAO {
 		return mydto;		
 	}
 	
+	public void updateUser(UserDTO udto, String id) {
+		System.out.println("udto userName : " + udto.getUserName());
+		try {
+			con = Util.getConnection();
+			String sql = "UPDATE user SET user_name = ?, user_birth = ?, user_email=?, user_phone = ? where user_id = ? ";						
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, udto.getUserName());
+			pstmt.setString(2, udto.getUserBirth());
+			pstmt.setString(3, udto.getUserEmail());
+			pstmt.setString(4, udto.getUserPhone());
+			pstmt.setString(5, id);			
+			
+			pstmt.executeUpdate();	
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public boolean userCheck(String id, String pass) {
+		boolean isCheck = false;
+		
+		try {
+			con = Util.getConnection();
+			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ?";						
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, pass);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isCheck = true;
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return isCheck;
+	}
+	
+	public int deleteUser(String id, String pass) {
+		boolean isCheck = userCheck(id, pass);
+		int result = 0;
+		if(isCheck) {
+			try {
+				con = Util.getConnection();
+				String sql = "UPDATE user SET user_delete=1 where user_id=?";						
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, id);
+				
+				result = pstmt.executeUpdate();
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(con != null) con.close();
+					if(rs != null) rs.close();
+					if(pstmt != null) pstmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}		
+		
+		}
+		return result;
+	}
 	
 }
