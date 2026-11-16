@@ -37,6 +37,13 @@ public class InquiryInsertProc extends HttpServlet {
 		System.out.println(chkid);
 		System.out.println("zz:" + type);
 		InquiryDTO idto = new InquiryDTO();
+		
+		if("admin".equals(chkid)) {
+			
+		}
+		
+		
+		
 		if (type.equals("inq")) {
 			idto.setUserId(chkid);
 			idto.setInquirySort(request.getParameter("inquirySort"));

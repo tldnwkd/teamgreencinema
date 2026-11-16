@@ -7,6 +7,8 @@
    ===================================================================== */
 
 /* 01. Design tokens */
+
+
 :root {
   --gc-primary: #03c75a;
   --gc-primary-hover: #02ad4f;
@@ -34,6 +36,56 @@
   --gc-shadow-md: 0 12px 32px rgb(17 21 26 / 9%);
   --gc-container: 1200px;
   --gc-ease: 180ms ease;
+}
+
+/* 고객센터 드롭다운 */
+.main-nav .nav-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav .nav-dropdown__title {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.main-nav .nav-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    z-index: 9999;
+}
+
+.main-nav .nav-dropdown__menu a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 8px;
+}
+
+.main-nav .nav-dropdown__menu a:hover {
+    background: #eef7f0;
+    color: #238b45;
+}
+
+.main-nav .nav-dropdown:hover .nav-dropdown__menu,
+.main-nav .nav-dropdown:focus-within .nav-dropdown__menu {
+    display: block;
 }
 
 /* 02. Reset / global */
@@ -4029,4 +4081,3 @@ a.service-card:hover {transform:translateY(-3px);box-shadow:0 14px 25px rgba(12,
     grid-template-columns: 1fr;
   }
 }
-

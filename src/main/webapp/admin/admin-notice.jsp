@@ -17,16 +17,18 @@
     </form>
 		<table border="1">
 			<tr>
+				<th>글번호</th>
 				<th>질문</th>
 				<th>게시일</th>
 				<th>조회수</th>
 			</tr>
 				<c:forEach var= "nList" items="${nList}">
 						<tr>
+							<td>${nList.noticeId }</td>
 							<td>
 								<a href="OneNoticeProc.do?notice_Id=${nList.noticeId}">${nList.noticeTitle }</a>
 							</td>
-								<td>${nList.noticeDate }</td>
+							<td>${nList.noticeDate }</td>
 							<td align="center">${nList.noticeHits }</td>
 						</tr>
 				</c:forEach>
