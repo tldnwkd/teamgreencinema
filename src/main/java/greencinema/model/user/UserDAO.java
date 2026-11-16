@@ -71,8 +71,8 @@ public class UserDAO {
 	}
 	
 	
-	public String loginCheck(String userId, String userPw) {
-		String id = "";
+	public boolean loginCheck(String userId, String userPw) {
+		boolean isCheck = false;
 		try {
 			con = Util.getConnection();
 			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ?";
@@ -82,7 +82,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				id = userId;
+				isCheck = true;
 			}
 			
 		}catch (Exception e) {
@@ -97,7 +97,37 @@ public class UserDAO {
 			}
 		}
 		
-		return userId;
+		return isCheck;
+	}
+	
+	
+	public boolean adminCheck(String userId, String userPw) {
+		boolean isCheck = false;
+		try {
+			con = Util.getConnection();
+			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPw);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next() && userId.equals("admin")) {
+				isCheck = true;
+			}
+			
+		}catch (Exception e) {
+			
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return isCheck;
 	}
 	
 	public boolean updatePassword(String userId, String userPw) {
