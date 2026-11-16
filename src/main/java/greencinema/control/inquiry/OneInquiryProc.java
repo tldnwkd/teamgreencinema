@@ -45,7 +45,7 @@ public class OneInquiryProc extends HttpServlet {
 			InquiryDTO idto = idao.AdmingetOneInquiry(inquiryId);
 			
 			request.setAttribute("idto", idto);
-			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-Inquiry-Insert.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/admin/admin-index.jsp?section=Admin-Inquiry-Insert.jsp");
 			rd.forward(request, response);
 			
 		}else {

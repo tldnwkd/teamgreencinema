@@ -33,6 +33,76 @@ public class SearchInquiryProc extends HttpServlet {
 		String chkid = (String) session.getAttribute("id");
 		
 		
+		if("admin".equals(chkid)) {
+			
+			int count = 0; // 전체게시글 수
+			int pagesize = 5; // 한 화면에 그릴 페이지 수
+			String pageNum = request.getParameter("pageNum");//화면에서 넘겨받을 pageNum값
+			if(pageNum == null) { // 페이지 선택 안했을 경우 자동으로 1번 페이지 선택
+				pageNum = "1";
+			}
+			
+			int number = 0; 
+			int curretnPage = Integer.parseInt(pageNum); // 현재 페이지 위치
+			InquiryDAO idao = new InquiryDAO();
+			
+			System.out.println("type"+type);
+			System.out.println("content"+content);
+			System.out.println("chkid"+chkid);
+			int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
+			count = idao.sCount(chkid, type, content); // 페이지 전체수 입력
+			
+			
+			ArrayList<InquiryDTO> sList = new ArrayList<InquiryDTO>();
+			sList = idao.search(type, content, StartRow, pagesize, chkid);
+			
+			number = count-StartRow; //페이지당 게시글 출력 번호
+			int pageCount = 0; //페이지 개수
+			int pageBlock = 3; //한 화면에 출력할 페이지 개수
+			int startpage = 1; //한 화면 시작 페이지 수
+			int endpage = 0; //마지막 페이지 수
+			
+			if(count > 0) {
+				
+				pageCount = count/pagesize + (count % pagesize == 0 ? 0:1);
+				
+				if(curretnPage % pageBlock != 0) {
+					startpage = (curretnPage / pageBlock)*pageBlock+1;
+				}else {
+					startpage = ((curretnPage/ pageBlock)-1)*pageBlock+1;
+				}
+				
+				endpage = startpage + pageBlock -1;
+				
+				if(endpage > pageCount) {
+					endpage = pageCount;
+				}
+				
+			}
+			System.out.println("pageCount:"+ pageCount);
+			request.setAttribute("sList", sList);
+			request.setAttribute("type", type);
+			request.setAttribute("content", content);
+			
+			request.setAttribute("StartRow", StartRow);
+			request.setAttribute("pageCount", pageCount);
+			request.setAttribute("pagesize", pagesize);
+			request.setAttribute("count", count);
+			request.setAttribute("number", number);
+			request.setAttribute("startpage", startpage);
+			request.setAttribute("endpage", endpage);
+			request.setAttribute("pageBlock", pageBlock);
+			
+			
+			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=inquiry/Search-List.jsp");
+			rd.forward(request, response);
+			
+			
+		}
+		
+		
 		
 		int count = 0; // 전체게시글 수
 		int pagesize = 5; // 한 화면에 그릴 페이지 수

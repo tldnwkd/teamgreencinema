@@ -14,6 +14,11 @@ public class FaqDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 	
+	//faq 페이징
+	public void paging() {
+		
+	}
+	
 	
 	// faq 리스트 select
 	public ArrayList<FaqDTO> FaqAllList(int StartRow, int pageSize){

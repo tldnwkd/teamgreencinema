@@ -491,8 +491,28 @@ public class InquiryDAO {
 }
 	// admin 답변 insert dao
 	public int AdminInquiryInsert(int num ,String content) {
+		int result = 0;
+		 try {
+			 con = Util.getConnection();
+			 String sql = "update inquiry set answer_status=1, answer_content=? where inquiry_id=?";
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setString(1, content);
+			 pstmt.setInt(2, num);
+			 result = pstmt.executeUpdate();
+			 
+			 
+		 }catch(Exception e) {e.printStackTrace();}finally {
+			 try {if(rs != null)rs.close();
+			 if(pstmt != null)pstmt.close();
+			 if(con != null)con.close();
+
+			 }catch(Exception e) {
+			 e.printStackTrace();
+			 
+			 }
+			 }
 		
-		return 0;
+		return result;
 	}
 	
 	}

@@ -10,11 +10,6 @@
 					<h1 class="page-heading__title">1:1 문의</h1>
 					<p class="page-heading__description">회원 전용 1:1 문의 작성 화면입니다.</p>
 				</div>
-				<nav class="cs-tabs" aria-label="고객센터 메뉴">
-					<a href="NoticeProc.do">공지사항</a>
-					<a href="FaqProc.do">FAQ</a>
-					<a href="InquiryProc.do" aria-current="page">1:1 문의</a>
-				</nav>
 
 				<section class="inquiry-form">
 					<div class="form-grid">
@@ -41,13 +36,13 @@
 						</div>
 						<div class="form-group form-group--full">
 								<p class="form-label">답변 내용</p>
-								<textarea id="answerText" class="form-control" name="answerContent" >${idto.answerContent}</textarea>
+								<textarea id="answerText" class="form-control" name="answerContent" ${idto.answerStatus==1?'readonly':''}>${idto.answerContent}</textarea>
 							</div>
 					</div>
 					<div class="form-actions">
 						<input type="hidden" name="id" value="${sessionScope.id }">
 						<input type="hidden" name="inquiryId" value="${idto.inquiryId}">
-						<a href="InquiryProc.do" class="btn btn--outline">내 문의내역보기</a>
+						<a href="InquiryProc.do" class="btn btn--outline">전체 문의내역보기</a>
 						<button name="btn" type="submit" class="btn btn--primary" value="updOk" onclick="return confirm('답변을 완료하시겠습니까?');" >답변</button>
 					</div>
 				</section>

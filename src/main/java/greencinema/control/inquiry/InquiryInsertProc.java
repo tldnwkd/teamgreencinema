@@ -1,6 +1,7 @@
 package greencinema.control.inquiry;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,8 +38,26 @@ public class InquiryInsertProc extends HttpServlet {
 		System.out.println(chkid);
 		System.out.println("zz:" + type);
 		InquiryDTO idto = new InquiryDTO();
+		InquiryDAO idao = new InquiryDAO();
 		
 		if("admin".equals(chkid)) {
+			int inquiryId = Integer.parseInt(request.getParameter("inquiryId"));
+			String answerContent = request.getParameter("answerContent");
+			
+			
+			int result = idao.AdminInquiryInsert(inquiryId, answerContent);
+			
+			if(result > 0 ) {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('답변이 완료되었습니다.')");
+				out.println("location.href='OneInquiryProc.do?inquiryId="+inquiryId+"';");
+				out.println("</script>");
+				out.flush();
+				return;
+				
+			}
 			
 		}
 		
@@ -52,7 +71,6 @@ public class InquiryInsertProc extends HttpServlet {
 			idto.setInquiryContent(request.getParameter("inquiryContent"));// �߸���
 			idto.setReceptionType(Integer.parseInt(request.getParameter("receptionType")));
 
-			InquiryDAO idao = new InquiryDAO();
 			boolean result = idao.insert(idto);
 			System.out.println(result);
 
@@ -60,7 +78,6 @@ public class InquiryInsertProc extends HttpServlet {
 				response.sendRedirect("InquiryProc.do");
 			}
 		} else if (type.equals("updOk")) {
-			InquiryDAO idao = new InquiryDAO();
 			int inquiryId = Integer.parseInt(request.getParameter("inquiryId"));
 			int result = idao.getOneUpdate(title, content, inquiryId, chkid);
 			System.out.println(result);
