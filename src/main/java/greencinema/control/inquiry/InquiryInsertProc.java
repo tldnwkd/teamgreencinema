@@ -42,24 +42,23 @@ public class InquiryInsertProc extends HttpServlet {
 			idto.setInquirySort(request.getParameter("inquirySort"));
 			idto.setInquiryType(request.getParameter("inquiryType"));
 			idto.setInquiryTitle(request.getParameter("inquiryTitle"));
-			idto.setInquiryContent(request.getParameter("inquiryContent"));// Àß¸øµÊ
+			idto.setInquiryContent(request.getParameter("inquiryContent"));// ï¿½ß¸ï¿½ï¿½ï¿½
 			idto.setReceptionType(Integer.parseInt(request.getParameter("receptionType")));
 
 			InquiryDAO idao = new InquiryDAO();
 			boolean result = idao.insert(idto);
 			System.out.println(result);
 
-			RequestDispatcher rd = request.getRequestDispatcher("InquiryProc.do");
-			rd.forward(request, response);
+			if (result) {
+				response.sendRedirect("InquiryProc.do");
+			}
 		} else if (type.equals("updOk")) {
 			InquiryDAO idao = new InquiryDAO();
 			int inquiryId = Integer.parseInt(request.getParameter("inquiryId"));
-			int result = idao.getOneUpdate(title, content, inquiryId);
+			int result = idao.getOneUpdate(title, content, inquiryId, chkid);
 			System.out.println(result);
 			if (result > 0) {
-				request.setAttribute("inquiryId", inquiryId);
-				RequestDispatcher rd = request.getRequestDispatcher("OneInquiryProc.do");
-				rd.forward(request, response);
+				response.sendRedirect("OneInquiryProc.do?inquiryId=" + inquiryId);
 			}
 
 		}

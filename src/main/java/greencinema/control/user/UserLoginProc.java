@@ -46,6 +46,8 @@ public class UserLoginProc extends HttpServlet {
 		}
 		
 		if(userId.equals("admin")) {
+			HttpSession session = request.getSession();
+			session.setAttribute("id", "admin");	
 			targetUri = "/admin/admin-index.jsp";
 		}
 		

@@ -14,7 +14,7 @@ public class NoticeDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
-	public ArrayList<NoticeDTO> FaqAllList(int Startpage, int pagesize){
+	public ArrayList<NoticeDTO> NoticeAllList(int Startpage, int pagesize){
 		ArrayList<NoticeDTO> n = new ArrayList<NoticeDTO>();
 		 try {
 			 con = Util.getConnection();
@@ -48,7 +48,7 @@ public class NoticeDAO {
 			 }
 		 return n;
 	}
-	// faq list count
+	// Notice list count
 	public int NoticeAllCount() {
 		int count=0;
 		try {
@@ -143,6 +143,16 @@ public class NoticeDAO {
 		NoticeDTO n = new NoticeDTO();
 		 try {
 			 con = Util.getConnection();
+			 
+			 
+			 
+			 String sql2 = "update Notice set notice_hits= notice_hits+1 where notice_id = ?";
+			 pstmt = con.prepareStatement(sql2);
+			 pstmt.setInt(1, notice_Id);
+			 pstmt.executeUpdate();
+			 
+			 pstmt.close();
+			 
 			 String sql = "select * from notice where notice_id = ?";
 			 pstmt = con.prepareStatement(sql);
 			 pstmt.setInt(1, notice_Id);
@@ -157,7 +167,6 @@ public class NoticeDAO {
 				 
 				 
 			 }
-			 
 			 
 		 }catch(Exception e) {e.printStackTrace();}finally {
 			 try {if(rs != null)rs.close();
