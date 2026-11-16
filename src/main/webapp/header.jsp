@@ -10,11 +10,10 @@
 				<nav class="main-nav" aria-label="주 메뉴">
 					<a href="MovieListProc.do" aria-current="page">영화</a>
 					<a href="selectMovieReserveProc.do">예매</a>
-					<a href="index.jsp?section=theater/theater.jsp">극장</a>
 					<div class="nav-dropdown">
 					    <button type="button" class="nav-dropdown__title">고객센터</button>
 					    <div class="nav-dropdown__menu">
-					        <a href="index.jsp?section=inquiry/Inquiry.jsp">1:1 문의</a>
+					        <a href="InquiryLoginchkProc.do">1:1 문의</a>
 					        <a href="FaqProc.do">FAQ</a>
 					        <a href="NoticeProc.do">공지사항</a>
 					    </div>

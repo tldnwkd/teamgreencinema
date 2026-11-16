@@ -37,10 +37,9 @@
                   <div class="reservation-card__actions">
                     <span class="status-badge ${myPage.paymentStatus eq '취소됨' ? 'status-badge--cancelled' : 'status-badge--success'}">${myPage.paymentStatus }</span>
                     <c:if test="${myPage.paymentStatus ne '취소됨'}">
-                      <span class="form-help">
-                        <a href="ReserveCancel.do?reserveId=${myPage.reserveId}"
-                           onclick="return confirm('이 예매를 취소하시겠습니까?');">취소</a>
-                      </span>
+                      <!-- 💡 쌩글씨 대신 예쁜 레드 테두리 버튼 클래스(btn-cancel-action) 적용 -->
+                      <a href="ReserveCancel.do?reserveId=${myPage.reserveId}" class="btn-cancel-action"
+                         onclick="return confirm('이 예매를 취소하시겠습니까?');">예매 취소</a>
                     </c:if>
                   </div>
                 </article>
@@ -83,11 +82,11 @@
                             <span class="status-badge ${inquiry.answerStatus == 0 ? 'status-badge--pending' : 'status-badge--success'}">
                               ${inquiry.answerStatus == 0 ? "답변대기" : "답변완료" }
                             </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 </c:otherwise>
               </c:choose>
             </section>

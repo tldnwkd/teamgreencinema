@@ -4100,3 +4100,43 @@ a.service-card:hover {transform:translateY(-3px);box-shadow:0 14px 25px rgba(12,
     grid-template-columns: 1fr;
   }
 }
+
+.btn-cancel-action {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ff4757;
+    background-color: #fff;
+    border: 1px solid #dce7e5;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    margin-top: 8px;
+    height: 25px;
+    line-height: 12.5px;
+}
+
+.btn-cancel-action:hover {
+    background-color: #ff4757;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(255, 71, 87, 0.3);
+}
+
+/* 💡 연령 등급별 뱃지 스타일 */
+.badge-rate {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #fff;
+}
+.badge-rate.green { background-color: #03c75a; }   /* ALL */
+.badge-rate.yellow { background-color: #ffc107; color: #222; } /* 12세 */
+.badge-rate.orange { background-color: #ff9800; } /* 15세 */
+.badge-rate.red { background-color: #e50914; }     /* 19세 */

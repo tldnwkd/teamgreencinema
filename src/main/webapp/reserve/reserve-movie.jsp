@@ -22,18 +22,14 @@
 			<li class="booking-step"><span class="step-num">04</span> 예매 완료</li>
 		</ol>
 
-		<!-- 전체 레이아웃: 좌측 메인, 우측 컴팩트 요약 사이드바 -->
 		<div class="booking-layout">
 
-			<!-- [좌측 영역] 극장 선택 및 달력/상영시간표 -->
 			<div class="booking-main">
-				<!-- 01 극장 선택 (지역 대분류 / 소분류 / 영화) -->
 				<section class="booking-panel">
 					<h2 class="booking-panel__title">
 						<span class="number-kicker">01</span> 극장 및 영화 선택
 					</h2>
 					<div class="theater-selection-layout">
-						<!-- 지역 대분류 -->
 						<div class="region-major-group">
 							<c:forEach items="${rjlist}" var="theater" begin="0">
 								<a
@@ -42,7 +38,6 @@
 									${theater.largeRegion } </a>
 							</c:forEach>
 						</div>
-						<!-- 지역 소분류 및 극장 -->
 						<div class="region-minor-group">
 							<c:if test="${not empty rjlist02}">
 								<c:forEach items="${rjlist02}" var="smallTheater" begin="0">
@@ -53,7 +48,6 @@
 								</c:forEach>
 							</c:if>
 						</div>
-						<!-- 영화 선택 리스트 -->
 						<div class="movie-select-group">
 							<c:choose>
 								<c:when test="${not empty rjlist04}">
@@ -82,21 +76,18 @@
 					</div>
 				</section>
 
-				<!-- 02 영화 및 상영일 선택 (달력 + 상영 시간표 좌우 2분할 배치) -->
 				<section class="booking-panel">
 					<h2 class="booking-panel__title">
 						<span class="number-kicker">02</span> 상영일 및 상영시간 선택
 					</h2>
 
 					<div class="date-time-flex-container">
-						<!-- [좌측] 날짜 선택 (달력) -->
 						<div class="date-select-group">
 							<div id="date-wrap">
 								<button id="previousButton" onclick="previousButton()">&lt;</button>
 								<div id="main_date"></div>
 								<button id="nextButton" onclick="nextButton()">&gt;</button>
 							</div>
-							<!-- 달력 테이블 -->
 							<div id="displayTable"></div>
 
 							<script>
@@ -223,8 +214,6 @@
 						</script>
 						</div>
 
-						<!-- [우측] 상영 시간표 영역 -->
-						<!-- [우측] 상영 시간표 영역 -->
 						<div id="schedule-area" class="schedule-output-area">
 							<h3>상영 시간표</h3>
 							<c:choose>
@@ -234,9 +223,8 @@
 											<a
 												href="selectMovieReserveProc.do?large_region=${param.large_region}&movieId=${rjdto.movieId}&smallRegion=${param.smallRegion}&selectedDate=${param.selectedDate}&scheduleSTime=${schedule.scheduleStarttime}&scheduleETime=${schedule.scheduleEndtime}&screenId=${schedule.screenId}&scheduleId=${schedule.scheduleId}#schedule-area"
 												class="schedule-card ${param.scheduleId eq schedule.scheduleId ? 'is-selected' : ''}">
-												<!-- 상영 시작 시간 --> <span class="schedule-time-text">${fn:substring(schedule.scheduleStarttime, 11, 16)}</span>
-												<!-- 잔여좌석 / 총좌석 · 상영관 번호 --> <span
-												class="schedule-info-text">${schedule.remainSeat}/${schedule.totalSeat}석
+												<span class="schedule-time-text">${fn:substring(schedule.scheduleStarttime, 11, 16)}</span>
+												<span class="schedule-info-text">${schedule.remainSeat}/${schedule.totalSeat}석
 													· ${schedule.screenNum}관</span>
 											</a>
 										</c:forEach>
@@ -253,7 +241,6 @@
 				</section>
 			</div>
 
-			<!-- [우측 영역] 예매 정보 요약 -->
 			<aside class="booking-summary">
 				<div class="summary-kicker">TICKET BOOKING</div>
 				<h2 class="booking-summary__title">예매 정보</h2>
@@ -311,7 +298,7 @@
 				<c:choose>
 					<c:when
 						test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">
-						<p class="summary-footnote02">선택이 완료되었습니다<br/>다음 단계로 이동하세요.</p>
+						<p class="summary-footnote02">선택이 완료되었습니다<br/> 다음 단계로 이동하세요.</p>
 					</c:when>
 					<c:otherwise>
 						<p class="summary-footnote">모든 항목을 선택한 후 다음 단계로 이동하세요.</p>
@@ -322,11 +309,12 @@
 					<c:when
 						test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">
 						<a class="btn btn--primary btn--block btn--large" id="seatMoveBtn"
-							href="selectSeatReserveProc.do?movieId=${rjdto.movieId}&smallRegion=${param.smallRegion}&selectedDate=${param.selectedDate}&scheduleSTime=${param.scheduleSTime}&scheduleETime=${param.scheduleETime}&screenId=${param.screenId}&large_region=${param.large_region}&scheduleId=${param.scheduleId}">인원·좌석
-							선택 ↗ </a>
+							href="selectSeatReserveProc.do?movieId=${rjdto.movieId}&smallRegion=${param.smallRegion}&selectedDate=${param.selectedDate}&scheduleSTime=${param.scheduleSTime}&scheduleETime=${param.scheduleETime}&screenId=${param.screenId}&large_region=${param.large_region}&scheduleId=${param.scheduleId}"
+							style="background-color: #03c75a; color: #fff; cursor: pointer;">인원·좌석 선택 ↗ </a>
 					</c:when>
 					<c:otherwise>
-						<p class="btn btn--primary btn--block btn--large02">인원·좌석 선택 ↗</p>
+						<a class="btn btn--primary btn--block btn--large" id="seatMoveBtn" href="javascript:void(0);" onclick="checkIncompleteSelection()"
+							style="background-color: #cccccc; color: #666666; cursor: pointer;">인원·좌석 선택 ↗</a>
 					</c:otherwise>
 				</c:choose>
 			</aside>
@@ -334,3 +322,27 @@
 		</div>
 	</div>
 </div>
+
+<script>
+function checkIncompleteSelection() {
+    let largeRegion = "${param.large_region}";
+    let smallRegion = "${param.smallRegion}";
+    let movieId = "${rjdto.movieId}";
+    let selectedDate = "${param.selectedDate}";
+    let scheduleSTime = "${param.scheduleSTime}";
+
+    if (!largeRegion || largeRegion === "") {
+        alert("지역 대분류를 선택해주세요.");
+    } else if (!smallRegion || smallRegion === "") {
+        alert("극장을 선택해주세요.");
+    } else if (!movieId || movieId === "") {
+        alert("관람할 영화를 선택해주세요.");
+    } else if (!selectedDate || selectedDate === "") {
+        alert("상영일(날짜)을 선택해주세요.");
+    } else if (!scheduleSTime || scheduleSTime === "") {
+        alert("상영 시간표를 선택해주세요.");
+    } else {
+        alert("모든 항목을 선택해주세요.");
+    }
+}
+</script>

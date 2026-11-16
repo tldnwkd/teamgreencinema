@@ -91,8 +91,7 @@ public class NoticeProc extends HttpServlet {
 			rd.forward(request, response);
 		}else{
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/Notice.jsp");
-			rd.forward(request, response);
-			
+			rd.forward(request, response);			
 		}
 		
 		
