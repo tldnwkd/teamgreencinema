@@ -1013,3 +1013,54 @@ INSERT INTO inquiry (inquiry_id, user_id, inquiry_sort, inquiry_type, inquiry_ti
 (NULL, 'user15', '영화관', '불만', '관람 중 휴대폰 불빛 제지 요청', '상영 중 밝기를 최대로 하고 메신저를 하는 관객 때문에 너무 불편했습니다.', 1, 0, NULL, '2026-11-08 21:40:00'),
 (NULL, 'user18', '이벤트', '건의', '재개봉 명작 기획전 요청', '타짜처럼 예전 명작 한국 영화들을 리마스터링해서 자주 상영해 주세요.', 2, 1, '소중한 건의 감사합니다. 매월 시그니처 재개봉 기획전을 확대 운영할 예정입니다.', '2026-11-09 16:05:00'),
 (NULL, 'user20', '영화관', '문의', '제주연동점 주차장 만차 시 안내', '주말에 제주연동점 방문 예정인데 주차장이 만차면 근처 제휴 주차장이 있나요?', 1, 0, NULL, '2026-11-10 10:30:00');
+
+-- 간단 버전
+
+USE greencinema;
+
+-- 1. 기존 프로시저 및 이벤트 초기화
+DROP PROCEDURE IF EXISTS KeepScheduleFresh;
+DROP EVENT IF EXISTS evt_keep_schedule_fresh;
+
+-- 2. 프로시저 생성 (워크벤치용 DELIMITER 적용)
+DELIMITER $$
+
+CREATE PROCEDURE KeepScheduleFresh()
+BEGIN
+    DECLARE v_min_date DATE;
+    DECLARE v_diff_days INT;
+
+    SELECT DATE(MIN(schedule_starttime)) INTO v_min_date FROM schedule;
+
+    IF v_min_date IS NOT NULL AND v_min_date < CURDATE() THEN
+        SET v_diff_days = DATEDIFF(CURDATE(), v_min_date);
+
+        SET SQL_SAFE_UPDATES = 0;
+
+        UPDATE schedule
+        SET schedule_starttime = DATE_ADD(schedule_starttime, INTERVAL v_diff_days DAY),
+            schedule_endtime   = DATE_ADD(schedule_endtime, INTERVAL v_diff_days DAY)
+        WHERE schedule_id > 0;
+
+        SET SQL_SAFE_UPDATES = 1;
+    END IF;
+END $$
+
+DELIMITER ;
+
+-- 3. 1시간마다 자동 갱신되는 이벤트 등록
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT evt_keep_schedule_fresh
+ON SCHEDULE EVERY 1 HOUR
+STARTS CURRENT_TIMESTAMP
+DO
+    CALL KeepScheduleFresh();
+
+-- 4. 지금 즉시 실행해서 오늘 날짜로 업데이트
+CALL KeepScheduleFresh();
+
+-- 5. 최종 확인 (하단 Result Grid 창에서 탭별로 확인 가능)
+SHOW PROCEDURE STATUS WHERE Db = 'greencinema';
+SHOW EVENTS FROM greencinema;
+SELECT MIN(schedule_starttime) AS '시작일', MAX(schedule_starttime) AS '종료일', COUNT(*) AS '총개수' FROM schedule;

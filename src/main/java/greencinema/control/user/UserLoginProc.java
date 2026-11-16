@@ -32,7 +32,7 @@ public class UserLoginProc extends HttpServlet {
 		String userPw = request.getParameter("userPw");
 		
 		UserDAO udao = new UserDAO();
-		isSuccess = udao.loginCheck(userId, userPw);
+		String idCheck = udao.loginCheck(userId, userPw);
 		String targetUri = "";
 		
 		
@@ -45,7 +45,7 @@ public class UserLoginProc extends HttpServlet {
 			request.setAttribute("msg", "아이디 혹은 비밀번호가 맞지 않습니다.");
 		}
 		
-		if(userId.equals("admin")) {
+		if(idCheck.equals("admin")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", "admin");	
 			targetUri = "/admin/admin-index.jsp";

@@ -71,8 +71,8 @@ public class UserDAO {
 	}
 	
 	
-	public boolean loginCheck(String userId, String userPw) {
-		boolean isLogin = false;
+	public String loginCheck(String userId, String userPw) {
+		String id = "";
 		try {
 			con = Util.getConnection();
 			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ?";
@@ -82,7 +82,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				isLogin = true;
+				id = userId;
 			}
 			
 		}catch (Exception e) {
@@ -97,9 +97,9 @@ public class UserDAO {
 			}
 		}
 		
-		return isLogin;
+		return userId;
 	}
-
+	
 	public boolean updatePassword(String userId, String userPw) {
 		boolean updated = false;
 		try {
