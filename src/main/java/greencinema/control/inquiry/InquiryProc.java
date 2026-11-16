@@ -158,7 +158,7 @@ public class InquiryProc extends HttpServlet {
 			request.setAttribute("endpage", endpage);
 			request.setAttribute("pageBlock", pageBlock);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/admin/admin-index.jsp?section=admin-inquiry.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-inquiry.jsp");
 			rd.forward(request, response);
 		}
 

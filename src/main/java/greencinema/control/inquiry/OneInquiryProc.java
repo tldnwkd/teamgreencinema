@@ -39,6 +39,19 @@ public class OneInquiryProc extends HttpServlet {
 		}
 		
 		
+		if("admin".equals(chkId)) {
+			
+			
+			InquiryDTO idto = idao.AdmingetOneInquiry(inquiryId);
+			
+			request.setAttribute("idto", idto);
+			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-Inquiry-Insert.jsp");
+			rd.forward(request, response);
+			
+		}else {
+		
+		
+		
 		if(type.equals("del")) {
 			int result = idao.OneDelete(inquiryId, chkId);
 			if(result > 0) {
@@ -64,6 +77,7 @@ public class OneInquiryProc extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=inquiry/OneInquiry.jsp");
 			rd.forward(request, response);
 			
+			}
 		}
 		
 	}
