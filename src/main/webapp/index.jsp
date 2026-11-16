@@ -17,7 +17,7 @@
 	
 		String section = request.getParameter("section");				
 		if(section == null || section.trim().isEmpty()){			
-	        request.getRequestDispatcher("MovieListProc.do").forward(request, response);
+	        request.getRequestDispatcher("IndexListProc.do").forward(request, response);
 	        return;
 	    }	
 	%>
