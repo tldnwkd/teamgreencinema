@@ -311,7 +311,7 @@
 				<c:choose>
 					<c:when
 						test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">
-						<p class="summary-footnote02">선택이 완료되었습니다 다음 단계로 이동하세요.</p>
+						<p class="summary-footnote02">선택이 완료되었습니다<br/>다음 단계로 이동하세요.</p>
 					</c:when>
 					<c:otherwise>
 						<p class="summary-footnote">모든 항목을 선택한 후 다음 단계로 이동하세요.</p>

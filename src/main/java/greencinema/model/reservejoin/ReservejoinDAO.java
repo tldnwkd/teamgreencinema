@@ -11,7 +11,6 @@ public class ReservejoinDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
-	// 자원 반납 메서드
 	public void closeAll() {
 		try {
 			if (rs != null) rs.close();
@@ -22,7 +21,6 @@ public class ReservejoinDAO {
 		}
 	}
 
-	// 하나의 영화 Select 하는 메소드
 	public ReservejoinDTO getOneMovieList(String id) {
 		ReservejoinDTO rjdto = new ReservejoinDTO();
 		try {
@@ -48,7 +46,6 @@ public class ReservejoinDAO {
 		return rjdto;
 	}
 
-	// 지역 대분류 select하는 메소드
 	public ArrayList<ReservejoinDTO> getAllLargeTheater () {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    try {
@@ -70,7 +67,6 @@ public class ReservejoinDAO {
 	    return list;        
 	}
 	
-	// 지역 소분류 select하는 메소드
 	public ArrayList<ReservejoinDTO> getAllSmallTheater (String largeRegion) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    try {
@@ -93,7 +89,6 @@ public class ReservejoinDAO {
 	    return list;        
 	}
 	
-	// 회차 및 상영관별 잔여 좌석을 정확히 집계하는 스케줄 조회 메소드
 	public ArrayList<ReservejoinDTO> getAllschedule(String movieid, String largeRegion, String smallRegion, String date) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    
@@ -115,7 +110,7 @@ public class ReservejoinDAO {
 	                     "        SELECT IFNULL(SUM(CHAR_LENGTH(se.seat_num) - CHAR_LENGTH(REPLACE(se.seat_num, ',', '')) + 1), 0) " +
 	                     "        FROM seat se " +
 	                     "        WHERE se.schedule_id = s.schedule_id " +
-	                     "          AND se.screen_id = s.screen_id " + // 💡 상영관까지 일치하도록 조건 추가하여 데이터 꼬임 방지
+	                     "          AND se.screen_id = s.screen_id " +
 	                     "          AND se.seat_num IS NOT NULL AND se.seat_num != '' " +
 	                     "    ) AS booked_seat_count " +
 	                     "FROM schedule s " +
@@ -144,12 +139,12 @@ public class ReservejoinDAO {
 	            rjdto.setScreenId(rs.getInt("screen_id"));
 	            rjdto.setScreenNum(rs.getInt("screen_num"));
 	            
-	            int totalSeat = rs.getInt("total_seat");          // 총 좌석 수 (예: 100)
-	            int bookedCount = rs.getInt("booked_seat_count");  // 예매된 좌석 수
-	            int remainSeat = totalSeat - bookedCount;          // 잔여 좌석 수
+	            int totalSeat = rs.getInt("total_seat");          
+	            int bookedCount = rs.getInt("booked_seat_count");  
+	            int remainSeat = totalSeat - bookedCount;          
 	            
-	            rjdto.setTotalSeat(totalSeat);     // 총 좌석 세팅
-	            rjdto.setRemainSeat(remainSeat);   // 잔여 좌석 세팅
+	            rjdto.setTotalSeat(totalSeat);     
+	            rjdto.setRemainSeat(remainSeat);   
 	            
 	            list.add(rjdto);
 	        }
@@ -163,7 +158,6 @@ public class ReservejoinDAO {
 	    return list;
 	}
 	
-	// 지역 대분류, 지역 소분류 선택 후 해당 지역에 상영중인 영화만 select하는 메소드
 	public ArrayList<ReservejoinDTO> getSelectMovie(String largeRegion, String smallRegion) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    if (largeRegion == null || smallRegion == null) return list;
@@ -193,7 +187,6 @@ public class ReservejoinDAO {
 	    return list;        
 	}
 	
-	// scheduleId와 screenId를 동시에 인자로 받아 해당 상영관 회차의 예매된 좌석만 정확히 조회하는 메소드
 	public ArrayList<ReservejoinDTO> getAllseat(int scheduleId, int screenId) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    if (scheduleId <= 0 || screenId <= 0) return list;
@@ -226,4 +219,32 @@ public class ReservejoinDAO {
 	    }
 	    return list;        
 	}
+
+	public ReservejoinDTO getFirstScheduleInfo(String movieId) {
+	    ReservejoinDTO rjdto = null;
+	    try {
+	        con = Util.getConnection();
+	        String sql = "SELECT t.large_region, t.small_region, s.schedule_starttime "
+	                   + "FROM schedule s "
+	                   + "JOIN screen sc ON s.screen_id = sc.screen_id "
+	                   + "JOIN theater t ON sc.theater_id = t.theater_id "
+	                   + "WHERE s.movie_id = ? "
+	                   + "ORDER BY s.schedule_starttime ASC LIMIT 1";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, movieId);
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            rjdto = new ReservejoinDTO();
+	            rjdto.setLargeRegion(rs.getString("large_region"));
+	            rjdto.setSmallRegion(rs.getString("small_region"));
+	            rjdto.setScheduleStarttime(rs.getString("schedule_starttime"));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        closeAll();
+	    }
+	    return rjdto;
+	}
 }
+
