@@ -12,6 +12,8 @@
         contentPage = "/user/my-page-inquiry.jsp";
     } else if ("info".equals(menu)) {
         contentPage = "/user/my-page-info.jsp";
+    } else if ("delete".equals(menu)) {
+        contentPage = "/user/my-page-delete.jsp";
     } else if ("inquiry-write".equals(menu)) {
     	contentPage = "/inquiry/Inquiry.jsp";
     } else {
@@ -57,6 +59,11 @@
         <a href="MyPageProc.do?userId=${sessionScope.id}&amp;menu=info"
            class="<%= "info".equals(menu) ? "is-active" : "" %>">
           내 정보
+        </a>
+
+        <a href="MyPageProc.do?userId=${sessionScope.id}&amp;menu=delete"
+           class="side-nav__withdraw <%= "delete".equals(menu) ? "is-active" : "" %>">
+          회원 탈퇴
         </a>
       </nav>
 

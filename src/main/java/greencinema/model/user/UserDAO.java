@@ -75,7 +75,7 @@ public class UserDAO {
 		boolean isCheck = false;
 		try {
 			con = Util.getConnection();
-			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ?";
+			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ? and user_delete = 0";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPw);
@@ -105,7 +105,7 @@ public class UserDAO {
 		boolean isCheck = false;
 		try {
 			con = Util.getConnection();
-			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ?";
+			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ? and user_delete = 0";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPw);
@@ -128,6 +128,33 @@ public class UserDAO {
 		}
 		
 		return isCheck;
+	}
+
+	public boolean deletedUserCheck(String userId, String userPw) {
+		boolean isDeleted = false;
+		try {
+			con = Util.getConnection();
+			String sql = "SELECT * FROM user WHERE user_id = ? and user_pw = ? and user_delete = 1";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPw);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				isDeleted = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) con.close();
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return isDeleted;
 	}
 	
 	public boolean updatePassword(String userId, String userPw) {

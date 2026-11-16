@@ -40,6 +40,9 @@ public class UserLoginProc extends HttpServlet {
 			HttpSession session = request.getSession();
 			targetUri = "/index.jsp";
 			session.setAttribute("id", userId);			
+		} else if (udao.deletedUserCheck(userId, userPw)) {
+			targetUri = "/index.jsp?section=user/login-err.jsp";
+			request.setAttribute("msg", "탈퇴한 계정입니다.");
 		} else {
 			targetUri = "/index.jsp?section=user/login-err.jsp";
 			request.setAttribute("msg", "아이디 혹은 비밀번호가 맞지 않습니다.");

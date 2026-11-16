@@ -3,18 +3,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
+			<c:choose>
+				<c:when test="${param.section == 'admin-notice.jsp'}">
+					<c:set var="adminTitle" value="공지사항 관리" />
+					<c:set var="adminDesc" value="등록된 공지를 검색하고 확인합니다." />
+				</c:when>
+				<c:when test="${param.section == 'admin-inquiry.jsp'}">
+					<c:set var="adminTitle" value="1:1 문의 관리" />
+					<c:set var="adminDesc" value="회원 문의를 검색하고 답변 상태를 확인합니다." />
+				</c:when>
+				<c:when test="${param.section == 'admin-faq.jsp'}">
+					<c:set var="adminTitle" value="FAQ 관리" />
+					<c:set var="adminDesc" value="자주 묻는 질문을 검색하고 확인합니다." />
+				</c:when>
+				<c:when test="${param.section == 'admin-movie.jsp'}">
+					<c:set var="adminTitle" value="상영작 관리" />
+					<c:set var="adminDesc" value="등록된 상영작을 확인합니다." />
+				</c:when>
+				<c:when test="${param.section == 'Admin-Inquiry-Insert.jsp'}">
+					<c:set var="adminTitle" value="문의 답변 관리" />
+					<c:set var="adminDesc" value="문의 내용을 확인하고 답변을 등록합니다." />
+				</c:when>
+				<c:otherwise>
+					<c:set var="adminTitle" value="하우스 데스크 관리" />
+					<c:set var="adminDesc" value="상영작, 공지, 문의, FAQ를 한 자리에서 봅니다." />
+				</c:otherwise>
+			</c:choose>
+
 			<header class="admin-top" id="overview">
 				<div>
 					<p class="tiny-eyebrow">ADMINISTRATOR</p>
-					<h1>하우스 데스크</h1>
-					<p>상영작, 공지, 문의, FAQ를 한 자리에서 봅니다. 숫자는 MySQL <strong>greencinema</strong> 데이터베이스에서 바로 읽습니다.</p>
+					<h1>${adminTitle}</h1>
+					<p>${adminDesc}</p>
 				</div>
 				<div class="admin-who"><span class="admin-who__dot" aria-hidden="true"></span>admin · 관리자</div>
 			</header>
 
-			<div class="admin-marquee" aria-hidden="true">
-				<p>NOW SHOWING · GREEN CINEMA · HOUSE LIGHTS DOWN · TICKETS · NOTICES · INQUIRIES</p>
-			</div>
+			<c:if test="${empty param.section or param.section == '/admin/admin.jsp'}">
+				<div class="admin-marquee" aria-hidden="true">
+					<p>NOW SHOWING · GREEN CINEMA · HOUSE LIGHTS DOWN · TICKETS · NOTICES · INQUIRIES</p>
+				</div>
+			</c:if>
 
 			<c:if test="${param.saved == '1'}">
 				<p class="admin-toast">문의 답변을 등록했습니다.</p>
