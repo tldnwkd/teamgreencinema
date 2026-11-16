@@ -27,6 +27,15 @@ public class AdminMovieProc extends HttpServlet {
 
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		if(request.getParameter("btn") != null || "write".equals(request.getParameter("menu"))) {
+			new AdminMovieInsertProc().reqPro(request, response);
+			return;
+		}
+		if(request.getParameter("movie_Id") != null) {
+			new OneAdminMovieProc().reqPro(request, response);
+			return;
+		}
+
 		HttpSession session = request.getSession();
 		String chkid = (String)session.getAttribute("id");
 		System.out.println(chkid);

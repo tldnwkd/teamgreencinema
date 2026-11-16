@@ -492,6 +492,10 @@
   margin: 0 0 16px;
 }
 
+.admin-board__search--movie {
+  grid-template-columns: 160px minmax(140px, 1fr) auto auto auto;
+}
+
 .admin-body .admin-board__search select,
 .admin-body .admin-board__search input[type="text"] {
   width: 100%;
@@ -537,6 +541,101 @@
 }
 
 .admin-board__search button.is-ghost:hover {
+  color: #fff;
+  background: rgb(3 199 90 / 12%);
+}
+
+.admin-form {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-form__row {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-form__row label {
+  color: #8eeeb8;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.admin-body .admin-form input,
+.admin-body .admin-form select,
+.admin-body .admin-form textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid rgb(3 199 90 / 28%);
+  border-radius: 10px;
+  color: #f4fff8;
+  background: #0b120f;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.admin-body .admin-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.admin-body .admin-form input:focus,
+.admin-body .admin-form select:focus,
+.admin-body .admin-form textarea:focus {
+  border-color: #03c75a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(3 199 90 / 18%);
+}
+
+.admin-form__poster {
+  width: 92px;
+  aspect-ratio: 3 / 4.2;
+  object-fit: cover;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 10px;
+}
+
+.admin-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.admin-form__actions a,
+.admin-form__actions button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  color: #04210f;
+  background: #03c75a;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 42px;
+  cursor: pointer;
+}
+
+.admin-form__actions a {
+  color: #d9ffe8;
+  background: transparent;
+  border: 1px solid rgb(3 199 90 / 35%);
+}
+
+.admin-form__actions button.is-danger {
+  color: #ffd7d7;
+  background: transparent;
+  border: 1px solid rgb(255 120 120 / 55%);
+}
+
+.admin-form__actions button:hover {
+  background: #02ad4f;
+}
+
+.admin-form__actions a:hover,
+.admin-form__actions button.is-danger:hover {
   color: #fff;
   background: rgb(3 199 90 / 12%);
 }

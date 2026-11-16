@@ -173,6 +173,123 @@ public class MovieDAO {
 			 }
 		
 		return m;
-	} 
+	}
+
+	// 영화 한건
+	public MovieDTO oneMovie(int movieId) {
+		MovieDTO mdto = null;
+		try {
+			con = Util.getConnection();
+			String sql = "select * from movie where movie_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, movieId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				mdto = new MovieDTO();
+				mdto.setMovieId(rs.getInt("movie_id"));
+				mdto.setMovieRate(rs.getInt("movie_rate"));
+				mdto.setMovieContent(rs.getString("movie_content"));
+				mdto.setMovieTitle(rs.getString("movie_title"));
+				mdto.setImgPath(rs.getString("img_path"));
+				mdto.setRunTime(rs.getInt("run_time"));
+			}
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+				if(con != null)con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return mdto;
+	}
+
+	public boolean insert(MovieDTO mdto) {
+		boolean result = false;
+		try {
+			con = Util.getConnection();
+			String sql = "insert into movie (movie_title, movie_rate, img_path, movie_content, run_time) values (?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getMovieTitle());
+			pstmt.setInt(2, mdto.getMovieRate());
+			pstmt.setString(3, mdto.getImgPath());
+			pstmt.setString(4, mdto.getMovieContent());
+			pstmt.setInt(5, mdto.getRunTime());
+			result = pstmt.executeUpdate() > 0;
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+				if(con != null)con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int update(MovieDTO mdto) {
+		int result = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "update movie set movie_title=?, movie_rate=?, img_path=?, movie_content=?, run_time=? where movie_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getMovieTitle());
+			pstmt.setInt(2, mdto.getMovieRate());
+			pstmt.setString(3, mdto.getImgPath());
+			pstmt.setString(4, mdto.getMovieContent());
+			pstmt.setInt(5, mdto.getRunTime());
+			pstmt.setInt(6, mdto.getMovieId());
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+				if(con != null)con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int deleteMovie(int movieId) {
+		int result = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "delete from movie where movie_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, movieId);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+				if(con != null)con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int scheduleCount(int movieId) {
+		int count = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "select count(*) from schedule where movie_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, movieId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+				if(pstmt != null)pstmt.close();
+				if(con != null)con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 	
 }

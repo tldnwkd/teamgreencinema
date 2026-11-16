@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css?v=20261116f">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css?v=20261116g">
 
 
 
