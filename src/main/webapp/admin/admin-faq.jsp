@@ -74,6 +74,7 @@
 				</c:url>
 				<a href="${nextUrl}">다음</a>
 			</c:if>
+			<button type="button" onclick="return location.href='admin/admin-index.jsp?section=Admin-FAQ-Insert.jsp'">글작성</button>
 		</div>
 	</div>
 </section>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import greencinema.model.faq.FaqDAO;
 import greencinema.model.faq.FaqDTO;
@@ -24,16 +25,21 @@ public class OneFaqProc extends HttpServlet {
 		rePro(request, response);
 	}
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		String chkId = (String)session.getAttribute("id");
 		int faqId = Integer.parseInt(request.getParameter("faq_id"));
 		FaqDAO fdao = new FaqDAO();
 		FaqDTO fOneList= fdao.OneFaq(faqId);
-		
 		request.setAttribute("fOneList", fOneList);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=faq/OneFaq.jsp");
-		rd.forward(request, response);
+		if("admin".equals(chkId)) {
+			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq.jsp");
+			rd.forward(request, response);
+		}else {
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=faq/OneFaq.jsp");
+			rd.forward(request, response);
+		}
 	}
 	
 }

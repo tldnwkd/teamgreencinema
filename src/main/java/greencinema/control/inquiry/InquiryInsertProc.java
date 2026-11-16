@@ -51,14 +51,14 @@ public class InquiryInsertProc extends HttpServlet {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('답변이 완료되었습니다.')");
+				out.println("alert('등록이 완료되었습니다.')");
 				out.println("location.href='OneInquiryProc.do?inquiryId="+inquiryId+"';");
 				out.println("</script>");
 				out.flush();
 				return;
 				
 			}
-			
+			response.sendRedirect("OneInquiryProc.do?inquiryId="+inquiryId+";");
 		}
 		
 		

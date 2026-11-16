@@ -176,4 +176,31 @@ public class FaqDAO {
 		
 		return f;
 	}
+	
+	//-- admin insert 
+	public int FaqInsert(int type, String inq, String content) {
+			int result = 0;
+		
+		 try {
+			 con = Util.getConnection();
+			 String sql = "insert into faq (faq_type,faq_inquery,faq_answer) values(?,?,?);";
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setInt(1, type);
+			 pstmt.setString(1, inq);
+			 pstmt.setString(1, content);
+			 result = pstmt.executeUpdate();
+			 
+		 }catch(Exception e) {e.printStackTrace();}finally {
+			 try {if(rs != null)rs.close();
+			 if(pstmt != null)pstmt.close();
+			 if(con != null)con.close();
+
+			 }catch(Exception e) {
+			 e.printStackTrace();
+			 }
+			 }
+		
+		
+		return result;
+	}
 }

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <section class="inquiry">
-	<form action="InquiryInsertProc.do" method="post" name="iform">
+	<form action="InquiryInsertProc.do" method="post" name="iform" id="iform">
 		<div class="page-content">
 			<div class="container">
 				<div class="page-heading">
@@ -35,18 +35,65 @@
 							<c:if test="${idto.receptionType eq 2}"><p>SMS</p></c:if>
 						</div>
 						<div class="form-group form-group--full">
+							<input type="hidden" id="after" value="${idto.answerContent}">
 								<p class="form-label">답변 내용</p>
-								<textarea id="answerText" class="form-control" name="answerContent" ${idto.answerStatus==1?'readonly':''}>${idto.answerContent}</textarea>
+								<textarea id="before" class="form-control" name="answerContent">${idto.answerContent}</textarea>
 							</div>
 					</div>
 					<div class="form-actions">
 						<input type="hidden" name="id" value="${sessionScope.id }">
 						<input type="hidden" name="inquiryId" value="${idto.inquiryId}">
 						<a href="InquiryProc.do" class="btn btn--outline">전체 문의내역보기</a>
-						<button name="btn" type="submit" class="btn btn--primary" value="updOk" onclick="return confirm('답변을 완료하시겠습니까?');" >답변</button>
+							<c:choose>
+								<c:when test="${idto.answerStatus==0}">
+									<button name="btn" type="button" class="btn btn--primary" value="updOk" onclick="ans()" >답변</button>
+								</c:when>
+								<c:otherwise>
+									<button name="btn" type="button" class="btn btn--primary" value="updOk" onclick="upd()" >수정</button>
+								</c:otherwise>
+							</c:choose>
 					</div>
 				</section>
 			</div>
 		</div>
 	</form>
 </section>
+<script>
+	function ans(){
+		let i = document.iform
+		
+		if(i.answerContent.value==""){
+			alert('답변을 입력해주세요');
+			i.answerContent.focus();
+			return;
+		}
+		
+		if(confirm('답변을 완료하시겠습니까?')){
+			i.submit();
+		}else{
+			i.answerContent.focus();
+			return;
+		}
+		
+		i.submit();
+		
+	}
+	function upd(){
+		let i = document.iform
+		let after = document.getElementById("after").value;
+		let before = document.getElementById("before").value;
+		
+		if(after == before){
+			alert('수정된 값이 없습니다.');
+			i.answerContent.focus();
+			return;
+		}
+		
+		if(confirm('수정을 완료하시겠습니까?')){
+			i.submit();
+		}else{
+			i.answerContent.focus();
+			return;
+		}
+	}
+</script>

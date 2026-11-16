@@ -76,6 +76,7 @@
 				</c:url>
 				<a href="${nextUrl}">다음</a>
 			</c:if>
+			<a href="admin/admin-index.jsp?section=Admin-Notice-Insert.jsp" class="btn btn--outline">글작성</a>
 		</div>
 	</div>
 </section>

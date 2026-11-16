@@ -9,6 +9,52 @@
 /* 01. Design tokens */
 
 
+/* 문의 제목 */
+td a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+td a:hover {
+    color: #2563eb;
+}
+
+/* 답변 완료 */
+td a.ok {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* 답변 대기 */
+td a.no {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #ffebee;
+    color: #c62828;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* 마우스 호버 */
+td a.ok:hover {
+    background-color: #c8e6c9;
+}
+
+td a.no:hover {
+    background-color: #ffcdd2;
+}
+
+
+
 :root {
   --gc-primary: #03c75a;
   --gc-primary-hover: #02ad4f;
