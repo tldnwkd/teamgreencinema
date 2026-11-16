@@ -44,7 +44,7 @@
 }
 .modal-header-icon { text-align: center; margin-bottom: 20px; }
 .success-icon-circle {
-    width: 50px; height: 50px; background: #ff4757; color: #fff; border-radius: 50%;
+    width: 50px; height: 50px; background: #03c75a; color: #fff; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 10px auto;
 }
 .reserve-info-card {

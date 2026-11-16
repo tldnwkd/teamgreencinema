@@ -11,6 +11,7 @@ public class ReservejoinDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
+	// DB 연결 및 자원 반납 메서드
 	public void closeAll() {
 		try {
 			if (rs != null) rs.close();
@@ -21,6 +22,7 @@ public class ReservejoinDAO {
 		}
 	}
 
+	// 특정 영화 ID를 받아 해당 영화의 상세 정보(제목, 이미지 경로, 관람가, 러닝타임 등)를 조회하는 메서드
 	public ReservejoinDTO getOneMovieList(String id) {
 		ReservejoinDTO rjdto = new ReservejoinDTO();
 		try {
@@ -46,6 +48,7 @@ public class ReservejoinDAO {
 		return rjdto;
 	}
 
+	// 등록된 전체 극장 목록에서 지역 대분류(예: 서울, 경기/인천 등)만 중복 없이 조회하는 메서드
 	public ArrayList<ReservejoinDTO> getAllLargeTheater () {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    try {
@@ -67,6 +70,7 @@ public class ReservejoinDAO {
 	    return list;        
 	}
 	
+	// 선택한 대지역에 속한 지역 소분류(예: 수원역, 부평역사 등) 목록을 중복 없이 조회하는 메서드
 	public ArrayList<ReservejoinDTO> getAllSmallTheater (String largeRegion) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    try {
@@ -89,6 +93,7 @@ public class ReservejoinDAO {
 	    return list;        
 	}
 	
+	// 영화 ID, 대지역, 소지역, 날짜 조건을 바탕으로 해당 상영 회차 정보와 각 상영관별 잔여 좌석 수를 계산하여 조회하는 메서드
 	public ArrayList<ReservejoinDTO> getAllschedule(String movieid, String largeRegion, String smallRegion, String date) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    
@@ -158,6 +163,7 @@ public class ReservejoinDAO {
 	    return list;
 	}
 	
+	// 선택한 대지역과 소지역에 해당하는 극장에서 현재 상영 중인 영화 목록만 중복 없이 조회하는 메서드
 	public ArrayList<ReservejoinDTO> getSelectMovie(String largeRegion, String smallRegion) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    if (largeRegion == null || smallRegion == null) return list;
@@ -187,6 +193,7 @@ public class ReservejoinDAO {
 	    return list;        
 	}
 	
+	// 특정 상영 회차(scheduleId)와 상영관(screenId)에서 이미 예매가 완료된 좌석 번호들을 분리하여 조회하는 메서드
 	public ArrayList<ReservejoinDTO> getAllseat(int scheduleId, int screenId) {
 	    ArrayList<ReservejoinDTO> list = new ArrayList<>();
 	    if (scheduleId <= 0 || screenId <= 0) return list;
@@ -220,6 +227,7 @@ public class ReservejoinDAO {
 	    return list;        
 	}
 
+	// 특정 영화 ID를 기준으로 상영 예정인 일정 중 가장 첫 번째 상영 정보(대지역, 소지역, 첫 상영일시)를 조회하는 메서드
 	public ReservejoinDTO getFirstScheduleInfo(String movieId) {
 	    ReservejoinDTO rjdto = null;
 	    try {
@@ -247,4 +255,3 @@ public class ReservejoinDAO {
 	    return rjdto;
 	}
 }
-
