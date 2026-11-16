@@ -40,6 +40,7 @@ public class MyPageProc extends HttpServlet {
 		UserDTO userDto = udao.getUser(userId);		
 		MyPageDTO mydto = udao.getMyPage(userId);				
 		
+				
 		// 예매내역 정보가져오기
 		ArrayList<ReserveDTO> reserveList = udao.getReserveList(userId);		
 				

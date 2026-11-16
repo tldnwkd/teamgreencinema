@@ -3,5 +3,5 @@
     
 <script type="text/javascript">
 	alert("${msg}")
-	location.href="/index.jsp?section=user/login.jsp";
+	location.href="index.jsp?section=user/login.jsp";
 </script>
