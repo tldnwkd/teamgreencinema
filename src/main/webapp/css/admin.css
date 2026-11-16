@@ -488,8 +488,10 @@
   margin: 0 0 16px;
 }
 
-.admin-board__search select,
-.admin-board__search input[type="text"] {
+.admin-body .admin-board__search select,
+.admin-body .admin-board__search input[type="text"] {
+  width: 100%;
+  min-width: 0;
   height: 42px;
   padding: 0 12px;
   border: 1px solid rgb(3 199 90 / 28%);
@@ -497,16 +499,7 @@
   color: #f4fff8;
   background: #0b120f;
   font: inherit;
-}
-
-.admin-board__search select {
-  flex: 0 0 180px;
-}
-
-.admin-board__search input[type="text"] {
-  flex: 1 1 auto;
-  width: 1%;
-  min-width: 0;
+  box-sizing: border-box;
 }
 
 .admin-board__search select:focus,
