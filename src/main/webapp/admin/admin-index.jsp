@@ -12,7 +12,7 @@
 	
 		String section = request.getParameter("section");
 				
-		if(section == null){			
+		if(section == null || section.trim().isEmpty()){			
 	        section = "/admin/admin.jsp";
 	        
 	    }

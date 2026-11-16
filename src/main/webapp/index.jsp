@@ -16,7 +16,7 @@
 		request.setCharacterEncoding("utf-8");
 	
 		String section = request.getParameter("section");				
-		if(section == null){			
+		if(section == null || section.trim().isEmpty()){			
 	        request.getRequestDispatcher("MovieListProc.do").forward(request, response);
 	        return;
 	    }	
