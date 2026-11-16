@@ -49,11 +49,15 @@ public class SearchInquiryProc extends HttpServlet {
 		System.out.println("content"+content);
 		System.out.println("chkid"+chkid);
 		int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
-		count = idao.sCount(chkid, type, content); // 페이지 전체수 입력
-		
-		
+		boolean isAdmin = "admin".equals(chkid);
 		ArrayList<InquiryDTO> sList = new ArrayList<InquiryDTO>();
-		sList = idao.search(type, content, StartRow, pagesize, chkid);
+		if (isAdmin) {
+			count = idao.adminSCount(type, content);
+			sList = idao.adminSearch(type, content, StartRow, pagesize);
+		} else {
+			count = idao.sCount(chkid, type, content); // 페이지 전체수 입력
+			sList = idao.search(type, content, StartRow, pagesize, chkid);
+		}
 		
 		number = count-StartRow; //페이지당 게시글 출력 번호
 		int pageCount = 0; //페이지 개수
@@ -80,6 +84,7 @@ public class SearchInquiryProc extends HttpServlet {
 		}
 		System.out.println("pageCount:"+ pageCount);
 		request.setAttribute("sList", sList);
+		request.setAttribute("iList", sList);
 		request.setAttribute("type", type);
 		request.setAttribute("content", content);
 		
@@ -95,7 +100,10 @@ public class SearchInquiryProc extends HttpServlet {
 		
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=inquiry/Search-List.jsp");
+		String view = "admin".equals(chkid)
+				? "admin/admin-index.jsp?section=admin-inquiry.jsp"
+				: "/index.jsp?section=inquiry/Search-List.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 		
 

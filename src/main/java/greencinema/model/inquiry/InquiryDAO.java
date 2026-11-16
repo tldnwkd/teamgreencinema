@@ -319,6 +319,84 @@ public class InquiryDAO {
 		return i;
 	} 
 	// 臾몄쓽湲� �벑濡� 硫붿냼�뱶
+	public int adminSCount(String type, String content) {
+		int count = 0;
+		String column = inquiryColumn(type);
+		try {
+			con = Util.getConnection();
+			String sql = "select count(*) from inquiry where " + column + " like ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + content + "%");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+
+	public ArrayList<InquiryDTO> adminSearch(String type, String content, int startPage, int pageSize) {
+		ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
+		String column = inquiryColumn(type);
+		try {
+			con = Util.getConnection();
+			String sql = "select * from inquiry where " + column + " like ? order by inquiry_id desc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + content + "%");
+			pstmt.setInt(2, startPage);
+			pstmt.setInt(3, pageSize);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				InquiryDTO idto = new InquiryDTO();
+				idto.setInquiryId(rs.getInt(1));
+				idto.setUserId(rs.getString(2));
+				idto.setInquirySort(rs.getString(3));
+				idto.setInquiryType(rs.getString(4));
+				idto.setInquiryTitle(rs.getString(5));
+				idto.setInquiryContent(rs.getString(6));
+				idto.setReceptionType(rs.getInt(7));
+				idto.setAnswerStatus(rs.getInt(8));
+				idto.setAnswerContent(rs.getString(9));
+				idto.setInquiryDate(rs.getString(10));
+				i.add(idto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return i;
+	}
+
+	private String inquiryColumn(String type) {
+		if ("inquiry_title".equals(type)) {
+			return "inquiry_title";
+		} else if ("inquiry_type".equals(type)) {
+			return "inquiry_type";
+		} else if ("inquiry_Sort".equals(type)) {
+			return "inquiry_Sort";
+		} else if ("answer_status".equals(type)) {
+			return "answer_status";
+		}
+		throw new IllegalArgumentException("잘못된 검색 조건");
+	}
+
 	public boolean insert(InquiryDTO idto) {
 		boolean result = false;
 		 try {

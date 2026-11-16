@@ -79,24 +79,8 @@
 
         <div class="profile-actions profile-actions--end">
           <button type="submit" class="btn btn--primary">비밀번호 변경</button>
-          <button type="button" class="btn btn--danger-outline" onclick="userDelete();">회원 탈퇴</button>
         </div>
       </form>
     </div>
-
-    <!-- 회원 탈퇴 처리용 히든 폼 (user_delete = 1 소프트 삭제 요청용) -->
-    <form id="userWithdrawForm" action="${pageContext.request.contextPath}/UserDeleteProc.do" method="post" name="userDeleteForm">
-      <input type="hidden" name="userId" value="${userInfo.userId}">
-      <input type="hidden" name="userPw" value="${userInfo.userPw }">
-      <input type="hidden" name="userDelete" value="1">
-    </form>
   </div>
 </section>
-<script>
-	function userDelete() {
-		let userDeleteForm = document.userDeleteForm;		
-		userDeleteForm.submit();		
-	}
-
-
-</script>

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import greencinema.model.faq.FaqDAO;
 import greencinema.model.faq.FaqDTO;
@@ -88,7 +89,12 @@ public class SearchNoticeProc extends HttpServlet {
 		request.setAttribute("pageBlock", pageBlock);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/Search-Notice.jsp");
+		HttpSession session = request.getSession(false);
+		String chkId = session == null ? null : (String) session.getAttribute("id");
+		String view = "admin".equals(chkId)
+				? "admin/admin-index.jsp?section=admin-notice.jsp"
+				: "/index.jsp?section=notice/Search-Notice.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 		
 	}

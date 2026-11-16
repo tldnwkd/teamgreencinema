@@ -961,6 +961,17 @@ textarea.form-control {
   background: var(--gc-primary-soft);
 }
 
+.side-nav a.side-nav__withdraw {
+  margin-top: 8px;
+  color: var(--gc-danger);
+}
+
+.side-nav a.side-nav__withdraw:hover,
+.side-nav a.side-nav__withdraw.is-active {
+  color: var(--gc-danger);
+  background: #fff0f0;
+}
+
 .reservation-list {
   display: grid;
   gap: 16px;
@@ -4028,16 +4039,18 @@ a.service-card:hover {transform:translateY(-3px);box-shadow:0 14px 25px rgba(12,
   font-size: 13px;
 }
 
+.withdraw-block__help {
+  margin: 0 0 18px;
+  color: var(--gc-muted);
+  font-size: 13px;
+}
+
 .form-help.is-match {
   color: #07813c;
 }
 
 .form-help.is-mismatch {
   color: var(--gc-danger);
-}
-
-.profile-actions--end {
-  justify-content: flex-end;
 }
 
 .profile-actions {
@@ -4057,6 +4070,10 @@ a.service-card:hover {transform:translateY(-3px);box-shadow:0 14px 25px rgba(12,
   gap: 10px;
 }
 
+.profile-actions--end {
+  justify-content: flex-end;
+}
+
 .btn--danger-outline {
   min-height: 44px;
   padding: 10px 16px;
@@ -4064,7 +4081,9 @@ a.service-card:hover {transform:translateY(-3px);box-shadow:0 14px 25px rgba(12,
   border-radius: var(--gc-radius-sm);
   color: var(--gc-danger);
   background: #fff;
+  font: inherit;
   font-weight: 750;
+  cursor: pointer;
 }
 
 .btn--danger-outline:hover {

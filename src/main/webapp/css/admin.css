@@ -479,6 +479,106 @@
   background: rgb(0 0 0 / 15%);
 }
 
+.admin-board__search {
+  display: grid;
+  grid-template-columns: 190px minmax(180px, 1fr) auto auto;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+
+.admin-board__search select,
+.admin-board__search input[type="text"] {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgb(3 199 90 / 28%);
+  border-radius: 10px;
+  color: #f4fff8;
+  background: #0b120f;
+  font: inherit;
+}
+
+.admin-board__search select {
+  flex: 0 0 180px;
+}
+
+.admin-board__search input[type="text"] {
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.admin-board__search select:focus,
+.admin-board__search input[type="text"]:focus {
+  border-color: #03c75a;
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(3 199 90 / 18%);
+}
+
+.admin-board__search button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 10px;
+  color: #04210f;
+  background: #03c75a;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-board__search button.is-ghost {
+  color: #d9ffe8;
+  background: transparent;
+  border: 1px solid rgb(3 199 90 / 35%);
+}
+
+.admin-board__search button:hover {
+  background: #02ad4f;
+}
+
+.admin-board__search button.is-ghost:hover {
+  color: #fff;
+  background: rgb(3 199 90 / 12%);
+}
+
+.admin-table a {
+  color: #d9ffe8;
+  font-weight: 700;
+}
+
+.admin-table a:hover {
+  color: #03c75a;
+}
+
+.admin-paging {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.admin-paging a {
+  min-width: 34px;
+  padding: 7px 10px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 8px;
+  color: #c5ddd0;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.admin-paging a:hover,
+.admin-paging a.is-current {
+  border-color: rgb(3 199 90 / 40%);
+  color: #fff;
+  background: rgb(3 199 90 / 14%);
+}
+
 .admin-faq {
   display: grid;
   gap: 10px;
@@ -538,6 +638,10 @@
 }
 
 @media (max-width: 860px) {
+  .admin-board__search {
+    grid-template-columns: 1fr;
+  }
+
   .admin-shell {
     grid-template-columns: 1fr;
   }
