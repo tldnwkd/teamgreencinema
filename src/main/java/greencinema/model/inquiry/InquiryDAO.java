@@ -353,7 +353,7 @@ public class InquiryDAO {
 		
 	}
 	
-	//�븯�굹�쓽 寃뚯떆湲� �븳�럹�씠吏��뿉 異쒕젰�븯�뒗 硫붿냼�뱶
+	//개인회원 inquiry 출력
 	public InquiryDTO getOneInquiry(int num, String id) {
 			InquiryDTO i = null;
 		 try {
@@ -449,6 +449,50 @@ public class InquiryDAO {
 	    }
 		
 		return result;
+	}
+	
+	//-------------------admin-------
+	
+	// admin 답변창 출력 select
+	public InquiryDTO AdmingetOneInquiry(int num) {
+		InquiryDTO i = null;
+	 try {
+		 con = Util.getConnection();
+		 String sql = "select * from inquiry where inquiry_id=?";
+		 pstmt = con.prepareStatement(sql);
+		 pstmt.setInt(1, num);
+		 rs = pstmt.executeQuery();
+		 if(rs.next()) {
+			 i = new InquiryDTO();
+			 i.setInquiryId(rs.getInt(1));
+			 i.setUserId(rs.getString(2));
+			 i.setInquirySort(rs.getString(3));
+			 i.setInquiryType(rs.getString(4));
+			 i.setInquiryTitle(rs.getString(5));
+			 i.setInquiryContent(rs.getString(6));
+			 i.setReceptionType(rs.getInt(7));
+			 i.setAnswerStatus(rs.getInt(8));
+			 i.setAnswerContent(rs.getString(9));
+			 i.setInquiryDate(rs.getString(10));
+
+		 }
+		 
+	 }catch(Exception e) {e.printStackTrace();}finally {
+		 try {if(rs != null)rs.close();
+		 if(pstmt != null)pstmt.close();
+		 if(con != null)con.close();
+
+		 }catch(Exception e) {
+		 e.printStackTrace();
+		 }
+		 }
+	 return i;
+	
+}
+	// admin 답변 insert dao
+	public int AdminInquiryInsert(int num ,String content) {
+		
+		return 0;
 	}
 	
 	}
