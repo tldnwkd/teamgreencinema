@@ -51,7 +51,6 @@ public class reserveCompleteProc extends HttpServlet {
 
 		String movieId = request.getParameter("movieId");
 		String smallRegion = request.getParameter("smallRegion");
-		String largeRegion = request.getParameter("large_region");
 		String selectedDate = request.getParameter("selectedDate");
 		String scheduleSTime = request.getParameter("scheduleSTime");
 		String scheduleETime = request.getParameter("scheduleETime");

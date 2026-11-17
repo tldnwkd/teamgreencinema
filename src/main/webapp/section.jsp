@@ -24,7 +24,7 @@
 						<span class="movie-card__rank">${begin}</span>
 						<div class="movie-card__actions">
 							<a class="btn btn--primary btn--small" href="selectMovieReserveProc.do?movieId=${list.movieId }">예매하기</a>
-							<a class="btn btn--dark btn--small" href="MovieInfo.do">상세보기</a>
+							<a class="btn btn--dark btn--small" href="MovieProc.do?movieId=${list.movieId }">상세보기</a>
 						</div>
 					</div>
 				</article>
@@ -60,16 +60,15 @@
 			<h3>영화 예매</h3>
 			<p>영화·극장·상영일정을 고르는 화면</p> <strong>화면 보기 ↗</strong></a>
 			
-			<a class="service-card" href="#">
+			<a class="service-card" href="NoticeProc.do">
 			<span class="service-card__num">02</span><span class="service-card__icon">▤</span>
-			<h3>마이페이지</h3>
-			<p>예매내역과 문의내역을 확인하는 화면</p> <strong>화면 보기 ↗</strong></a>
+			<h3>공지사항</h3>
+			<p>예매내역과 문의내역을 확인하는 화면</p> <strong>화면 보기 ↗</strong></a>		
 			
-			
-			<a class="service-card" href="#">
+			<a class="service-card" href="InquiryLoginchkProc.do">
 			<span class="service-card__num">03</span><span class="service-card__icon">?</span>
-			<h3>고객센터</h3>
-			<p>FAQ·공지사항·1:1 문의 안내</p> <strong>화면 보기 ↗</strong></a>
+			<h3>1:1문의</h3>
+			<p>1:1 문의 안내</p> <strong>화면 보기 ↗</strong></a>
 		</div>
 	</div>
 </section>

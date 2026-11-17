@@ -365,7 +365,9 @@ public class UserDAO {
 					+ "    AND s.schedule_starttime <= DATE_ADD(r.reserve_date, INTERVAL 1 DAY)"
 					+ " JOIN movie m ON s.movie_id = m.movie_id"
 					+ " WHERE u.user_id = ? and r.cancel_date is null"
-					+ " GROUP BY r.reserve_id"
+					+ " GROUP BY r.reserve_id, m.movie_title, m.img_path, sc.screen_num, t.large_region, t.small_region, "
+					+ "          s.schedule_starttime, r.adult_count, r.teens_count, seat_info.seat_num, "
+					+ "          r.total_price, p.payment_method, r.cancel_date, r.reserve_date"
 					+ " ORDER BY r.reserve_date DESC"
 					+ " limit 1";
 			
