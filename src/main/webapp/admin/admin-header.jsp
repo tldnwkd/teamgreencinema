@@ -17,8 +17,8 @@
 					<c:set var="adminDesc" value="자주 묻는 질문을 검색하고 확인합니다." />
 				</c:when>
 				<c:when test="${param.section == 'admin-movie.jsp'}">
-					<c:set var="adminTitle" value="상영작 관리" />
-					<c:set var="adminDesc" value="등록된 상영작을 확인합니다." />
+					<c:set var="adminTitle" value="영화관리" />
+					<c:set var="adminDesc" value="등록된 영화를 검색하고 확인합니다." />
 				</c:when>
 				<c:when test="${param.section == 'Admin-Inquiry-Insert.jsp'}">
 					<c:set var="adminTitle" value="문의 답변 관리" />

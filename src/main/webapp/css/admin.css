@@ -391,6 +391,10 @@
   font-size: 14px;
 }
 
+.admin-table--fit {
+  min-width: 0;
+}
+
 .admin-table th,
 .admin-table td {
   padding: 13px 12px;

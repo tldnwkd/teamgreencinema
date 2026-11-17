@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css?v=20261116e">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css?v=20261116f">
 
 
 
@@ -12,7 +12,7 @@
 	
 		String section = request.getParameter("section");
 				
-		if(section == null){			
+		if(section == null || section.trim().isEmpty()){			
 	        section = "/admin/admin.jsp";
 	        
 	    }
