@@ -74,12 +74,13 @@
 				</c:url>
 				<a href="${nextUrl}">다음</a>
 			</c:if>
+			<button type="button" onclick="return location.href='admin/admin-index.jsp?section=Admin-FAQ-Insert.jsp'">글작성</button>
 		</div>
 	</div>
 </section>
 <script>
 function searchFaq() {
-	var form = document.fform;
+	let form = document.fform;
 	if (form.type.value === "") {
 		alert("검색 항목을 선택해주세요.");
 		form.type.focus();

@@ -29,12 +29,12 @@
 						<td>${iList.inquirySort }</td>
 						<c:choose >
 							<c:when test="${iList.answerStatus eq 1 }">
-								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">${iList.inquiryTitle }</a></td>
-								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">답변 완료</a></td>
+								<td><a  href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">${iList.inquiryTitle }</a></td>
+								<td><a class="ok" href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">답변 완료</a></td>
 							</c:when>
 							<c:otherwise>
 								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">${iList.inquiryTitle }</a></td>
-								<td><a href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">답변 대기</a></td>
+								<td><a class="no" href="OneInquiryProc.do?inquiryId=${iList.inquiryId}&answerStatus=${iList.answerStatus}">답변 대기</a></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
