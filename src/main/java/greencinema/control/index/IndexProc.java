@@ -1,4 +1,4 @@
-package greencinema.control.movie;
+package greencinema.control.index;
 
 import java.io.IOException;
 
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import greencinema.model.reservejoin.ReservejoinDAO;
 import greencinema.model.reservejoin.ReservejoinDTO;
 
-@WebServlet("/MovieProc.do")
-public class MovieProc extends HttpServlet implements Servlet {
+@WebServlet("/IndexProc.do")
+public class IndexProc extends HttpServlet implements Servlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		reqPro(request, response);
@@ -26,17 +26,6 @@ public class MovieProc extends HttpServlet implements Servlet {
 
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-
-		ReservejoinDAO rjdao = new ReservejoinDAO();
-		ReservejoinDTO rjdto = new ReservejoinDTO();
-		String movieId = request.getParameter("movieId");
-
-		rjdto= rjdao.getOneMovieList(movieId);
-		request.setAttribute("rjdto", rjdto);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=movie/movieInfo.jsp");
-		rd.forward(request, response);
-
 	}
 
 
