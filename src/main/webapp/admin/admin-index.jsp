@@ -23,8 +23,14 @@
 	<div class="admin-shell">
 		<jsp:include page="/admin/admin-left.jsp"></jsp:include>
 		<div class="admin-main">
-			<jsp:include page="/admin/admin-header.jsp"></jsp:include>		
-			<jsp:include page="<%= section %>" ></jsp:include>
+			<jsp:include page="/admin/admin-header.jsp"></jsp:include>
+			<% if("admin-user.jsp".equals(section)){ %>
+				<jsp:include page="/admin/admin-user.jsp"></jsp:include>
+			<% }else if("admin-user-form.jsp".equals(section)){ %>
+				<jsp:include page="/admin/admin-user-form.jsp"></jsp:include>
+			<% }else{ %>
+				<jsp:include page="<%= section %>" ></jsp:include>
+			<% } %>
 		</div>	
 	</div>	
 </body>

@@ -38,11 +38,12 @@ public class MyPageProc extends HttpServlet {
 		UserDAO udao = new UserDAO();
 		
 		UserDTO userDto = udao.getUser(userId);		
-		MyPageDTO mydto = udao.getMyPage(userId);				
+		ArrayList<MyPageDTO> mydto = udao.getMyPage(userId);				
 		
 				
 		// 예매내역 정보가져오기
-		ArrayList<ReserveDTO> reserveList = udao.getReserveList(userId);		
+		ArrayList<ReserveDTO> reserveList = udao.getReserveList(userId);
+		
 				
 		// 1:1문의 내역 정보가져오기
 		ArrayList<InquiryDTO> inquiryList = udao.getInquiryList(userId);
@@ -50,9 +51,10 @@ public class MyPageProc extends HttpServlet {
 		InquiryDTO inquiry = udao.getInquiry(userId);
 				
 		request.setAttribute("reserveList", reserveList);
+		
 		request.setAttribute("inquiryList", inquiryList);
 		request.setAttribute("inquiry", inquiry);
-		request.setAttribute("myPage", mydto);
+		request.setAttribute("mypage", mydto);
 		request.setAttribute("userInfo", userDto);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=user/my-page-index.jsp");

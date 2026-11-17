@@ -20,6 +20,18 @@
 					<c:set var="adminTitle" value="영화관리" />
 					<c:set var="adminDesc" value="등록된 영화를 검색하고 확인합니다." />
 				</c:when>
+				<c:when test="${param.section == 'admin-user.jsp'}">
+					<c:set var="adminTitle" value="회원관리" />
+					<c:set var="adminDesc" value="회원을 검색하고 등록, 수정, 탈퇴 처리합니다." />
+				</c:when>
+				<c:when test="${param.section == 'admin-user-form.jsp' && not empty udto}">
+					<c:set var="adminTitle" value="회원 수정" />
+					<c:set var="adminDesc" value="회원 정보를 확인하고 수정하거나 탈퇴 처리합니다." />
+				</c:when>
+				<c:when test="${param.section == 'admin-user-form.jsp'}">
+					<c:set var="adminTitle" value="회원 등록" />
+					<c:set var="adminDesc" value="새 회원의 아이디, 비밀번호, 연락처를 등록합니다." />
+				</c:when>
 				<c:when test="${param.section == 'admin-movie-form.jsp' && not empty mdto}">
 					<c:set var="adminTitle" value="영화 수정" />
 					<c:set var="adminDesc" value="영화 정보를 확인하고 수정하거나 삭제합니다." />
