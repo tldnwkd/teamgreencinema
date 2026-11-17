@@ -4,7 +4,7 @@
 
 <section class="admin-board">
 	<div class="admin-panel">
-		<form class="admin-form" action="AdminMovieProc.do" method="post" name="movieForm">
+		<form class="admin-form" action="AdminMovieProc.do" method="post" name="movieForm" enctype="multipart/form-data">
 			<c:if test="${not empty mdto}">
 				<input type="hidden" name="movieId" value="${mdto.movieId}">
 			</c:if>
@@ -27,8 +27,10 @@
 				<input id="runTime" name="runTime" type="number" min="1" max="255" value="${mdto.runTime}" placeholder="분">
 			</div>
 			<div class="admin-form__row">
-				<label for="imgPath">이미지 경로</label>
-				<input id="imgPath" name="imgPath" type="text" maxlength="20" value="${mdto.imgPath}" placeholder="/img/m01.jpg">
+				<label for="poster">포스터 이미지</label>
+				<input id="poster" name="poster" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,image/*">
+				<input type="hidden" name="imgPath" value="${mdto.imgPath}">
+				<p class="admin-form__hint">jpg, png, gif, webp 파일을 올려 주세요. 수정할 때 파일을 비우면 지금 이미지가 유지됩니다.</p>
 				<c:if test="${not empty mdto.imgPath}">
 					<img class="admin-form__poster" src="${pageContext.request.contextPath}${mdto.imgPath}" alt="${mdto.movieTitle}">
 				</c:if>

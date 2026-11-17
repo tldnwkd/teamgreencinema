@@ -580,6 +580,31 @@
   resize: vertical;
 }
 
+.admin-body .admin-form input[type="file"] {
+  padding: 8px;
+  color: #d9ffe8;
+}
+
+.admin-body .admin-form input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  color: #04210f;
+  background: #03c75a;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-form__hint {
+  margin: 0;
+  color: #8aa898;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .admin-body .admin-form input:focus,
 .admin-body .admin-form select:focus,
 .admin-body .admin-form textarea:focus {
