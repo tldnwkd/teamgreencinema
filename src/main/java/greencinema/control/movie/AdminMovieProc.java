@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import greencinema.model.movie.MovieDAO;
 import greencinema.model.movie.MovieDTO;
 
 @WebServlet("/AdminMovieProc.do")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 6)
 public class AdminMovieProc extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,6 +29,29 @@ public class AdminMovieProc extends HttpServlet {
 
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		String btn = null;
+		String menu = null;
+		try {
+			btn = request.getParameter("btn");
+			menu = request.getParameter("menu");
+		} catch (IllegalStateException e) {
+			response.setContentType("text/html; charset=UTF-8");
+			java.io.PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('이미지 파일은 5MB 이하만 올릴 수 있습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			return;
+		}
+		if(btn != null || "write".equals(menu)) {
+			new AdminMovieInsertProc().reqPro(request, response);
+			return;
+		}
+		if(request.getParameter("movie_Id") != null) {
+			new OneAdminMovieProc().reqPro(request, response);
+			return;
+		}
+
 		HttpSession session = request.getSession();
 		String chkid = (String)session.getAttribute("id");
 		System.out.println(chkid);

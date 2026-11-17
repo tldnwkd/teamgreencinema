@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="admin-board">
-	<form class="admin-board__search" action="SearchAdminMoiveProc.do" method="get" name="mform">
+	<form class="admin-board__search admin-board__search--movie" action="SearchAdminMoiveProc.do" method="get" name="mform">
 		<select name="type">
 			<option value="">선택</option>
 			<option value="movie_title" ${type=='movie_title'?'selected':''}>제목으로 검색</option>
@@ -12,6 +12,7 @@
 		<input name="content" type="text" value="${content}" placeholder="검색어를 입력해주세요">
 		<button type="button" onclick="searchMovie();">검색</button>
 		<button type="button" class="is-ghost" onclick="location.href='AdminMovieProc.do'">전체보기</button>
+		<button type="button" onclick="location.href='AdminMovieProc.do?menu=write'">영화 등록</button>
 	</form>
 
 	<div class="admin-panel">
@@ -34,7 +35,7 @@
 							<c:forEach var="mList" items="${mList}">
 								<tr>
 									<td>${mList.movieId}</td>
-									<td>${mList.movieTitle}</td>
+									<td><a href="AdminMovieProc.do?movie_Id=${mList.movieId}">${mList.movieTitle}</a></td>
 									<td>
 										<c:choose>
 											<c:when test="${mList.movieRate == 0}">전체</c:when>
