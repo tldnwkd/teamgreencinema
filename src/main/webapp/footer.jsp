@@ -16,10 +16,21 @@
 			</div>
 			<div class="site-footer__links">
 				<a href="index.jsp">영화</a>
-				<a href="selectMovieReserveProc.do">예매</a>
+				<a onclick="reservebtn()">예매</a>
 				<a href="NoticeProc.do">공지사항</a>
-				<a href="InquiryLoginchkProc.do">1:1문의</a>
+				<a onclick="reservebtn()">1:1문의</a>
 				<a href="FaqProc.do">FAQ</a>
 			</div>
 		</div>
 	</footer>
+<script type="text/javascript">
+	function reservebtn(){
+		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
+			alert('로그인 후 이용 가능합니다.'); 
+			location.href='index.jsp?section=user/login.jsp';
+			return
+		}else{
+			location.href="selectMovieReserveProc.do?movieId="${list.movieId};
+		}
+	}
+</script>

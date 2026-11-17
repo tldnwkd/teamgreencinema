@@ -354,6 +354,8 @@
             checkAndResetOverflow();
             render();
             seatrender();
+        } else{
+        	alert("0명 미만의 인원은 선택 불가능 합니다.");
         }
     }
 
@@ -375,6 +377,8 @@
             checkAndResetOverflow();
             render();
             seatrender();
+        }else{
+        	alert("0명 미만의 인원은 선택 불가능 합니다.");
         }
     }
 
