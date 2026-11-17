@@ -17,32 +17,38 @@ import greencinema.model.faq.FaqDAO;
 public class FaqInsertProc extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		rePro(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		rePro(request, response);
 	}
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		int type = (Integer) request.getAttribute("faqType") ;
-		String inq = (String)request.getAttribute("faqTitle"); 
-		String content = (String)request.getAttribute("faqContent"); 
+		int type =  Integer.parseInt(request.getParameter("faqType"));
+		String inq = (String)request.getParameter("faqTitle"); 
+		String content = (String)request.getParameter("faqContent"); 
 		
 		FaqDAO fdao = new FaqDAO();
 		
 		int result = fdao.FaqInsert(type, inq, content);
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		response.setContentType("text/html; charset=UTF=8");
 		
 		if(result > 0) {
 			out.println("<script>");
 			out.println("alert('FAQ 등록이 완료되었습니다.')");
-			out.println("location.href='FaqProc.do'");
+			out.println("location.href='FaqProc.do';");
 			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('FAQ 등록에 실패했습니다.')");
+			out.println("history.go(-1)");
+			out.println("</script>");
+			
+			
 		}
-		
 		
 		
 		

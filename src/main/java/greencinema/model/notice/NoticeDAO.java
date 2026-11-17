@@ -182,4 +182,30 @@ public class NoticeDAO {
 		return n;
 	}
 	
+	//--admin-notice(공지사항)--insert
+	public int NoticeInsert(String inq, String content) {
+		int result = 0;
+	
+	 try {
+		 con = Util.getConnection();
+		 String sql = "insert notice (notice_title,notice_date,notice_text) values(?,now(),?);";
+		 pstmt = con.prepareStatement(sql);
+		 pstmt.setString(1, inq);
+		 pstmt.setString(2, content);
+		 result = pstmt.executeUpdate();
+		 
+	 }catch(Exception e) {e.printStackTrace();}finally {
+		 try {if(rs != null)rs.close();
+		 if(pstmt != null)pstmt.close();
+		 if(con != null)con.close();
+
+		 }catch(Exception e) {
+		 e.printStackTrace();
+		 }
+		 }
+	
+	
+	return result;
+}
+	
 }

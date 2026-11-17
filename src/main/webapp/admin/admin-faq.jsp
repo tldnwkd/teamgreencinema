@@ -80,7 +80,7 @@
 </section>
 <script>
 function searchFaq() {
-	var form = document.fform;
+	let form = document.fform;
 	if (form.type.value === "") {
 		alert("검색 항목을 선택해주세요.");
 		form.type.focus();
