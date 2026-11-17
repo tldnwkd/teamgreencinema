@@ -8,7 +8,7 @@
 				<a class="logo" href="index.jsp" aria-label="그린시네마 홈">GREEN<span>CINEMA</span><small
 					class="logo__sub">CINEMA FOR EVERYONE</small></a>
 				<nav class="main-nav" aria-label="주 메뉴">
-					<a href="MovieListProc.do" aria-current="page">영화</a>
+					<a href="index.jsp" aria-current="page">영화</a>
 					<a href="selectMovieReserveProc.do">예매</a>
 					<div class="nav-dropdown">
 					    <button type="button" class="nav-dropdown__title">고객센터</button>
