@@ -13,7 +13,8 @@
 		String section = request.getParameter("section");
 				
 		if(section == null || section.trim().isEmpty()){			
-	        section = "/admin/admin.jsp";
+			request.getRequestDispatcher("/AdminMovieProc.do").forward(request, response);
+	        return;
 	        
 	    }
 	

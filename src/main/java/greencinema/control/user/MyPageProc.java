@@ -32,6 +32,22 @@ public class MyPageProc extends HttpServlet {
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+
+		// 마이페이지 문의 작성
+		if("myinq".equals(request.getParameter("btn"))) {
+			new greencinema.control.inquiry.MyInquiryInsertProc().reqPro(request, response);
+			return;
+		}
+
+		// 마이페이지 문의 상세, 수정, 삭제
+		String inquiryMenu = request.getParameter("menu");
+		String inquiryBtn = request.getParameter("btn");
+		if("inquiry-one".equals(inquiryMenu) || "inquiry-edit".equals(inquiryMenu)
+				|| "mydel".equals(inquiryBtn) || "myupdOk".equals(inquiryBtn)) {
+			if(new greencinema.control.inquiry.MyInquiryOneProc().reqPro(request, response)) {
+				return;
+			}
+		}
 		
 		String userId = request.getParameter("userId");
 		

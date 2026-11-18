@@ -186,7 +186,7 @@ public class UserDAO {
 		ArrayList<ReserveDTO> rList = new ArrayList<>();
 		try {
 			con = Util.getConnection();
-			String sql = "SELECT * FROM reserve WHERE user_id = ?";
+			String sql = "select * from reserve where user_id=? order by reserve_date desc;";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);		
@@ -226,7 +226,7 @@ public class UserDAO {
 		ArrayList<InquiryDTO> iList = new ArrayList<>();
 		try {
 			con = Util.getConnection();
-			String sql = "SELECT * FROM inquiry WHERE user_id = ?";
+			String sql = "SELECT * FROM inquiry WHERE user_id = ? order by inquiry_date desc;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);		
 			rs = pstmt.executeQuery();
