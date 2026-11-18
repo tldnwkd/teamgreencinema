@@ -32,17 +32,34 @@ public class MyPageProc extends HttpServlet {
 	
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+
+		// 마이페이지 문의 작성
+		if("myinq".equals(request.getParameter("btn"))) {
+			new greencinema.control.inquiry.MyInquiryInsertProc().reqPro(request, response);
+			return;
+		}
+
+		// 마이페이지 문의 상세, 수정, 삭제
+		String inquiryMenu = request.getParameter("menu");
+		String inquiryBtn = request.getParameter("btn");
+		if("inquiry-one".equals(inquiryMenu) || "inquiry-edit".equals(inquiryMenu)
+				|| "mydel".equals(inquiryBtn) || "myupdOk".equals(inquiryBtn)) {
+			if(new greencinema.control.inquiry.MyInquiryOneProc().reqPro(request, response)) {
+				return;
+			}
+		}
 		
 		String userId = request.getParameter("userId");
 		
 		UserDAO udao = new UserDAO();
 		
 		UserDTO userDto = udao.getUser(userId);		
-		MyPageDTO mydto = udao.getMyPage(userId);				
+		ArrayList<MyPageDTO> mydto = udao.getMyPage(userId);				
 		
 				
 		// 예매내역 정보가져오기
-		ArrayList<ReserveDTO> reserveList = udao.getReserveList(userId);		
+		ArrayList<ReserveDTO> reserveList = udao.getReserveList(userId);
+		
 				
 		// 1:1문의 내역 정보가져오기
 		ArrayList<InquiryDTO> inquiryList = udao.getInquiryList(userId);
@@ -50,9 +67,10 @@ public class MyPageProc extends HttpServlet {
 		InquiryDTO inquiry = udao.getInquiry(userId);
 				
 		request.setAttribute("reserveList", reserveList);
+		
 		request.setAttribute("inquiryList", inquiryList);
 		request.setAttribute("inquiry", inquiry);
-		request.setAttribute("myPage", mydto);
+		request.setAttribute("mypage", mydto);
 		request.setAttribute("userInfo", userDto);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=user/my-page-index.jsp");

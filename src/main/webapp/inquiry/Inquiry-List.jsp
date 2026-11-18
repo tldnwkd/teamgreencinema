@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    <section class="board-page board-page--inquiry">
+ <section class="board-page board-page--inquiry is-search">
    <h1>1:1 문의사항</h1>
     <form action="SearchInquiryProc.do" method="get" name="iform">
     	<select id="type_i" name="type">
@@ -56,7 +56,7 @@
 			<a href ="InquiryProc.do?pageNum=${startpage+pageBlock}">다음</a>
 		</c:if>
 	</div>
-	</section>
+</section>
 		<script>
 	function search(){
 		let i = document.iform;

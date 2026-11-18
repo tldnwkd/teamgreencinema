@@ -3,19 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    String menu = request.getParameter("menu");
+    String menu = (String) request.getAttribute("mypageMenu");
+    if (menu == null || menu.trim().isEmpty()) {
+        menu = request.getParameter("menu");
+    }
     String contentPage = "/user/my-page.jsp";
 
     if ("reserve".equals(menu)) {
         contentPage = "/user/my-page-reserve.jsp";
     } else if ("inquiry".equals(menu)) {
         contentPage = "/user/my-page-inquiry.jsp";
+    } else if ("inquiry-one".equals(menu)) {
+        contentPage = "/user/my-page-inquiry-one.jsp";
+    } else if ("inquiry-edit".equals(menu)) {
+        contentPage = "/user/my-page-inquiry-edit.jsp";
     } else if ("info".equals(menu)) {
         contentPage = "/user/my-page-info.jsp";
     } else if ("delete".equals(menu)) {
         contentPage = "/user/my-page-delete.jsp";
     } else if ("inquiry-write".equals(menu)) {
-    	contentPage = "/inquiry/Inquiry.jsp";
+    	contentPage = "/user/my-page-inquiry-write.jsp";
     } else {
         menu = "home";
     }
@@ -47,7 +54,7 @@
         </a>
 
         <a href="MyPageProc.do?userId=${sessionScope.id}&amp;menu=inquiry"
-           class="<%= "inquiry".equals(menu) ? "is-active" : "" %>">
+           class="<%= "inquiry".equals(menu) || "inquiry-one".equals(menu) || "inquiry-edit".equals(menu) ? "is-active" : "" %>">
           1:1 문의 내역
         </a>
 

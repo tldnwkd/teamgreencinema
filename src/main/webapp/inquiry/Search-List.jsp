@@ -37,11 +37,11 @@
 								<c:choose >
 									<c:when test="${sList.answerStatus eq 1 }">
 										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">${sList.inquiryTitle}</a></td>
-										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">답변 완료</a></td>
+										<td><a class="ok" href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">답변 완료</a></td>
 									</c:when>
 									<c:otherwise>
 										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">${sList.inquiryTitle}</a></td>
-										<td><a href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">답변 대기</a></td>
+										<td><a class="no" href="OneInquiryProc.do?inquiryId=${sList.inquiryId}&answerStatus=${sList.answerStatus}">답변 대기</a></td>
 									</c:otherwise>
 								</c:choose>
 							</tr>

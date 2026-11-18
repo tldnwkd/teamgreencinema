@@ -3,8 +3,7 @@
 
 <section id="my-inquiries">
   <div class="section-header">
-    <h2 class="section-title">1:1 문의 내역</h2>
-    <a href="MyPageProc.do?userId=${sessionScope.id}&amp;menu=inquiry-write" class="btn btn--outline btn--small">문의 작성</a>
+    <h2 class="section-title">1:1 문의 내역</h2>    
   </div>
 
   <c:choose>
@@ -33,7 +32,7 @@
                 <td>${item.inquirySort}</td>
                 <td>${item.inquiryType}</td>
                 <td>
-                  <a href="OneInquiryProc.do?inquiryId=${item.inquiryId}&amp;answerStatus=${item.answerStatus}">${item.inquiryTitle}</a>
+                  <a href="MyPageProc.do?userId=${sessionScope.id}&amp;menu=inquiry-one&amp;inquiryId=${item.inquiryId}">${item.inquiryTitle}</a>
                 </td>
                 <td>
                   <span class="status-badge ${item.answerStatus == 0 ? 'status-badge--pending' : 'status-badge--success'}">

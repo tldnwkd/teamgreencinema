@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="admin-board">
-	<form class="admin-board__search" action="SearchFaqProc.do" method="get" name="fform">
+	<form class="admin-board__search admin-board__search--movie" action="SearchFaqProc.do" method="get" name="fform">
 		<select name="type">
 			<option value="">선택</option>
 			<option value="faq_inquery" ${type=='faq_inquery'?'selected':''}>제목으로 검색</option>
@@ -12,6 +12,7 @@
 		<input name="content" type="text" value="${content}" placeholder="검색어를 입력해주세요">
 		<button type="button" onclick="searchFaq();">검색</button>
 		<button type="button" class="is-ghost" onclick="location.href='FaqProc.do'">전체보기</button>
+		<button type="button" onclick="location.href='admin/admin-index.jsp?section=Admin-FAQ-Insert.jsp'">글작성</button>
 	</form>
 
 	<div class="admin-panel">
@@ -74,7 +75,6 @@
 				</c:url>
 				<a href="${nextUrl}">다음</a>
 			</c:if>
-			<button type="button" onclick="return location.href='admin/admin-index.jsp?section=Admin-FAQ-Insert.jsp'">글작성</button>
 		</div>
 	</div>
 </section>

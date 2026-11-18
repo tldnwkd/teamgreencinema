@@ -34,6 +34,35 @@ public class OneNoticeProc extends HttpServlet {
 		String chkId = (String)session.getAttribute("id");
 		int notice_Id = Integer.parseInt(request.getParameter("notice_Id"));
 		NoticeDAO ndao = new NoticeDAO();
+		String btn = request.getParameter("btn");
+		if("admin".equals(chkId) && "upd".equals(btn)) {
+			String title = request.getParameter("noticeTitle");
+			String content = request.getParameter("noticeText");
+			if(title == null) title = "";
+			if(content == null) content = "";
+			title = title.trim();
+			content = content.trim();
+			response.setContentType("text/html; charset=UTF-8");
+			java.io.PrintWriter out = response.getWriter();
+			if(title.equals("") || title.length() > 30 || content.equals("")) {
+				out.println("<script>");
+				out.println("alert('제목은 30자 이내, 내용은 비우지 말고 입력해주세요.');");
+				out.println("history.back();");
+				out.println("</script>");
+				return;
+			}
+			int result = ndao.NoticeUpdate(notice_Id, title, content);
+			out.println("<script>");
+			if(result > 0) {
+				out.println("alert('공지 수정이 완료되었습니다.');");
+				out.println("location.href='OneNoticeProc.do?notice_Id=" + notice_Id + "';");
+			}else {
+				out.println("alert('공지 수정에 실패했습니다.');");
+				out.println("history.back();");
+			}
+			out.println("</script>");
+			return;
+		}
 		NoticeDTO nOneList= ndao.OneNotice(notice_Id);
 		request.setAttribute("nOneList", nOneList);
 		

@@ -13,7 +13,7 @@
 					<div class="nav-dropdown">
 					    <button type="button" class="nav-dropdown__title">고객센터</button>
 					    <div class="nav-dropdown__menu">
-					        <a href="index.jsp?section=inquiry/Inquiry.jsp">1:1 문의</a>
+					        <a href="InquiryLoginchkProc.do">1:1 문의</a>
 					        <a href="FaqProc.do">FAQ</a>
 					        <a href="NoticeProc.do">공지사항</a>
 					    </div>
@@ -32,11 +32,11 @@
 				</div>
 			</div>
 		</header>
-		
+
 <script type="text/javascript">
 	function reservebtn(){
 		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
-			alert('로그인 후 이용 가능합니다.'); 
+			alert('로그인 후 이용 가능합니다.');
 			location.href='index.jsp?section=user/login.jsp';
 			return
 		}else{
