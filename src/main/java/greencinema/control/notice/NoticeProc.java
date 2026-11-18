@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import greencinema.model.faq.FaqDAO;
-import greencinema.model.faq.FaqDTO;
 import greencinema.model.notice.NoticeDAO;
 import greencinema.model.notice.NoticeDTO;
 
@@ -75,6 +73,9 @@ public class NoticeProc extends HttpServlet {
 			}
 			
 		}
+		int noticeCount = ndao.NoticeAllCount();
+		request.setAttribute("noticeCount", noticeCount);
+		
 		request.setAttribute("nList", nList);
 		
 		request.setAttribute("StartRow", StartRow);

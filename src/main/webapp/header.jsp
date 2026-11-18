@@ -13,7 +13,7 @@
 					<div class="nav-dropdown">
 					    <button type="button" class="nav-dropdown__title">고객센터</button>
 					    <div class="nav-dropdown__menu">
-					        <a onclick="reservebtn()">1:1 문의</a>
+					        <a onclick="inquirybtn()">1:1 문의</a>
 					        <a href="FaqProc.do">FAQ</a>
 					        <a href="NoticeProc.do">공지사항</a>
 					    </div>
@@ -41,6 +41,16 @@
 			return
 		}else{
 			location.href="selectMovieReserveProc.do?movieId="${list.movieId};
+		}
+	}
+	
+	function inquirybtn(){
+		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
+			alert('로그인 후 이용 가능합니다.');
+			location.href='index.jsp?section=user/login.jsp';
+			return
+		}else{
+			location.href="InquiryProc.do";
 		}
 	}
 </script>

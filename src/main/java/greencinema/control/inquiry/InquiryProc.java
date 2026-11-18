@@ -1,7 +1,6 @@
 package greencinema.control.inquiry;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -74,6 +73,8 @@ public class InquiryProc extends HttpServlet {
 				}
 
 			}
+			
+			
 			request.setAttribute("iList", iList);
 
 			request.setAttribute("StartRow", StartRow);
@@ -134,6 +135,10 @@ public class InquiryProc extends HttpServlet {
 				}
 
 			}
+			
+			int inquiryCount = idao.AllCount();
+			request.setAttribute("inquiryCount", inquiryCount);	
+			
 			request.setAttribute("iList", iList);
 
 			request.setAttribute("StartRow", StartRow);

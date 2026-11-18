@@ -65,7 +65,7 @@
 			<h3>공지사항</h3>
 			<p>예매내역과 문의내역을 확인하는 화면</p> <strong>화면 보기 ↗</strong></a>		
 			
-			<a class="service-card" onclick="reservebtn()">
+			<a class="service-card" onclick="inquirybtn()">
 			<span class="service-card__num">03</span><span class="service-card__icon">?</span>
 			<h3>1:1문의</h3>
 			<p>1:1 문의 안내</p> <strong>화면 보기 ↗</strong></a>
@@ -81,6 +81,15 @@
 			return
 		}else{
 			location.href="selectMovieReserveProc.do?movieId="${list.movieId};
+		}
+	}
+	function inquirybtn(){
+		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
+			alert('로그인 후 이용 가능합니다.');
+			location.href='index.jsp?section=user/login.jsp';
+			return
+		}else{
+			location.href="InquiryProc.do";
 		}
 	}
 </script>
