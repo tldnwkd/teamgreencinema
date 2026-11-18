@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 import greencinema.model.notice.NoticeDAO;
 import greencinema.model.notice.NoticeDTO;
 
+/**
+ * Servlet implementation class OneNoticeProc
+ */
 @WebServlet("/OneNoticeProc.do")
 public class OneNoticeProc extends HttpServlet {
 
@@ -29,25 +32,45 @@ public class OneNoticeProc extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String chkId = (String)session.getAttribute("id");
-		int noticeId = Integer.parseInt(request.getParameter("noticeId"));
+		int notice_Id = Integer.parseInt(request.getParameter("notice_Id"));
 		NoticeDAO ndao = new NoticeDAO();
-		NoticeDTO nOneList= ndao.OneNotice(noticeId, chkId);
+		String btn = request.getParameter("btn");
+		if("admin".equals(chkId) && "upd".equals(btn)) {
+			String title = request.getParameter("noticeTitle");
+			String content = request.getParameter("noticeText");
+			if(title == null) title = "";
+			if(content == null) content = "";
+			title = title.trim();
+			content = content.trim();
+			response.setContentType("text/html; charset=UTF-8");
+			java.io.PrintWriter out = response.getWriter();
+			if(title.equals("") || title.length() > 30 || content.equals("")) {
+				out.println("<script>");
+				out.println("alert('제목은 30자 이내, 내용은 비우지 말고 입력해주세요.');");
+				out.println("history.back();");
+				out.println("</script>");
+				return;
+			}
+			int result = ndao.NoticeUpdate(notice_Id, title, content);
+			out.println("<script>");
+			if(result > 0) {
+				out.println("alert('공지 수정이 완료되었습니다.');");
+				out.println("location.href='OneNoticeProc.do?notice_Id=" + notice_Id + "';");
+			}else {
+				out.println("alert('공지 수정에 실패했습니다.');");
+				out.println("history.back();");
+			}
+			out.println("</script>");
+			return;
+		}
+		NoticeDTO nOneList= ndao.OneNotice(notice_Id);
 		request.setAttribute("nOneList", nOneList);
 		
 		
 		if("admin".equals(chkId)) {
-			
-			String type = request.getParameter("type");
-			
-			if("upd".equals(type)) {
-				
-				RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Notice-Update.jsp");
-				rd.forward(request, response);
-			}else {
-			
 			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Notice.jsp");
 			rd.forward(request, response);
-			}}else {
+		}else {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=notice/OneNotice.jsp");
 			rd.forward(request, response);
 		}

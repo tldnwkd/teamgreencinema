@@ -580,6 +580,12 @@
   resize: vertical;
 }
 
+.admin-body .admin-form input[readonly],
+.admin-body .admin-form textarea[readonly] {
+  color: #f4fff8;
+  background: #101915;
+}
+
 .admin-body .admin-form input[type="file"] {
   padding: 8px;
   color: #d9ffe8;

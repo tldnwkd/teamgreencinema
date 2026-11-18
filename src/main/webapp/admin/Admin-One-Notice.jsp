@@ -1,41 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<section class="inquiry">
-	<div class="page-content">
-		<div class="container">
-			<div class="page-heading">
-				<p class="page-heading__eyebrow">CUSTOMER SERVICE</p>
-				<h1 class="page-heading__title">공지사항</h1>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<section class="admin-board">
+	<div class="admin-panel">
+		<form class="admin-form" action="OneNoticeProc.do" method="post" name="nform">
+			<input type="hidden" name="notice_Id" value="${nOneList.noticeId}">
+			<div class="admin-form__row">
+				<label for="noticeTitle">제목</label>
+				<input id="noticeTitle" name="noticeTitle" type="text" maxlength="30" value="${nOneList.noticeTitle}">
 			</div>
-			<section class="inquiry-form">
-				<div class="form-grid">
-					<div class="form-group">
-						<p class="form-label">글번호</p>
-						<p>${nOneList.noticeId }</p>
-					</div>
-					<div class="form-group">
-						<p class="form-label">제목</p>
-						<p>${nOneList.noticeTitle }</p>
-					</div>
-					<div class="form-group">
-						<p class="form-label">게시일</p>
-						<p>${nOneList.noticeDate }</p>
-					</div>
-					<div class="form-group form-group--full">
-						<p class="form-label">조회수</p>
-						<p>${nOneList.noticeHits}</p>
-					</div>
-					<div class="form-group form-group--full">
-						<p class="form-label">공지사항 내용</p>
-						<textarea id="inqText" class="form-control" name="faqAnswer" readonly>${nOneList.noticeText}</textarea>
-					</div>
-				</div>
-				<div class="form-actions">
-					<a href="${pageContext.request.contextPath}/NoticeProc.do" class="btn btn--outline">공지 목록보기</a>
-					<a href="${pageContext.request.contextPath}/OneNoticeProc.do?noticeId=${nOneList.noticeId}&type=upd"  class="btn btn--outline">수정</a>
-				</div>
-			</section>
-		</div>
+			<div class="admin-form__row">
+				<label for="noticeDate">게시일</label>
+				<input id="noticeDate" type="text" value="${nOneList.noticeDate}" readonly>
+			</div>
+			<div class="admin-form__row">
+				<label for="noticeHits">조회수</label>
+				<input id="noticeHits" type="text" value="${nOneList.noticeHits}" readonly>
+			</div>
+			<div class="admin-form__row">
+				<label for="noticeText">공지사항 내용</label>
+				<textarea id="noticeText" name="noticeText" rows="5">${nOneList.noticeText}</textarea>
+			</div>
+			<div class="admin-form__actions">
+				<a href="${pageContext.request.contextPath}/NoticeProc.do">목록</a>
+				<button type="submit" name="btn" value="upd" onclick="return confirm('공지를 수정할까요?');">수정</button>
+			</div>
+		</form>
 	</div>
 </section>
