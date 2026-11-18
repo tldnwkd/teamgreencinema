@@ -26,7 +26,7 @@ public class FaqUpdateProc extends HttpServlet {
 		FaqDAO fdao = new FaqDAO();
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-
+		
 		int faqId = Integer.parseInt(request.getParameter("faq_id"));
 		int faqType = Integer.parseInt(request.getParameter("type"));
 

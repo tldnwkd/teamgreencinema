@@ -33,6 +33,11 @@ public class InquiryProc extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		String chkId = session == null ? null : (String) session.getAttribute("id");
 
+		if (chkId == null) {
+			response.sendRedirect(request.getContextPath() + "/index.jsp?section=user/login.jsp");
+		    return;
+		    }
+
 		if (!chkId.equals("admin")) { // 일반회원일 경우
 			int count = 0; // 전체게시글 수
 			int pagesize = 5; // 한 화면에 그릴 페이지 수
