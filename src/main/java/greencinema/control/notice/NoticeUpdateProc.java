@@ -30,7 +30,7 @@ public class NoticeUpdateProc extends HttpServlet {
 		String content = request.getParameter("content");
 		int noticeId = Integer.parseInt(request.getParameter("noticeId"));
 		
-		int result = ndao.NoticeUpdate(title, content, noticeId);
+		int result = ndao.NoticeUpdate(noticeId, title, content);
 		
 		if(result > 0) {
 			request.setAttribute("msg", "수정이 완료되었습니다.");

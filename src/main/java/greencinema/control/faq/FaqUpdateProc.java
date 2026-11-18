@@ -27,8 +27,9 @@ public class FaqUpdateProc extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		int faq_Id = Integer.parseInt(request.getParameter("faq_id"));
+		int faqtype = Integer.parseInt(request.getParameter("type"));
 		
-		int result = fdao.FaqUpdate(title, content, faq_Id);
+		int result = fdao.FaqUpdate(faq_Id,faqtype, title, content);
 		
 		if(result > 0) {
 			request.setAttribute("msg", "수정이 완료되었습니다.");

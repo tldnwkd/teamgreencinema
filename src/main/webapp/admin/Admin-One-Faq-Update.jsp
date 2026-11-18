@@ -14,7 +14,7 @@
 					<div class="form-grid">
 						<div class="form-group">
 							<p class="form-label">문의 분류</p>
-							<input type="text" name="title" value="${fOneList.faqType }" readonly>
+							<input type="text" name="type" value="${fOneList.faqType }" readonly>
 						</div>
 						<div class="form-group">
 							<p class="form-label">제목</p>
