@@ -66,7 +66,7 @@ public class OneInquiryProc extends HttpServlet {
 		InquiryDTO idto = idao.getOneInquiry(inquiryId, chkId);
 		
 		request.setAttribute("idto", idto);
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=inquiry/OneInquiryUpdate.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=inquiry&csView=edit");
 		rd.forward(request, response);
 		
 		}else {
@@ -74,7 +74,7 @@ public class OneInquiryProc extends HttpServlet {
 			InquiryDTO idto = idao.getOneInquiry(inquiryId,chkId);
 			
 			request.setAttribute("idto", idto);
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=inquiry/OneInquiry.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=inquiry&csView=detail");
 			rd.forward(request, response);
 			
 			}

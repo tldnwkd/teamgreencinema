@@ -28,12 +28,15 @@ public class FaqUpdateProc extends HttpServlet {
 		String content = request.getParameter("content");
 		int faq_Id = Integer.parseInt(request.getParameter("faq_id"));
 		int faqType = Integer.parseInt(request.getParameter("type"));
-		
+		int faqId = Integer.parseInt(request.getParameter("faq_id"));
+		int faqType = Integer.parseInt(request.getParameter("type"));
+
 		int result = fdao.FaqUpdate(faq_Id,faqType,title, content);
-		
+		int result = fdao.FaqUpdate(faqId, faqType, title, content);
+
 		if(result > 0) {
 			request.setAttribute("msg", "수정이 완료되었습니다.");
-			response.sendRedirect("OneFaqProc.do?faq_id=" + faq_Id);
+			response.sendRedirect("OneFaqProc.do?faq_id=" + faqId);
 		}
 	}
 

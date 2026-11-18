@@ -93,7 +93,7 @@ public class SearchNoticeProc extends HttpServlet {
 		String chkId = session == null ? null : (String) session.getAttribute("id");
 		String view = "admin".equals(chkId)
 				? "admin/admin-index.jsp?section=admin-notice.jsp"
-				: "/index.jsp?section=notice/Search-Notice.jsp";
+				: "/index.jsp?section=cs/cs-index.jsp&csSection=notice&csView=search";
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 		
