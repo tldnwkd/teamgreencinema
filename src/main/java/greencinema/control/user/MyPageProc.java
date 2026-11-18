@@ -16,9 +16,6 @@ import greencinema.model.user.MyPageDTO;
 import greencinema.model.user.UserDAO;
 import greencinema.model.user.UserDTO;
 
-/**
- * Servlet implementation class MyPageProc
- */
 @WebServlet("/MyPageProc.do")
 public class MyPageProc extends HttpServlet {
 
