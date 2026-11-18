@@ -1,6 +1,8 @@
 package greencinema.control.movie;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -183,21 +185,46 @@ public class AdminMovieInsertProc extends HttpServlet {
 			return "fail";
 		}
 
+		// 실행 중인 서버 img 와 프로젝트 src/main/webapp/img 둘 다 저장한다.
+		// 서버 폴더에만 두면 이클립스 img 목록에 안 보이고, 다시 배포하면 파일도 사라진다.
 		String folder = request.getServletContext().getRealPath("/img");
-		if(folder == null) {
+		File projectImg = new File("C:/green/src/main/webapp/img");
+		File dir = null;
+		if(folder != null) {
+			dir = new File(folder);
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
+		}
+		if(dir == null || !dir.isDirectory()) {
+			dir = projectImg;
+		}
+		if(!dir.isDirectory()) {
 			return "fail";
 		}
-		File dir = new File(folder);
-		if(!dir.exists()) {
-			dir.mkdirs();
-		}
+		File saved = new File(dir, fileName);
 		try {
-			part.write(new File(dir, fileName).getAbsolutePath());
+			part.write(saved.getAbsolutePath());
+			if(projectImg.isDirectory() && !saved.getCanonicalPath().equals(new File(projectImg, fileName).getCanonicalPath())) {
+				copyFile(saved, new File(projectImg, fileName));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "fail";
 		}
 		return imgPath;
+	}
+
+	private void copyFile(File from, File to) throws IOException {
+		FileInputStream in = new FileInputStream(from);
+		FileOutputStream out = new FileOutputStream(to);
+		byte[] buf = new byte[4096];
+		int n = 0;
+		while((n = in.read(buf)) != -1) {
+			out.write(buf, 0, n);
+		}
+		in.close();
+		out.close();
 	}
 
 	private void alert(HttpServletResponse response, String msg, String location) throws IOException {

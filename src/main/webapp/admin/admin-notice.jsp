@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="admin-board">
-	<form class="admin-board__search" action="SearchNoticeProc.do" method="post" name="nform">
+	<form class="admin-board__search admin-board__search--movie" action="SearchNoticeProc.do" method="post" name="nform">
 		<select name="type">
 			<option value="">선택</option>
 			<option value="notice_title" ${type=='notice_title'?'selected':''}>제목으로 검색</option>
@@ -12,6 +12,7 @@
 		<input name="content" type="text" value="${content}" placeholder="검색어를 입력해주세요">
 		<button type="button" onclick="searchNotice();">검색</button>
 		<button type="button" class="is-ghost" onclick="location.href='NoticeProc.do'">전체보기</button>
+		<button type="button" onclick="location.href='admin/admin-index.jsp?section=Admin-Notice-Insert.jsp'">글작성</button>
 	</form>
 
 	<div class="admin-panel">
@@ -34,7 +35,7 @@
 							<c:forEach var="nList" items="${nList}">
 								<tr>
 									<td>${nList.noticeId}</td>
-									<td><a href="OneNoticeProc.do?notice_Id=${nList.noticeId}">${nList.noticeTitle}</a></td>
+									<td><a href="OneNoticeProc.do?noticeId=${nList.noticeId}">${nList.noticeTitle}</a></td>
 									<td>${nList.noticeDate}</td>
 									<td>${nList.noticeHits}</td>
 								</tr>
@@ -76,7 +77,6 @@
 				</c:url>
 				<a href="${nextUrl}">다음</a>
 			</c:if>
-			<a href="admin/admin-index.jsp?section=Admin-Notice-Insert.jsp" class="btn btn--outline">글작성</a>
 		</div>
 	</div>
 </section>

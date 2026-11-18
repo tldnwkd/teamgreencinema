@@ -32,11 +32,11 @@
 				</div>
 			</div>
 		</header>
-		
+
 <script type="text/javascript">
 	function reservebtn(){
 		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
-			alert('로그인 후 이용 가능합니다.'); 
+			alert('로그인 후 이용 가능합니다.');
 			location.href='index.jsp?section=user/login.jsp';
 			return
 		}else{

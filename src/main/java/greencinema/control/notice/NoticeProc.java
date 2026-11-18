@@ -90,8 +90,8 @@ public class NoticeProc extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-notice.jsp");
 			rd.forward(request, response);
 		}else{
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=notice/Notice.jsp");
-			rd.forward(request, response);			
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=notice");
+				rd.forward(request, response);		
 		}
 		
 		

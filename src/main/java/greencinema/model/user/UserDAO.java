@@ -186,7 +186,8 @@ public class UserDAO {
 		ArrayList<ReserveDTO> rList = new ArrayList<>();
 		try {
 			con = Util.getConnection();
-			String sql = "SELECT * FROM reserve WHERE user_id = ?";
+			String sql = "select * from reserve where user_id=? order by reserve_date desc;";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);		
 			rs = pstmt.executeQuery();
@@ -225,7 +226,7 @@ public class UserDAO {
 		ArrayList<InquiryDTO> iList = new ArrayList<>();
 		try {
 			con = Util.getConnection();
-			String sql = "SELECT * FROM inquiry WHERE user_id = ?";
+			String sql = "SELECT * FROM inquiry WHERE user_id = ? order by inquiry_date desc;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);		
 			rs = pstmt.executeQuery();
@@ -313,6 +314,7 @@ public class UserDAO {
 			    userDto.setUserBirth(rs.getString(4));
 			    userDto.setUserEmail(rs.getString(5));
 			    userDto.setUserPhone(rs.getString(6));
+			    userDto.setUserDelete(rs.getInt(7));
 			}
 			
 		}catch (Exception e) {
@@ -329,82 +331,95 @@ public class UserDAO {
 		return userDto;
 	}
 	
-	public MyPageDTO getMyPage(String id) {
-		MyPageDTO mydto = new MyPageDTO();
-		System.out.println("getMyPage id : " + id);
-		try {
-			con = Util.getConnection();
-			String sql = "SELECT\r\n"		
-					+ "     m.movie_title                           AS        movie_title"
-					+ "    , m.img_path                              AS        img_path"
-					+ "    , sc.screen_num                           AS        screen_num"
-					+ "    , CONCAT(t.large_region, ' ', t.small_region) AS    region"
-					+ "    , s.schedule_starttime                    AS        schedule_starttime"
-					+ "    , r.adult_count                           AS        adult_count"
-					+ "    , r.teens_count                           AS        teens_count"
-					+ "    , seat_info.seat_num                      AS        seat_num"
-					+ "    , r.total_price                           AS        total_price"
-					+ "    , CASE p.payment_method"
-					+ "        WHEN 1 THEN '신용카드'"
-					+ "        WHEN 2 THEN '계좌이체'"
-					+ "      END                                     AS payment_method"
-					+ "    , r.cancel_date                           AS cancel_date"
-					+ "    , CASE"
-					+ "        WHEN r.cancel_date IS NULL THEN '예매 완료'"
-					+ "        ELSE '취소됨'"
-					+ "      END                                     AS payment_status"
-					+ "    , r.reserve_id                                       AS reserve_id"
-					+ " FROM reserve r"
-					+ " JOIN user u ON r.user_id = u.user_id"
-					+ " JOIN payment p ON r.reserve_id = p.reserve_id"
-					+ " JOIN seat seat_info ON r.reserve_id = seat_info.reserve_id"
-					+ " JOIN screen sc ON seat_info.screen_id = sc.screen_id"
-					+ " JOIN theater t ON sc.theater_id = t.theater_id"
-					+ " JOIN schedule s ON sc.screen_id = s.screen_id"
-					+ "    AND s.schedule_starttime >= DATE_SUB(r.reserve_date, INTERVAL 7 DAY)"
-					+ "    AND s.schedule_starttime <= DATE_ADD(r.reserve_date, INTERVAL 1 DAY)"
-					+ " JOIN movie m ON s.movie_id = m.movie_id"
-					+ " WHERE u.user_id = ? and r.cancel_date is null"
-					+ " GROUP BY r.reserve_id, m.movie_title, m.img_path, sc.screen_num, t.large_region, t.small_region, "
-					+ "          s.schedule_starttime, r.adult_count, r.teens_count, seat_info.seat_num, "
-					+ "          r.total_price, p.payment_method, r.cancel_date, r.reserve_date"
-					+ " ORDER BY r.reserve_date DESC"
-					+ " limit 1";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				mydto.setMovieTitle(rs.getString(1));
-				mydto.setImgPath(rs.getString(2));
-				mydto.setScreenNum(rs.getInt(3));
-				mydto.setRegion(rs.getString(4));
-				mydto.setScheduleStarttime(rs.getString(5));
-				mydto.setAdultCount(rs.getInt(6));
-				mydto.setTeensCount(rs.getInt(7));
-				mydto.setSeatNum(rs.getString(8));
-				mydto.setTotalPrice(rs.getInt(9));
-				mydto.setPaymentMethod(rs.getString(10));
-				mydto.setCancelDate(rs.getString(11));
-				mydto.setPaymentStatus(rs.getString(12));
-				mydto.setReserveId(rs.getInt(13));
-			}		
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(con != null) con.close();
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return mydto;		
+	public ArrayList<MyPageDTO> getMyPage(String id) {
+	    ArrayList<MyPageDTO> mList = new ArrayList<>();
+	    System.out.println("getMyPage id : " + id);
+	    
+	    try {
+	        con = Util.getConnection();
+	        String sql = "SELECT "	        		
+	                   + "    m.movie_title                               AS movie_title "
+	                   + "  , m.img_path                                  AS img_path "
+	                   + "  , sc.screen_num                               AS screen_num "
+	                   + "  , CONCAT(t.large_region, ' ', t.small_region) AS region "
+	                   + "  , s.schedule_starttime                        AS schedule_starttime "
+	                   + "  , r.adult_count                               AS adult_count "
+	                   + "  , r.teens_count                               AS teens_count "
+	                   + "  , GROUP_CONCAT(seat_info.seat_num ORDER BY seat_info.seat_num SEPARATOR ', ') AS seat_num "
+	                   + "  , r.total_price                               AS total_price "
+	                   + "  , CASE p.payment_method "
+	                   + "      WHEN 1 THEN '신용카드' "
+	                   + "      WHEN 2 THEN '계좌이체' "
+	                   + "    END                                         AS payment_method "
+	                   + "  , r.cancel_date                               AS cancel_date "
+	                   + "  , CASE "
+	                   + "      WHEN r.cancel_date IS NULL THEN '예매 완료' "
+	                   + "      ELSE '취소됨' "
+	                   + "    END                                         AS payment_status "
+	                   + "  , r.reserve_id                                AS reserve_id "
+	                   + "FROM reserve r "
+	                   + "JOIN user u         ON r.user_id = u.user_id "
+	                   + "JOIN payment p      ON r.reserve_id = p.reserve_id "
+	                   + "JOIN seat seat_info ON r.reserve_id = seat_info.reserve_id "
+	                   + "JOIN screen sc      ON seat_info.screen_id = sc.screen_id "
+	                   + "JOIN theater t      ON sc.theater_id = t.theater_id "
+	                   + "JOIN schedule s     ON s.schedule_id = ( "
+	                   + "    SELECT s2.schedule_id "
+	                   + "    FROM schedule s2 "
+	                   + "    WHERE s2.screen_id = sc.screen_id "
+	                   + "      AND s2.schedule_starttime > NOW() "
+	                   + "    ORDER BY s2.schedule_starttime ASC "
+	                   + "    LIMIT 1 "
+	                   + ") "
+	                   + "JOIN movie m        ON s.movie_id = m.movie_id "
+	                   + "WHERE r.user_id = ? "
+	                   + "  AND r.cancel_date IS NULL "
+	                   + "  AND s.schedule_starttime > NOW() "
+	                   + "GROUP BY r.reserve_id "
+	                   + "ORDER BY s.schedule_starttime DESC";
+	        
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, id);
+	        rs = pstmt.executeQuery();
+	                
+	        while(rs.next()) {
+	            MyPageDTO mydto = new MyPageDTO();
+	            
+	            // 숫자 인덱스 대신 SELECT절의 AS 별칭으로 안전하게 매핑
+	            mydto.setMovieTitle(rs.getString("movie_title"));
+	            mydto.setImgPath(rs.getString("img_path"));
+	            mydto.setScreenNum(rs.getInt("screen_num"));
+	            mydto.setRegion(rs.getString("region"));
+	            mydto.setScheduleStarttime(rs.getString("schedule_starttime"));
+	            mydto.setAdultCount(rs.getInt("adult_count"));
+	            mydto.setTeensCount(rs.getInt("teens_count"));
+	            mydto.setSeatNum(rs.getString("seat_num"));
+	            mydto.setTotalPrice(rs.getInt("total_price"));
+	            mydto.setPaymentMethod(rs.getString("payment_method"));
+	            mydto.setCancelDate(rs.getString("cancel_date"));
+	            mydto.setPaymentStatus(rs.getString("payment_status"));
+	            mydto.setReserveId(rs.getInt("reserve_id"));
+	            
+	            mList.add(mydto);
+	        }
+	        
+	        // 리스트에 총 몇 건이 담겼는지 최종 확인용 로그
+	        System.out.println("getMyPage mList size : " + mList.size());
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            // 닫는 순서는 열었던 역순 (rs -> pstmt -> con)
+	            if(rs != null) rs.close();
+	            if(pstmt != null) pstmt.close();
+	            if(con != null) con.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    return mList;        
 	}
 	
 	public void updateUser(UserDTO udto, String id) {
@@ -493,6 +508,232 @@ public class UserDAO {
 				}
 			}		
 		
+		}
+		return result;
+	}
+
+	public int userAllCount() {
+		int count = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "select count(*) from user";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+
+	public ArrayList<UserDTO> userAllList(int Startpage, int pagesize) {
+		ArrayList<UserDTO> uList = new ArrayList<UserDTO>();
+		try {
+			con = Util.getConnection();
+			String sql = "select * from user order by user_id limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Startpage);
+			pstmt.setInt(2, pagesize);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				UserDTO udto = new UserDTO();
+				udto.setUserId(rs.getString(1));
+				udto.setUserName(rs.getString(3));
+				udto.setUserEmail(rs.getString(5));
+				udto.setUserPhone(rs.getString(6));
+				udto.setUserDelete(rs.getInt(7));
+				uList.add(udto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return uList;
+	}
+
+	public int uCount(String type, String content) {
+		int count = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "select count(*) from user where "+type+" like '%"+content+"%'";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+
+	public ArrayList<UserDTO> userSearch(String type, String content, int Startpage, int pagesize) {
+		ArrayList<UserDTO> uList = new ArrayList<UserDTO>();
+		try {
+			con = Util.getConnection();
+			String sql = "select * from user where "+type+" like '%"+content+"%' order by user_id limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Startpage);
+			pstmt.setInt(2, pagesize);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				UserDTO udto = new UserDTO();
+				udto.setUserId(rs.getString(1));
+				udto.setUserName(rs.getString(3));
+				udto.setUserEmail(rs.getString(5));
+				udto.setUserPhone(rs.getString(6));
+				udto.setUserDelete(rs.getInt(7));
+				uList.add(udto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return uList;
+	}
+
+	public boolean idCheck(String userId) {
+		boolean chk = false;
+		try {
+			con = Util.getConnection();
+			String sql = "select count(*) from user where user_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1) > 0) {
+					chk = true;
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return chk;
+	}
+
+	public boolean adminInsert(UserDTO udto) {
+		boolean result = false;
+		try {
+			con = Util.getConnection();
+			String sql = "insert into user (user_id, user_pw, user_name, user_birth, user_email, user_phone, user_delete) values (?, ?, ?, ?, ?, ?, 0)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, udto.getUserId());
+			pstmt.setString(2, udto.getUserPw());
+			pstmt.setString(3, udto.getUserName());
+			pstmt.setString(4, udto.getUserBirth());
+			pstmt.setString(5, udto.getUserEmail());
+			pstmt.setString(6, udto.getUserPhone());
+			if(pstmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int adminUpdate(UserDTO udto, boolean changePw) {
+		int result = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "";
+			if(changePw) {
+				sql = "update user set user_pw=?, user_name=?, user_birth=?, user_email=?, user_phone=?, user_delete=? where user_id=?";
+			}else {
+				sql = "update user set user_name=?, user_birth=?, user_email=?, user_phone=?, user_delete=? where user_id=?";
+			}
+			pstmt = con.prepareStatement(sql);
+			int i = 1;
+			if(changePw) {
+				pstmt.setString(i++, udto.getUserPw());
+			}
+			pstmt.setString(i++, udto.getUserName());
+			pstmt.setString(i++, udto.getUserBirth());
+			pstmt.setString(i++, udto.getUserEmail());
+			pstmt.setString(i++, udto.getUserPhone());
+			pstmt.setInt(i++, udto.getUserDelete());
+			pstmt.setString(i++, udto.getUserId());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int withdrawUser(String userId) {
+		int result = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "update user set user_delete=1 where user_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
