@@ -92,7 +92,7 @@ public class SearchFaqProc extends HttpServlet {
 		String chkId = session == null ? null : (String) session.getAttribute("id");
 		String view = "admin".equals(chkId)
 				? "admin/admin-index.jsp?section=admin-faq.jsp"
-				: "/index.jsp?section=faq/Search-Faq.jsp";
+				: "/index.jsp?section=cs/cs-index.jsp&csSection=faq&csView=search";
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 		

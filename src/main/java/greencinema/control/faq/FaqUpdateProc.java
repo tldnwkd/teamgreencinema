@@ -26,13 +26,14 @@ public class FaqUpdateProc extends HttpServlet {
 		FaqDAO fdao = new FaqDAO();
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		int faq_Id = Integer.parseInt(request.getParameter("faq_id"));
+		int faqId = Integer.parseInt(request.getParameter("faq_id"));
+		int faqType = Integer.parseInt(request.getParameter("type"));
 		
-		int result = fdao.FaqUpdate(title, content, faq_Id);
+		int result = fdao.FaqUpdate(faqId, faqType, title, content);
 		
 		if(result > 0) {
 			request.setAttribute("msg", "수정이 완료되었습니다.");
-			response.sendRedirect("OneFaqProc.do?faq_id=" + faq_Id);
+			response.sendRedirect("OneFaqProc.do?faq_id=" + faqId);
 		}
 	}
 

@@ -172,7 +172,7 @@ public class SearchInquiryProc extends HttpServlet {
 		
 		String view = "admin".equals(chkid)
 				? "admin/admin-index.jsp?section=admin-inquiry.jsp"
-				: "/index.jsp?section=inquiry/Search-List.jsp";
+				: "/index.jsp?section=cs/cs-index.jsp&csSection=inquiry&csView=search";
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 		

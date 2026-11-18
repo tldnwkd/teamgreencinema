@@ -83,7 +83,7 @@ public class OneFaqProc extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq.jsp");
 					rd.forward(request, response);
 			}}else {
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=faq/OneFaq.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=faq&csView=detail");
 			rd.forward(request, response);
 		}
 	}

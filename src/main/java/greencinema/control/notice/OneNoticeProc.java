@@ -32,7 +32,11 @@ public class OneNoticeProc extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String chkId = (String)session.getAttribute("id");
-		int noticeId = Integer.parseInt(request.getParameter("noticeId"));
+		String noticeParam = request.getParameter("noticeId");
+		if(noticeParam == null || noticeParam.trim().isEmpty()) {
+			noticeParam = request.getParameter("notice_Id");
+		}
+		int noticeId = Integer.parseInt(noticeParam);
 		NoticeDAO ndao = new NoticeDAO();
 		String btn = request.getParameter("btn");
 		if("admin".equals(chkId) && "upd".equals(btn)) {
@@ -71,7 +75,7 @@ public class OneNoticeProc extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Notice.jsp");
 			rd.forward(request, response);
 		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=notice/OneNotice.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=notice&csView=detail");
 			rd.forward(request, response);
 		}
 	}
