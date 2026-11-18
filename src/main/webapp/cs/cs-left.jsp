@@ -20,15 +20,15 @@
         </c:choose>
     </div>
 
-    <nav class="cs-tabs" aria-label="고객센터 메뉴">
+    <nav class="cs-nav" aria-label="고객센터 메뉴">
         <a href="${pageContext.request.contextPath}/NoticeProc.do"
            class="${param.csSection eq 'notice' ? 'is-active' : ''}"
-           aria-current="${param.csSection eq 'notice' ? 'page' : 'false'}">공지사항</a>
+           ${param.csSection eq 'notice' ? 'aria-current="page"' : ''}>공지사항</a>
         <a href="${pageContext.request.contextPath}/FaqProc.do"
            class="${param.csSection eq 'faq' ? 'is-active' : ''}"
-           aria-current="${param.csSection eq 'faq' ? 'page' : 'false'}">FAQ</a>
+           ${param.csSection eq 'faq' ? 'aria-current="page"' : ''}>FAQ</a>
         <a href="${pageContext.request.contextPath}/InquiryProc.do"
            class="${empty param.csSection or param.csSection eq 'inquiry' ? 'is-active' : ''}"
-           aria-current="${empty param.csSection or param.csSection eq 'inquiry' ? 'page' : 'false'}">1:1 문의</a>
+           ${empty param.csSection or param.csSection eq 'inquiry' ? 'aria-current="page"' : ''}>1:1 문의</a>
     </nav>
 </aside>

@@ -3,29 +3,33 @@
 
 <c:choose>
     <c:when test="${param.csView eq 'detail'}">
-        <section class="inquiry-form">
-            <div class="form-grid">
-                <div class="form-group">
-                    <p class="form-label">문의 분류</p>
-                    <p><c:out value="${fOneList.faqType}" /></p>
-                </div>
-                <div class="form-group form-group--full">
-                    <p class="form-label">문의 제목</p>
-                    <p><c:out value="${fOneList.faqInquery}" /></p>
-                </div>
-                <div class="form-group form-group--full">
-                    <p class="form-label">답변 내용</p>
-                    <textarea class="form-control" readonly><c:out value="${fOneList.faqAnswer}" /></textarea>
-                </div>
+        <article class="cs-panel">
+            <span class="cs-chip">
+                <c:choose>
+                    <c:when test="${fOneList.faqType == 1}">예매 · 결제</c:when>
+                    <c:when test="${fOneList.faqType == 2}">영화관</c:when>
+                    <c:when test="${fOneList.faqType == 3}">회원정보</c:when>
+                    <c:when test="${fOneList.faqType == 4}">이벤트</c:when>
+                    <c:when test="${fOneList.faqType == 5}">관람 · 시설</c:when>
+                    <c:otherwise>FAQ</c:otherwise>
+                </c:choose>
+            </span>
+            <h2 class="cs-article__title"><c:out value="${fOneList.faqInquery}" /></h2>
+            <div class="cs-answer">
+                <span class="cs-chip">답변</span>
+                <div class="cs-body"><c:out value="${fOneList.faqAnswer}" /></div>
             </div>
             <div class="form-actions">
-                <a class="btn btn--outline" href="${pageContext.request.contextPath}/FaqProc.do">FAQ 목록보기</a>
+                <a class="btn btn--outline" href="${pageContext.request.contextPath}/FaqProc.do">목록</a>
             </div>
-        </section>
+        </article>
     </c:when>
     <c:otherwise>
-        <section class="board-page board-page--faq ${param.csView eq 'search' ? 'is-search' : ''}">
-            <form action="${pageContext.request.contextPath}/SearchFaqProc.do" method="get">
+        <section class="cs-panel">
+            <div class="cs-panel__head">
+                <span class="cs-chip">${param.csView eq 'search' ? '검색 결과' : '자주 묻는 질문'}</span>
+            </div>
+            <form class="cs-search" action="${pageContext.request.contextPath}/SearchFaqProc.do" method="get">
                 <select name="type" aria-label="FAQ 검색 항목" required>
                     <option value="">선택</option>
                     <option value="faq_inquery" ${type eq 'faq_inquery' ? 'selected' : ''}>제목으로 검색</option>
@@ -33,27 +37,28 @@
                 </select>
                 <input type="text" name="content" value="<c:out value='${content}'/>" placeholder="검색어를 입력해주세요" required>
                 <input type="submit" value="검색">
-                <input type="button" class="btn-all" value="전체보기"
-                       onclick="location.href='${pageContext.request.contextPath}/FaqProc.do'">
+                <input type="button" class="btn-all" value="전체보기" onclick="location.href='${pageContext.request.contextPath}/FaqProc.do'">
             </form>
-
-            <table>
-                <thead><tr><th>질문</th></tr></thead>
-                <tbody>
-                    <c:choose>
-                        <c:when test="${empty fList}">
-                            <tr><td>등록된 FAQ가 없습니다.</td></tr>
-                        </c:when>
-                        <c:otherwise>
-                            <c:forEach var="f" items="${fList}">
-                                <tr><td><a href="${pageContext.request.contextPath}/OneFaqProc.do?faq_id=${f.faqId}"><c:out value="${f.faqInquery}" /></a></td></tr>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
-                </tbody>
-            </table>
-
-            <div class="paging">
+            <div class="cs-table-wrap">
+                <table class="cs-table">
+                    <thead><tr><th>질문</th></tr></thead>
+                    <tbody>
+                        <c:choose>
+                            <c:when test="${empty fList}">
+                                <tr><td class="cs-empty">등록된 FAQ가 없습니다.</td></tr>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach var="f" items="${fList}">
+                                    <tr>
+                                        <td><a href="${pageContext.request.contextPath}/OneFaqProc.do?faq_id=${f.faqId}"><c:out value="${f.faqInquery}" /></a></td>
+                                    </tr>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </tbody>
+                </table>
+            </div>
+            <div class="cs-paging">
                 <c:if test="${startpage gt pageBlock}">
                     <c:url var="prev" value="/${param.csView eq 'search' ? 'SearchFaqProc.do' : 'FaqProc.do'}">
                         <c:param name="pageNum" value="${startpage-pageBlock}" />
@@ -67,7 +72,7 @@
                             <c:param name="pageNum" value="${i}" />
                             <c:if test="${param.csView eq 'search'}"><c:param name="type" value="${type}"/><c:param name="content" value="${content}"/></c:if>
                         </c:url>
-                        <a href="${purl}"><c:out value="${i}" /></a>
+                        <a href="${purl}" class="${i == param.pageNum || (empty param.pageNum && i == 1) ? 'is-current' : ''}"><c:out value="${i}" /></a>
                     </c:forEach>
                 </c:if>
                 <c:if test="${endpage lt pageCount}">

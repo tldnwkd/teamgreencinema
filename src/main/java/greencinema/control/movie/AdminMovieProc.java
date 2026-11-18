@@ -109,6 +109,8 @@ public class AdminMovieProc extends HttpServlet {
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("pageBlock", pageBlock);
 		
+		request.setAttribute("movieCount", count);
+		request.setAttribute("movieCount", count);
 															 
 		if("admin".equals(chkid)) {
 			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-movie.jsp");
