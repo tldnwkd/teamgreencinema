@@ -13,7 +13,7 @@
 					<div class="nav-dropdown">
 					    <button type="button" class="nav-dropdown__title">고객센터</button>
 					    <div class="nav-dropdown__menu">
-					        <a onclick="reservebtn()">1:1 문의</a>
+					        <a href="index.jsp?section=inquiry/Inquiry.jsp">1:1 문의</a>
 					        <a href="FaqProc.do">FAQ</a>
 					        <a href="NoticeProc.do">공지사항</a>
 					    </div>
