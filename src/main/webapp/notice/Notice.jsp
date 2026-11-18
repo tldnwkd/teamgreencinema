@@ -24,7 +24,7 @@
 				<c:forEach var= "nList" items="${nList}">
 						<tr>
 							<td>
-								<a href="OneNoticeProc.do?notice_Id=${nList.noticeId}">${nList.noticeTitle }</a>
+								<a href="OneNoticeProc.do?noticeId=${nList.noticeId}">${nList.noticeTitle }</a>
 							</td>
 								<td>${nList.noticeDate }</td>
 							<td align="center">${nList.noticeHits }</td>

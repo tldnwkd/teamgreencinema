@@ -203,4 +203,33 @@ public class FaqDAO {
 		
 		return result;
 	}
+	
+	public int FaqUpdate(String title, String content, int FaqId) {
+	    int result = 0;
+
+	    try {
+	        con = Util.getConnection();
+
+	        String sql = "update faq set faq_inquery=?, faq_answer=? where faq_id = ?";
+
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, title);
+	        pstmt.setString(2, content);
+	        pstmt.setInt(3, FaqId);
+
+	        result = pstmt.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (pstmt != null) pstmt.close();
+	            if (con != null) con.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return result;
+	}
 }

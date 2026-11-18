@@ -89,7 +89,7 @@ public class FaqProc extends HttpServlet {
 			rd.forward(request, response);
 		} else {
 
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=faq/Faq.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=faq");
 			rd.forward(request, response);
 		}
 	}

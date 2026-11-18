@@ -2982,140 +2982,205 @@ textarea.form-control {
   }
 }
 
-/* --- Inquiry list --- */
+/* --- Inquiry list: same look as search --- */
 .board-page--inquiry:not(.is-search) {
-  --inq-green: #03a94f;
-  --inq-green-dark: #078743;
-  --inq-green-soft: #ecfaf2;
-  --inq-ink: #192328;
-  --inq-muted: #6b7781;
-  --inq-line: #e6ebeb;
-  --inq-white: #ffffff;
-  width: min(1120px, calc(100% - 48px));
-  margin: 56px auto 92px;
-  padding: 0;
-  color: var(--inq-ink);
-  font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+  --gc-accent: #3c63bd;
+  --gc-accent-dark: #294b9b;
+  --gc-accent-light: #ecf2fe;
+  --gc-accent-glow: rgba(60, 99, 189, 0.13);
+  --gc-border: #e4ebf1;
+  --gc-muted: #738295;
+  --gc-ink: #1b2a3b;
+  box-sizing: border-box;
+  width: min(1120px, calc(100% - 36px));
+  margin: 44px auto 68px;
+  padding: 34px 38px 32px;
+  background: #fff;
+  border: 1px solid #3c63bd38;
+  border-radius: 22px;
+  box-shadow: 0 16px 46px rgba(20, 43, 69, 0.055);
+  font-family: Pretendard, "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+  color: var(--gc-ink);
+  overflow-x: auto;
+}
+.board-page--inquiry:not(.is-search),
+.board-page--inquiry:not(.is-search) * {
   box-sizing: border-box;
 }
-.board-page--inquiry:not(.is-search) *,
-.board-page--inquiry:not(.is-search) *::before,
-.board-page--inquiry:not(.is-search) *::after {
-  box-sizing: border-box;
+.board-page--inquiry:not(.is-search)::before {
+  content: "1:1 문의 · 전체 목록";
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  color: var(--gc-accent-dark);
+  background: var(--gc-accent-light);
 }
 .board-page--inquiry:not(.is-search) > h1 {
-  margin: 0 0 32px;
-  padding: 0 0 22px;
-  border-bottom: 2px solid var(--inq-ink);
-  font-size: clamp(26px, 2.6vw, 34px);
-  font-weight: 750;
-  letter-spacing: -1.2px;
+  position: relative;
+  margin: 0 0 25px;
+  padding: 0 0 20px;
+  font-size: clamp(23px, 2.6vw, 32px);
+  font-weight: 800;
   line-height: 1.3;
+  letter-spacing: -0.045em;
+  color: var(--gc-ink);
 }
-.board-page--inquiry:not(.is-search) > h1::before {
-  content: "CUSTOMER SERVICE";
-  display: block;
-  margin-bottom: 10px;
-  color: var(--inq-green-dark);
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: 2px;
+.board-page--inquiry:not(.is-search) > h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--gc-accent);
 }
 .board-page--inquiry:not(.is-search) > form {
-  display: flex;
+  display: grid;
+  grid-template-columns: 172px minmax(0, 1fr) 85px 94px;
+  gap: 10px;
   align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin: 0 0 24px;
-  padding: 0;
+  margin: 0 0 29px;
+  padding: 19px;
+  background: linear-gradient(110deg, #ecf2fe, #ffffff 72%);
+  border: 1px solid #3c63bd30;
+  border-radius: 14px;
 }
 .board-page--inquiry:not(.is-search) > form select,
 .board-page--inquiry:not(.is-search) > form input {
+  min-width: 0;
   height: 44px;
-  border: 1px solid #d8dfdf;
-  border-radius: 6px;
-  background: var(--inq-white);
-  color: var(--inq-ink);
+  margin: 0;
+  border-radius: 9px;
   font: inherit;
-  font-size: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  font-size: 13px;
 }
-.board-page--inquiry:not(.is-search) > form select {
-  width: 175px;
-  padding: 0 35px 0 14px;
-  cursor: pointer;
-}
+.board-page--inquiry:not(.is-search) > form select,
 .board-page--inquiry:not(.is-search) > form input[type="text"] {
-  flex: 0 1 325px;
-  min-width: 210px;
-  padding: 0 14px;
+  width: 100%;
+  padding: 0 13px;
+  background: #fff;
+  border: 1px solid #dce4ea;
+  color: #314256;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
 }
 .board-page--inquiry:not(.is-search) > form input[type="text"]::placeholder {
-  color: #9aa4ab;
+  color: #a0aaba;
 }
 .board-page--inquiry:not(.is-search) > form select:focus,
 .board-page--inquiry:not(.is-search) > form input[type="text"]:focus {
-  outline: none;
-  border-color: var(--inq-green);
-  box-shadow: 0 0 0 3px rgba(3, 169, 79, 0.12);
+  border-color: var(--gc-accent);
+  box-shadow: 0 0 0 3px var(--gc-accent-glow);
 }
 .board-page--inquiry:not(.is-search) > form input[type="submit"],
 .board-page--inquiry:not(.is-search) > form input[type="button"] {
-  min-width: 82px;
-  padding: 0 20px;
-  font-weight: 700;
+  width: 100%;
+  padding: 0 8px;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.15s, background-color 0.15s, border-color 0.15s;
 }
 .board-page--inquiry:not(.is-search) > form input[type="submit"] {
-  border-color: var(--inq-green-dark);
-  color: white;
-  background: var(--inq-green-dark);
+  border: 1px solid var(--gc-accent);
+  color: #fff;
+  background: var(--gc-accent);
 }
 .board-page--inquiry:not(.is-search) > form input[type="submit"]:hover {
-  background: #066d36;
-  border-color: #066d36;
+  background: var(--gc-accent-dark);
+  transform: translateY(-1px);
 }
 .board-page--inquiry:not(.is-search) > form input.btn-all {
-  background: #f6f8f8;
-  color: #3d484f;
+  border: 1px solid #d8e0e8;
+  color: #526275;
+  background: #fff;
 }
 .board-page--inquiry:not(.is-search) > form input.btn-all:hover {
-  border-color: #879b91;
-  background: #edf3ef;
+  border-color: var(--gc-accent);
+  color: var(--gc-accent-dark);
 }
 .board-page--inquiry:not(.is-search) > table {
   width: 100%;
-  table-layout: fixed;
-  border: none;
+  min-width: 710px;
+  margin: 0;
   border-collapse: collapse;
-  border-top: 2px solid var(--inq-ink);
-  background: var(--inq-white);
-  font-size: 14px;
+  border: 0;
+  table-layout: fixed;
+  background: #fff;
 }
 .board-page--inquiry:not(.is-search) > table th,
 .board-page--inquiry:not(.is-search) > table td {
-  border: none;
-  border-bottom: 1px solid var(--inq-line);
+  border: 0;
+  border-bottom: 1px solid #edf1f5;
+  text-align: center;
   vertical-align: middle;
   overflow-wrap: anywhere;
 }
 .board-page--inquiry:not(.is-search) > table th {
-  padding: 19px 12px;
-  background: #f5f8f6;
-  color: #47565b;
-  text-align: center;
+  padding: 16px 13px;
+  background: var(--gc-accent-light);
+  color: var(--gc-accent-dark);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
+  white-space: nowrap;
+  border-top: 2px solid var(--gc-accent);
+  border-bottom: 1px solid #dce7e5;
 }
 .board-page--inquiry:not(.is-search) > table td {
-  padding: 20px 12px;
-  color: #47535b;
-  text-align: center;
-  line-height: 1.6;
+  padding: 17px 13px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #4a5969;
+}
+.board-page--inquiry:not(.is-search) > table td:nth-child(3) {
+  text-align: left;
+  font-weight: 700;
+  color: #233449;
+}
+.board-page--inquiry:not(.is-search) > table td:nth-child(3) a {
+  color: inherit;
+  text-decoration: none;
 }
 .board-page--inquiry:not(.is-search) > table tr:not(:first-child):hover td {
-  background: #f7fcf9;
+  background: #f7fbfa;
+}
+.board-page--inquiry:not(.is-search) > table td[colspan] {
+  padding: 48px 18px;
+  color: var(--gc-muted);
+  text-align: center;
+}
+.board-page--inquiry:not(.is-search) > table td[colspan] p {
+  margin: 0;
+}
+.board-page--inquiry:not(.is-search) > table td:last-child a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: #e5f7ee;
+  color: #18794e;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.board-page--inquiry:not(.is-search) > table td:last-child p {
+  display: inline-block;
+  margin: 0;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: #f1f3f6;
+  color: #687386;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 .board-page--inquiry:not(.is-search) > table th:nth-child(1),
 .board-page--inquiry:not(.is-search) > table td:nth-child(1) {
@@ -3125,114 +3190,78 @@ textarea.form-control {
 .board-page--inquiry:not(.is-search) > table td:nth-child(2) {
   width: 18%;
 }
-.board-page--inquiry:not(.is-search) > table th:nth-child(3),
-.board-page--inquiry:not(.is-search) > table td:nth-child(3) {
-  width: auto;
-  text-align: left;
-}
 .board-page--inquiry:not(.is-search) > table th:nth-child(4),
 .board-page--inquiry:not(.is-search) > table td:nth-child(4) {
   width: 140px;
-  text-align: center;
-}
-.board-page--inquiry:not(.is-search) > table td:nth-child(3) a {
-  color: #202b31;
-  text-decoration: none;
-  font-weight: 700;
-}
-.board-page--inquiry:not(.is-search) > table td:nth-child(3) a:hover {
-  color: var(--inq-green-dark);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.board-page--inquiry:not(.is-search) > table td:last-child a,
-.board-page--inquiry:not(.is-search) > table td:last-child p {
-  display: inline-block;
-  min-width: 82px;
-  margin: 0;
-  padding: 6px 11px;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.5;
-  white-space: nowrap;
-}
-.board-page--inquiry:not(.is-search) > table td:last-child a {
-  background: var(--inq-green-soft);
-  color: var(--inq-green-dark);
-  text-decoration: none;
-}
-.board-page--inquiry:not(.is-search) > table td:last-child p {
-  background: #f0f2f4;
-  color: #79858d;
 }
 .board-page--inquiry:not(.is-search) > .paging {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 36px;
+  gap: 7px;
+  min-height: 42px;
+  margin: 30px 0 0;
 }
-.board-page--inquiry:not(.is-search) > .paging a {
+.board-page--inquiry:not(.is-search) > .paging > a {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   min-width: 38px;
   height: 38px;
   padding: 0 11px;
-  border: 1px solid #e0e5e6;
-  border-radius: 5px;
+  border: 1px solid #dfe7ef;
+  border-radius: 9px;
   background: #fff;
-  color: #536168;
   font-size: 13px;
+  font-weight: 700;
   text-decoration: none;
-  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  color: #657489;
+  transition: background-color 0.18s, color 0.18s, border-color 0.18s;
 }
-.board-page--inquiry:not(.is-search) > .paging a:hover,
-.board-page--inquiry:not(.is-search) > .paging a:focus-visible {
-  background: var(--inq-green-dark);
-  border-color: var(--inq-green-dark);
-  color: white;
-  outline: none;
-}
-.board-page--inquiry:not(.is-search) a:focus-visible {
-  outline: 2px solid var(--inq-green);
-  outline-offset: 3px;
+.board-page--inquiry:not(.is-search) > .paging > a:hover,
+.board-page--inquiry:not(.is-search) > .paging > a:focus-visible {
+  background: var(--gc-accent);
+  border-color: var(--gc-accent);
+  color: #fff;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 800px) {
   .board-page--inquiry:not(.is-search) {
-    width: calc(100% - 28px);
-    margin: 28px auto 60px;
-    overflow-x: auto;
-  }
-  .board-page--inquiry:not(.is-search) > h1 {
-    font-size: 26px;
-    margin-bottom: 22px;
+    width: calc(100% - 22px);
+    padding: 24px 18px;
+    margin: 22px auto 40px;
+    border-radius: 16px;
   }
   .board-page--inquiry:not(.is-search) > form {
-    justify-content: stretch;
-    gap: 8px;
-  }
-  .board-page--inquiry:not(.is-search) > form select {
-    width: 100%;
-  }
-  .board-page--inquiry:not(.is-search) > form input[type="text"] {
-    flex: 1 1 100%;
-    width: 100%;
-    min-width: 0;
+    grid-template-columns: 135px minmax(0, 1fr);
+    padding: 14px;
   }
   .board-page--inquiry:not(.is-search) > form input[type="submit"],
-  .board-page--inquiry:not(.is-search) > form input[type="button"] {
-    flex: 1;
+  .board-page--inquiry:not(.is-search) > form input.btn-all {
+    min-height: 42px;
+  }
+  .board-page--inquiry:not(.is-search) > table td,
+  .board-page--inquiry:not(.is-search) > table th {
+    padding: 13px 10px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 510px) {
+  .board-page--inquiry:not(.is-search) > form {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .board-page--inquiry:not(.is-search) > form select,
+  .board-page--inquiry:not(.is-search) > form input[type="text"] {
+    grid-column: 1 / -1;
   }
   .board-page--inquiry:not(.is-search) > table {
-    min-width: 660px;
+    min-width: 710px;
   }
-  .board-page--inquiry:not(.is-search) > table th,
-  .board-page--inquiry:not(.is-search) > table td {
-    padding: 15px 10px;
+  .board-page--inquiry:not(.is-search) > .paging > a {
+    min-width: 35px;
+    height: 35px;
   }
 }
 
@@ -4243,4 +4272,98 @@ textarea.form-control {
 }
 .badge-rate.red {
   background-color: #e50914;
+}
+
+/* 답변 완료 - 초록색 */
+.board-page--inquiry > table td:last-child a.ok {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    padding: 7px 14px;
+    background: #e5f7ee;
+    color: #18794e;
+    border: 1px solid #a6dfc0;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* 답변 대기 - 주황색 */
+.board-page--inquiry > table td:last-child a.no {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    padding: 7px 14px;
+    background: #fff3df;
+    color: #976006;
+    border: 1px solid #f4d49c;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* 마우스 올렸을 때 */
+.board-page--inquiry > table td:last-child a.ok:hover {
+    background: #c9f0da;
+}
+
+.board-page--inquiry > table td:last-child a.no:hover {
+    background: #ffe5b5;
+}
+
+/* 왼쪽 제목 + 메뉴 / 오른쪽 문의 폼 */
+.inquiry form[name="iform"] > .page-content > .container {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    grid-template-areas:
+        "heading form"
+        "nav     form";
+
+    grid-template-rows: max-content 1fr; /* 추가 */
+
+    column-gap: 36px;
+    row-gap: 24px;
+    align-items: start;
+}
+
+/* 1:1 문의 제목 */
+.inquiry form[name="iform"] .page-heading {
+    grid-area: heading;
+    margin: 0;
+    text-align: left;
+}
+
+/* 왼쪽 세로 메뉴 */
+.inquiry form[name="iform"] .cs-tabs {
+    grid-area: nav;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+}
+
+/* 오른쪽 문의 작성 폼 */
+.inquiry form[name="iform"] .inquiry-form {
+    grid-area: form;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+    .inquiry form[name="iform"] > .page-content > .container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "heading"
+            "nav"
+            "form";
+    }
 }

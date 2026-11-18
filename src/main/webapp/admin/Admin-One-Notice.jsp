@@ -8,14 +8,12 @@
 				<p class="page-heading__eyebrow">CUSTOMER SERVICE</p>
 				<h1 class="page-heading__title">공지사항</h1>
 			</div>
-			<nav class="cs-tabs" aria-label="고객센터 메뉴">
-				<a href="NoticeProc.do" aria-current="page">공지사항</a>
-				<a href="FaqProc.do">FAQ</a>
-				<a href="InquiryProc.do">1:1 문의</a>
-			</nav>
-
 			<section class="inquiry-form">
 				<div class="form-grid">
+					<div class="form-group">
+						<p class="form-label">글번호</p>
+						<p>${nOneList.noticeId }</p>
+					</div>
 					<div class="form-group">
 						<p class="form-label">제목</p>
 						<p>${nOneList.noticeTitle }</p>
@@ -35,6 +33,7 @@
 				</div>
 				<div class="form-actions">
 					<a href="${pageContext.request.contextPath}/NoticeProc.do" class="btn btn--outline">공지 목록보기</a>
+					<a href="${pageContext.request.contextPath}/OneNoticeProc.do?noticeId=${nOneList.noticeId}&type=upd"  class="btn btn--outline">수정</a>
 				</div>
 			</section>
 		</div>

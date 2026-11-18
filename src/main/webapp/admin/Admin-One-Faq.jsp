@@ -25,6 +25,7 @@
 				</div>
 				<div class="form-actions">
 					<a href="FaqProc.do" class="btn btn--outline">FAQ 목록보기</a>
+					<a href="${pageContext.request.contextPath}/OneFaqProc.do?faq_id=${fOneList.faqId}&type=upd"  class="btn btn--outline">수정</a>
 				</div>
 			</section>
 		</div>

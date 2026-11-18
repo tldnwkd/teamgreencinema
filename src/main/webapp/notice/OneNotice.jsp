@@ -8,12 +8,6 @@
 				<p class="page-heading__eyebrow">CUSTOMER SERVICE</p>
 				<h1 class="page-heading__title">공지사항</h1>
 			</div>
-			<nav class="cs-tabs" aria-label="고객센터 메뉴">
-				<a href="NoticeProc.do" aria-current="page">공지사항</a>
-				<a href="FaqProc.do">FAQ</a>
-				<a href="InquiryProc.do">1:1 문의</a>
-			</nav>
-
 			<section class="inquiry-form">
 				<div class="form-grid">
 					<div class="form-group">
