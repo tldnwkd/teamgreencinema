@@ -207,5 +207,25 @@ public class NoticeDAO {
 	
 	return result;
 }
-	
+
+	public int NoticeUpdate(int noticeId, String title, String content) {
+		int result = 0;
+		try {
+			con = Util.getConnection();
+			String sql = "update notice set notice_title=?, notice_text=? where notice_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, noticeId);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {e.printStackTrace();}finally {
+			try {if(rs != null)rs.close();
+			if(pstmt != null)pstmt.close();
+			if(con != null)con.close();
+			}catch(Exception e) {
+			e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }

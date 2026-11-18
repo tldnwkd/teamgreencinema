@@ -42,7 +42,23 @@
 				</c:when>
 				<c:when test="${param.section == 'Admin-Inquiry-Insert.jsp'}">
 					<c:set var="adminTitle" value="문의 답변 관리" />
-					<c:set var="adminDesc" value="문의 내용을 확인하고 답변을 등록합니다." />
+					<c:set var="adminDesc" value="문의 내용을 확인하고 답변을 등록하거나 수정합니다." />
+				</c:when>
+				<c:when test="${param.section == 'Admin-One-Notice.jsp'}">
+					<c:set var="adminTitle" value="공지 수정" />
+					<c:set var="adminDesc" value="공지 제목과 내용을 확인하고 수정합니다." />
+				</c:when>
+				<c:when test="${param.section == 'Admin-Notice-Insert.jsp'}">
+					<c:set var="adminTitle" value="공지 등록" />
+					<c:set var="adminDesc" value="새 공지의 제목과 내용을 등록합니다." />
+				</c:when>
+				<c:when test="${param.section == 'Admin-One-Faq.jsp'}">
+					<c:set var="adminTitle" value="FAQ 수정" />
+					<c:set var="adminDesc" value="자주 묻는 질문과 답변을 확인하고 수정합니다." />
+				</c:when>
+				<c:when test="${param.section == 'Admin-FAQ-Insert.jsp'}">
+					<c:set var="adminTitle" value="FAQ 등록" />
+					<c:set var="adminDesc" value="새 FAQ의 종류, 제목, 내용을 등록합니다." />
 				</c:when>
 				<c:otherwise>
 					<c:set var="adminTitle" value="하우스 데스크 관리" />
