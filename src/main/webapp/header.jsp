@@ -40,7 +40,7 @@
 			location.href='index.jsp?section=user/login.jsp';
 			return
 		}else{
-			location.href="selectMovieReserveProc.do?movieId="${list.movieId};
+			location.href="InquiryProc.do";
 		}
 	}
 </script>

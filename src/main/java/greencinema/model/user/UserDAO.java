@@ -337,7 +337,7 @@ public class UserDAO {
 	    
 	    try {
 	        con = Util.getConnection();
-	        String sql = "SELECT "	        		
+	        String sql = "SELECT "                                         
 	                   + "    m.movie_title                               AS movie_title "
 	                   + "  , m.img_path                                  AS img_path "
 	                   + "  , sc.screen_num                               AS screen_num "
@@ -345,7 +345,7 @@ public class UserDAO {
 	                   + "  , s.schedule_starttime                        AS schedule_starttime "
 	                   + "  , r.adult_count                               AS adult_count "
 	                   + "  , r.teens_count                               AS teens_count "
-	                   + "  , GROUP_CONCAT(seat_info.seat_num ORDER BY seat_info.seat_num SEPARATOR ', ') AS seat_num "
+	                   + "  , t_seat.seat_num                             AS seat_num "
 	                   + "  , r.total_price                               AS total_price "
 	                   + "  , CASE p.payment_method "
 	                   + "      WHEN 1 THEN '신용카드' "
@@ -360,22 +360,19 @@ public class UserDAO {
 	                   + "FROM reserve r "
 	                   + "JOIN user u         ON r.user_id = u.user_id "
 	                   + "JOIN payment p      ON r.reserve_id = p.reserve_id "
-	                   + "JOIN seat seat_info ON r.reserve_id = seat_info.reserve_id "
-	                   + "JOIN screen sc      ON seat_info.screen_id = sc.screen_id "
+	                   + "JOIN ( "
+	                   + "    SELECT reserve_id, schedule_id, "
+	                   + "           GROUP_CONCAT(seat_num ORDER BY seat_num SEPARATOR ', ') AS seat_num "
+	                   + "    FROM seat "
+	                   + "    GROUP BY reserve_id, schedule_id "
+	                   + ") t_seat ON r.reserve_id = t_seat.reserve_id "
+	                   + "JOIN schedule s     ON t_seat.schedule_id = s.schedule_id "
+	                   + "JOIN screen sc      ON s.screen_id = sc.screen_id "
 	                   + "JOIN theater t      ON sc.theater_id = t.theater_id "
-	                   + "JOIN schedule s     ON s.schedule_id = ( "
-	                   + "    SELECT s2.schedule_id "
-	                   + "    FROM schedule s2 "
-	                   + "    WHERE s2.screen_id = sc.screen_id "
-	                   + "      AND s2.schedule_starttime > NOW() "
-	                   + "    ORDER BY s2.schedule_starttime ASC "
-	                   + "    LIMIT 1 "
-	                   + ") "
 	                   + "JOIN movie m        ON s.movie_id = m.movie_id "
 	                   + "WHERE r.user_id = ? "
 	                   + "  AND r.cancel_date IS NULL "
 	                   + "  AND s.schedule_starttime > NOW() "
-	                   + "GROUP BY r.reserve_id "
 	                   + "ORDER BY s.schedule_starttime DESC";
 	        
 	        pstmt = con.prepareStatement(sql);
@@ -385,7 +382,6 @@ public class UserDAO {
 	        while(rs.next()) {
 	            MyPageDTO mydto = new MyPageDTO();
 	            
-	            // 숫자 인덱스 대신 SELECT절의 AS 별칭으로 안전하게 매핑
 	            mydto.setMovieTitle(rs.getString("movie_title"));
 	            mydto.setImgPath(rs.getString("img_path"));
 	            mydto.setScreenNum(rs.getInt("screen_num"));
@@ -403,14 +399,12 @@ public class UserDAO {
 	            mList.add(mydto);
 	        }
 	        
-	        // 리스트에 총 몇 건이 담겼는지 최종 확인용 로그
 	        System.out.println("getMyPage mList size : " + mList.size());
 	        
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            // 닫는 순서는 열었던 역순 (rs -> pstmt -> con)
 	            if(rs != null) rs.close();
 	            if(pstmt != null) pstmt.close();
 	            if(con != null) con.close();

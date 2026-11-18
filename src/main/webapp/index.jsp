@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>그린시네마에 오신걸 환영합니다.</title>
 <link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/style.css?v=20261118">
+      href="${pageContext.request.contextPath}/css/style.css?v=20261118c">
 </head>
 
 	<%

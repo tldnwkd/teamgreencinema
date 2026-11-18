@@ -42,16 +42,18 @@ public class UserJoinProc extends HttpServlet {
 		
 		// 1. 비밀번호 불일치 검사
 		if (userPw == null || !userPw.equals(userPwChk)) {
+			keepJoinForm(request, userId, userName, userBirth, userEmail, userPhone);
 			request.setAttribute("msg", "암호와 암호확인이 맞지 않습니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=user/user-join-passerr.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=user/user-join.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		
 		// 2. 아이디 중복 검사
 		if (isDuplicate) {
+			keepJoinForm(request, userId, userName, userBirth, userEmail, userPhone);
 			request.setAttribute("msg", "이미 가입된 유저 아이디 입니다.");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=user/user-join-iderr.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=user/user-join.jsp");
 			rd.forward(request, response);
 			return;
 		}
@@ -73,6 +75,14 @@ public class UserJoinProc extends HttpServlet {
 		return;
 
 
+	}
+
+	private void keepJoinForm(HttpServletRequest request, String userId, String userName, String userBirth, String userEmail, String userPhone) {
+		request.setAttribute("userId", userId);
+		request.setAttribute("userName", userName);
+		request.setAttribute("userBirth", userBirth);
+		request.setAttribute("userEmail", userEmail);
+		request.setAttribute("userPhone", userPhone);
 	}
 
 }

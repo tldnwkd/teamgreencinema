@@ -55,7 +55,7 @@
 <section id="my-inquiries" class="stack-section">
   <div class="section-header">
     <h2 class="section-title">1:1 문의내역</h2>
-    <a href="index.jsp?section=inquiry/Inquiry.jsp" class="btn btn--outline btn--small">문의 작성</a>
+    <a href="MyPageProc.do?userId=${sessionScope.id}&amp;menu=inquiry-write" class="btn btn--outline btn--small">문의 작성</a>
   </div>
 
   <c:choose>

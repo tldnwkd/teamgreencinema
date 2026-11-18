@@ -10,11 +10,20 @@
         <h1 class="auth-card__title">로그인</h1>
         <p class="auth-card__subtitle">그린시네마에 오신 것을 환영합니다.</p>
 
+        <c:if test="${not empty msg}">
+          <div class="auth-modal" role="alertdialog" aria-modal="true" aria-labelledby="loginMsg">
+            <div class="auth-modal__card">
+              <p id="loginMsg"><c:out value="${msg}" /></p>
+              <button type="button" class="btn btn--primary" onclick="this.closest('.auth-modal').remove()">확인</button>
+            </div>
+          </div>
+        </c:if>
+
         <!-- 로그인 폼 -->
         <form action="UserLoginProc.do" method="post">
           <div class="form-group">
             <label class="form-label" for="userId">아이디</label>
-            <input class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요" >
+            <input class="form-control" id="userId" name="userId" value="<c:out value='${userId}'/>" placeholder="아이디를 입력하세요" >
           </div>
 
           <div class="form-group">

@@ -33,6 +33,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="mList" items="${mList}">
+								
 								<tr>
 									<td>${mList.movieId}</td>
 									<td><a href="AdminMovieProc.do?movie_Id=${mList.movieId}">${mList.movieTitle}</a></td>
@@ -46,7 +47,7 @@
 										</c:choose>
 									</td>
 									<td>${mList.runTime}분</td>
-								</tr>
+								</tr>								
 							</c:forEach>
 						</tbody>
 					</table>

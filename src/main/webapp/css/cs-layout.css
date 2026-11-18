@@ -203,6 +203,50 @@
   color: #07813c;
 }
 
+.cs-acc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: #1b2a22;
+  background: transparent;
+  font: inherit;
+  font-weight: 750;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cs-acc:hover {
+  color: #07813c;
+}
+
+.cs-acc__chev {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+.cs-acc[aria-expanded="true"] .cs-acc__chev {
+  transform: rotate(225deg);
+}
+
+.cs-drop td {
+  padding-top: 0;
+  background: #f7faf8;
+}
+
+.cs-drop .cs-body {
+  margin-bottom: 8px;
+}
+
 .cs-table .is-muted {
   color: #6b7872;
   font-variant-numeric: tabular-nums;

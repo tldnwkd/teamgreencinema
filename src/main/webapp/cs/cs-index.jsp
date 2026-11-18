@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/cs-layout.css?v=20261118b">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/cs-layout.css?v=20261118d">
 
 <section class="inquiry cs-shell">
     <div class="page-content">
@@ -24,3 +24,14 @@
         </div>
     </div>
 </section>
+<script>
+document.addEventListener("click", function (event) {
+    var button = event.target.closest(".cs-acc");
+    if (!button) return;
+    var row = button.closest("tr");
+    var drop = row.nextElementSibling;
+    var open = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", open ? "false" : "true");
+    if (drop) drop.hidden = open;
+});
+</script>

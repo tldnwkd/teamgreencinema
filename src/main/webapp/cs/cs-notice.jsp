@@ -42,9 +42,17 @@
                             <c:otherwise>
                                 <c:forEach var="n" items="${nList}">
                                     <tr>
-                                        <td><a href="${pageContext.request.contextPath}/OneNoticeProc.do?noticeId=${n.noticeId}"><c:out value="${n.noticeTitle}" /></a></td>
+                                        <td>
+                                            <button type="button" class="cs-acc" aria-expanded="false">
+                                                <span><c:out value="${n.noticeTitle}" /></span>
+                                                <span class="cs-acc__chev" aria-hidden="true"></span>
+                                            </button>
+                                        </td>
                                         <td class="is-muted"><c:out value="${n.noticeDate}" /></td>
                                         <td class="is-muted is-center"><c:out value="${n.noticeHits}" /></td>
+                                    </tr>
+                                    <tr class="cs-drop" hidden>
+                                        <td colspan="3"><div class="cs-body"><c:out value="${n.noticeText}" /></div></td>
                                     </tr>
                                 </c:forEach>
                             </c:otherwise>

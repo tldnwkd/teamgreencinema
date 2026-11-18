@@ -9,6 +9,15 @@
           <p class="tiny-eyebrow" style="text-align:center">JOIN GREEN CINEMA</p>
           <h1 class="auth-card__title">회원가입</h1>
           <p class="auth-card__subtitle">회원 가입에 필요한 정보를 입력하세요.</p>
+
+          <c:if test="${not empty msg}">
+            <div class="auth-modal" role="alertdialog" aria-modal="true" aria-labelledby="joinMsg">
+              <div class="auth-modal__card">
+                <p id="joinMsg"><c:out value="${msg}" /></p>
+                <button type="button" class="btn btn--primary" onclick="this.closest('.auth-modal').remove()">확인</button>
+              </div>
+            </div>
+          </c:if>
           
           <div class="demo-note">
             <span class="demo-note__dot" aria-hidden="true"></span>회원가입
@@ -18,11 +27,11 @@
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label" for="userId">아이디 <span class="form-label__required">*</span></label>
-                <input id="userId" class="form-control" name="userId"  placeholder="아이디를 입력하세요.">
+                <input id="userId" class="form-control" name="userId" value="<c:out value='${userId}'/>" placeholder="아이디를 입력하세요.">
               </div>
               <div class="form-group">
                 <label class="form-label" for="userName">이름 <span class="form-label__required">*</span></label>
-                <input id="userName" class="form-control" name="userName" placeholder="이름">
+                <input id="userName" class="form-control" name="userName" value="<c:out value='${userName}'/>" placeholder="이름">
               </div>
               <div class="form-group">
                 <label class="form-label" for="userPw">비밀번호 <span class="form-label__required">*</span></label>
@@ -34,15 +43,15 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="userBirth">생년월일</label>
-                <input type="date" id="userBirth" class="form-control" name="userBirth">
+                <input type="date" id="userBirth" class="form-control" name="userBirth" value="<c:out value='${userBirth}'/>">
               </div>
               <div class="form-group">
                 <label class="form-label" for="userPhone">휴대폰번호</label>
-                <input type="tel" id="userPhone" class="form-control" name="userPhone" placeholder="010-0000-0000">
+                <input type="tel" id="userPhone" class="form-control" name="userPhone" value="<c:out value='${userPhone}'/>" placeholder="010-0000-0000">
               </div>
               <div class="form-group form-group--full">
                 <label class="form-label" for="userEmail">이메일</label>
-                <input type="email" id="userEmail" class="form-control" name="userEmail" placeholder="example@email.com">
+                <input type="email" id="userEmail" class="form-control" name="userEmail" value="<c:out value='${userEmail}'/>" placeholder="example@email.com">
               </div>
             </div>
             <button type="submit" class="btn btn--primary btn--large btn--block">회원가입</button>

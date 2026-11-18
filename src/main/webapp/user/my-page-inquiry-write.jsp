@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="inquiry-form">
+	<div class="section-header">
+		<h2 class="section-title">문의 작성</h2>
+	</div>
+	<p class="page-heading__description">분류와 내용을 입력하면 마이페이지 문의 내역에서 확인할 수 있습니다.</p>
 	<form action="MyPageProc.do" method="post" name="iform">
 		<input type="hidden" name="btn" value="myinq">
 		<input type="hidden" name="userId" value="${sessionScope.id}">

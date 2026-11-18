@@ -50,7 +50,15 @@
                             <c:otherwise>
                                 <c:forEach var="f" items="${fList}">
                                     <tr>
-                                        <td><a href="${pageContext.request.contextPath}/OneFaqProc.do?faq_id=${f.faqId}"><c:out value="${f.faqInquery}" /></a></td>
+                                        <td>
+                                            <button type="button" class="cs-acc" aria-expanded="false">
+                                                <span><c:out value="${f.faqInquery}" /></span>
+                                                <span class="cs-acc__chev" aria-hidden="true"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="cs-drop" hidden>
+                                        <td><div class="cs-body"><c:out value="${f.faqAnswer}" /></div></td>
                                     </tr>
                                 </c:forEach>
                             </c:otherwise>

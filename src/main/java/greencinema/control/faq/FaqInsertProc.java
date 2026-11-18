@@ -50,8 +50,10 @@ public class FaqInsertProc extends HttpServlet {
 			
 		}
 		
-		
-		
 	}
+
+
+
+
 
 }
