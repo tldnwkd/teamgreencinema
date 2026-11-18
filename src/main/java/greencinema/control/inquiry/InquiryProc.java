@@ -34,17 +34,6 @@ public class InquiryProc extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		String chkId = session == null ? null : (String) session.getAttribute("id");
 
-		if (chkId == null || chkId.isEmpty()) {
-		    response.setContentType("text/html; charset=UTF-8");
-		    PrintWriter out = response.getWriter();
-
-		    out.println("<script>");
-		    out.println("alert('로그인 후 이용해주세요');");
-		    out.println("location.href='index.jsp?section=user/login.jsp';");
-		    out.println("</script>");
-		    return;
-		}
-
 		if (!chkId.equals("admin")) { // 일반회원일 경우
 			int count = 0; // 전체게시글 수
 			int pagesize = 5; // 한 화면에 그릴 페이지 수
