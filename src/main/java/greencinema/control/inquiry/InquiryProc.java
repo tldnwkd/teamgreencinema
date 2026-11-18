@@ -31,20 +31,18 @@ public class InquiryProc extends HttpServlet {
 
 	protected void rePro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(false);
+		String chkId = session == null ? null : (String) session.getAttribute("id");
 
-		String chkId = (String) session.getAttribute("id");
+		if (chkId == null || chkId.isEmpty()) {
+		    response.setContentType("text/html; charset=UTF-8");
+		    PrintWriter out = response.getWriter();
 
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-
-		if (chkId.equals("") || chkId.isEmpty()) {
-			out.println("<script>");
-			out.println("alert('로그인 후 이용해주세요')");
-			out.println("location.href='index.jsp?section=user/login.jsp'");
-			out.println("</script>");
-			out.flush();
+		    out.println("<script>");
+		    out.println("alert('로그인 후 이용해주세요');");
+		    out.println("location.href='index.jsp?section=user/login.jsp';");
+		    out.println("</script>");
+		    return;
 		}
 
 		if (!chkId.equals("admin")) { // 일반회원일 경우
@@ -98,7 +96,7 @@ public class InquiryProc extends HttpServlet {
 			request.setAttribute("endpage", endpage);
 			request.setAttribute("pageBlock", pageBlock);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=inquiry/Inquiry-List.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher( "/index.jsp?section=cs/cs-index.jsp&csSection=inquiry&csView=list");
 			rd.forward(request, response);
 
 		}
@@ -158,8 +156,8 @@ public class InquiryProc extends HttpServlet {
 			request.setAttribute("endpage", endpage);
 			request.setAttribute("pageBlock", pageBlock);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-inquiry.jsp");
-			rd.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/admin/admin-index.jsp?section=admin-inquiry.jsp");
+				rd.forward(request, response);
 		}
 
 

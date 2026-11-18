@@ -12,11 +12,11 @@
 					<a href="selectMovieReserveProc.do">예매</a>
 					<div class="nav-dropdown">
 					    <button type="button" class="nav-dropdown__title">고객센터</button>
-					    <div class="nav-dropdown__menu">
-					        <a href="InquiryLoginchkProc.do">1:1 문의</a>
-					        <a href="FaqProc.do">FAQ</a>
-					        <a href="NoticeProc.do">공지사항</a>
-					    </div>
+							<div class="nav-dropdown__menu">
+							    <a href="${pageContext.request.contextPath}/NoticeProc.do">공지사항</a>
+							    <a href="${pageContext.request.contextPath}/FaqProc.do">FAQ </a>
+							    <a href="${pageContext.request.contextPath}/InquiryProc.do">1:1 문의 </a>
+							</div>
 					</div>
 				</nav>
 				<div class="header-actions">

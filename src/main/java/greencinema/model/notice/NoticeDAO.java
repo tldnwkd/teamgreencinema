@@ -139,16 +139,24 @@ public class NoticeDAO {
 		return i;
 	} 
 	
-	public NoticeDTO OneNotice(int notice_Id) {
+	public NoticeDTO OneNotice(int notice_Id, String chkid) {
 		NoticeDTO n = new NoticeDTO();
+		
 		 try {
 			 con = Util.getConnection();
 			 
+			 int hit = 1;
+			 
+			 if(chkid.equals("admin")) {
+				 hit = 0;
+			 }
 			 
 			 
-			 String sql2 = "update Notice set notice_hits= notice_hits+1 where notice_id = ?";
+			 
+			 String sql2 = "update Notice set notice_hits= notice_hits+? where notice_id = ?";
 			 pstmt = con.prepareStatement(sql2);
-			 pstmt.setInt(1, notice_Id);
+			 pstmt.setInt(1, hit);
+			 pstmt.setInt(2, notice_Id);
 			 pstmt.executeUpdate();
 			 
 			 pstmt.close();
@@ -207,5 +215,34 @@ public class NoticeDAO {
 	
 	return result;
 }
+	//공지사항 수정
+	public int NoticeUpdate(String title, String content, int NoticeId) {
+	    int result = 0;
+
+	    try {
+	        con = Util.getConnection();
+
+	        String sql = "update Notice set notice_title=?, notice_date=now(), notice_text=? where notice_id = ?";
+
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, title);
+	        pstmt.setString(2, content);
+	        pstmt.setInt(3, NoticeId);
+
+	        result = pstmt.executeUpdate();
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (pstmt != null) pstmt.close();
+	            if (con != null) con.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return result;
+	}
 	
 }

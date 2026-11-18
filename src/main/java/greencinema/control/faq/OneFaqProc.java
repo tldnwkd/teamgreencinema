@@ -16,14 +16,16 @@ import greencinema.model.faq.FaqDTO;
 @WebServlet("/OneFaqProc.do")
 public class OneFaqProc extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		rePro(request, response);
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		rePro(request, response);
 	}
+
 	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
@@ -34,9 +36,17 @@ public class OneFaqProc extends HttpServlet {
 		request.setAttribute("fOneList", fOneList);
 		
 		if("admin".equals(chkId)) {
-			RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq.jsp");
-			rd.forward(request, response);
-		}else {
+			
+			String type = request.getParameter("type");
+			
+			if("upd".equals(type)) {
+				
+				RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq-Update.jsp");
+				rd.forward(request, response);
+				}else {
+					RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq.jsp");
+					rd.forward(request, response);
+			}}else {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=faq/OneFaq.jsp");
 			rd.forward(request, response);
 		}

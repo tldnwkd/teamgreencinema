@@ -1,0 +1,74 @@
+/* CUSTOMER SERVICE: PC layout only */
+.cs-shell .cs-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+}
+.cs-shell .cs-left { min-width: 0; }
+.cs-shell .cs-left .page-heading { margin: 0 0 24px; text-align: left; }
+.cs-shell .cs-left .cs-tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.cs-shell .cs-left .cs-tabs a {
+    display: block;
+    padding: 14px 16px;
+    border: 1px solid var(--gc-border, #e5e7eb);
+    border-radius: 10px;
+    color: var(--gc-text, #333d38);
+    background: #fff;
+    text-align: left;
+}
+.cs-shell .cs-left .cs-tabs a:hover,
+.cs-shell .cs-left .cs-tabs a.is-active {
+    border-color: var(--gc-primary, #03c75a);
+    color: #07813c;
+    background: var(--gc-primary-soft, #e8fff1);
+}
+.cs-shell .cs-main { width: 100%; min-width: 0; }
+.cs-shell .cs-main .inquiry-form,
+.cs-shell .cs-main .board-page--notice,
+.cs-shell .cs-main .board-page--faq,
+.cs-shell .cs-main .board-page--inquiry {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+.cs-shell .cs-main .board-page--notice,
+.cs-shell .cs-main .board-page--faq,
+.cs-shell .cs-main .board-page--inquiry { padding: 30px; }
+.cs-shell .cs-main .inquiry-form textarea { white-space: pre-wrap; }
+
+/* Existing style.css targets action="SearchNoticeProc.do" exactly.
+   Match the new context-prefixed form action as well. */
+.cs-shell .board-page--notice:not(.is-search) > form {
+    display: grid;
+    grid-template-columns: 172px minmax(0, 1fr) 85px 94px;
+    gap: 10px;
+    align-items: center;
+    margin: 0 0 29px;
+    padding: 19px;
+    background: #f7f9fb;
+    border: 1px solid #ecf0f4;
+    border-radius: 14px;
+}
+.cs-shell .board-page--notice:not(.is-search) > form select,
+.cs-shell .board-page--notice:not(.is-search) > form input {
+    min-width: 0;
+    height: 44px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+.cs-shell .board-page--notice:not(.is-search) > form input[type="submit"] {
+    color: #fff;
+    border: 1px solid var(--gc-primary, #03c75a);
+    background: var(--gc-primary, #03c75a);
+    cursor: pointer;
+}
