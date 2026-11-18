@@ -254,6 +254,7 @@ p {
   min-height: 54px;
   padding: 14px 26px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .btn--block {
@@ -401,6 +402,7 @@ p {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   z-index: 9999;
+  cursor: pointer;
 }
 
 .main-nav .nav-dropdown__menu a {
@@ -569,6 +571,7 @@ p {
   color: var(--gc-primary-hover);
   font-size: 14px;
   font-weight: 750;
+  cursor: pointer;
 }
 
 .movie-filters {
@@ -885,6 +888,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+  cursor: pointer;
 }
 
 .service-card {
@@ -895,6 +899,7 @@ p {
   background: #f9fcfa;
   padding: 26px;
   transition: transform 160ms, box-shadow 160ms;
+  cursor: pointer;
 }
 
 a.service-card:hover {
@@ -1686,6 +1691,7 @@ textarea.form-control {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  cursor: pointer;
 }
 
 .site-footer__links a:hover {
@@ -4243,4 +4249,49 @@ textarea.form-control {
 }
 .badge-rate.red {
   background-color: #e50914;
+}
+
+.reserve-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 9999;
+}
+.reserve-modal-content {
+    background: #fff; width: 450px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;
+}
+.modal-close-btn {
+    position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer;
+}
+.modal-header-icon { text-align: center; margin-bottom: 20px; }
+
+/* 💡 포스터 이미지 영역 스타일 (적당한 크기와 입체감 부여) */
+.poster-img-wrap {
+    width: 110px;
+    height: 155px;
+    margin: 0 auto 15px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.poster-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-header-icon h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.modal-header-icon p {
+    font-size: 14px;
+    color: #64706b;
+}
+
+.reserve-info-card {
+    background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; margin-bottom: 20px;
+}
+.reserve-info-card h3 { font-size: 16px; margin-bottom: 10px; }
+.reserve-info-card p { font-size: 14px; margin: 8px 0; color: #495057; }
+.btn-confirm-home {
+    width: 100%; padding: 12px; background: #03c75a; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;
 }

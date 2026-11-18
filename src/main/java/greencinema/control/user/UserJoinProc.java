@@ -69,7 +69,7 @@ public class UserJoinProc extends HttpServlet {
 		
 		
 		
-		response.sendRedirect("/index.jsp");			
+		response.sendRedirect("index.jsp");			
 		return;
 
 

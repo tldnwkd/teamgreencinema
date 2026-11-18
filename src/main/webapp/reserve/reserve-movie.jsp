@@ -232,7 +232,8 @@
 								</c:when>
 								<c:otherwise>
 									<p style="font-size: 13px; color: #64706b; margin-top: 10px;">선택하신
-										상영관, 영화, 날짜에 해당하는 상영일정이 없습니다.</p>
+										상영관, 영화, 날짜에 해당하는 상영일정이 없습니다.<br/>
+										상영시작 5분 전 영화는 예매가 불가능합니다.</p>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -345,4 +346,42 @@ function checkIncompleteSelection() {
         alert("모든 항목을 선택해주세요.");
     }
 }
+
+// 당일 상영 시작 5분 전 및 지난 상영시간표 숨김 처리 함수
+function filterPastShowtimes() {
+    let selectedDateStr = "${param.selectedDate}"; 
+    
+    let now = new Date();
+    let tYear = now.getFullYear();
+    let tMonth = (now.getMonth() + 1) < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);
+    let tDay = now.getDate() < 10 ? "0" + now.getDate() : now.getDate();
+    let todayStr = tYear + "-" + tMonth + "-" + tDay;
+
+    // 오늘 날짜인 경우에만 5분 전 마감 필터 적용
+    if (selectedDateStr === todayStr) {
+        let thresholdTime = new Date(now.getTime() + 5 * 60000); // 현재 시간 + 5분
+
+        let scheduleCards = document.querySelectorAll('.schedule-grid-wrap .schedule-card');
+        
+        scheduleCards.forEach(card => {
+            let timeText = card.querySelector('.schedule-time-text').innerText.trim();
+            let [hours, minutes] = timeText.split(':').map(Number);
+
+            let showTime = new Date();
+            showTime.setHours(hours, minutes, 0, 0);
+
+            // 상영 시간이 (현재 시각 + 5분) 이내이거나 이미 지난 경우 숨김
+            if (showTime <= thresholdTime) {
+                card.style.display = 'none'; 
+            } else {
+                card.style.display = 'inline-flex'; 
+            }
+        });
+    }
+}
+
+// 페이지 로드 시 실행
+document.addEventListener("DOMContentLoaded", function() {
+    filterPastShowtimes();
+});
 </script>

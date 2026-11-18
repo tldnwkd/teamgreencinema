@@ -30,18 +30,6 @@ public class selectMovieReserveProc extends HttpServlet {
 	protected void reqPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		HttpSession session = request.getSession(false);
-		Object idObj = (session != null) ? session.getAttribute("id") : null;
-
-		if (session == null || idObj == null || idObj.toString().trim().isEmpty()) {
-		    response.setContentType("text/html; charset=UTF-8");
-		    PrintWriter out = response.getWriter();
-		    out.println("<script>");
-		    out.println("alert('로그인 후 이용 가능합니다.');");
-		    out.println("location.href='index.jsp?section=user/login.jsp';");
-		    out.println("</script>");
-		    return;
-		}
 		
 		ReservejoinDAO rjdao = new ReservejoinDAO();
 		

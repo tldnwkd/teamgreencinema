@@ -12,7 +12,7 @@
 				<h2 class="section-title">현재 상영작</h2>
 				<p class="section-subtitle">그린시네마의 가상 영화 컬렉션</p>
 			</div>
-			<a class="section-link" href="selectMovieReserveProc.do">전체 예매 보기 ↗</a>
+			<a class="section-link" onclick="reservebtn()">전체 예매 보기 ↗</a>
 		</div>
 
 			<div class="movie-grid">
@@ -23,7 +23,7 @@
 						<img class="movie-card__poster" src="./${list.imgPath}" alt="${list.movieTitle }"></a>
 						<span class="movie-card__rank">${begin}</span>
 						<div class="movie-card__actions">
-							<a class="btn btn--primary btn--small" href="selectMovieReserveProc.do?movieId=${list.movieId }">예매하기</a>
+							<button class="btn btn--primary btn--small" onclick="reservebtn()">예매하기</button>
 							<a class="btn btn--dark btn--small" href="MovieProc.do?movieId=${list.movieId }">상세보기</a>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 			</h2>
 			<p>영화 선택 → 극장·일정 선택 → 좌석 선택 → 결제 순서의 예매 화면을 둘러보세요.</p>
 		</div>
-		<a class="btn btn--primary btn--large" href="selectMovieReserveProc.do">예매 화면
+		<a class="btn btn--primary btn--large" onclick="reservebtn()">예매 화면
 			보기 ↗</a>
 	</div>
 </section>
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<div class="service-grid">
-			<a class="service-card" href="selectMovieReserveProc.do">
+			<a class="service-card" onclick="reservebtn()">
 			<span class="service-card__num">01</span><span class="service-card__icon">▦</span>
 			<h3>영화 예매</h3>
 			<p>영화·극장·상영일정을 고르는 화면</p> <strong>화면 보기 ↗</strong></a>
@@ -65,10 +65,22 @@
 			<h3>공지사항</h3>
 			<p>예매내역과 문의내역을 확인하는 화면</p> <strong>화면 보기 ↗</strong></a>		
 			
-			<a class="service-card" href="InquiryLoginchkProc.do">
+			<a class="service-card" onclick="reservebtn()">
 			<span class="service-card__num">03</span><span class="service-card__icon">?</span>
 			<h3>1:1문의</h3>
 			<p>1:1 문의 안내</p> <strong>화면 보기 ↗</strong></a>
 		</div>
 	</div>
 </section>
+
+<script type="text/javascript">
+	function reservebtn(){
+		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
+			alert('로그인 후 이용 가능합니다.'); 
+			location.href='index.jsp?section=user/login.jsp';
+			return
+		}else{
+			location.href="selectMovieReserveProc.do?movieId="${list.movieId};
+		}
+	}
+</script>

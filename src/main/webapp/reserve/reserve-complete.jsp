@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div id="reserveCompleteModal" class="reserve-modal-overlay" style="display: <c:if test="${isReservedSuccess}">flex</c:if><c:if test="${!isReservedSuccess}">none</c:if>;">
     <div class="reserve-modal-content">
@@ -25,6 +26,8 @@
                 <c:if test="${precount > 0}">청소년 ${precount}명</c:if>
             </p>
             <p><strong>선택좌석:</strong> <span style="color: #03c75a; font-weight: bold;">${seats}</span></p>
+            <!-- 💡 3자리 콤마 포맷 적용 -->
+            <p><strong>결제금액:</strong> <span style="color: #03c75a; font-weight: bold;"><fmt:formatNumber value="${totalprice}" type="number" />원</span></p>
         </div>
 
         <div class="modal-actions">
@@ -33,52 +36,6 @@
     </div>
 </div>
 
-<style>
-.reserve-modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 9999;
-}
-.reserve-modal-content {
-    background: #fff; width: 450px; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;
-}
-.modal-close-btn {
-    position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer;
-}
-.modal-header-icon { text-align: center; margin-bottom: 20px; }
-
-/* 💡 포스터 이미지 영역 스타일 (적당한 크기와 입체감 부여) */
-.poster-img-wrap {
-    width: 110px;
-    height: 155px;
-    margin: 0 auto 15px auto;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-.poster-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.modal-header-icon h2 {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-.modal-header-icon p {
-    font-size: 14px;
-    color: #64706b;
-}
-
-.reserve-info-card {
-    background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; margin-bottom: 20px;
-}
-.reserve-info-card h3 { font-size: 16px; margin-bottom: 10px; }
-.reserve-info-card p { font-size: 14px; margin: 8px 0; color: #495057; }
-.btn-confirm-home {
-    width: 100%; padding: 12px; background: #03c75a; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;
-}
-</style>
 
 <script>
 function closeModal() {
