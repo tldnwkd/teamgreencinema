@@ -30,6 +30,9 @@ public class UserProc extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String btn = request.getParameter("btn");
 		String menu = request.getParameter("menu");
+		UserDAO	udao = new UserDAO();
+		int userCount = udao.userAllCount();
+		request.setAttribute("userCount", userCount);	
 
 		if(btn != null || "write".equals(menu)) {
 			writePro(request, response);
@@ -44,7 +47,7 @@ public class UserProc extends HttpServlet {
 			searchPro(request, response, type);
 			return;
 		}
-		listPro(request, response);
+		listPro(request, response);		
 	}
 
 	private void listPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

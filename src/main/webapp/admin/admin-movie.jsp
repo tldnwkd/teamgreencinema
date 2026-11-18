@@ -33,7 +33,6 @@
 						</thead>
 						<tbody>
 							<c:forEach var="mList" items="${mList}">
-								
 								<tr>
 									<td>${mList.movieId}</td>
 									<td><a href="AdminMovieProc.do?movie_Id=${mList.movieId}">${mList.movieTitle}</a></td>
@@ -47,7 +46,7 @@
 										</c:choose>
 									</td>
 									<td>${mList.runTime}분</td>
-								</tr>								
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -90,13 +89,13 @@
 	</div>
 </section>
 <script>
-function searchMovie() {
-	var form = document.mform;
-	if (form.type.value === "") {
-		alert("검색 항목을 선택해주세요.");
-		form.type.focus();
-		return;
+	function searchMovie() {
+		var form = document.mform;
+		if (form.type.value === "") {
+			alert("검색 항목을 선택해주세요.");
+			form.type.focus();
+			return;
+		}
+		form.submit();
 	}
-	form.submit();
-}
 </script>

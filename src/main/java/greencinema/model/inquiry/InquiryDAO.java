@@ -8,24 +8,11 @@ import java.util.ArrayList;
 import greencinema.DBPKG.Util;
 
 
-/*
- try {}catch(Exception e) {e.printStackTrace();}finally {
-try {if(rs != null)rs.close();
-if(pstmt != null)pstmt.close();
-if(con != null)con.close();
-
-}catch(Exception e) {
-e.printStackTrace();
-}
-}
-*/
-
 public class InquiryDAO {
 	Connection con = null;
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
-	//admin  1:1  臾몄쓽 �쟾泥� 異쒕젰 硫붿냼�뱶
 	public ArrayList<InquiryDTO> inAllList(int StartRow, int pageSize) {
 			ArrayList<InquiryDTO> i = new ArrayList<InquiryDTO>();
 		try {
@@ -73,7 +60,7 @@ public class InquiryDAO {
 		
 	}
 	//------------------------------------------------------
-	// 寃뚯떆湲� 珥� count 硫붿냼�뱶
+	
 	public int AllCount() {
 		int count=0;
 		try {

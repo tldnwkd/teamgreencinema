@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import greencinema.model.faq.FaqDAO;
+import greencinema.model.inquiry.InquiryDAO;
 import greencinema.model.movie.MovieDAO;
 import greencinema.model.movie.MovieDTO;
+import greencinema.model.notice.NoticeDAO;
+import greencinema.model.user.UserDAO;
 
 @WebServlet("/AdminMovieProc.do")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 6)
@@ -98,6 +102,8 @@ public class AdminMovieProc extends HttpServlet {
 			}
 			
 		}
+		
+		
 		request.setAttribute("mList", mList);
 		
 		request.setAttribute("StartRow", StartRow);
@@ -109,7 +115,7 @@ public class AdminMovieProc extends HttpServlet {
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("pageBlock", pageBlock);
 		
-		request.setAttribute("movieCount", count);
+		
 		request.setAttribute("movieCount", count);
 															 
 		if("admin".equals(chkid)) {

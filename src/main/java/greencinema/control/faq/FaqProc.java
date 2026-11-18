@@ -73,6 +73,10 @@ public class FaqProc extends HttpServlet {
 			}
 
 		}
+		
+		int faqCount = fdao.AllCount();		
+		request.setAttribute("faqCount", faqCount);	
+		
 		request.setAttribute("fList", fList);
 
 		request.setAttribute("StartRow", StartRow);
