@@ -225,4 +225,6 @@ public class FaqDAO {
 		}
 		return result;
 	}
+
+
 }
