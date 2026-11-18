@@ -32,7 +32,7 @@ public class OneNoticeProc extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String chkId = (String)session.getAttribute("id");
-		int notice_Id = Integer.parseInt(request.getParameter("notice_Id"));
+		int noticeId = Integer.parseInt(request.getParameter("noticeId"));
 		NoticeDAO ndao = new NoticeDAO();
 		String btn = request.getParameter("btn");
 		if("admin".equals(chkId) && "upd".equals(btn)) {
@@ -51,11 +51,11 @@ public class OneNoticeProc extends HttpServlet {
 				out.println("</script>");
 				return;
 			}
-			int result = ndao.NoticeUpdate(notice_Id, title, content);
+			int result = ndao.NoticeUpdate(noticeId, title, content);
 			out.println("<script>");
 			if(result > 0) {
 				out.println("alert('공지 수정이 완료되었습니다.');");
-				out.println("location.href='OneNoticeProc.do?notice_Id=" + notice_Id + "';");
+				out.println("location.href='OneNoticeProc.do?notice_Id=" + noticeId + "';");
 			}else {
 				out.println("alert('공지 수정에 실패했습니다.');");
 				out.println("history.back();");
@@ -63,7 +63,7 @@ public class OneNoticeProc extends HttpServlet {
 			out.println("</script>");
 			return;
 		}
-		NoticeDTO nOneList= ndao.OneNotice(notice_Id);
+		NoticeDTO nOneList= ndao.OneNotice(noticeId);
 		request.setAttribute("nOneList", nOneList);
 		
 		
