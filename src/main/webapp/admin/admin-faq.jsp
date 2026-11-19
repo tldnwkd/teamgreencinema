@@ -6,7 +6,7 @@
 	<form class="admin-board__search admin-board__search--movie" action="SearchFaqProc.do" method="get" name="fform">
 		<select name="type">
 			<option value="">선택</option>
-			<option value="faq_inquery" ${type=='faq_inquery'?'selected':''}>제목으로 검색</option>
+			<option value="faq_inquiry" ${type=='faq_inquiry'?'selected':''}>제목으로 검색</option>
 			<option value="faq_answer" ${type=='faq_answer'?'selected':''}>내용으로 검색</option>
 		</select>
 		<input name="content" type="text" value="${content}" placeholder="검색어를 입력해주세요">
@@ -35,7 +35,7 @@
 								<tr>
 									<td>${fList.faqId}</td>
 									<td>${fList.faqType}</td>
-									<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquery}</a></td>
+									<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquiry}</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

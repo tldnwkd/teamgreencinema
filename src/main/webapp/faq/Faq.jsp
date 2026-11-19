@@ -7,7 +7,7 @@
     <form action="SearchFaqProc.do" method="get" name="fform">
     	<select id="type_i" name="type">
     		<option>선택</option>
-    		<option value="faq_inquery"  ${type=='faq_inquery'?'selected':''}>제목로 검색</option>
+    		<option value="faq_inquery"  ${type=='faq_inquiry'?'selected':''}>제목로 검색</option>
     		<option value="faq_answer"  ${type=='faq_answer'?'selected':''}>내용으로 검색</option>
     	</select> 
 		<input name="content" id="ch" type="text" onchange="change()" placeholder="검색어를 입력해주세요" >
@@ -21,7 +21,7 @@
 				</tr>
 		<c:forEach var= "fList" items="${fList}">
 				<tr>
-					<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquery }</a></td>
+					<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquiry }</a></td>
 				</tr>
 		</c:forEach>
 	</table>

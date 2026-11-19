@@ -14,7 +14,7 @@
                     <c:otherwise>FAQ</c:otherwise>
                 </c:choose>
             </span>
-            <h2 class="cs-article__title"><c:out value="${fOneList.faqInquery}" /></h2>
+            <h2 class="cs-article__title"><c:out value="${fOneList.faqInquiry}" /></h2>
             <div class="cs-answer">
                 <span class="cs-chip">답변</span>
                 <div class="cs-body"><c:out value="${fOneList.faqAnswer}" /></div>
@@ -32,7 +32,7 @@
             <form class="cs-search" action="${pageContext.request.contextPath}/SearchFaqProc.do" method="get">
                 <select name="type" aria-label="FAQ 검색 항목" required>
                     <option value="">선택</option>
-                    <option value="faq_inquery" ${type eq 'faq_inquery' ? 'selected' : ''}>제목으로 검색</option>
+                    <option value="faq_inquiry" ${type eq 'faq_inquiry' ? 'selected' : ''}>제목으로 검색</option>
                     <option value="faq_answer" ${type eq 'faq_answer' ? 'selected' : ''}>내용으로 검색</option>
                 </select>
                 <input type="text" name="content" value="<c:out value='${content}'/>" placeholder="검색어를 입력해주세요" required>
@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>
                                             <button type="button" class="cs-acc" aria-expanded="false">
-                                                <span><c:out value="${f.faqInquery}" /></span>
+                                                <span><c:out value="${f.faqInquiry}" /></span>
                                                 <span class="cs-acc__chev" aria-hidden="true"></span>
                                             </button>
                                         </td>
