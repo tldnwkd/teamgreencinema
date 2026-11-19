@@ -24,160 +24,133 @@ public class SearchInquiryProc extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		rePro(request, response);
 	}
-	protected void rePro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		
-		String type = request.getParameter("type");
-		String content = request.getParameter("content");
-		String chkid = (String) session.getAttribute("id");
-		
-		
-		if("admin".equals(chkid)) {
-			
-			int count = 0; // 전체게시글 수
-			int pagesize = 5; // 한 화면에 그릴 페이지 수
-			String pageNum = request.getParameter("pageNum");//화면에서 넘겨받을 pageNum값
-			if(pageNum == null) { // 페이지 선택 안했을 경우 자동으로 1번 페이지 선택
-				pageNum = "1";
-			}
-			
-			int number = 0; 
-			int curretnPage = Integer.parseInt(pageNum); // 현재 페이지 위치
-			InquiryDAO idao = new InquiryDAO();
-			
-			System.out.println("type"+type);
-			System.out.println("content"+content);
-			System.out.println("chkid"+chkid);
-			int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
-			count = idao.sCount(chkid, type, content); // 페이지 전체수 입력
-			
-			
-			ArrayList<InquiryDTO> sList = new ArrayList<InquiryDTO>();
-			sList = idao.search(type, content, StartRow, pagesize, chkid);
-			
-			number = count-StartRow; //페이지당 게시글 출력 번호
-			int pageCount = 0; //페이지 개수
-			int pageBlock = 3; //한 화면에 출력할 페이지 개수
-			int startpage = 1; //한 화면 시작 페이지 수
-			int endpage = 0; //마지막 페이지 수
-			
-			if(count > 0) {
-				
-				pageCount = count/pagesize + (count % pagesize == 0 ? 0:1);
-				
-				if(curretnPage % pageBlock != 0) {
-					startpage = (curretnPage / pageBlock)*pageBlock+1;
-				}else {
-					startpage = ((curretnPage/ pageBlock)-1)*pageBlock+1;
-				}
-				
-				endpage = startpage + pageBlock -1;
-				
-				if(endpage > pageCount) {
-					endpage = pageCount;
-				}
-				
-			}
-			System.out.println("pageCount:"+ pageCount);
-			request.setAttribute("sList", sList);
-			request.setAttribute("type", type);
-			request.setAttribute("content", content);
-			
-			request.setAttribute("StartRow", StartRow);
-			request.setAttribute("pageCount", pageCount);
-			request.setAttribute("pagesize", pagesize);
-			request.setAttribute("count", count);
-			request.setAttribute("number", number);
-			request.setAttribute("startpage", startpage);
-			request.setAttribute("endpage", endpage);
-			request.setAttribute("pageBlock", pageBlock);
-			
-			
-			
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=inquiry/Search-List.jsp");
-			rd.forward(request, response);
-			
-			
-		}
-		
-		
-		
-		int count = 0; // 전체게시글 수
-		int pagesize = 5; // 한 화면에 그릴 페이지 수
-		String pageNum = request.getParameter("pageNum");//화면에서 넘겨받을 pageNum값
-		if(pageNum == null) { // 페이지 선택 안했을 경우 자동으로 1번 페이지 선택
-			pageNum = "1";
-		}
-		
-		int number = 0; 
-		int curretnPage = Integer.parseInt(pageNum); // 현재 페이지 위치
-		InquiryDAO idao = new InquiryDAO();
-		
-		System.out.println("type"+type);
-		System.out.println("content"+content);
-		System.out.println("chkid"+chkid);
-		int StartRow = (curretnPage-1)*pagesize;//한 페이지에 출력할 개수
-		boolean isAdmin = "admin".equals(chkid);
-		ArrayList<InquiryDTO> sList = new ArrayList<InquiryDTO>();
-		if (isAdmin) {
-			count = idao.adminSCount(type, content);
-			sList = idao.adminSearch(type, content, StartRow, pagesize);
-		} else {
-			count = idao.sCount(chkid, type, content); // 페이지 전체수 입력
-			sList = idao.search(type, content, StartRow, pagesize, chkid);
-		}
-		
-		number = count-StartRow; //페이지당 게시글 출력 번호
-		int pageCount = 0; //페이지 개수
-		int pageBlock = 3; //한 화면에 출력할 페이지 개수
-		int startpage = 1; //한 화면 시작 페이지 수
-		int endpage = 0; //마지막 페이지 수
-		
-		if(count > 0) {
-			
-			pageCount = count/pagesize + (count % pagesize == 0 ? 0:1);
-			
-			if(curretnPage % pageBlock != 0) {
-				startpage = (curretnPage / pageBlock)*pageBlock+1;
-			}else {
-				startpage = ((curretnPage/ pageBlock)-1)*pageBlock+1;
-			}
-			
-			endpage = startpage + pageBlock -1;
-			
-			if(endpage > pageCount) {
-				endpage = pageCount;
-			}
-			
-		}
-		System.out.println("pageCount:"+ pageCount);
-		request.setAttribute("sList", sList);
-		request.setAttribute("iList", sList);
-		request.setAttribute("type", type);
-		request.setAttribute("content", content);
-		
-		request.setAttribute("StartRow", StartRow);
-		request.setAttribute("pageCount", pageCount);
-		request.setAttribute("pagesize", pagesize);
-		request.setAttribute("count", count);
-		request.setAttribute("number", number);
-		request.setAttribute("startpage", startpage);
-		request.setAttribute("endpage", endpage);
-		request.setAttribute("pageBlock", pageBlock);
-		
-		
-		
-		
-		String view = "admin".equals(chkid)
-				? "admin/admin-index.jsp?section=admin-inquiry.jsp"
-				: "/index.jsp?section=cs/cs-index.jsp&csSection=inquiry&csView=search";
-		RequestDispatcher rd = request.getRequestDispatcher(view);
-		rd.forward(request, response);
-		
+	protected void rePro(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+		System.out.println("SearchInquiryProc 실행됨");
 
-		
+	    request.setCharacterEncoding("UTF-8");
+
+	    HttpSession session = request.getSession(false);
+	    String chkid = session == null ? null : (String) session.getAttribute("id");
+
+	    // 로그인 검사
+	    if (chkid == null || chkid.isEmpty()) {
+	        response.sendRedirect(
+	            request.getContextPath() + "/index.jsp?section=user/login.jsp"
+	        );
+	        return;
+	    }
+
+	    String type = request.getParameter("type");
+	    String content = request.getParameter("content");
+
+	    
+
+
+	    if (type == null) type = "";
+	    if (content == null) content = "";
+
+	    // 페이징
+	    int pagesize = 10;
+	    String pageNum = request.getParameter("pageNum");
+
+	    if (pageNum == null || pageNum.isEmpty()) {
+	        pageNum = "1";
+	    }
+
+	    int currentPage = Integer.parseInt(pageNum);
+	    int StartRow = (currentPage - 1) * pagesize;
+
+	    InquiryDAO idao = new InquiryDAO();
+
+	    int count = 0;
+	    ArrayList<InquiryDTO> sList;
+
+	    boolean isAdmin = "admin".equals(chkid);
+	    
+	    System.out.println("검색 Servlet 실행");
+	    System.out.println("관리자 여부: " + isAdmin);
+	    System.out.println("type: [" + type + "]");
+	    System.out.println("content: [" + content + "]");
+	    System.out.println("status: [" + request.getParameter("status") + "]");
+
+	    // 관리자 / 일반회원 검색 구분
+	    if (isAdmin) {
+	    	
+	    	String status = request.getParameter("status");
+	    	if(status == null || status.trim().isEmpty()) {
+	    		status = null;
+	    	}
+	    		
+	    		if(type == null || type.trim().isEmpty()) {
+	    		type = null;
+	    		content = null;
+	    	}
+	    	
+	    	
+		    System.out.println("status:"+ status);
+
+	        count = idao.adminSCount(type, content, status);
+	        sList = idao.adminSearch(type, content, StartRow, pagesize, status);
+
+	    
+	    	request.setAttribute("status", status);
+	    
+	    } else {
+
+	        count = idao.sCount(chkid, type, content);
+	        sList = idao.search(type, content, StartRow, pagesize, chkid);
+	    }
+
+	    int number = count - StartRow;
+
+	    int pageCount = 0;
+	    int pageBlock = 3;
+	    int startpage = 1;
+	    int endpage = 0;
+
+	    if (count > 0) {
+
+	        pageCount = count / pagesize
+	                + (count % pagesize == 0 ? 0 : 1);
+
+	        startpage = ((currentPage - 1) / pageBlock)
+	                * pageBlock + 1;
+
+	        endpage = startpage + pageBlock - 1;
+
+	        if (endpage > pageCount) {
+	            endpage = pageCount;
+	        }
+	    }
+
+	    // JSP 데이터 전달
+	    request.setAttribute("sList", sList);
+	    request.setAttribute("iList", sList);
+
+	    request.setAttribute("type", type);
+	    request.setAttribute("content", content);
+
+	    request.setAttribute("StartRow", StartRow);
+	    request.setAttribute("pageCount", pageCount);
+	    request.setAttribute("pagesize", pagesize);
+	    request.setAttribute("count", count);
+	    request.setAttribute("number", number);
+	    request.setAttribute("startpage", startpage);
+	    request.setAttribute("endpage", endpage);
+	    request.setAttribute("pageBlock", pageBlock);
+
+	    // 화면 이동
+	    String view;
+
+	    if (isAdmin) {
+	        view = "/admin/admin-index.jsp?section=admin-inquiry.jsp";
+	    } else {
+	        view = "/index.jsp?section=cs/cs-index.jsp"
+	             + "&csSection=inquiry&csView=search";
+	    }
+
+	    RequestDispatcher rd = request.getRequestDispatcher(view);
+	    rd.forward(request, response);
 	}
-
 }

@@ -32,40 +32,69 @@
             <form class="cs-search" action="${pageContext.request.contextPath}/SearchFaqProc.do" method="get">
                 <select name="type" aria-label="FAQ 검색 항목" required>
                     <option value="">선택</option>
-                    <option value="faq_inquery" ${type eq 'faq_inquery' ? 'selected' : ''}>제목으로 검색</option>
+                    <option value="faq_inquiry" ${type eq 'faq_inquiry' ? 'selected' : ''}>제목으로 검색</option>
                     <option value="faq_answer" ${type eq 'faq_answer' ? 'selected' : ''}>내용으로 검색</option>
                 </select>
                 <input type="text" name="content" value="<c:out value='${content}'/>" placeholder="검색어를 입력해주세요" required>
                 <input type="submit" value="검색">
                 <input type="button" class="btn-all" value="전체보기" onclick="location.href='${pageContext.request.contextPath}/FaqProc.do'">
             </form>
-            <div class="cs-table-wrap">
-                <table class="cs-table">
-                    <thead><tr><th>질문</th></tr></thead>
-                    <tbody>
-                        <c:choose>
-                            <c:when test="${empty fList}">
-                                <tr><td class="cs-empty">등록된 FAQ가 없습니다.</td></tr>
-                            </c:when>
-                            <c:otherwise>
-                                <c:forEach var="f" items="${fList}">
-                                    <tr>
-                                        <td>
-                                            <button type="button" class="cs-acc" aria-expanded="false">
-                                                <span><c:out value="${f.faqInquery}" /></span>
-                                                <span class="cs-acc__chev" aria-hidden="true"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr class="cs-drop" hidden>
-                                        <td><div class="cs-body"><c:out value="${f.faqAnswer}" /></div></td>
-                                    </tr>
-                                </c:forEach>
-                            </c:otherwise>
-                        </c:choose>
-                    </tbody>
-                </table>
-            </div>
+<div class="cs-table-wrap">
+    <table class="cs-table">
+        <thead>
+            <tr>
+                <th>글종류</th>
+                <th>질문</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:choose>
+                <c:when test="${empty fList}">
+                    <tr>
+                        <td colspan="2" class="cs-empty">
+                            등록된 FAQ가 없습니다.
+                        </td>
+                    </tr>
+                </c:when>
+
+                <c:otherwise>
+                    <c:forEach var="f" items="${fList}">
+                        <tr>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${f.faqType == 1}">예매·취소</c:when>
+                                    <c:when test="${f.faqType == 2}">결제·환불</c:when>
+                                    <c:when test="${f.faqType == 3}">할인·포인트</c:when>
+                                    <c:when test="${f.faqType == 4}">회원·계정</c:when>
+                                    <c:when test="${f.faqType == 5}">관람·시설</c:when>
+                                    <c:otherwise>기타</c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="cs-acc"
+                                        aria-expanded="false">
+                                    <span>
+                                        <c:out value="${f.faqInquery}" />
+                                    </span>
+                                    <span class="cs-acc__chev"
+                                          aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="cs-drop" hidden>
+                            <td colspan="2">
+                                <div class="cs-body">
+                                    <c:out value="${f.faqAnswer}" />
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+        </tbody>
+    </table>
+</div>
             <div class="cs-paging">
                 <c:if test="${startpage gt pageBlock}">
                     <c:url var="prev" value="/${param.csView eq 'search' ? 'SearchFaqProc.do' : 'FaqProc.do'}">

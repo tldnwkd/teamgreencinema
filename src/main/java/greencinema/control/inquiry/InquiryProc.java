@@ -40,7 +40,7 @@ public class InquiryProc extends HttpServlet {
 
 		if (!chkId.equals("admin")) { // 일반회원일 경우
 			int count = 0; // 전체게시글 수
-			int pagesize = 5; // 한 화면에 그릴 페이지 수
+			int pagesize = 10; // 한 화면에 그릴 페이지 수
 			String pageNum = request.getParameter("pageNum");// 화면에서 넘겨받을 pageNum값
 			if (pageNum == null) { // 페이지 선택 안했을 경우 자동으로 1번 페이지 선택
 				pageNum = "1";

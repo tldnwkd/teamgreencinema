@@ -84,10 +84,15 @@ public class FaqDAO {
 	//--faq search 메소드
 	public int fCount(String type, String content) {
 		int count=0;
+		
+		if (!"faq_inquiry".equals(type) && !"faq_answer".equals(type)) {
+		    return 0;
+		}
 		try {
 			con = Util.getConnection();
-			String sql = "select count(*) from faq where "+type+" like '%"+content+"%' ";
+			String sql = "select count(*) from faq where " + type + " like ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + content + "%");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -111,12 +116,20 @@ public class FaqDAO {
 	// search select add
 	public ArrayList<FaqDTO> search(String type, String content, int Startpage, int pagesize){
 			ArrayList<FaqDTO> f = new ArrayList<FaqDTO>();
+			
+			if (!"faq_inquiry".equals(type) && !"faq_answer".equals(type)) {
+			    return f;
+			}
+			
 		try { 
 			con = Util.getConnection();
-			String sql = "select * from faq where "+type+" like '%"+content+"%' limit ?,?";
+			String sql = "select * from faq where " + type
+			           + " like ? order by faq_id desc limit ?,?";
+
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, Startpage);
-			pstmt.setInt(2, pagesize);
+			pstmt.setString(1, "%" + content + "%");
+			pstmt.setInt(2, Startpage);
+			pstmt.setInt(3, pagesize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
