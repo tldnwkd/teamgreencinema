@@ -75,7 +75,7 @@
                                         class="cs-acc"
                                         aria-expanded="false">
                                     <span>
-                                        <c:out value="${f.faqInquery}" />
+                                        <c:out value="${f.faqInquiry}" />
                                     </span>
                                     <span class="cs-acc__chev"
                                           aria-hidden="true"></span>
