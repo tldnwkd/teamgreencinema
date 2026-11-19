@@ -148,7 +148,7 @@ public class AdminMovieInsertProc extends HttpServlet {
 				int result = mdao.update(mdto);
 				System.out.println(result);
 				if(result > 0) {
-					response.sendRedirect("AdminMovieProc.do?movie_Id=" + movieId);
+					response.sendRedirect("AdminMovieProc.do");
 				}else {
 					alert(response, "영화를 수정하지 못했습니다.", "AdminMovieProc.do?movie_Id=" + movieId);
 				}
