@@ -3,7 +3,7 @@ package greencinema.model.faq;
 public class FaqDTO {
 	private int faqId;
 	private int faqType;
-	private String faqInquery;
+	private String faqInquiry;
 	private String faqAnswer;
 	public int getFaqId() {
 		return faqId;
@@ -17,11 +17,12 @@ public class FaqDTO {
 	public void setFaqType(int faqType) {
 		this.faqType = faqType;
 	}
-	public String getFaqInquery() {
-		return faqInquery;
+	
+	public String getFaqInquiry() {
+		return faqInquiry;
 	}
-	public void setFaqInquery(String faqInquery) {
-		this.faqInquery = faqInquery;
+	public void setFaqInquiry(String faqInquiry) {
+		this.faqInquiry = faqInquiry;
 	}
 	public String getFaqAnswer() {
 		return faqAnswer;

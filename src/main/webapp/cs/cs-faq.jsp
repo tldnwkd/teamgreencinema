@@ -14,7 +14,7 @@
                     <c:otherwise>FAQ</c:otherwise>
                 </c:choose>
             </span>
-            <h2 class="cs-article__title"><c:out value="${fOneList.faqInquery}" /></h2>
+            <h2 class="cs-article__title"><c:out value="${fOneList.faqInquiry}" /></h2>
             <div class="cs-answer">
                 <span class="cs-chip">답변</span>
                 <div class="cs-body"><c:out value="${fOneList.faqAnswer}" /></div>

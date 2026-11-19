@@ -33,7 +33,8 @@ public class OneFaqProc extends HttpServlet {
 		int faqId = Integer.parseInt(request.getParameter("faq_id"));
 		FaqDAO fdao = new FaqDAO();
 		String btn = request.getParameter("btn");
-		if("admin".equals(chkId) && "upd".equals(btn)) {
+		System.out.println("btn value : " + btn);
+		if("admin".equals(chkId) && "update".equals(btn)) {
 			String typeText = request.getParameter("faqType");
 			String title = request.getParameter("faqTitle");
 			String content = request.getParameter("faqContent");
@@ -60,7 +61,7 @@ public class OneFaqProc extends HttpServlet {
 			out.println("<script>");
 			if(result > 0) {
 				out.println("alert('FAQ 수정이 완료되었습니다.');");
-				out.println("location.href='OneFaqProc.do?faq_id=" + faqId + "';");
+				out.println("location.href='FaqProc.do'");
 			}else {
 				out.println("alert('FAQ 수정에 실패했습니다.');");
 				out.println("history.back();");
@@ -77,12 +78,13 @@ public class OneFaqProc extends HttpServlet {
 			
 			if("upd".equals(type)) {
 				
-				RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq-Update.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-faq.jsp");
 				rd.forward(request, response);
-				}else {
+			}else {
 					RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq.jsp");
 					rd.forward(request, response);
-			}}else {
+			}
+			}else {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=faq&csView=detail");
 			rd.forward(request, response);
 		}

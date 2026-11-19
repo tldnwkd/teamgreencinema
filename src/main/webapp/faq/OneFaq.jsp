@@ -16,7 +16,7 @@
 					</div>
 					<div class="form-group form-group--full">
 						<p class="form-label">문의 제목</p>
-						<p>${fOneList.faqInquery}</p>
+						<p>${fOneList.faqInquiry}</p>
 					</div>
 					<div class="form-group form-group--full">
 						<p class="form-label">답변 내용</p>

@@ -35,7 +35,7 @@ public class FaqDAO {
 				 FaqDTO fdto = new FaqDTO();
 				 fdto.setFaqId(rs.getInt(1));
 				 fdto.setFaqType(rs.getInt(2));
-				 fdto.setFaqInquery(rs.getString(3));
+				 fdto.setFaqInquiry(rs.getString(3));
 				 fdto.setFaqAnswer(rs.getString(4));
 				 
 				 f.add(fdto);
@@ -89,6 +89,8 @@ public class FaqDAO {
 		    return 0;
 		}
 		try {
+			System.out.println("type value : " + type);
+			System.out.println("content value : " + content);
 			con = Util.getConnection();
 			String sql = "select count(*) from faq where " + type + " like ?";
 			pstmt = con.prepareStatement(sql);
@@ -136,7 +138,7 @@ public class FaqDAO {
 				FaqDTO fdto = new FaqDTO();
 				fdto.setFaqId(rs.getInt(1));
 				fdto.setFaqType(rs.getInt(2));
-				fdto.setFaqInquery(rs.getString(3));
+				fdto.setFaqInquiry(rs.getString(3));
 				fdto.setFaqAnswer(rs.getString(4));
 				
 				f.add(fdto);
@@ -169,7 +171,7 @@ public class FaqDAO {
 			 if(rs.next()) {
 				 f.setFaqId(rs.getInt(1));
 				 f.setFaqType(rs.getInt(2));
-				 f.setFaqInquery(rs.getString(3));
+				 f.setFaqInquiry(rs.getString(3));
 				 f.setFaqAnswer(rs.getString(4));
 				 
 				 

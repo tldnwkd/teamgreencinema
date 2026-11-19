@@ -33,7 +33,12 @@ public class UserProc extends HttpServlet {
 		UserDAO	udao = new UserDAO();
 		int userCount = udao.userAllCount();
 		request.setAttribute("userCount", userCount);	
-
+		
+		System.out.println("btn value : " + btn);
+		System.out.println("menu value : " + menu);
+		
+		
+		
 		if(btn != null || "write".equals(menu)) {
 			writePro(request, response);
 			return;
@@ -277,7 +282,7 @@ public class UserProc extends HttpServlet {
 			boolean changePw = !userPw.equals("");
 			int result = udao.adminUpdate(udto, changePw);
 			if(result == 1) {
-				response.sendRedirect("UserProc.do?user_Id=" + userId);
+				response.sendRedirect("UserProc.do");
 			}else {
 				alert(response, "회원 수정에 실패했습니다.", null);
 			}

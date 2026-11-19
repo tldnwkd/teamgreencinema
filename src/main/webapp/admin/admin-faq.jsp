@@ -35,7 +35,7 @@
 								<tr>
 									<td>${fList.faqId}</td>
 									<td>${fList.faqType}</td>
-									<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquery}</a></td>
+									<td><a href="OneFaqProc.do?faq_id=${fList.faqId}">${fList.faqInquiry}</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

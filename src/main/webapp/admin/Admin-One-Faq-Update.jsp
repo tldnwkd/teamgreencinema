@@ -18,7 +18,7 @@
 						</div>
 						<div class="form-group">
 							<p class="form-label">제목</p>
-							<input type="text" name="title" value="${fOneList.faqInquery}">
+							<input type="text" name="title" value="${fOneList.faqInquiry}">
 						</div>
 						<div class="form-group form-group--full">
 							<p class="form-label">공지사항 내용</p>
@@ -34,6 +34,7 @@
 		</div>
 	</section>
 </form>
+
 <script>
 	
 </script>

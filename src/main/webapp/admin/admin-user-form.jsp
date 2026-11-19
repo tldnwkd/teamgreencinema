@@ -17,32 +17,39 @@
 				</c:choose>
 			</div>
 			<div class="admin-form__row">
-				<label for="userPw">비밀번호</label>
-				<input id="userPw" name="userPw" type="text" maxlength="15" placeholder="${empty udto ? '비밀번호 (15자 이내)' : '비워 두면 기존 비밀번호를 유지합니다'}">
+				<label for="beforePw">비밀번호</label>				
+				<input id="beforePw" name="userPw" type="text" maxlength="15" placeholder="${empty udto ? '비밀번호 (15자 이내)' : '비워 두면 기존 비밀번호를 유지합니다'}">
 				<c:if test="${not empty udto}">
 					<p class="admin-form__hint">비밀번호를 바꾸지 않으려면 비워 두세요.</p>
 				</c:if>
 			</div>
 			<div class="admin-form__row">
-				<label for="userName">이름</label>
-				<input id="userName" name="userName" type="text" maxlength="20" value="${udto.userName}" placeholder="이름 (20자 이내)">
+				<label for="beforeName">이름</label>
+				<input id="afterName" type="hidden" value="${udto.userName}" >
+				<input id="beforeName" name="userName" type="text" maxlength="20" value="${udto.userName}" placeholder="이름 (20자 이내)">
 			</div>
 			<div class="admin-form__row">
-				<label for="userBirth">생년월일</label>
-				<input id="userBirth" name="userBirth" type="date" value="${udto.userBirth}">
+				<label for="beforeBirth">생년월일</label>
+				<input id="afterBirth" type="hidden" value="${udto.userBirth}">
+				<input id="beforeBirth" name="userBirth" type="date" value="${udto.userBirth}">
 			</div>
 			<div class="admin-form__row">
-				<label for="userPhone">연락처</label>
-				<input id="userPhone" name="userPhone" type="text" maxlength="15" value="${udto.userPhone}" placeholder="010-0000-0000">
+				<label for="beforePhone">연락처</label>
+				<input id="afterPhone" type="hidden" value="${udto.userPhone}">
+				<input id="beforePhone" name="userPhone" type="text" maxlength="15" value="${udto.userPhone}" placeholder="010-0000-0000">
 			</div>
 			<div class="admin-form__row">
 				<label for="userEmail">이메일</label>
+				<c:if test="${not empty udto}">
+					<input id="afterEmail" type="hidden" value="${udto.userEmail}">
+				</c:if>
 				<input id="userEmail" name="userEmail" type="text" maxlength="30" value="${udto.userEmail}" placeholder="이메일 (없으면 비워 두세요)">
 			</div>
 			<c:if test="${not empty udto}">
 				<div class="admin-form__row">
-					<label for="userDelete">상태</label>
-					<select id="userDelete" name="userDelete">
+				<input id="afterDelete" type="hidden" value="${udto.userDelete}">
+					<label for="beforeDelete">상태</label>
+					<select id="beforeDelete" name="userDelete">
 						<option value="0" ${udto.userDelete == 0 ? 'selected' : ''}>정상</option>
 						<option value="1" ${udto.userDelete == 1 ? 'selected' : ''}>탈퇴</option>
 					</select>
@@ -55,10 +62,11 @@
 					<c:when test="${empty udto}">
 						<button type="submit" name="btn" value="ins">등록</button>
 					</c:when>
-					<c:otherwise>
-						<button type="submit" name="btn" value="upd" onclick="return confirm('회원 정보를 수정할까요?');">수정</button>
+					<c:otherwise>						
+						<input type="hidden" name="btn" id="btn" value="">
+						<button type="button" onclick="updateUser()">수정</button>
 						<c:if test="${udto.userId != 'admin'}">
-							<button type="submit" name="btn" value="del" class="is-danger" onclick="return confirm('이 회원을 탈퇴 처리할까요?');">탈퇴</button>
+							<button type="button" class="is-danger" onclick="deleteUser()">탈퇴</button>
 						</c:if>
 					</c:otherwise>
 				</c:choose>
@@ -66,3 +74,43 @@
 		</form>
 	</div>
 </section>
+
+<script>
+	function updateUser() {
+		let form = document.userForm;
+
+		let afterDelete = document.getElementById("afterDelete").value;
+		let beforeDelete = document.getElementById("beforeDelete").value;
+		let afterName = document.getElementById("afterName").value;
+		let beforeName = document.getElementById("beforeName").value;
+		let afterBirth = document.getElementById("afterBirth").value;
+		let beforeBirth = document.getElementById("beforeBirth").value;		
+		let afterPhone = document.getElementById("afterPhone").value;
+		let beforePhone = document.getElementById("beforePhone").value;
+		let afterEmail = document.getElementById("afterEmail").value;
+		let beforeEmail = document.getElementById("userEmail").value;
+		let beforePw = document.getElementById("beforePw").value;
+
+		if(	afterDelete == beforeDelete
+			&&  afterName == beforeName
+			&&	afterBirth == beforeBirth
+			&&	afterPhone == beforePhone
+			&&	afterEmail == beforeEmail
+			&&	beforePw.trim() == ""
+		) {
+			alert("수정된 값이 없습니다.");
+			form.userPhone.focus();
+			return;
+		} else if (confirm('수정을 완료하시겠습니까?')) {
+		    document.getElementById("btn").value = "upd";
+		    form.submit();
+		}
+	}
+
+	function deleteUser() {
+		if (confirm('이 회원을 탈퇴 처리할까요?')) {
+			document.getElementById("btn").value = "del";
+			document.userForm.submit();
+		}
+	}
+</script>
