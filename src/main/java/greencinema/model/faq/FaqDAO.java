@@ -225,6 +225,29 @@ public class FaqDAO {
 		}
 		return result;
 	}
+	
+	public int FaqDelete(int faqid) {
+		int result = 0;
 
+		try {
+			con = Util.getConnection();
+			String sql = "DELETE FROM faq WHERE faq_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, faqid);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 
 }

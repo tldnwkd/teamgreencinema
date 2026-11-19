@@ -68,8 +68,9 @@
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
-									<p style="font-size: 13px; color: #64706b; margin-top: 10px;">극장을
-										선택하면 해당 극장에서 상영중인 영화가 표시됩니다.</p>
+									<p style="font-size: 13px; color: #64706b; margin-top: 10px;">
+										해당 영화가 상영중인 상영관이 없습니다.
+									</p>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -299,7 +300,7 @@
 				<c:choose>
 					<c:when
 						test="${not empty rjdto.movieId && not empty param.smallRegion && not empty param.selectedDate && not empty param.scheduleSTime && not empty param.scheduleETime}">
-						<p class="summary-footnote02">선택이 완료되었습니다<br/> 다음 단계로 이동하세요.</p>
+						<p class="summary-footnote02">선택이 완료되었습니다 다음 단계로 이동하세요.</p>
 					</c:when>
 					<c:otherwise>
 						<p class="summary-footnote">모든 항목을 선택한 후 다음 단계로 이동하세요.</p>

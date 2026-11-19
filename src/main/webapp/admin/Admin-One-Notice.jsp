@@ -25,7 +25,17 @@
 			<div class="admin-form__actions">
 				<a href="${pageContext.request.contextPath}/NoticeProc.do">목록</a>
 				<button type="submit" name="btn" value="upd" onclick="return confirm('공지를 수정할까요?');">수정</button>
+				<a onclick="deleteNotice(${nOneList.noticeId})" class="delete-notice-button">삭제</a>
 			</div>
 		</form>
 	</div>
 </section>
+
+<script type="text/javascript">
+	function deleteNotice(noticeId){
+		if(confirm("공지사항을 삭제하시겠습니까?")){
+			location.href="${pageContext.request.contextPath}/NoticeDeleteProc.do?noticeId=" + noticeId;
+			return;
+		}
+	}
+</script>

@@ -23,7 +23,7 @@
 						<img class="movie-card__poster" src="./${list.imgPath}" alt="${list.movieTitle }"></a>
 						<span class="movie-card__rank">${begin}</span>
 						<div class="movie-card__actions">
-							<button class="btn btn--primary btn--small" onclick="reservebtn()">예매하기</button>
+							<button class="btn btn--primary btn--small" onclick="reservebtn(${list.movieId})">예매하기</button>
 							<a class="btn btn--dark btn--small" href="MovieProc.do?movieId=${list.movieId }">상세보기</a>
 						</div>
 					</div>
@@ -74,15 +74,16 @@
 </section>
 
 <script type="text/javascript">
-	function reservebtn(){
-		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
-			alert('로그인 후 이용 가능합니다.'); 
-			location.href='index.jsp?section=user/login.jsp';
-			return
-		}else{
-			location.href="selectMovieReserveProc.do?movieId="${list.movieId};
-		}
+	function reservebtn(movieId) {
+	    if (${sessionScope.id == null} || ${sessionScope.id == ""}) {
+	        alert('로그인 후 이용 가능합니다.');
+	        location.href = 'index.jsp?section=user/login.jsp';
+	        return;
+	    }
+	    var targetId = movieId ? movieId : "1";
+	    location.href = "selectMovieReserveProc.do?movieId=" + targetId;
 	}
+	
 	function inquirybtn(){
 		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
 			alert('로그인 후 이용 가능합니다.');

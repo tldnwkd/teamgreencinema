@@ -34,16 +34,15 @@
 		</header>
 
 <script type="text/javascript">
-	function reservebtn(){
-		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
-			alert('로그인 후 이용 가능합니다.');
-			location.href='index.jsp?section=user/login.jsp';
-			return
-		}else{
-			location.href="selectMovieReserveProc.do?movieId="${list.movieId};
-		}
+	function reservebtn(movieId) {
+	    if (${sessionScope.id == null} || ${sessionScope.id == ""}) {
+	        alert('로그인 후 이용 가능합니다.');
+	        location.href = 'index.jsp?section=user/login.jsp';
+	        return;
+	    }
+	    var targetId = movieId ? movieId : "1";
+	    location.href = "selectMovieReserveProc.do?movieId=" + targetId;
 	}
-
 	function inquirybtn(){
 		if(${sessionScope.id ==null} ||${sessionScope.id ==""}){
 			alert('로그인 후 이용 가능합니다.');

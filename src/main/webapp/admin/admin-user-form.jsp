@@ -57,12 +57,21 @@
 					</c:when>
 					<c:otherwise>
 						<button type="submit" name="btn" value="upd" onclick="return confirm('회원 정보를 수정할까요?');">수정</button>
-						<c:if test="${udto.userId != 'admin'}">
-							<button type="submit" name="btn" value="del" class="is-danger" onclick="return confirm('이 회원을 탈퇴 처리할까요?');">탈퇴</button>
-						</c:if>
+							<c:if test="${udto.userId != 'admin'}">							
+								<button type="submit" name="btn" value="del" class="is-danger" onclick="return confirm('이 회원을 탈퇴 처리할까요?');">탈퇴</button>
+							</c:if>
+							<c:if test="${udto.userId == 'admin'}">							
+								<button type="button" class="is-danger" onclick="admin()">탈퇴</button>
+							</c:if>
 					</c:otherwise>
 				</c:choose>
 			</div>
 		</form>
 	</div>
 </section>
+
+<script type="text/javascript">
+	function admin(){
+		alert("관리자 계정은 삭제 할 수 없습니다.");
+	}
+</script>

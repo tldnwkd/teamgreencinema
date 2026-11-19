@@ -185,8 +185,9 @@ public class UserProc extends HttpServlet {
 				return;
 			}
 			int result = udao.withdrawUser(userId);
+			
 			if(result == 1) {
-				response.sendRedirect("UserProc.do");
+				alert(response, "탈퇴 처리가 완료되었습니다.", "UserProc.do");			
 			}else {
 				alert(response, "탈퇴 처리에 실패했습니다.", "UserProc.do?user_Id=" + userId);
 			}
