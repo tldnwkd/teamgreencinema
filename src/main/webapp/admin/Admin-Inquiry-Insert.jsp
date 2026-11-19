@@ -36,10 +36,10 @@
 				<a href="InquiryProc.do">목록</a>
 				<c:choose>
 					<c:when test="${idto.answerStatus==0}">
-						<button name="btn" type="button" value="updOk" onclick="ans()">답변</button>
+						<button name="btn" type="button" value="upd" onclick="ans()">답변</button>
 					</c:when>
 					<c:otherwise>
-						<button name="btn" type="button" value="updOk" onclick="upd()">수정</button>
+						<button name="btn" type="button" value="upd" onclick="upd()">수정</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -59,6 +59,7 @@
 			i.submit();
 		}
 	}
+	
 	function upd(){
 		let i = document.iform;
 		let after = document.getElementById("after").value;

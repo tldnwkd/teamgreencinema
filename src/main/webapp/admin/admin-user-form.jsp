@@ -17,7 +17,7 @@
 				</c:choose>
 			</div>
 			<div class="admin-form__row">
-				<label for="beforePw">비밀번호</label>				
+				<label for="beforePw">비밀번호</label>
 				<input id="beforePw" name="userPw" type="text" maxlength="15" placeholder="${empty udto ? '비밀번호 (15자 이내)' : '비워 두면 기존 비밀번호를 유지합니다'}">
 				<c:if test="${not empty udto}">
 					<p class="admin-form__hint">비밀번호를 바꾸지 않으려면 비워 두세요.</p>
@@ -62,7 +62,7 @@
 					<c:when test="${empty udto}">
 						<button type="submit" name="btn" value="ins">등록</button>
 					</c:when>
-					<c:otherwise>						
+					<c:otherwise>
 						<input type="hidden" name="btn" id="btn" value="">
 						<button type="button" onclick="updateUser()">수정</button>
 						<c:if test="${udto.userId != 'admin'}">
@@ -84,7 +84,7 @@
 		let afterName = document.getElementById("afterName").value;
 		let beforeName = document.getElementById("beforeName").value;
 		let afterBirth = document.getElementById("afterBirth").value;
-		let beforeBirth = document.getElementById("beforeBirth").value;		
+		let beforeBirth = document.getElementById("beforeBirth").value;
 		let afterPhone = document.getElementById("afterPhone").value;
 		let beforePhone = document.getElementById("beforePhone").value;
 		let afterEmail = document.getElementById("afterEmail").value;

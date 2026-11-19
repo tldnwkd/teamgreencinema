@@ -1,6 +1,7 @@
 package greencinema.control.faq;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -73,21 +74,40 @@ public class OneFaqProc extends HttpServlet {
 		request.setAttribute("fOneList", fOneList);
 		
 		if("admin".equals(chkId)) {
-			
-			String type = request.getParameter("type");
+			System.out.println("chkId=?"+chkId);
+
+			String type = request.getParameter("btn");
+			System.out.println("type02=?"+type);
 			
 			if("upd".equals(type)) {
-				
-				RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=admin-faq.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq-Update.jsp");
 				rd.forward(request, response);
-			}else {
+				}
+			if("del".equals(type)) {
+				int result = fdao.FaqDelete(faqId);
+				if(result > 0) {
+					alert(response, "삭제가 완료되었습니다", "FaqProc.do");
+				}
+			}
+			else {
 					RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq.jsp");
 					rd.forward(request, response);
-			}
-			}else {
+			}}else {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?section=cs/cs-index.jsp&csSection=faq&csView=detail");
 			rd.forward(request, response);
 		}
 	}
 	
+	private void alert(HttpServletResponse response, String msg, String location) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('" + msg + "');");
+		if (location == null) {
+			out.println("history.back();");
+		} else {
+			out.println("location.href='" + location + "';");
+		}
+		out.println("</script>");
+	}
 }

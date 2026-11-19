@@ -228,4 +228,29 @@ public class NoticeDAO {
 		}
 		return result;
 	}
+	
+	public int deleteNotice(int noticeId) {
+		int result = 0;
+
+		try {
+			con = Util.getConnection();
+			String sql = "DELETE FROM notice WHERE notice_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, noticeId);
+
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result; 
+	}
+	
 }

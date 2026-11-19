@@ -2,6 +2,7 @@ package greencinema.control.inquiry;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +34,7 @@ public class OneInquiryProc extends HttpServlet {
 		String type ="";
 		int inquiryId = Integer.parseInt(request.getParameter("inquiryId")) ;
 		InquiryDAO idao = new InquiryDAO();
+		
 		if(request.getParameter("btn") != null) {
 		type = request.getParameter("btn");
 		System.out.println("type"+type);
@@ -50,18 +52,7 @@ public class OneInquiryProc extends HttpServlet {
 			
 		}else {
 		
-		
-		
-		if(type.equals("del")) {
-			int result = idao.OneDelete(inquiryId, chkId);
-			if(result > 0) {
-					response.sendRedirect("InquiryProc.do");
-					return;
-			}
-		}
-		
-		
-		
+				
 		if(type.equals("upd")) {
 		InquiryDTO idto = idao.getOneInquiry(inquiryId, chkId);
 		
@@ -80,6 +71,19 @@ public class OneInquiryProc extends HttpServlet {
 			}
 		}
 		
+	}
+	
+	private void alert(HttpServletResponse response, String msg, String location) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('" + msg + "');");
+		if (location == null) {
+			out.println("history.back();");
+		} else {
+			out.println("location.href='" + location + "';");
+		}
+		out.println("</script>");
 	}
 
 }
