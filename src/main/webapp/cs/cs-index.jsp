@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cs-layout.css?v=20261118d">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-unified.css?v=20261118">
 
 <section class="inquiry cs-shell">
     <div class="page-content">

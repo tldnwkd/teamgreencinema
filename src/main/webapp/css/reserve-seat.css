@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+@scope (body:has(#seatwrap)) {
 :root {
   --gc-primary: #03c75a;
   --gc-primary-hover: #02ad4f;
@@ -481,4 +482,5 @@
   justify-content: center;
   cursor: not-allowed;
   pointer-events: none;
+}
 }

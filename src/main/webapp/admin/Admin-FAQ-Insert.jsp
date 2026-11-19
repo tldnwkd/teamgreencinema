@@ -8,7 +8,7 @@
 			<div class="admin-form__row">
 				<label for="faqType">문의 종류</label>
 				<select id="faqType" name="faqType">
-					<option selected>선택</option>
+					<option value=""selected>선택</option>
 					<option value="1">예매·취소</option>
 					<option value="2">결제·환불</option>
 					<option value="3">할인·포인트</option>

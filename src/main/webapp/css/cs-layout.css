@@ -404,3 +404,21 @@
     grid-column: 1 / -1;
   }
 }
+
+
+/* Customer-center reference style */
+.cs-shell .cs-layout{gap:26px;align-items:start}
+.cs-shell .cs-left .page-heading__eyebrow{color:#008d40;letter-spacing:.13em}
+.cs-shell .cs-nav a{min-height:45px;border:1px solid #e1e9e4;border-radius:13px;background:#fff;color:#293a30;font-weight:750;box-shadow:none}
+.cs-shell .cs-nav a:hover{border-color:#92d9ad;background:#f4fff8}
+.cs-shell .cs-nav a.is-active{background:#03c75a;border-color:#03c75a;color:#062414;box-shadow:0 8px 18px rgba(3,199,90,.20)}
+.cs-shell .cs-panel{border:1px solid #e5ede8;border-radius:22px;background:#fff;box-shadow:0 16px 40px rgba(17,28,23,.055)}
+.cs-shell .cs-search{border:1px solid #e7eee9;border-radius:13px;background:#f6faf7}
+.cs-shell .cs-table{border-collapse:collapse;width:100%}
+.cs-shell .cs-table thead{background:#f1f9f4}
+.cs-shell .cs-table th{color:#335f43;font-weight:800}
+.cs-shell .cs-table td{border-bottom:1px solid #e7eeea;color:#24352c}
+.cs-shell .cs-chip{border-radius:999px;background:#e8fff1;color:#06883c}
+.cs-shell .cs-status.is-done{background:#e8fff1;color:#078a42}
+.cs-shell .cs-status.is-wait{background:#fff3df;color:#a16b16}
+.cs-shell .cs-paging .is-current{background:#e8fff1;border-color:#03c75a;color:#056e35}

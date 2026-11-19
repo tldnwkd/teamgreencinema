@@ -26,8 +26,12 @@
 			</div>
 			<div class="admin-form__actions">
 				<a href="FaqProc.do">목록</a>
-				<button type="submit" name="btn" value="upd" onclick="return confirm('FAQ를 수정할까요?');">수정</button>
+				<button type="button" name="btn" value="upd" onclick="return confirm('FAQ를 수정할까요?');">수정</button>
+				<button type="button" name="btn" value="del" onclick="return confirm('FAQ를 삭제할까요?');">삭제</button>
 			</div>
 		</form>
 	</div>
 </section>
+<script>
+	
+</script>

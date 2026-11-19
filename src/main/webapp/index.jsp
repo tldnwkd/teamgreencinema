@@ -6,10 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>그린시네마에 오신걸 환영합니다.</title>
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/style.css?v=20261118c">
+    <meta charset="UTF-8">
+    <title>그린시네마에 오신 걸 환영합니다.</title>
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/css/style.css?v=20261118c">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/css/theme-unified.css?v=20261118b">
 </head>
 
 	<%
