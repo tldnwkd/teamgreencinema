@@ -64,10 +64,8 @@
 					</c:when>
 					<c:otherwise>
 						<input type="hidden" name="btn" id="btn" value="">
-						<button type="button" onclick="updateUser()">수정</button>
-						<c:if test="${udto.userId != 'admin'}">
-							<button type="button" class="is-danger" onclick="deleteUser()">탈퇴</button>
-						</c:if>
+						<button type="button" onclick="updateUser()">수정</button>					
+						<button type="button" class="is-danger" onclick="deleteUser()">탈퇴</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
