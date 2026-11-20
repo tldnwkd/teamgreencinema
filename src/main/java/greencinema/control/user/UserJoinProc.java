@@ -1,6 +1,7 @@
 package greencinema.control.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,14 +68,23 @@ public class UserJoinProc extends HttpServlet {
 		udto.setUserEmail(userEmail);
 		udto.setUserPhone(userPhone);
 		
-		udao.joinUser(udto);		
 		
 		
+		int joinresult=udao.joinUser(udto);	
 		
-		response.sendRedirect("index.jsp");			
-		return;
-
-
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		if(joinresult==1) {
+			 out.println("<script>");
+			 out.println("alert('회원가입이 완료되었습니다.');");
+			 out.println("location.href='index.jsp';");
+			 out.println("</script>");
+		}else {
+			out.println("alert('회원가입 처리 중 오류가 발생했습니다. 다시 시도해주세요.');");
+			out.println("history.back();");
+		}
+				
 	}
 
 	private void keepJoinForm(HttpServletRequest request, String userId, String userName, String userBirth, String userEmail, String userPhone) {

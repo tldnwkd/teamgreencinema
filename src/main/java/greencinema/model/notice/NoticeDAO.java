@@ -146,7 +146,7 @@ public class NoticeDAO {
 			 
 			 
 			 
-			 String sql2 = "update Notice set notice_hits= notice_hits+1 where notice_id = ?";
+			 String sql2 = "update notice set notice_hits= notice_hits+1 where notice_id = ?";
 			 pstmt = con.prepareStatement(sql2);
 			 pstmt.setInt(1, notice_Id);
 			 pstmt.executeUpdate();
@@ -234,7 +234,7 @@ public class NoticeDAO {
 
 		try {
 			con = Util.getConnection();
-			String sql = "DELETE FROM notice WHERE notice_id = ?";
+			String sql = "delete from notice where notice_id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, noticeId);
 

@@ -44,7 +44,8 @@ public class UserDAO {
 	}
 	
 	
-	public void joinUser(UserDTO udto) {		
+	public int joinUser(UserDTO udto) {		
+		int result = 0;
 		try {
 			con = Util.getConnection();
 			String sql = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, 0)";
@@ -56,9 +57,9 @@ public class UserDAO {
 			pstmt.setString(5, udto.getUserEmail());
 			pstmt.setString(6, udto.getUserPhone());					
 			
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		}catch (Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			try {
 				if(con != null) con.close();
@@ -67,7 +68,8 @@ public class UserDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}		
+		}	
+		return result;
 	}
 	
 	

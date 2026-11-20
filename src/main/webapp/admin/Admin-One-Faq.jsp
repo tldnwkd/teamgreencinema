@@ -29,9 +29,9 @@
 			</div>
 			<div class="admin-form__actions">
 				<a href="FaqProc.do">목록</a>
+				<input type="hidden" id="btnAction" value="">
+				<button type="button" onclick="modify()">수정</button>
 				<button type="submit" name="btn" value="del" onclick="return confirm('FAQ를 삭제할까요?');">삭제</button>
-				<input type="hidden" name="btn" value="update">
-				<button type="button" value="update" onclick="modify()">수정</button>
 			</div>
 		</form>
 	</div>
@@ -53,9 +53,11 @@ function modify(){
 		return;
 	}
 
-	if(confirm('수정을 완료하시겠습니까?'))	{
+	if(confirm('수정을 완료하시겠습니까?')) {
+		const btnEl = document.getElementById("btnAction");
+		btnEl.name = "btn";
+		btnEl.value = "update";
 		i.submit();
 	}
 }
-
 </script>

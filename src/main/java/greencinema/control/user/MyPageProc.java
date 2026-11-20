@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import greencinema.model.inquiry.InquiryDTO;
 import greencinema.model.reserve.ReserveDTO;
@@ -46,7 +47,8 @@ public class MyPageProc extends HttpServlet {
 			}
 		}
 		
-		String userId = request.getParameter("userId");
+		HttpSession session = request.getSession(false);
+		String userId = (String)session.getAttribute("id");
 		
 		UserDAO udao = new UserDAO();
 		

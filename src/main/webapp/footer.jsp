@@ -16,7 +16,7 @@
 			</div>
 			<div class="site-footer__links">
 				<a href="index.jsp">영화</a>
-				<a onclick="reservebtn()">예매</a>
+				<a href="selectMovieReserveProc.do">예매</a>
 				<a href="NoticeProc.do">공지사항</a>
 				<a onclick="inquirybtn()">1:1문의</a>
 				<a href="FaqProc.do">FAQ</a>

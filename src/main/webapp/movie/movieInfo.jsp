@@ -60,7 +60,7 @@
                         </div>
 
                         <!-- 예매하기 버튼 -->
-                        <a onclick="reservebtn('${rjdto.movieId}')" class="btn-reserve-action">
+                        <a href="selectMovieReserveProc.do?movieId=${rjdto.movieId }" class="btn-reserve-action">
                             예매하기
                         </a>
                     </div>

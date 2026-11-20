@@ -74,7 +74,7 @@ INSERT INTO notice (notice_id, notice_title, notice_date, notice_hits, notice_te
 (NULL, '[동성로] 매점 신메뉴 출시 및 할인 안내', '2026-11-10 10:15:00', 210, '반반 팝콘 신메뉴 출시 기념으로 평일 매점 콤보 할인 이벤트를 진행합니다.');
 
 -- 3. 자주 묻는 질문 (faq) 테이블
--- (faq_type 구분 코드: 1=예매/결제, 2=영화관, 3=회원정보, 4=이벤트)
+-- (faq_type 구분 코드: 1=예매/결제, 2=영화관, 3=회원정보, 4=이벤트 5=관람 · 시설)
 CREATE TABLE faq (
     faq_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     faq_type INT NOT NULL,

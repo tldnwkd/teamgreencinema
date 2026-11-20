@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 import greencinema.model.notice.NoticeDAO;
 import greencinema.model.notice.NoticeDTO;
 
-/**
- * Servlet implementation class OneNoticeProc
- */
+
 @WebServlet("/OneNoticeProc.do")
 public class OneNoticeProc extends HttpServlet {
 
@@ -59,7 +57,7 @@ public class OneNoticeProc extends HttpServlet {
 			out.println("<script>");
 			if(result > 0) {
 				out.println("alert('공지 수정이 완료되었습니다.');");
-				out.println("location.href='OneNoticeProc.do?notice_Id=" + noticeId + "';");
+				out.println("location.href='NoticeProc.do';");
 			}else {
 				out.println("alert('공지 수정에 실패했습니다.');");
 				out.println("history.back();");

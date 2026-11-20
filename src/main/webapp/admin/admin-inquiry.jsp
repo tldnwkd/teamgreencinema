@@ -83,8 +83,9 @@
 		</c:choose>
 
 		<div class="admin-paging">
-			<c:if test="${startpage > pageBlock}">
+			<c:if test="${startpage > pageBlock}">			
 				<c:url var="prevUrl" value="${empty type and empty status ? 'InquiryProc.do' : 'SearchInquiryProc.do'}">
+					<c:if test="${not empty status}"><c:param name="status" value="${status}"/></c:if>								
 					<c:param name="pageNum" value="${startpage-pageBlock}"/>
 					<c:if test="${not empty type}">
 						<c:param name="type" value="${type}"/>
@@ -111,6 +112,7 @@
 				</c:forEach>
 			<c:if test="${endpage < pageCount}">
 				<c:url var="nextUrl" value="${empty type and empty status ? 'InquiryProc.do' : 'SearchInquiryProc.do'}">
+					<c:if test="${not empty status}"><c:param name="status" value="${status}"/></c:if>
 					<c:param name="pageNum" value="${startpage+pageBlock}"/>
 					<c:if test="${not empty type}">
 						<c:param name="type" value="${type}"/>

@@ -38,7 +38,7 @@ public class reservePaymentProc extends HttpServlet {
 		    response.setContentType("text/html; charset=UTF-8");
 		    PrintWriter out = response.getWriter();
 		    out.println("<script>");
-		    out.println("alert('세션이 만료되었습니다. 로그인 후 다시 예매 하세요.');");
+		    out.println("alert('로그인 후 다시 예매 하세요.');");
 		    out.println("location.href='index.jsp?section=user/login.jsp';");
 		    out.println("</script>");
 		    return;

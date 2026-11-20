@@ -82,6 +82,7 @@ public class OneFaqProc extends HttpServlet {
 			if("upd".equals(type)) {
 				RequestDispatcher rd = request.getRequestDispatcher("admin/admin-index.jsp?section=Admin-One-Faq-Update.jsp");
 				rd.forward(request, response);
+				return;
 				}
 			if("del".equals(type)) {
 				int result = fdao.FaqDelete(faqId);

@@ -9,7 +9,7 @@
 					class="logo__sub">CINEMA FOR EVERYONE</small></a>
 				<nav class="main-nav" aria-label="주 메뉴">
 					<a href="index.jsp" aria-current="page">영화</a>
-					<a onclick="reservebtn()">예매</a>
+					<a href="selectMovieReserveProc.do">예매</a>
 					<div class="nav-dropdown">
 					    <button type="button" class="nav-dropdown__title">고객센터</button>
 					    <div class="nav-dropdown__menu">

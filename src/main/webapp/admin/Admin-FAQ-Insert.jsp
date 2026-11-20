@@ -36,7 +36,7 @@
 	function chk(){
 		let f = document.fform;
 
-		if(f.faqType.value == "선택"){
+		if(f.faqType.value == ""){
 			alert("FAQ 종류를 입력해주세요");
 			f.faqType.focus();
 			return;
